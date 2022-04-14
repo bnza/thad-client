@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "8001:80"
+      - "444:443"
+    volumes:
+      - ./dist:/app
+    environment:
+      - NGINX_HOST=${NGINX_HOST:-localhost}
