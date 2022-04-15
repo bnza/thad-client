@@ -22,6 +22,7 @@
 <script>
 // eslint-disable-next-line import/named
 import { Fragment } from 'vue-frag'
+import ShowSnackbarMixin from "@/mixins/ShowSnackbarMixin";
 import AuthButtonToggle from '@/components/AuthButtonToggle'
 import AuthLogoutDialog from "@/components/AuthLogoutDialog";
 
@@ -32,6 +33,7 @@ export default {
     AuthButtonToggle,
     AuthLogoutDialog
   },
+  mixins: [ShowSnackbarMixin],
   data() {
     return {
       logoutDialog: false
@@ -56,8 +58,9 @@ export default {
        this.$router.push('/login')
     },
     logout() {
-       this.logoutDialog = false
+      this.logoutDialog = false
       this.$auth.logout()
+      this.showSnackbar({text: 'User logged out'})
     },
   },
 }

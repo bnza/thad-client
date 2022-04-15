@@ -35,12 +35,12 @@
 </template>
 
 <script>
-
-import loginFormValidationMixin from "@/mixins/validation/loginFormValidationMixin";
+import ShowSnackbarMixin from "@/mixins/ShowSnackbarMixin";
+import LoginFormValidationMixin from "@/mixins/validation/LoginFormValidationMixin";
 
 export default {
   name: 'LoginPage',
-  mixins: [loginFormValidationMixin],
+  mixins: [LoginFormValidationMixin, ShowSnackbarMixin],
   data: () => {
     return {
       form: {
@@ -56,10 +56,18 @@ export default {
     async userLogin() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
+        const snackbar = {
+          color: 'success',
+        }
         try {
           await this.$auth.loginWith('local', { data: this.form })
+          snackbar.text = `User ${this.$auth.user.email} logged in`
         } catch (err) {
-          console.log(err)
+          snackbar.timeout = -1
+          snackbar.color = 'error'
+          snackbar.text = 'Login failed'
+        } finally {
+          this.showSnackbar(snackbar)
         }
       }
     },

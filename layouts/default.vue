@@ -28,7 +28,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <AuthSpanStatus />
+      <auth-span-status />
     </v-app-bar>
     <v-main>
       <v-container fluid>
@@ -38,14 +38,19 @@
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
+    <the-snackbar></the-snackbar>
   </v-app>
 </template>
 
 <script>
 import AuthSpanStatus from '@/components/AuthSpanStatus'
+import TheSnackbar from "@/components/TheSnackbar";
 export default {
   name: 'DefaultLayout',
-  components: { AuthSpanStatus },
+  components: {
+    AuthSpanStatus,
+    TheSnackbar
+  },
   data() {
     return {
       clipped: false,

@@ -1,9 +1,5 @@
 describe('The auth process', () => {
-  it.skip('successfully auth user', () => {
-    cy.login('user_base@example.com','0000')
-  })
-
-  it('logout works', () => {
+  it('successful login/logout', () => {
     cy.login('user_base@example.com','0000')
 
     cy.get('[data-cy=auth_btn]').click()
@@ -11,7 +7,7 @@ describe('The auth process', () => {
     cy.get('[data-cy=auth_btn]').within(() => {
       cy.get('i').should('have.class', 'mdi-login')
     })
+
+    cy.snackbarContains('User logged out')
   })
-
-
 })
