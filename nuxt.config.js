@@ -14,15 +14,15 @@ export default {
     titleTemplate: 'THAD: %s',
     title: 'home',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/Ninive.png' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/Ninive.png' }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -40,7 +40,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    '@nuxtjs/google-fonts',
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -49,6 +49,11 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
+    defaultAssets: {
+      font: false,
+      icons: 'mdi'
+    },
     theme: {
       dark: true,
       themes: {
@@ -59,14 +64,14 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
-        },
-      },
-    },
+          success: colors.green.accent
+        }
+      }
+    }
   },
 
   axios: {
-    baseURL: process.env.API_BASE_URL,
+    baseURL: process.env.API_BASE_URL
   },
 
   auth: {
@@ -77,32 +82,33 @@ export default {
           property: 'token',
           global: true,
           required: true,
-          type: 'Bearer',
+          type: 'Bearer'
         },
         user: {
           property: '',
-          autoFetch: true,
+          autoFetch: true
         },
         endpoints: {
           login: { url: '/login', method: 'post' },
-          user: { url: '/users/me', method: 'get' },
-        },
-      },
-    },
+          user: { url: '/users/me', method: 'get' }
+        }
+      }
+    }
   },
 
   googleFonts: {
     families: {
-      'Work+Sans': true,
+      'Nunito+Sans': true,
+      Asul: [700]
     },
     useStylesheet: true,
-    preload: true,
+    preload: true
   },
 
   router: {
-    middleware: ['auth'],
+    middleware: ['auth']
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {}
 }
