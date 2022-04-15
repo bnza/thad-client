@@ -7,6 +7,7 @@
           v-model="form.username"
           :error-messages="emailErrors"
           label="email"
+          data-cy="username"
           required
           @input="$v.form.username.$touch()"
           @blur="$v.form.username.$touch()"
@@ -16,6 +17,7 @@
           :error-messages="passwordErrors"
           type="password"
           label="password"
+          data-cy="password"
           required
           @input="$v.form.password.$touch()"
           @blur="$v.form.password.$touch()"
@@ -24,7 +26,7 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions>
-      <v-btn class="mr-4" @click="userLogin" :disabled="$v.$invalid">
+      <v-btn class="mr-4" @click="userLogin" :disabled="$v.$invalid" data-cy="submit">
         login
       </v-btn>
       <v-btn nuxt @click="goToPrev"> cancel </v-btn>

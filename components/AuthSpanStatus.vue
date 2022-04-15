@@ -2,13 +2,18 @@
   <fragment>
     <template v-if="$auth.loggedIn">
       <v-icon :color="color" class="mx-3">mdi-account-circle</v-icon>
-      <v-toolbar-title class="text-body-1">
-        {{ $auth.user.email }}</v-toolbar-title
-      >
+      <v-toolbar-title class="text-body-1" data-cy="logged_user">
+        {{ $auth.user.email }}
+      </v-toolbar-title>
     </template>
-    <AuthButtonToggle
+    <auth-button-toggle
       :logged-in="$auth.loggedIn"
       @login="login"
+      @logout="logoutDialog = true"
+    />
+    <auth-logout-dialog
+      :dialog="logoutDialog"
+      @cancel="logoutDialog=false"
       @logout="logout"
     />
   </fragment>
@@ -18,12 +23,19 @@
 // eslint-disable-next-line import/named
 import { Fragment } from 'vue-frag'
 import AuthButtonToggle from '@/components/AuthButtonToggle'
+import AuthLogoutDialog from "@/components/AuthLogoutDialog";
 
 export default {
   name: 'AuthSpanStatus',
   components: {
     Fragment,
     AuthButtonToggle,
+    AuthLogoutDialog
+  },
+  data() {
+    return {
+      logoutDialog: false
+    }
   },
   computed: {
     color() {
@@ -44,6 +56,7 @@ export default {
        this.$router.push('/login')
     },
     logout() {
+       this.logoutDialog = false
       this.$auth.logout()
     },
   },

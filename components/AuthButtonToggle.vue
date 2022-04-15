@@ -1,7 +1,7 @@
 <template>
   <v-tooltip bottom>
     <template #activator="{ on, attrs }">
-      <v-btn icon v-bind="attrs" v-on="on" @click.stop="$emit(toggleAction)">
+      <v-btn icon v-bind="attrs" v-on="on" data-cy="auth_btn" @click.stop="$emit(toggleAction)">
         <v-icon>{{ `mdi-${toggleAction}` }}</v-icon>
       </v-btn>
     </template>
