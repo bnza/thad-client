@@ -33,6 +33,13 @@
       >
         <v-list-item-title>Area</v-list-item-title>
       </v-list-item>
+      <v-list-item
+        nuxt
+        to="/app/sus"
+        router
+      >
+        <v-list-item-title>Stratigraphic Unit</v-list-item-title>
+      </v-list-item>
     </v-list-group>
     <v-list>
       <v-list-item

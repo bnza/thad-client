@@ -7,3 +7,22 @@ $body-font-family: 'Nunito Sans', Arial, sans-serif;
 $font-size-root: 18px;
 
 @import '~vuetify/src/styles/styles.sass';
+
+tbody {
+  span.v-chip {
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+
+.col > p.form-group-title {
+  margin-bottom: 0;
+}
+
+.secondary--text input {
+  color: var(--v-secondary-base) !important;
+}
+
+

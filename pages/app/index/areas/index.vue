@@ -1,13 +1,10 @@
 <template>
-  <div>
-    <p>AppPage</p>
-    <NuxtChild />
-  </div>
+  <h3>indexAreasPage</h3>
 </template>
 
 <script>
 export default {
-  name: "AppPage"
+  name: "indexAreasPage"
 }
 </script>
 

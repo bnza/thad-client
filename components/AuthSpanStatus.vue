@@ -1,10 +1,12 @@
 <template>
   <fragment>
     <template v-if="$auth.loggedIn">
-      <v-icon :color="color" class="mx-3">mdi-account-circle</v-icon>
-      <v-toolbar-title class="text-body-1" data-cy="logged_user">
+      <v-btn icon>
+        <v-icon :color="color" class="mx-3">mdi-account-circle</v-icon>
+      </v-btn>
+      <p class="text-body-2 align-center username" data-cy="logged_user">
         {{ $auth.user.email }}
-      </v-toolbar-title>
+      </p>
     </template>
     <auth-button-toggle
       :logged-in="$auth.loggedIn"
@@ -66,4 +68,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+  p.username {
+    margin-top: 12px;
+  }
+</style>

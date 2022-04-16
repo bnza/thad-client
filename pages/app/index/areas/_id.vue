@@ -1,10 +1,10 @@
 <template>
-  <h3>indexAppAreaPage</h3>
+  <p>id: {{ $route.params.id }}</p>
 </template>
 
 <script>
 export default {
-  name: "IndexAppAreaPage",
+  name: "AppAreaPage"
 }
 </script>
 
