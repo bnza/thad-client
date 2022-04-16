@@ -16,6 +16,6 @@
 
 <script>
 export default {
-  name: 'InspirePage',
+  name: 'AboutPage',
 }
 </script>

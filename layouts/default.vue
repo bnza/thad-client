@@ -1,32 +1,9 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+    <the-navigation-drawer :visible="drawer"></the-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="title" class="title"/>
       <v-spacer />
       <auth-span-status />
     </v-app-bar>
@@ -44,11 +21,13 @@
 
 <script>
 import AuthSpanStatus from '@/components/AuthSpanStatus'
+import TheNavigationDrawer from "@/components/TheNavigationDrawer";
 import TheSnackbar from "@/components/TheSnackbar";
 export default {
   name: 'DefaultLayout',
   components: {
     AuthSpanStatus,
+    TheNavigationDrawer,
     TheSnackbar
   },
   data() {
@@ -76,3 +55,9 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="sass">
+.title
+  font-family: 'Asul', 'Work Sans', Arial, sans-serif !important
+  font-weight: bold
+</style>

@@ -35,7 +35,7 @@ Cypress.Commands.add('login', (username, password) => {
 
 Cypress.Commands.add('snackbarContains', (content) => {
   cy.get('[data-cy=the_snackbar]').within( () => {
-    cy.get('.v-snack__wrapper').should('not.have.css', 'display', 'none')
+    cy.get('.v-snack__wrapper').should('be.visible')
     cy.get('.v-snack__content').contains(content)
   })
 })

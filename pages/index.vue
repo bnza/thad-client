@@ -5,7 +5,7 @@
         <NiniveLogo />
       </v-card>
       <v-card>
-        <v-card-title class="text-h6 justify-center">
+        <v-card-title class="text-h2 justify-center title">
           Tell Hatarah Database
         </v-card-title>
         <v-card-title class="text-subtitle-1 justify-center">
@@ -75,7 +75,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
+          <v-btn color="primary" nuxt to="/about"> About </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -88,3 +88,9 @@ export default {
   auth: false
 }
 </script>
+
+<style scoped lang="sass">
+  .title
+    font-family: 'Asul', 'Work Sans', Arial, sans-serif !important
+    font-weight: bold
+</style>
