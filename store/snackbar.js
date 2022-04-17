@@ -31,6 +31,22 @@ export const actions = {
   show({commit}, snackbar) {
     commit('resetTimeout')
     commit('set', snackbar)
+  },
+  requestError({commit}, error) {
+    commit('resetTimeout')
+    let text = '';
+    if (error.response) {
+      const title  =error.response.data['hydra:title']
+      text = `${title}: [${error.response.status}]\n`+
+        error.response.data['hydra:description']
+    } else {
+      text = error.message
+    }
+    commit('set', {
+      text,
+      color: 'error',
+      timeout: -1
+    })
   }
 }
 

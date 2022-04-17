@@ -8,11 +8,12 @@
 import ActionResourceCard from "@/components/ActionResourceCard";
 import UpdateSiteCard from "@/components/UpdateSiteCard";
 export default {
-  name: "AppSiteEdit",
+  name: "AppSiteUpdatePage",
   components: {
     ActionResourceCard,
     UpdateSiteCard
-  }
+  },
+  middleware: ['admin-auth']
 }
 </script>
 

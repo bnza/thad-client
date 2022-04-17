@@ -6,29 +6,25 @@
         icon
         v-bind="attrs"
         :disabled="disabled"
-        :to="`${resourceBaseUrl}${itemId}/update`"
+        :to="`${resourceBaseUrl}create`"
         v-on="on"
       >
-        <v-icon color="primary" class="mx-3">mdi-pencil</v-icon>
+        <v-icon class="mx-3">mdi-plus</v-icon>
       </v-btn>
     </template>
-    <span>Edit</span>
+    <span>New</span>
   </v-tooltip>
 </template>
 
 <script>
 export default {
-  name: "NavigationUpdateResourceButton",
+  name: "NavigationCreateResourceButton",
   props: {
     disabled: {
       type: Boolean,
       required: true
     },
     resourceBaseUrl: {
-      type: String,
-      required: true
-    },
-    itemId: {
       type: String,
       required: true
     },

@@ -72,7 +72,7 @@ export default {
   },
 
   axios: {
-    baseURL: process.env.API_BASE_URL,
+    baseURL: process.env.API_BASE_URL
   },
 
   auth: {
@@ -104,10 +104,6 @@ export default {
     },
     useStylesheet: true,
     preload: true
-  },
-
-  router: {
-    middleware: ['auth']
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

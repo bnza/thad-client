@@ -1,7 +1,7 @@
 <template>
   <v-snackbar
-    app
     v-model="show"
+    app
     top
     :vertical="closeable"
     text
@@ -10,8 +10,9 @@
     :color="color"
     data-cy="the_snackbar"
   >
-    {{ text }}
-
+    <div v-for="(line, i) in text.split('\n')" :key="i">
+      {{ line }}
+    </div>
     <template v-if="closeable" #action="{ attrs }">
       <v-btn
         :color="color"

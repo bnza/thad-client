@@ -1,7 +1,12 @@
 <template>
   <fragment>
     <navigation-update-resource-button :item-id="itemId" :resource-base-url="resourceBaseUrl" :disabled="disabled" />
-    <navigation-delete-resource-button :item-id="itemId" :resource-base-url="resourceBaseUrl" :disabled="disabled" />
+    <navigation-delete-resource-button
+      :item-id="itemId"
+      :resource-base-url="resourceBaseUrl"
+      :disabled="disabled"
+      @delete="$emit('delete')"
+    />
   </fragment>
 </template>
 

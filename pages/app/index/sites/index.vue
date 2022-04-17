@@ -2,6 +2,12 @@
   <v-card>
     <v-toolbar flat dense>
       <v-toolbar-title>Sites</v-toolbar-title>
+      <v-spacer />
+      <navigation-create-resource-button
+        v-if="$auth.hasScope('ROLE_ADMIN')"
+        resource-base-url="/app/sites/"
+        :disabled="false"
+      />
     </v-toolbar>
     <v-data-table
       multi-sort
@@ -30,38 +36,61 @@
       :options.sync="pagination"
       :server-items-length="totalItems"
     >
-      <template #[`item.id`]="{ item }">
+      <template #[`item.id`]="{ item : tItem }">
         <navigation-resource-item-crud
-          :item-id="item.id.toString()" resource-base-url="/app/sites/"
+          :item-id="tItem.id.toString()" resource-base-url="/app/sites/"
+          @delete="openDeleteDialog(tItem)"
           />
       </template>
-      <template #[`item.code`]="{ item }">
+      <template #[`item.code`]="{ item : tItem }">
         <navigation-resource-item-chip
-          :link-text="item.code"
-          :item-id="item.id.toString()"
+          :link-text="tItem.code"
+          :item-id="tItem.id.toString()"
           resource-base-url="/app/sites/" />
       </template>
     </v-data-table>
+    <delete-resource-dialog
+      resource-base-url="/sites/"
+      :visible.sync="deleteDialog"
+      :item="item"
+      @itemDeleted="$fetch"
+    />
   </v-card>
 </template>
 
 <script>
 import ResourceCollectionTableMixin from "@/mixins/ResourceCollectionTableMixin";
+import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
 import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
 import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
+import DeleteResourceDialog from "@/components/DeleteResourceDialog";
 
 export default {
   name: "IndexSitesPage",
   components: {
+    DeleteResourceDialog,
+    NavigationCreateResourceButton,
     NavigationResourceItemChip,
     NavigationResourceItemCrud
   },
   mixins: [
     ResourceCollectionTableMixin
   ],
+  data() {
+    return {
+      deleteDialog: false,
+      item: {}
+    }
+  },
   computed: {
     resourceName() {
       return 'sites'
+    }
+  },
+  methods: {
+    openDeleteDialog(item) {
+      this.item = item
+      this.deleteDialog = true
     }
   }
 }

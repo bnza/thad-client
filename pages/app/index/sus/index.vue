@@ -9,7 +9,7 @@
       :headers="[
       {
         text: 'id',
-        value: 'id',
+        value: 'id'
       },
       {
         text: 'site',
@@ -79,12 +79,12 @@ import NavigationResourceItemChip from "@/components/NavigationResourceItemChip"
 
 export default {
   name: "IndexSusPage",
-  mixins: [
-    ResourceCollectionTableMixin
-  ],
   components: {
     NavigationResourceItemChip
   },
+  mixins: [
+    ResourceCollectionTableMixin
+  ],
   computed: {
     resourceName() {
       return 'stratigraphic_units'

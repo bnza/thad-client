@@ -3,7 +3,7 @@
     <the-navigation-drawer :visible="drawer"></the-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" class="title"/>
+      <v-toolbar-title class="title" v-text="title"/>
       <v-spacer />
       <auth-span-status />
     </v-app-bar>
@@ -30,6 +30,7 @@ export default {
     TheNavigationDrawer,
     TheSnackbar
   },
+  middleware: ['auth'],
   data() {
     return {
       clipped: false,
