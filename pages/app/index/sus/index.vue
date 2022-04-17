@@ -55,13 +55,13 @@
       :server-items-length="totalItems"
     >
       <template #[`item.site.code`]="{ item }">
-        <NavigationResourceItemChip
+        <navigation-resource-item-chip
           :link-text="item.site.code"
           :item-id="item.site.id"
           resource-base-url="/app/sites/" />
       </template>
       <template #[`item.area.code`]="{ item }">
-        <NavigationResourceItemChip
+        <navigation-resource-item-chip
           :link-text="item.area.code"
           :item-id="item.area.id"
           resource-base-url="/app/areas/" />
@@ -92,6 +92,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-
-</style>

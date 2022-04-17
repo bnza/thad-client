@@ -6,8 +6,6 @@
 $body-font-family: 'Nunito Sans', Arial, sans-serif;
 $font-size-root: 18px;
 
-@import '~vuetify/src/styles/styles.sass';
-
 tbody {
   span.v-chip {
     a {
@@ -25,4 +23,5 @@ tbody {
   color: var(--v-secondary-base) !important;
 }
 
+@import '~vuetify/src/styles/styles.sass';
 

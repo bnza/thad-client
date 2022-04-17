@@ -28,6 +28,13 @@
       </template>
       <v-list-item
         nuxt
+        to="/app/sites"
+        router
+      >
+        <v-list-item-title>Site</v-list-item-title>
+      </v-list-item>
+      <v-list-item
+        nuxt
         to="/app/areas"
         router
       >
