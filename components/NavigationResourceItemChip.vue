@@ -18,8 +18,8 @@ export default {
       required: true
     },
     itemId: {
-      type: String,
-      required: true
+      required: true,
+      validation: v => !isNaN(v) && Number.isInteger(+v)
     },
     linkText: {
       type: String,

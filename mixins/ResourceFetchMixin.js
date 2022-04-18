@@ -1,4 +1,5 @@
 import {mapActions} from "vuex";
+import {objectIsEmpty} from "~/src/utils";
 
 export default {
   data() {
@@ -14,6 +15,9 @@ export default {
     responseData() {
       return this.response.data || {}
     },
+    emptyData() {
+      return objectIsEmpty(this.responseData)
+    }
   },
   methods: {
     ...mapActions('http', [

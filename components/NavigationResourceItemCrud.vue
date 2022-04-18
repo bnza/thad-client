@@ -1,5 +1,6 @@
 <template>
-  <fragment>
+  <div>
+    <navigation-resource-read-button :item-id="itemId" :resource-base-url="resourceBaseUrl" />
     <navigation-update-resource-button :item-id="itemId" :resource-base-url="resourceBaseUrl" :disabled="disabled" />
     <navigation-delete-resource-button
       :item-id="itemId"
@@ -7,21 +8,20 @@
       :disabled="disabled"
       @delete="$emit('delete')"
     />
-  </fragment>
+  </div>
 </template>
 
 <script>
-// eslint-disable-next-line import/named
-import { Fragment } from 'vue-frag'
 import NavigationUpdateResourceButton from "@/components/NavigationUpdateResourceButton";
 import NavigationDeleteResourceButton from "@/components/NavigationDeleteResourceButton";
+import NavigationResourceReadButton from "@/components/NavigationResourceReadButton";
 
 export default {
   name: "NavigationResourceItemCrud",
   components: {
-    Fragment,
     NavigationUpdateResourceButton,
-    NavigationDeleteResourceButton
+    NavigationDeleteResourceButton,
+    NavigationResourceReadButton
   },
   props: {
     scope: {
@@ -33,13 +33,13 @@ export default {
       required: true
     },
     itemId: {
-      type: String,
-      required: true
+      required: true,
+      validation: v => !isNaN(v) && Number.isInteger(+v)
     },
   },
   computed: {
     disabled() {
-      return !this.$auth.hasScope('ROLE_ADMIN')
+      return !this.$auth.hasScope(this.scope)
     }
   }
 }

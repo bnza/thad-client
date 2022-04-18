@@ -35,5 +35,8 @@ export const formatOptionsArrayForQueryString = (options) => {
   if (hasOwnProperty(options, 'pagination')) {
     requestOptions = mergeLeft(formatPaginationOptions(options.pagination), {})
   }
+  if (hasOwnProperty(options, 'filters')) {
+    requestOptions = mergeLeft(options.filters, requestOptions)
+  }
   return requestOptions
 }

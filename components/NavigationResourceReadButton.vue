@@ -2,27 +2,23 @@
   <v-tooltip bottom>
     <template #activator="{ on, attrs }">
       <v-btn
+        nuxt
         icon
         v-bind="attrs"
-        :disabled="disabled"
+        :to="`${resourceBaseUrl}${itemId}`"
         v-on="on"
-        @click="$emit('delete', itemId)"
       >
-        <v-icon color="error" class="mx-3">mdi-delete</v-icon>
+        <v-icon color="primary" class="mx-3">mdi-arrow-right</v-icon>
       </v-btn>
     </template>
-    <span>Delete</span>
+    <span>View</span>
   </v-tooltip>
 </template>
 
 <script>
 export default {
-  name: "NavigationDeleteResourceButton",
+  name: "NavigationResourceReadButton",
   props: {
-    disabled: {
-      type: Boolean,
-      required: true
-    },
     resourceBaseUrl: {
       type: String,
       required: true
@@ -30,7 +26,7 @@ export default {
     itemId: {
       required: true,
       validation: v => !isNaN(v) && Number.isInteger(+v)
-    },
+    }
   }
 }
 </script>

@@ -4,6 +4,13 @@
       <v-row dense>
         <v-col>
           <v-text-field
+            :value="getResponseValue('site.code', item)"
+            label="site"
+            readonly
+          />
+        </v-col>
+        <v-col>
+          <v-text-field
             :value="getResponseValue('code', item)"
             label="code"
             readonly

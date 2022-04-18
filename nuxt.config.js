@@ -106,6 +106,16 @@ export default {
     preload: true
   },
 
+  router: {
+    parseQuery(q) {
+      return require('qs').parse(q)
+    },
+    stringifyQuery(q) {
+      const r = require('qs').stringify(q)
+      return r ? '?' + r : ''
+    },
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
 }

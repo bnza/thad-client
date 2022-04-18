@@ -1,11 +1,11 @@
 <template>
   <v-card>
     <v-toolbar flat dense>
-      <v-toolbar-title>Sites</v-toolbar-title>
+      <v-toolbar-title v-if="!isChild">Areas</v-toolbar-title>
       <v-spacer />
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_ADMIN')"
-        resource-base-url="/app/sites/"
+        resource-base-url="/app/areas/"
         :disabled="false"
       />
     </v-toolbar>
@@ -16,6 +16,11 @@
       {
         text: 'actions',
         value: 'id',
+        align: 'center'
+      },
+      {
+        text: 'site',
+        value: 'site.code',
         align: 'center'
       },
       {
@@ -38,23 +43,23 @@
     >
       <template #[`item.id`]="{ item : tItem }">
         <navigation-resource-item-crud
-          :item-id="tItem.id.toString()" resource-base-url="/app/sites/"
+          :item-id="tItem.id" resource-base-url="/app/areas/"
           @delete="openDeleteDialog(tItem)"
-          />
+        />
       </template>
       <template #[`item.code`]="{ item : tItem }">
         <navigation-resource-item-chip
           :link-text="tItem.code"
-          :item-id="tItem.id.toString()"
+          :item-id="tItem.id"
+          resource-base-url="/app/areas/" />
+      </template>
+      <template #[`item.site.code`]="{ item : tItem }">
+        <navigation-resource-item-chip
+          :link-text="tItem.site.code"
+          :item-id="tItem.site.id"
           resource-base-url="/app/sites/" />
       </template>
     </v-data-table>
-    <delete-resource-dialog
-      resource-base-url="/sites/"
-      :visible.sync="deleteDialog"
-      :item="deletingItem"
-      @itemDeleted="$fetch"
-    />
   </v-card>
 </template>
 
@@ -63,12 +68,10 @@ import RouteResourceCollectionTableMixin from "@/mixins/RouteResourceCollectionT
 import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
 import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
 import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
-import DeleteResourceDialog from "@/components/DeleteResourceDialog";
 
 export default {
-  name: "IndexSitesPage",
+  name: "CollectionsAreaCard",
   components: {
-    DeleteResourceDialog,
     NavigationCreateResourceButton,
     NavigationResourceItemChip,
     NavigationResourceItemCrud
@@ -76,22 +79,14 @@ export default {
   mixins: [
     RouteResourceCollectionTableMixin
   ],
-  data() {
-    return {
-      deleteDialog: false,
-      deletingItem: {}
-    }
-  },
   computed: {
     resourceName() {
-      return 'sites'
+      return 'areas'
     }
   },
-  methods: {
-    openDeleteDialog(item) {
-      this.item = item
-      this.deleteDialog = true
-    }
-  }
 }
 </script>
+
+<style scoped>
+
+</style>

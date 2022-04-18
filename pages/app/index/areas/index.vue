@@ -1,10 +1,14 @@
 <template>
-  <h3>indexAreasPage</h3>
+  <collection-areas-card />
 </template>
 
 <script>
+import CollectionAreasCard from "@/components/CollectionAreasCard";
 export default {
-  name: "indexAreasPage"
+  name: "IndexAreasPage",
+  components: {
+    CollectionAreasCard
+  }
 }
 </script>
 

@@ -12,14 +12,14 @@
             <v-row dense>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('site.code')"
+                  :value="getResponseValue('site.code', item)"
                   label="code"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('site.name')"
+                  :value="getResponseValue('site.name', item)"
                   label="name"
                   readonly
                 />
@@ -33,14 +33,14 @@
             <v-row dense>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('area.code')"
+                  :value="getResponseValue('area.code', item)"
                   label="code"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('area.name')"
+                  :value="getResponseValue('area.name', item)"
                   label="name"
                   readonly
                 />
@@ -62,7 +62,7 @@
               </v-col>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('number')"
+                  :value="getResponseValue('number', item)"
                   label="number"
                   readonly
                 />
@@ -71,14 +71,14 @@
             <v-row dense>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('type.value')"
+                  :value="getResponseValue('type.value', item)"
                   label="type"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('preservationState.value')"
+                  :value="getResponseValue('preservationState.value', item)"
                   label="state of preservation"
                   readonly
                 />
@@ -87,21 +87,21 @@
             <v-row dense>
               <v-col>
                 <v-textarea
-                  :value="getResponseValue('description')"
+                  :value="getResponseValue('description', item)"
                   label="description"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-textarea
-                  :value="getResponseValue('summary')"
+                  :value="getResponseValue('summary', item)"
                   label="summary"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-textarea
-                  :value="getResponseValue('interpretation')"
+                  :value="getResponseValue('interpretation', item)"
                   label="interpretation"
                   readonly
                 />
@@ -110,21 +110,21 @@
             <v-row dense>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('compiler')"
+                  :value="getResponseValue('compiler', item)"
                   label="compiler"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('areaSupervisor')"
+                  :value="getResponseValue('areaSupervisor', item)"
                   label="name"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-text-field
-                  :value="getResponseDateString('date')"
+                  :value="getResponseDateString('date', item)"
                   label="date"
                   readonly
                 />
@@ -138,14 +138,19 @@
 </template>
 
 <script>
-import {isEmpty} from "ramda";
-import ResourceItemFormMixin from "@/mixins/ResourceItemFormMixin";
+import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
   name: "ReadSusCard",
   mixins: [
-    ResourceItemFormMixin
+    ResourceItemDataAccessorMixin
   ],
+  props: {
+    item: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
       panels: [
@@ -154,16 +159,9 @@ export default {
     }
   },
   computed: {
-    resourceName() {
-      return 'stratigraphic_units'
-    },
     code() {
-      return isEmpty(this.responseData) ? '' : `${this.responseData.site.code}.${this.responseData.number}`
+      return this.ready ? `${this.item.site.code}.${this.item.number.toString().padStart(4,'0')}` : ''
     }
   },
 }
 </script>
-
-<style scoped>
-
-</style>

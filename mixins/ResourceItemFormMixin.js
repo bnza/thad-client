@@ -1,9 +1,14 @@
+
 import {isEmpty} from "ramda";
 import ResourceFetchMixin from "~/mixins/ResourceFetchMixin";
-import {hasOwnProperty} from "~/src/utils";
+import ResourceItemDataAccessorMixin from "~/mixins/ResourceItemDataAccessorMixin";
+import RouteResourceItemMixin from "~/mixins/RouteResourceItemMixin";
+
 
 export default {
   mixins: [
+    ResourceItemDataAccessorMixin,
+    RouteResourceItemMixin,
     ResourceFetchMixin
   ],
   async fetch() {
@@ -18,41 +23,21 @@ export default {
       }
     })
   },
+  props: {
+    idKey: {
+      type: String,
+      default: 'id'
+    }
+  },
   computed: {
-    idKey() {
-      return 'id'
+    item() {
+      return this.responseData
     },
     url() {
-      return this.resourceName ? `${this.resourceName}/${this.id}` : ''
+      return this.resourceName ? `${this.resourceName}/${this.routeRequestedId}` : ''
     },
     id() {
-      return this.$route.params[this.idKey]
+      return this.getResponseValue(this.idKey)
     }
   },
-  methods: {
-    getResponseValue(key, item) {
-      item = item || this.responseData
-      if (isEmpty(item)) {
-        return
-      }
-      return key.split('.').reduce((obj, key) => {
-        if (obj && hasOwnProperty(obj, key)) {
-          return obj[key]
-        }
-        return false
-      }, item)
-    },
-    getResponseDateString(key) {
-      const date = this.getResponseValue(key)
-      if (!date) {
-        return
-      }
-      return (new Date(date)).toLocaleDateString()
-    }
-  },
-  watch: {
-    code() {
-      this.$emit('ready', this.code)
-    }
-  }
 }
