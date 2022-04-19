@@ -3,11 +3,30 @@
         <v-container>
           <v-row dense>
             <v-col>
+              <select-sites-autocomplete
+                :error-messages="siteErrors"
+                class="mx-4"
+                v-on="$listeners"
+                @select="setSite"
+                @input="$v.item.site.$touch()"
+                @blur="$v.item.site.$touch()"
+              />
+            </v-col>
+            <v-text-field
+              :value="siteName"
+              label="site name"
+              readonly
+              class="mx-4"
+            />
+          </v-row>
+          <v-row dense>
+            <v-col>
               <v-text-field
                 v-model="item.code"
                 label="code"
                 required
                 :error-messages="codeErrors"
+                class="mx-4"
                 @input="$v.item.code.$touch()"
                 @blur="$v.item.code.$touch()"
               />
@@ -18,6 +37,7 @@
                 label="name"
                 required
                 :error-messages="nameErrors"
+                class="mx-4"
                 @input="$v.item.name.$touch()"
                 @blur="$v.item.name.$touch()"
               />
@@ -25,9 +45,10 @@
           </v-row>
           <v-row dense>
             <v-col>
-              <v-text-field
+              <v-textarea
                 v-model="item.description"
                 label="description"
+                class="mx-4"
               />
             </v-col>
           </v-row>
@@ -36,26 +57,31 @@
 </template>
 
 <script>
+import SelectSitesAutocomplete from "@/components/SelectSitesAutocomplete";
 import ResourceFetchMixin from "@/mixins/ResourceFetchMixin";
-import ResourceValidationSiteMixin from "@/mixins/validation/ResourceValidationSiteMixin";
+import ResourceValidationAreaMixin from "@/mixins/validation/ResourceValidationAreaMixin";
 
 export default {
   name: "CreateSiteCard",
+  components: {
+    SelectSitesAutocomplete
+  },
   mixins: [
     ResourceFetchMixin,
-    ResourceValidationSiteMixin
+    ResourceValidationAreaMixin
   ],
   data() {
     return {
-      item: {}
+      item: {},
+      siteName: null,
     }
   },
   computed: {
     resourceName() {
-      return 'sites'
+      return 'areas'
     },
     url() {
-      return '/sites'
+      return '/areas'
     }
   },
   watch: {
@@ -74,6 +100,15 @@ export default {
   methods: {
     newResourcePath(data) {
       return this.$route.fullPath.replace(/create$/, data.id)
+    },
+    setSite(site) {
+      if (!site) {
+        this.item.site = null
+        this.siteName = null
+        return
+      }
+      this.item.site = `/api/sites/${site.id}`
+      this.siteName = site.name
     },
     async submit() {
       this.$v.$touch()

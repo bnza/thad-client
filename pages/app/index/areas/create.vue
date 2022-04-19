@@ -1,18 +1,18 @@
 <template>
-  <action-resource-card resource-name="sites" action="new">
-    <create-site-card />
+  <action-resource-card resource-name="areas" action="new">
+    <create-area-card />
   </action-resource-card>
 </template>
 
 <script>
 import ActionResourceCard from "@/components/ActionResourceCard";
-import CreateSiteCard from "@/components/CreateSiteCard";
+import CreateAreaCard from "@/components/CreateAreaCard";
 
 export default {
-  name: "AppCreateSitePage",
+  name: "AppCreateAreaPage",
   components: {
     ActionResourceCard,
-    CreateSiteCard
+    CreateAreaCard
   }
 }
 </script>

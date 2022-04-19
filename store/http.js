@@ -19,5 +19,15 @@ export const actions = {
   nextRequestCounter({commit, state}) {
     commit('increment')
     return state.counter
+  },
+  getSites({dispatch}) {
+    return dispatch('request',
+      {
+        method: 'get',
+        url: '/sites',
+        headers: {
+          Accept: 'application/json'
+        },
+      })
   }
 }

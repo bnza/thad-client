@@ -40,13 +40,13 @@
 
 <script>
 import ResourceItemFormMixin from "@/mixins/ResourceItemFormMixin";
-import SiteResourceValidationMixin from "@/mixins/validation/SiteResourceValidationMixin";
+import ResourceValidationSiteMixin from "@/mixins/validation/ResourceValidationSiteMixin";
 
 export default {
   name: "UpdateSiteCard",
   mixins: [
     ResourceItemFormMixin,
-    SiteResourceValidationMixin
+    ResourceValidationSiteMixin
   ],
   data() {
     return {

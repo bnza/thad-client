@@ -50,7 +50,7 @@
       </template>
     </v-data-table>
     <delete-resource-dialog
-      resource-base-url="/sites/"
+      resource-base-url="/app/sites/"
       :visible.sync="deleteDialog"
       :item="deletingItem"
       @itemDeleted="$fetch"
