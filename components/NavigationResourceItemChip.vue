@@ -2,7 +2,7 @@
   <v-tooltip bottom>
     <template #activator="{ on, attrs }">
         <v-chip v-bind="attrs" small v-on="on">
-          <NuxtLink :to="`${resourceBaseUrl}${itemId}`">{{ linkText }}</NuxtLink>
+          <NuxtLink :to="getItemResourcePath(itemId)">{{ linkText }}</NuxtLink>
         </v-chip>
     </template>
     <span>Show</span>
@@ -10,13 +10,14 @@
 </template>
 
 <script>
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
+
 export default {
   name: "NavigationResourceItemChip",
+  mixins: [
+    ResourceNavigationMixin
+  ],
   props: {
-    resourceBaseUrl: {
-      type: String,
-      required: true
-    },
     itemId: {
       required: true,
       validation: v => !isNaN(v) && Number.isInteger(+v)

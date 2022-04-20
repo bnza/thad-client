@@ -5,7 +5,7 @@
       <v-spacer />
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_ADMIN')"
-        resource-base-url="/app/sites/"
+        resource-base-path="/app/sites"
         :disabled="false"
       />
     </v-toolbar>
@@ -38,7 +38,7 @@
     >
       <template #[`item.id`]="{ item : tItem }">
         <navigation-resource-item-crud
-          :item-id="tItem.id.toString()" resource-base-url="/app/sites/"
+          :item-id="tItem.id.toString()" resource-base-path="/app/sites"
           @delete="openDeleteDialog(tItem)"
           />
       </template>
@@ -46,11 +46,11 @@
         <navigation-resource-item-chip
           :link-text="tItem.code"
           :item-id="tItem.id.toString()"
-          resource-base-url="/app/sites/" />
+          resource-base-path="/app/sites" />
       </template>
     </v-data-table>
     <delete-resource-dialog
-      resource-base-url="/app/sites/"
+      resource-base-path="/app/sites"
       :visible.sync="deleteDialog"
       :item="deletingItem"
       @itemDeleted="$fetch"

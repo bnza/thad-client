@@ -6,7 +6,7 @@
         icon
         v-bind="attrs"
         :disabled="disabled"
-        :to="`${resourceBaseUrl}create`"
+        :to="`${createResourcePath}create`"
         v-on="on"
       >
         <v-icon class="mx-3">mdi-plus</v-icon>
@@ -17,15 +17,15 @@
 </template>
 
 <script>
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 export default {
   name: "NavigationCreateResourceButton",
+  mixins: [
+    ResourceNavigationMixin
+  ],
   props: {
     disabled: {
       type: Boolean,
-      required: true
-    },
-    resourceBaseUrl: {
-      type: String,
       required: true
     },
   }

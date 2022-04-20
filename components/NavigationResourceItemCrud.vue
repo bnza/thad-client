@@ -1,10 +1,10 @@
 <template>
   <div>
-    <navigation-resource-read-button :item-id="itemId" :resource-base-url="resourceBaseUrl" />
-    <navigation-update-resource-button :item-id="itemId" :resource-base-url="resourceBaseUrl" :disabled="disabled" />
+    <navigation-resource-read-button :item-id="itemId" :resource-base-path="resourceBasePath" />
+    <navigation-update-resource-button :item-id="itemId" :resource-base-path="resourceBasePath" :disabled="disabled" />
     <navigation-delete-resource-button
       :item-id="itemId"
-      :resource-base-url="resourceBaseUrl"
+      :resource-base-path="resourceBasePath"
       :disabled="disabled"
       @delete="$emit('delete')"
     />
@@ -15,6 +15,7 @@
 import NavigationUpdateResourceButton from "@/components/NavigationUpdateResourceButton";
 import NavigationDeleteResourceButton from "@/components/NavigationDeleteResourceButton";
 import NavigationResourceReadButton from "@/components/NavigationResourceReadButton";
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 
 export default {
   name: "NavigationResourceItemCrud",
@@ -23,14 +24,13 @@ export default {
     NavigationDeleteResourceButton,
     NavigationResourceReadButton
   },
+  mixins: [
+    ResourceNavigationMixin
+  ],
   props: {
     scope: {
       type: String,
       default: 'ROLE_ADMIN'
-    },
-    resourceBaseUrl: {
-      type: String,
-      required: true
     },
     itemId: {
       required: true,

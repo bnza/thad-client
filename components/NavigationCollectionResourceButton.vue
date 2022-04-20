@@ -5,7 +5,7 @@
         icon
         v-bind="attrs"
         nuxt
-        :to="resourceBaseUrl"
+        :to="resourceBasePath"
         v-on="on"
       >
         <v-icon class="mx-3">mdi-format-list-numbered</v-icon>
@@ -16,14 +16,13 @@
 </template>
 
 <script>
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
+
 export default {
   name: "NavigationCollectionResourceButton",
-  props: {
-    resourceBaseUrl: {
-      type: String,
-      required: true
-    },
-  }
+  mixins: [
+    ResourceNavigationMixin
+  ],
 }
 </script>
 

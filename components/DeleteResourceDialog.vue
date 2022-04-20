@@ -28,8 +28,13 @@
 </template>
 
 <script>
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
+
 export default {
   name: "DeleteResourceDialog",
+  mixins: [
+    ResourceNavigationMixin
+  ],
   props: {
     idKey: {
       type: String,
@@ -43,17 +48,13 @@ export default {
       type: Boolean,
       required: true
     },
-    resourceBaseUrl: {
-      type: String,
-      required: true
-    }
   },
   computed: {
     id() {
       return this.item[this.idKey]
     },
     url() {
-      return `${this.resourceBaseUrl}${this.id}`
+      return this.getItemResourcePath(this.id)
     }
   },
   methods: {

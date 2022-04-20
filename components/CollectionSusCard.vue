@@ -5,7 +5,7 @@
       <v-spacer />
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_EDITOR')"
-        resource-base-url="/app/stratigraphic_units/"
+        resource-base-path="/app/stratigraphic_units"
         :disabled="false"
       />
     </v-toolbar>
@@ -63,7 +63,7 @@
     >
       <template #[`item.id`]="{ item : tItem }">
         <navigation-resource-item-crud
-          :item-id="tItem.id" resource-base-url="/app/stratigraphic_units/"
+          :item-id="tItem.id" resource-base-path="/app/stratigraphic_units"
           @delete="openDeleteDialog(tItem)"
         />
       </template>
@@ -71,13 +71,13 @@
         <navigation-resource-item-chip
           :link-text="item.site.code"
           :item-id="item.site.id"
-          resource-base-url="/app/sites/" />
+          resource-base-path="/app/sites" />
       </template>
       <template #[`item.area.code`]="{ item }">
         <navigation-resource-item-chip
           :link-text="item.area.code"
           :item-id="item.area.id"
-          resource-base-url="/app/areas/" />
+          resource-base-path="/app/areas" />
       </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}

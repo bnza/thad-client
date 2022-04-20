@@ -16,15 +16,16 @@
 </template>
 
 <script>
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
+
 export default {
   name: "NavigationDeleteResourceButton",
+  mixins: [
+    ResourceNavigationMixin
+  ],
   props: {
     disabled: {
       type: Boolean,
-      required: true
-    },
-    resourceBaseUrl: {
-      type: String,
       required: true
     },
     itemId: {

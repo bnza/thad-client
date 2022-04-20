@@ -5,7 +5,7 @@
       <v-spacer />
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_ADMIN')"
-        resource-base-url="/app/areas/"
+        resource-base-path="/app/areas"
         :disabled="false"
       />
     </v-toolbar>
@@ -43,7 +43,7 @@
     >
       <template #[`item.id`]="{ item : tItem }">
         <navigation-resource-item-crud
-          :item-id="tItem.id" resource-base-url="/app/areas/"
+          :item-id="tItem.id" resource-base-path="/app/areas"
           @delete="openDeleteDialog(tItem)"
         />
       </template>
@@ -51,13 +51,13 @@
         <navigation-resource-item-chip
           :link-text="tItem.code"
           :item-id="tItem.id"
-          resource-base-url="/app/areas/" />
+          resource-base-path="/app/areas" />
       </template>
       <template #[`item.site.code`]="{ item : tItem }">
         <navigation-resource-item-chip
           :link-text="tItem.site.code"
           :item-id="tItem.site.id"
-          resource-base-url="/app/sites/" />
+          resource-base-path="/app/sites" />
       </template>
     </v-data-table>
   </v-card>

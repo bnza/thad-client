@@ -6,9 +6,9 @@
       <v-spacer />
       <v-toolbar-title v-if="item"><strong class="secondary--text">{{item.code}}</strong></v-toolbar-title>
       <v-spacer />
-      <navigation-collection-resource-button resource-base-url="/app/sites" />
-      <navigation-update-resource-button :item-id="routeRequestedId" resource-base-url="/app/sites/" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
-      <navigation-delete-resource-button :item-id="routeRequestedId" resource-base-url="/app/sites/" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
+      <navigation-collection-resource-button resource-base-path="/app/sites" />
+      <navigation-update-resource-button :item-id="routeRequestedId" resource-base-path="/app/sites" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
+      <navigation-delete-resource-button :item-id="routeRequestedId" resource-base-path="/app/sites" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
       <template #extension>
         <v-tabs v-model="tab" align-with-title>
           <v-tab href="#data">Data</v-tab>

@@ -6,7 +6,7 @@
         icon
         v-bind="attrs"
         :disabled="disabled"
-        :to="`${resourceBaseUrl}${itemId}/update`"
+        :to="getItemResourceUpdatePath(itemId)"
         v-on="on"
       >
         <v-icon color="primary" class="mx-3">mdi-pencil</v-icon>
@@ -17,15 +17,16 @@
 </template>
 
 <script>
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
+
 export default {
   name: "NavigationUpdateResourceButton",
+  mixins: [
+    ResourceNavigationMixin
+  ],
   props: {
     disabled: {
       type: Boolean,
-      required: true
-    },
-    resourceBaseUrl: {
-      type: String,
       required: true
     },
     itemId: {

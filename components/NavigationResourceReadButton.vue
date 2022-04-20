@@ -5,7 +5,7 @@
         nuxt
         icon
         v-bind="attrs"
-        :to="`${resourceBaseUrl}${itemId}`"
+        :to="getItemResourcePath(itemId)"
         v-on="on"
       >
         <v-icon color="primary" class="mx-3">mdi-arrow-right</v-icon>
@@ -16,13 +16,14 @@
 </template>
 
 <script>
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
+
 export default {
   name: "NavigationResourceReadButton",
+  mixins: [
+    ResourceNavigationMixin
+  ],
   props: {
-    resourceBaseUrl: {
-      type: String,
-      required: true
-    },
     itemId: {
       required: true,
       validation: v => !isNaN(v) && Number.isInteger(+v)
