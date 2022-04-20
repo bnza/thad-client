@@ -1,5 +1,4 @@
 import {mapActions} from "vuex";
-import {objectIsEmpty} from "~/src/utils";
 
 export default {
   data() {
@@ -12,12 +11,12 @@ export default {
     return `${this.resourceName}-${this.nextRequestCounter()}`
   },
   computed: {
+    resourceName() {
+      return /\/app\/(\w+)/.exec(this.$route.path)[1]
+    },
     responseData() {
       return this.response.data || {}
     },
-    emptyData() {
-      return objectIsEmpty(this.responseData)
-    }
   },
   methods: {
     ...mapActions('http', [

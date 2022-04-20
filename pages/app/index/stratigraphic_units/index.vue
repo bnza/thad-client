@@ -14,10 +14,10 @@ export default {
   mixins: [
     RouteResourceCollectionTableMixin
   ],
-  computed: {
+/*   computed: {
     resourceName() {
       return 'stratigraphic_units'
     }
-  }
+  } */
 }
 </script>

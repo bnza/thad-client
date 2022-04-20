@@ -55,9 +55,6 @@ export default {
     }
   },
   computed: {
-    resourceName() {
-      return 'sites'
-    },
     code() {
       return this.getResponseValue('code')
     },

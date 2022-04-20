@@ -42,7 +42,7 @@
       </v-list-item>
       <v-list-item
         nuxt
-        to="/app/sus"
+        to="/app/stratigraphic_units"
         router
       >
         <v-list-item-title>Stratigraphic Unit</v-list-item-title>

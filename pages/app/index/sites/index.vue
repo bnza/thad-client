@@ -82,11 +82,11 @@ export default {
       deletingItem: {}
     }
   },
-  computed: {
+/*   computed: {
     resourceName() {
       return 'sites'
     }
-  },
+  }, */
   methods: {
     openDeleteDialog(item) {
       this.item = item

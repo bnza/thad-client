@@ -10,8 +10,6 @@ export const hasOwnProperty = (object, key) =>
   typeof object === 'object' &&
   Object.prototype.hasOwnProperty.call(object, key)
 
-export const objectIsEmpty = (object) => Object.keys(object).length === 0;
-
 const parseBool = v => !["false", 0, false].includes(v)
 export const paginationQueryToOptions =  options => {
   if (isEmpty(options)) {

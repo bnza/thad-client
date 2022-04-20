@@ -79,11 +79,6 @@ export default {
   mixins: [
     RouteResourceCollectionTableMixin
   ],
-  computed: {
-    resourceName() {
-      return 'areas'
-    }
-  },
 }
 </script>
 

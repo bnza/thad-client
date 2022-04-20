@@ -57,9 +57,9 @@ export default {
     RouteTabbedComponentMixin
   ],
   computed: {
-    resourceName() {
+/*     resourceName() {
       return 'sites'
-    },
+    }, */
   },
 }
 </script>

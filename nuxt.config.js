@@ -47,6 +47,10 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
+  publicRuntimeConfig: {
+    apiPrefix: process.env.API_PREFIX || '/api'
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
@@ -72,7 +76,7 @@ export default {
   },
 
   axios: {
-    baseURL: process.env.API_BASE_URL
+    baseURL: process.env.API_BASE_URL + process.env.API_PREFIX
   },
 
   auth: {
@@ -113,7 +117,7 @@ export default {
     stringifyQuery(q) {
       const r = require('qs').stringify(q)
       return r ? '?' + r : ''
-    },
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

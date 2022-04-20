@@ -5,7 +5,7 @@
       <v-spacer />
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_EDITOR')"
-        resource-base-url="/app/sus/"
+        resource-base-url="/app/stratigraphic_units/"
         :disabled="false"
       />
     </v-toolbar>
@@ -63,7 +63,7 @@
     >
       <template #[`item.id`]="{ item : tItem }">
         <navigation-resource-item-crud
-          :item-id="tItem.id" resource-base-url="/app/sus/"
+          :item-id="tItem.id" resource-base-url="/app/stratigraphic_units/"
           @delete="openDeleteDialog(tItem)"
         />
       </template>
@@ -102,11 +102,6 @@ export default {
   mixins: [
     RouteResourceCollectionTableMixin
   ],
-  computed: {
-    resourceName() {
-      return 'stratigraphic_units'
-    }
-  },
 }
 </script>
 

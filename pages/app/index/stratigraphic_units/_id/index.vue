@@ -6,9 +6,9 @@
       <v-spacer />
       <v-toolbar-title v-if="ready"><strong class="secondary--text">{{code}}</strong></v-toolbar-title>
       <v-spacer />
-      <navigation-collection-resource-button resource-base-url="/app/sus" />
-      <navigation-update-resource-button :item-id="routeRequestedId" resource-base-url="/app/sus/" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
-      <navigation-delete-resource-button :item-id="routeRequestedId" resource-base-url="/app/sus/" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
+      <navigation-collection-resource-button resource-base-url="/app/stratigraphic_units" />
+      <navigation-update-resource-button :item-id="routeRequestedId" resource-base-url="/app/stratigraphic_units/" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
+      <navigation-delete-resource-button :item-id="routeRequestedId" resource-base-url="/app/stratigraphic_units/" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
       <template #extension>
         <v-tabs v-model="tab" align-with-title>
           <v-tab href="#data">Data</v-tab>
@@ -85,9 +85,9 @@ export default {
     code() {
       return this.ready ? `${this.item.site.code}.${this.item.number.toString().padStart(4,'0')}` : ''
     },
-    resourceName() {
+/*     resourceName() {
       return 'stratigraphic_units'
-    },
+    }, */
   },
 }
 </script>

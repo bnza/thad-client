@@ -77,9 +77,6 @@ export default {
     }
   },
   computed: {
-    resourceName() {
-      return 'areas'
-    },
     url() {
       return '/areas'
     }
@@ -107,7 +104,8 @@ export default {
         this.siteName = null
         return
       }
-      this.item.site = `/api/sites/${site.id}`
+      this.item.site = `${this.$config.apiPrefix}/sites/${site.id}`
+      console.log(this.item)
       this.siteName = site.name
     },
     async submit() {

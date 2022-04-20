@@ -51,9 +51,6 @@ export default {
     }
   },
   computed: {
-    resourceName() {
-      return 'sites'
-    },
     url() {
       return '/sites'
     }

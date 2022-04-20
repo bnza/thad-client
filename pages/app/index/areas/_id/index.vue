@@ -60,9 +60,9 @@ export default {
       // return this.item ? `${this.item.site.code}.${this.item.number.toString().padStart(4,'0')}` : ''
       return this.ready ? `${this.item.site.code}.${this.item.code}` : ''
     },
-    resourceName() {
+/*     resourceName() {
       return 'areas'
-    },
+    }, */
   }
 }
 </script>

@@ -12,7 +12,11 @@ $ yarn dev
 # build for production and launch server
 $ yarn build
 $ yarn start
+```
 
+Copy `.env.dist` and adjust the variables values
+
+```
 # generate static project
 $ yarn generate
 ```
