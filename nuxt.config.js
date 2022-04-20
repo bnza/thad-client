@@ -99,7 +99,7 @@ export default {
 
   googleFonts: {
     families: {
-      'Nunito+Sans': true,
+      'Work+Sans': true,
       Asul: [700]
     },
     useStylesheet: true,
