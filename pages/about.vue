@@ -17,5 +17,6 @@
 <script>
 export default {
   name: 'AboutPage',
+  auth:false
 }
 </script>
