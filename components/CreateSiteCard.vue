@@ -2,32 +2,33 @@
     <v-card-text>
         <v-container>
           <v-row dense>
-            <v-col>
+            <v-col data-cy="site-code-input-col">
               <v-text-field
-                v-model="item.code"
+                v-model="editableItem.code"
                 label="code"
                 required
                 :error-messages="codeErrors"
-                @input="$v.item.code.$touch()"
-                @blur="$v.item.code.$touch()"
+                @input="$v.editableItem.code.$touch()"
+                @blur="$v.editableItem.code.$touch()"
               />
             </v-col>
-            <v-col>
+            <v-col data-cy="site-name-input-col">
               <v-text-field
-                v-model="item.name"
+                v-model="editableItem.name"
                 label="name"
                 required
                 :error-messages="nameErrors"
-                @input="$v.item.name.$touch()"
-                @blur="$v.item.name.$touch()"
+                @input="$v.editableItem.name.$touch()"
+                @blur="$v.editableItem.name.$touch()"
               />
             </v-col>
           </v-row>
           <v-row dense>
             <v-col>
               <v-text-field
-                v-model="item.description"
+                v-model="editableItem.description"
                 label="description"
+                data-cy="site-description-input"
               />
             </v-col>
           </v-row>
@@ -37,35 +38,19 @@
 
 <script>
 import ResourceFetchMixin from "@/mixins/ResourceFetchMixin";
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceValidationSiteMixin from "@/mixins/validation/ResourceValidationSiteMixin";
 
 export default {
   name: "CreateSiteCard",
   mixins: [
     ResourceFetchMixin,
+    ResourceNavigationMixin,
     ResourceValidationSiteMixin
   ],
   data() {
     return {
-      item: {}
-    }
-  },
-  computed: {
-    url() {
-      return '/sites'
-    }
-  },
-  watch: {
-    item: {
-      handler(item) {
-        if (item.code) {
-          this.item.code = item.code.trim().toUpperCase()
-        }
-        if (item.name) {
-          this.item.name = item.name.trim()
-        }
-      },
-      deep: true
+      editableItem: {}
     }
   },
   methods: {
@@ -80,8 +65,8 @@ export default {
       try {
         const response = await this.request({
           method: 'post',
-          url: this.url,
-          data: this.item,
+          url: this.resourceBaseUrl,
+          data: this.editableItem,
           headers: {
             Accept: 'application/ld+json'
           }

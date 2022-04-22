@@ -39,3 +39,7 @@ Cypress.Commands.add('snackbarContains', (content) => {
     cy.get('.v-snack__content').contains(content)
   })
 })
+
+Cypress.Commands.add('loadFixtures', () => {
+  cy.exec(`cd ${Cypress.env('api_compose_path')} && docker-compose exec php bin/console hautelook:fixtures:load --env=dev --quiet`)
+})

@@ -90,3 +90,5 @@ sw.*
 *.swp
 
 .env
+
+cypress.env.json

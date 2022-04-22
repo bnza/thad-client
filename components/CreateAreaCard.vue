@@ -105,7 +105,6 @@ export default {
         return
       }
       this.item.site = `${this.$config.apiPrefix}/sites/${site.id}`
-      console.log(this.item)
       this.siteName = site.name
     },
     async submit() {

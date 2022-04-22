@@ -17,6 +17,7 @@
       <v-btn
         :color="color"
         text
+        data-cy="snackbar-close-btn"
         v-bind="attrs"
         @click="show=false"
       >

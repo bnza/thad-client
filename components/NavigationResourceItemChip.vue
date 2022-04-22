@@ -1,8 +1,8 @@
 <template>
   <v-tooltip bottom>
     <template #activator="{ on, attrs }">
-        <v-chip v-bind="attrs" small v-on="on">
-          <NuxtLink :to="getItemResourcePath(itemId)">{{ linkText }}</NuxtLink>
+        <v-chip v-bind="attrs" class="font-weight-bold" v-on="on" :data-cy="`${resourceName}-navigation-chip`">
+          <NuxtLink :to="getItemResourcePath(itemId)" >{{ linkText }}</NuxtLink>
         </v-chip>
     </template>
     <span>Show</span>

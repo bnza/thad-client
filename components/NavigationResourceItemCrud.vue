@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <navigation-resource-read-button :item-id="itemId" :resource-base-path="resourceBasePath" />
-    <navigation-update-resource-button :item-id="itemId" :resource-base-path="resourceBasePath" :disabled="disabled" />
+  <div data-cy="item-crud-navigation">
+    <navigation-resource-read-button :item-id="itemId" :resource-name="resourceName" />
+    <navigation-update-resource-button :item-id="itemId" :resource-name="resourceName" :disabled="disabled" />
     <navigation-delete-resource-button
       :item-id="itemId"
-      :resource-base-path="resourceBasePath"
+      :resource-name="resourceBasePath"
       :disabled="disabled"
       @delete="$emit('delete')"
     />

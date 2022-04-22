@@ -2,34 +2,35 @@
     <v-card-text>
         <v-container>
           <v-row dense>
-            <v-col>
+            <v-col data-cy="site-code-input-col">
               <v-text-field
-                v-model="item.code"
+                v-model="editableItem.code"
                 label="code"
                 required
                 :error-messages="codeErrors"
                 @change="change('code', $event)"
-                @input="$v.item.code.$touch()"
-                @blur="$v.item.code.$touch()"
+                @input="$v.editableItem.code.$touch()"
+                @blur="$v.editableItem.code.$touch()"
               />
             </v-col>
-            <v-col>
+            <v-col data-cy="site-name-input-col">
               <v-text-field
-                v-model="item.name"
+                v-model="editableItem.name"
                 label="name"
                 required
                 :error-messages="nameErrors"
                 @change="change('name', $event)"
-                @input="$v.item.name.$touch()"
-                @blur="$v.item.name.$touch()"
+                @input="$v.editableItem.name.$touch()"
+                @blur="$v.editableItem.name.$touch()"
               />
             </v-col>
           </v-row>
           <v-row dense>
             <v-col>
               <v-text-field
-                v-model="item.description"
+                v-model="editableItem.description"
                 label="description"
+                data-cy="site-description-input"
                 @change="change('description', $event)"
               />
             </v-col>
@@ -41,16 +42,18 @@
 <script>
 import ResourceItemFormMixin from "@/mixins/ResourceItemFormMixin";
 import ResourceValidationSiteMixin from "@/mixins/validation/ResourceValidationSiteMixin";
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 
 export default {
   name: "UpdateSiteCard",
   mixins: [
     ResourceItemFormMixin,
+    ResourceNavigationMixin,
     ResourceValidationSiteMixin
   ],
   data() {
     return {
-      item: {},
+      editableItem: {},
       form: {}
     }
   },
@@ -64,7 +67,7 @@ export default {
   },
   watch: {
     responseData(item) {
-      this.item = item
+      this.editableItem = item
     }
   },
   methods: {
@@ -75,16 +78,20 @@ export default {
       if (this.$v.$invalid) {
         return
       }
-      this.response = await this.request({
-        method: 'patch',
-        url: this.url,
-        data: this.form,
-        headers: {
-          Accept: 'application/ld+json',
-          'Content-Type': 'application/merge-patch+json'
-        }
-      })
-      await this.$router.replace(this.readPath)
+      try {
+        this.response = await this.request({
+          method: 'patch',
+          url: this.getItemResourceUrl(this.id),
+          data: this.editableItem,
+          headers: {
+            Accept: 'application/ld+json',
+            'Content-Type': 'application/merge-patch+json'
+          }
+        })
+        await this.$router.go(-1)
+      } catch (e) {
+        await this.$store.dispatch('snackbar/requestError', e)
+      }
     }
   }
 }

@@ -6,6 +6,7 @@
         icon
         v-bind="attrs"
         @click="$router.go(-1)"
+        data-cy="navigation-prev-btn"
         v-on="on"
       >
         <v-icon color="primary" class="mx-3">mdi-arrow-left</v-icon>

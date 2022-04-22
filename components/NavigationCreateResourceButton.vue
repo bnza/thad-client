@@ -6,7 +6,8 @@
         icon
         v-bind="attrs"
         :disabled="disabled"
-        :to="`${createResourcePath}create`"
+        :to="createResourcePath"
+        data-cy="resource-create-btn"
         v-on="on"
       >
         <v-icon class="mx-3">mdi-plus</v-icon>

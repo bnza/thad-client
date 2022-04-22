@@ -36,7 +36,7 @@ export const actions = {
     commit('resetTimeout')
     let text = '';
     if (error.response) {
-      const title  =error.response.data['hydra:title']
+      const title = error.response.data['hydra:title']
       text = `${title}: [${error.response.status}]\n`+
         error.response.data['hydra:description']
     } else {

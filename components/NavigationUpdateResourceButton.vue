@@ -7,6 +7,7 @@
         v-bind="attrs"
         :disabled="disabled"
         :to="getItemResourceUpdatePath(itemId)"
+        data-cy="resource-update-btn"
         v-on="on"
       >
         <v-icon color="primary" class="mx-3">mdi-pencil</v-icon>

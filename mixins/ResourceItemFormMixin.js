@@ -1,5 +1,3 @@
-
-import {isEmpty} from "ramda";
 import ResourceFetchMixin from "~/mixins/ResourceFetchMixin";
 import ResourceItemDataAccessorMixin from "~/mixins/ResourceItemDataAccessorMixin";
 import RouteResourceItemMixin from "~/mixins/RouteResourceItemMixin";

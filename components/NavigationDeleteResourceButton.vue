@@ -5,6 +5,7 @@
         icon
         v-bind="attrs"
         :disabled="disabled"
+        data-cy="resource-delete-btn"
         v-on="on"
         @click="$emit('delete', itemId)"
       >

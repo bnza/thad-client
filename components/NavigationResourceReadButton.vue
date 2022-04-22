@@ -6,6 +6,7 @@
         icon
         v-bind="attrs"
         :to="getItemResourcePath(itemId)"
+        data-cy="resource-read-btn"
         v-on="on"
       >
         <v-icon color="primary" class="mx-3">mdi-arrow-right</v-icon>

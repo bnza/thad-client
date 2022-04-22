@@ -1,11 +1,17 @@
 export default {
   props: {
-    resourceBasePath: {
+    resourceName: {
       type: String,
       required: true
     }
   },
   computed: {
+    resourceBasePath() {
+      return `/app/${this.resourceName}`
+    },
+    resourceBaseUrl() {
+      return this.resourceName
+    },
     createResourcePath() {
       return `${this.resourceBasePath}/create`
     }
@@ -17,8 +23,8 @@ export default {
     getItemResourceUpdatePath(id) {
       return `${this.resourceBasePath}/${id}/update`
     },
-    getItemResourceDeletePath(id) {
-      return `${this.resourceBasePath}/${id}/delete`
+    getItemResourceUrl(id) {
+      return `${this.resourceBaseUrl}/${id}`
     },
   }
 }
