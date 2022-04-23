@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card data-cy="collection-areas-card">
     <v-toolbar flat dense>
       <v-toolbar-title v-if="!isChild">Areas</v-toolbar-title>
       <v-spacer />
@@ -60,11 +60,23 @@
           resource-name="sites" />
       </template>
     </v-data-table>
+    <delete-resource-dialog
+      v-if="deletingItem"
+      resource-name="areas"
+      :visible.sync="deleteDialog"
+      :item="deletingItem"
+      @itemDeleted="resetAndFetch"
+    >
+      <delete-area-card-text :item="deletingItem" />
+    </delete-resource-dialog>
   </v-card>
 </template>
 
 <script>
-import RouteResourceCollectionTableMixin from "@/mixins/RouteResourceCollectionTableMixin";
+import DeleteResourceDialog from "@/components/DeleteResourceDialog";
+import DeleteAreaCardText from "@/components/DeleteSiteCardText";
+import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
+import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
 import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
 import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
@@ -72,12 +84,15 @@ import NavigationResourceItemChip from "@/components/NavigationResourceItemChip"
 export default {
   name: "CollectionsAreaCard",
   components: {
+    DeleteResourceDialog,
+    DeleteAreaCardText,
     NavigationCreateResourceButton,
     NavigationResourceItemChip,
     NavigationResourceItemCrud
   },
   mixins: [
-    RouteResourceCollectionTableMixin
+    ResourceDeleteDialogMixin,
+    ResourceCollectionGetMixin
   ],
 }
 </script>

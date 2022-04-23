@@ -1,4 +1,8 @@
+import ResourceFetchMixin from "~/mixins/ResourceFetchMixin";
 export default {
+  mixins: [
+    ResourceFetchMixin
+  ],
   computed: {
     routeIdParamKey() {
       return 'id'

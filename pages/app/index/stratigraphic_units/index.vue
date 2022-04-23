@@ -1,9 +1,9 @@
 <template>
-  <collection-sus-card />
+  <collection-sus-card resource-name="stratigraphic_units"/>
 </template>
 
 <script>
-import RouteResourceCollectionTableMixin from "@/mixins/RouteResourceCollectionTableMixin";
+import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import CollectionSusCard from "@/components/CollectionSusCard";
 
 export default {
@@ -12,12 +12,7 @@ export default {
     CollectionSusCard
   },
   mixins: [
-    RouteResourceCollectionTableMixin
+    ResourceCollectionGetMixin
   ],
-/*   computed: {
-    resourceName() {
-      return 'stratigraphic_units'
-    }
-  } */
 }
 </script>

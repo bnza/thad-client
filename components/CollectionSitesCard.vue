@@ -69,7 +69,7 @@ import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
 import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
 import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
-import RouteResourceCollectionTableMixin from "@/mixins/RouteResourceCollectionTableMixin";
+import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 
 export default {
   name: "CollectionSitesCard",
@@ -82,7 +82,7 @@ export default {
   },
   mixins: [
     ResourceDeleteDialogMixin,
-    RouteResourceCollectionTableMixin
+    ResourceCollectionGetMixin
   ],
 }
 </script>

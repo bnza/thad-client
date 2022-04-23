@@ -1,18 +1,18 @@
 <template>
   <action-resource-card resource-name="sites" action="new">
-    <create-site-card resource-name="sites"/>
+    <edit-site-card resource-name="sites"/>
   </action-resource-card>
 </template>
 
 <script>
 import ActionResourceCard from "@/components/ActionResourceCard";
-import CreateSiteCard from "@/components/CreateSiteCard";
+import EditSiteCard from "@/components/EditSiteCard";
 
 export default {
   name: "AppCreateSitePage",
   components: {
     ActionResourceCard,
-    CreateSiteCard
+    EditSiteCard
   }
 }
 </script>

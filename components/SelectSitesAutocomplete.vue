@@ -1,16 +1,19 @@
 <template>
   <v-autocomplete
-    v-model="select"
+    :value="select"
     :error-messages="errorMessages"
     :loading="loading"
     :items="items"
     item-text="code"
     item-value="id"
     :search-input.sync="search"
+    :readonly="readonly"
+    return-object
     cache-items
     flat
     hide-no-data
     label="site"
+    @change="$emit('update:select', $event)"
   />
 </template>
 
@@ -23,13 +26,20 @@ export default {
       default() {
         return []
       }
-
+    },
+    select: {
+      type: Object,
+      required: true
+    },
+    readonly: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
       loading: false,
-      select: null,
+      // select: null,
       search: null,
       items: []
     }
@@ -51,9 +61,6 @@ export default {
         return (new RegExp('^'+val, 'i')).test(i.code)
       })
     },
-    select (id) {
-      this.$emit('select', this.items.find(site => site.id === id))
-    }
   }
 }
 </script>

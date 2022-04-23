@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import RouteResourceCollectionTableMixin from "@/mixins/RouteResourceCollectionTableMixin";
+import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
 import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
 import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
@@ -100,7 +100,7 @@ export default {
     NavigationResourceItemCrud
   },
   mixins: [
-    RouteResourceCollectionTableMixin
+    ResourceCollectionGetMixin
   ],
 }
 </script>

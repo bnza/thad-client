@@ -55,7 +55,7 @@
               <v-col>
                 <v-text-field
                   class="secondary--text font-weight-bold" color="secondary"
-                  :value="code"
+                  :value="formatCode('stratigraphic_units', item)"
                   label="code"
                   readonly
                 />
@@ -154,14 +154,9 @@ export default {
   data() {
     return {
       panels: [
-        0,1,2
+        1,2
       ],
     }
-  },
-  computed: {
-    code() {
-      return this.ready ? `${this.item.site.code}.${this.item.number.toString().padStart(4,'0')}` : ''
-    }
-  },
+  }
 }
 </script>

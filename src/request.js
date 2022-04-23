@@ -1,4 +1,4 @@
-import {clone, mergeLeft} from "ramda";
+import {clone, mergeLeft, map, is} from "ramda";
 import {hasOwnProperty} from "~/src/utils";
 
 export const setAuthorizationHeader = (token, headers) => {
@@ -39,4 +39,8 @@ export const formatOptionsArrayForQueryString = (options) => {
     requestOptions = mergeLeft(options.filters, requestOptions)
   }
   return requestOptions
+}
+
+export const normalizeRequestBodyData = (data) => {
+  return map(v => is(String)(v) ? v || null : v, data)
 }
