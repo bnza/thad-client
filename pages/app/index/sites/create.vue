@@ -13,7 +13,8 @@ export default {
   components: {
     ActionResourceCard,
     EditSiteCard
-  }
+  },
+  middleware: ['admin-auth']
 }
 </script>
 

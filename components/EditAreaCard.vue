@@ -90,7 +90,7 @@ export default {
     requestData() {
       const data = normalizeRequestBodyData(this.updateItem)
       if (has('site', data)) {
-        data.site = this.formatIri('sites', data.site.id)
+        data.site = data.site['@id']
       }
       return data
     }

@@ -26,7 +26,7 @@ export const actions = {
         method: 'get',
         url: '/sites',
         headers: {
-          Accept: 'application/json'
+          Accept: 'application/ld+json'
         },
       })
   },

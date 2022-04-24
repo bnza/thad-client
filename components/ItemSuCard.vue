@@ -8,7 +8,11 @@
       <v-spacer />
       <navigation-collection-resource-button resource-name="stratigraphic_units" />
       <navigation-update-resource-button :item-id="id" resource-name="stratigraphic_units" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
-      <navigation-delete-resource-button :item-id="id" resource-name="stratigraphic_units" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
+      <navigation-delete-resource-button
+        :item-id="id"
+        resource-name="stratigraphic_units"
+        :disabled="!$auth.hasScope('ROLE_EDITOR')"
+      />
       <template #extension>
         <v-tabs v-model="tab" align-with-title>
           <v-tab href="#data">Data</v-tab>

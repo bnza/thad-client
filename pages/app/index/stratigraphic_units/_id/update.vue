@@ -12,6 +12,7 @@ export default {
   components: {
     ActionResourceCard,
     EditSuCard
-  }
+  },
+  middleware: ['editor-auth']
 }
 </script>

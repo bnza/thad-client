@@ -63,7 +63,9 @@
     >
       <template #[`item.id`]="{ item : tItem }">
         <navigation-resource-item-crud
-          :item-id="tItem.id" resource-name="stratigraphic_units"
+          scope="ROLE_EDITOR"
+          :item-id="tItem.id"
+          resource-name="stratigraphic_units"
           @delete="openDeleteDialog(tItem)"
         />
       </template>
@@ -83,10 +85,22 @@
         {{ new Date(item.date).toLocaleDateString() }}
       </template>
     </v-data-table>
+    <delete-resource-dialog
+      v-if="deletingItem"
+      resource-name="stratigraphic_units"
+      :visible.sync="deleteDialog"
+      :item="deletingItem"
+      @itemDeleted="resetAndFetch"
+    >
+      <delete-su-card-text :item="deletingItem" />
+    </delete-resource-dialog>
   </v-card>
 </template>
 
 <script>
+import DeleteResourceDialog from "@/components/DeleteResourceDialog";
+import DeleteSuCardText from "@/components/DeleteSuCardText";
+import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
 import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
@@ -95,12 +109,15 @@ import NavigationResourceItemChip from "@/components/NavigationResourceItemChip"
 export default {
   name: "CollectionSusCard",
   components: {
+    DeleteSuCardText,
+    DeleteResourceDialog,
     NavigationCreateResourceButton,
     NavigationResourceItemChip,
     NavigationResourceItemCrud
   },
   mixins: [
-    ResourceCollectionGetMixin
+    ResourceCollectionGetMixin,
+    ResourceDeleteDialogMixin
   ],
 }
 </script>
