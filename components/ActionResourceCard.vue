@@ -2,7 +2,10 @@
   <v-card data-cy="action-resource-card">
     <v-toolbar flat dense>
       <navigation-prev-button />
-      <v-toolbar-title data-cy="resource-action-toolbar-title"><span class="text-capitalize">{{resourceName}}</span> <small>({{action}})</small></v-toolbar-title>
+      <v-toolbar-title data-cy="resource-action-toolbar-title">
+        <span class="text-capitalize">{{getResourceProperty(resourceName, 'name')}}</span>
+        <small>({{action}})</small>
+      </v-toolbar-title>
     </v-toolbar>
     <slot />
     <slot name="actions">
@@ -35,6 +38,8 @@
 </template>
 
 <script>
+import {getResourceProperty} from "@/src/utils";
+
 import NavigationPrevButton from "@/components/NavigationPrevButton";
 export default {
   name: "ActionResourceCard",
@@ -52,6 +57,7 @@ export default {
     }
   },
   methods: {
+    getResourceProperty,
     submit() {
       this.$slots.default[0].componentInstance.submit()
     },

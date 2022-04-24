@@ -110,6 +110,22 @@
             <v-row dense>
               <v-col>
                 <v-text-field
+                  :value="getResponseValue('topElevation', item)"
+                  label="top elevation (m)"
+                  readonly
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  :value="getResponseValue('bottomElevation', item)"
+                  label="bottom elevation (m)"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col>
+                <v-text-field
                   :value="getResponseValue('compiler', item)"
                   label="compiler"
                   readonly
@@ -118,13 +134,13 @@
               <v-col>
                 <v-text-field
                   :value="getResponseValue('areaSupervisor', item)"
-                  label="name"
+                  label="supervisor"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-text-field
-                  :value="getResponseDateString('date', item)"
+                  :value="getResponseValue('date', item).substring(0,10)"
                   label="date"
                   readonly
                 />

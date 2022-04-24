@@ -7,3 +7,12 @@ export const mutations = {
     state.counter++
   },
 }
+
+export const actions = {
+  a({commit}) {
+    commit('increment')
+  },
+  nuxtClientInit({dispatch}) {
+    dispatch('vocabularies/fetch')
+  }
+}

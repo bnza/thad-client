@@ -29,5 +29,20 @@ export const actions = {
           Accept: 'application/json'
         },
       })
+  },
+  getAreas({dispatch}, site) {
+    const params = {}
+    if (site) {
+      params['site.id'] = site
+    }
+    return dispatch('request',
+      {
+        method: 'get',
+        url: '/areas',
+        headers: {
+          Accept: 'application/ld+json'
+        },
+        params
+      })
   }
 }

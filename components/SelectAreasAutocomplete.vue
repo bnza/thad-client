@@ -4,7 +4,7 @@
     :error-messages="errorMessages"
     :loading="loading"
     :items="items"
-    item-text="code"
+    item-text="@code"
     item-value="id"
     :search-input.sync="search"
     :readonly="readonly"
@@ -12,7 +12,7 @@
     cache-items
     flat
     hide-no-data
-    label="site"
+    label="area"
     @change="$emit('update:select', $event)"
   />
 </template>
@@ -25,6 +25,12 @@ export default {
       type: Array,
       default() {
         return []
+      }
+    },
+    site: {
+      type: Object,
+      default() {
+        return {};
       }
     },
     select: {
@@ -46,8 +52,11 @@ export default {
   async fetch() {
     this.loading = true
     try {
-      const response = await this.$store.dispatch('http/getSites');
-      this.items = response.data['hydra:member']
+      const response = await this.$store.dispatch('http/getAreas');
+      this.items = response.data['hydra:member'].map(item => {
+        item['@code'] = `${item.site.code}.${item.code}`
+        return item
+      })
     } catch (e) {
       await this.$store.dispatch('snackbar/requestError', e)
     } finally {
@@ -57,7 +66,7 @@ export default {
   watch: {
     search (val) {
       val && val !== this.select && this.items.filter(i => {
-        return (new RegExp('^'+val, 'i')).test(i.code)
+        return (new RegExp('^'+val, 'i')).test(i['@code'])
       })
     },
   }

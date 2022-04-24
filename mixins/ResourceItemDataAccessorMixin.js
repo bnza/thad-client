@@ -14,7 +14,7 @@ const getResponseValue = (key, item) => {
 const codeFormatters = {
   sites: item => item.code || '',
   areas: item => `${getResponseValue('site.code', item)}.${item.code}`,
-  stratigraphic_units: item => `${getResponseValue('site.code', item)}.${item.number.toString().padStart(5,'0')}`
+  stratigraphic_units: item => `${getResponseValue('site.code', item)}.${getResponseValue('date', item).substring(2,4)}.SU.${item.number.toString().padStart(5,'0')}`
 }
 
 export default {

@@ -1,4 +1,10 @@
-import { mergeLeft, isEmpty, when, is, pipe, toLower, replace, toUpper } from 'ramda'
+import { mergeLeft, isEmpty, when, is, pipe, toLower, replace, toUpper, has } from 'ramda'
+
+const resourcesNamesMap = {
+  stratigraphic_units: {
+    name: 'stratigraphic unit'
+  }
+}
 
 export const capitalize = when(
   is(String),
@@ -36,4 +42,14 @@ export const optionsToPaginationQuery = (options, tab, query) => {
     }
   }
   return mergeLeft(_query, query)
+}
+
+export const getResourceProperty = (resourceName, key) => {
+  if (!has(resourceName, resourcesNamesMap)) {
+    return resourceName
+  }
+  if (!has(key, resourcesNamesMap[resourceName])) {
+    return resourceName
+  }
+  return resourcesNamesMap[resourceName][key]
 }

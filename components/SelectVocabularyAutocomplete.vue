@@ -2,9 +2,8 @@
   <v-autocomplete
     :value="select"
     :error-messages="errorMessages"
-    :loading="loading"
-    :items="items"
-    item-text="code"
+    :items="vocabulary"
+    item-text="value"
     item-value="id"
     :search-input.sync="search"
     :readonly="readonly"
@@ -12,46 +11,52 @@
     cache-items
     flat
     hide-no-data
-    label="site"
+    :label="label"
     @change="$emit('update:select', $event)"
   />
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
-  name: "SelectSitesAutocomplete",
+  name: "SelectVocabularyAutocomplete",
   props: {
+    label: {
+      type: String,
+      required: true
+    },
     errorMessages: {
       type: Array,
       default() {
         return []
       }
     },
-    select: {
-      type: Object,
-      required: true
-    },
     readonly: {
       type: Boolean,
       default: false
+    },
+    select: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
+    vocabularyName: {
+      type: String,
+      required: true
     }
   },
   data() {
     return {
-      loading: false,
       search: null,
       items: []
     }
   },
-  async fetch() {
-    this.loading = true
-    try {
-      const response = await this.$store.dispatch('http/getSites');
-      this.items = response.data['hydra:member']
-    } catch (e) {
-      await this.$store.dispatch('snackbar/requestError', e)
-    } finally {
-      this.loading = false
+  computed: {
+    ...mapGetters('vocabularies', ['getVocabulary']),
+    vocabulary() {
+      return this.getVocabulary(this.vocabularyName)
     }
   },
   watch: {
