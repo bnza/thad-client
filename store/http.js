@@ -44,5 +44,30 @@ export const actions = {
         },
         params
       })
+  },
+  getSus({dispatch}, {area}) {
+    const params = {}
+    if (area?.id) {
+      params['area.id'] = area.id
+    }
+    return dispatch('request',
+      {
+        method: 'get',
+        url: '/stratigraphic_units',
+        headers: {
+          Accept: 'application/ld+json'
+        },
+        params
+      })
+  },
+  getSu({dispatch}, id) {
+    return dispatch('request',
+      {
+        method: 'get',
+        url: `/stratigraphic_units/${id}`,
+        headers: {
+          Accept: 'application/ld+json'
+        },
+      })
   }
 }

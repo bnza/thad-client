@@ -1,0 +1,82 @@
+<template>
+  <v-autocomplete
+    :value="select"
+    :error-messages="errorMessages"
+    :loading="loading"
+    :items="items"
+    item-text="@code"
+    item-value="id"
+    :search-input.sync="search"
+    :readonly="readonly"
+    return-object
+    cache-items
+    flat
+    hide-no-data
+    label="stratigraphic unit"
+    @change="$emit('update:select', $event)"
+  />
+</template>
+
+<script>
+import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
+export default {
+  name: "SelectSitesAutocomplete",
+  mixins: [
+    ResourceItemDataAccessorMixin
+  ],
+  props: {
+    errorMessages: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    area: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
+    select: {
+      type: Object,
+      required: true
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      loading: false,
+      search: null,
+      items: []
+    }
+  },
+  async fetch() {
+    this.loading = true
+    try {
+      const response = await this.$store.dispatch('http/getSus', {area: this.area});
+      this.items = response.data['hydra:member'].map(item => {
+        item['@code'] = this.formatCode('stratigraphic_units', item)
+        return item
+      })
+    } catch (e) {
+      await this.$store.dispatch('snackbar/requestError', e)
+    } finally {
+      this.loading = false
+    }
+  },
+  watch: {
+    search (val) {
+      val && val !== this.select && this.items.filter(i => {
+        return (new RegExp('^'+val, 'i')).test(i['@code'])
+      })
+    },
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

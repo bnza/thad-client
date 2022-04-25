@@ -4,22 +4,22 @@
       <v-row dense>
         <v-col>
           <v-text-field
-            :value="getResponseValue('site.code', item)"
-            label="site"
+            :value="getResponseValue('sxSU.number', item)"
+            label="stratigraphic unit"
             readonly
           />
         </v-col>
         <v-col>
           <v-text-field
-            :value="getResponseValue('area.code', item)"
-            label="code"
+            :value="relationship.value"
+            label="relationship"
             readonly
           />
         </v-col>
         <v-col>
           <v-text-field
-            :value="getResponseValue('number', item)"
-            label="number"
+            :value="getResponseValue('dxSU.number', item)"
+            label="stratigraphic unit"
             readonly
           />
         </v-col>
@@ -29,9 +29,11 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
+
 export default {
-  name: "DeleteSuCardText",
+  name: "DeleteSuRelCardText",
   mixins: [
     ResourceItemDataAccessorMixin
   ],
@@ -39,6 +41,13 @@ export default {
     item: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    ...mapState('vocabularies', {relationships: 'su_relationships'}),
+    relationship() {
+      const relationIri = this.item.relationship
+      return this.relationships.find(relation => relation['@id'] === relationIri)
     }
   }
 }

@@ -12,6 +12,7 @@
         :item-id="id"
         resource-name="stratigraphic_units"
         :disabled="!$auth.hasScope('ROLE_EDITOR')"
+        @delete="openDeleteDialog(item)"
       />
       <template #extension>
         <v-tabs v-model="tab" align-with-title>
@@ -31,7 +32,7 @@
       </v-tab-item>
       <v-tab-item value="rels">
         <v-card-text>
-          Relationships
+          <collection-su-rels-container :parent="item" resource-name="stratigraphic_relationships"/>
         </v-card-text>
       </v-tab-item>
       <v-tab-item value="pottery">
@@ -60,6 +61,15 @@
         </v-card-text>
       </v-tab-item>
     </v-tabs-items>
+    <delete-resource-dialog
+      v-if="deletingItem"
+      resource-name="stratigraphic_units"
+      :visible.sync="deleteDialog"
+      :item="deletingItem"
+      @itemDeleted="resetAndPrev"
+    >
+      <delete-su-card-text :item="deletingItem" />
+    </delete-resource-dialog>
   </v-card>
 </template>
 
@@ -73,15 +83,17 @@ import ReadSuCard from "@/components/ReadSuCard";
 import NavigationCollectionResourceButton from "@/components/NavigationCollectionResourceButton";
 import NavigationDeleteResourceButton from "@/components/NavigationDeleteResourceButton";
 import NavigationUpdateResourceButton from "@/components/NavigationUpdateResourceButton";
-/* import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import DeleteAreaCardText from "@/components/DeleteAreaCardText"; */
+import CollectionSuRelsContainer from "@/components/CollectionSuRelsContainer";
+import DeleteResourceDialog from "@/components/DeleteResourceDialog";
+import DeleteSuCardText from "@/components/DeleteSuCardText";
 
 export default {
   name: "ItemAreaCard",
   components: {
+    CollectionSuRelsContainer,
     ReadSuCard,
-/*     DeleteResourceDialog,
-    DeleteAreaCardText, */
+    DeleteResourceDialog,
+    DeleteSuCardText,
     NavigationPrevButton,
     NavigationCollectionResourceButton,
     NavigationDeleteResourceButton,

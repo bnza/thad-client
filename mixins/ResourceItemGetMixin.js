@@ -37,4 +37,9 @@ export default {
       await this.$store.dispatch('snackbar/requestError', e)
     }
   },
+  watch: {
+    id() {
+      this.$fetch()
+    }
+  }
 }
