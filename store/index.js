@@ -1,18 +1,23 @@
 export const state = () => ({
-  counter: 0,
+  apiPrefix: '',
+  ready: false
 })
 
 export const mutations = {
-  increment(state) {
-    state.counter++
+  setApiPrefix(state, prefix) {
+    state.apiPrefix = prefix
+  },
+  setReady(state) {
+    state.ready = true
   },
 }
 
 export const actions = {
-  a({commit}) {
-    commit('increment')
-  },
-  nuxtClientInit({dispatch}) {
-    dispatch('vocabularies/fetch')
+  nuxtClientInit({dispatch, commit}) {
+    commit('setApiPrefix', this.$config.apiPrefix)
+    dispatch('api/fetchEntrypoint').then(() => {
+      commit('setReady')
+      dispatch('vocabularies/fetchAll')
+    })
   }
 }

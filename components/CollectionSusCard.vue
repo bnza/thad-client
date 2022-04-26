@@ -5,7 +5,7 @@
       <v-spacer />
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_EDITOR')"
-        resource-name="stratigraphic_units"
+        :resource-name="resourceName"
         :disabled="false"
       />
     </v-toolbar>
@@ -65,7 +65,7 @@
         <navigation-resource-item-crud
           scope="ROLE_EDITOR"
           :item-id="tItem.id"
-          resource-name="stratigraphic_units"
+          :resource-name="resourceName"
           @delete="openDeleteDialog(tItem)"
         />
       </template>
@@ -73,13 +73,14 @@
         <navigation-resource-item-chip
           :link-text="item.site.code"
           :item-id="item.site.id"
-          resource-name="sites" />
+          resource-name="site" />
       </template>
       <template #[`item.area.code`]="{ item }">
         <navigation-resource-item-chip
           :link-text="item.area.code"
           :item-id="item.area.id"
-          resource-name="areas" />
+          resource-name="area"
+        />
       </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}
@@ -87,7 +88,7 @@
     </v-data-table>
     <delete-resource-dialog
       v-if="deletingItem"
-      resource-name="stratigraphic_units"
+      :resource-name="resourceName"
       :visible.sync="deleteDialog"
       :item="deletingItem"
       @itemDeleted="resetAndFetch"

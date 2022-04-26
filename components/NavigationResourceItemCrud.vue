@@ -4,7 +4,7 @@
     <navigation-update-resource-button :item-id="itemId" :resource-name="resourceName" :disabled="disabled" />
     <navigation-delete-resource-button
       :item-id="itemId"
-      :resource-name="resourceBasePath"
+      :resource-name="resourceName"
       :disabled="disabled"
       @delete="$emit('delete')"
     />

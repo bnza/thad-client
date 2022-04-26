@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
@@ -44,7 +43,9 @@ export default {
     }
   },
   computed: {
-    ...mapState('vocabularies', {relationships: 'su_relationships'}),
+    relationships() {
+      return this.$store.getters['vocabularies/getVocabulary']('relationship')
+    },
     relationship() {
       const relationIri = this.item.relationship
       return this.relationships.find(relation => relation['@id'] === relationIri)

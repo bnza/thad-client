@@ -1,5 +1,5 @@
 <template>
-  <collection-areas-card resource-name="areas"/>
+  <collection-areas-card resource-name="area"/>
 </template>
 
 <script>

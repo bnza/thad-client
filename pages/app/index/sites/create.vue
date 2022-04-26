@@ -1,6 +1,6 @@
 <template>
-  <action-resource-card resource-name="sites" action="new">
-    <edit-site-card resource-name="sites"/>
+  <action-resource-card resource-name="site" action="new">
+    <edit-site-card resource-name="site"/>
   </action-resource-card>
 </template>
 
@@ -17,7 +17,3 @@ export default {
   middleware: ['admin-auth']
 }
 </script>
-
-<style scoped>
-
-</style>

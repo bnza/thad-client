@@ -1,35 +1,8 @@
-const vocabulariesMap = {
-  su_preservation_states: {
-    url: '/vocabulary/su/preservation_states'
-  },
-  su_relationships: {
-    url: '/vocabulary/su/relationships'
-  },
-  su_types: {
-    url: '/vocabulary/su/types'
-  }
-}
-
-const fetchVocabulary = ($axios, url) => {
-  return $axios.request({
-    method: 'get',
-    url,
-    headers: {
-      Accept: 'application/ld+json'
-    },
-  })
-}
-
-export const state = () => ({
-  su_preservation_states: [],
-  su_relationships: [],
-  su_types: [],
-
-})
+export const state = () => ({})
 
 export const mutations = {
-  set(state, {name, data}) {
-    state[name] = data['hydra:member']
+  set(state, {resourceName, data}) {
+    state[resourceName] = data['hydra:member']
   },
 }
 
@@ -42,14 +15,24 @@ export const getters = {
 }
 
 export const actions = {
-  fetch({commit}) {
-    const $axios = this.$axios
-    Object.keys(vocabulariesMap).forEach(k => {
-      fetchVocabulary($axios, vocabulariesMap[k].url).then(
-        res => {
-          commit('set', {name: k, data: res.data})
-        }
-      )
-    })
+  fetch: ({commit}, vocabulary) => {
+     return this.$axios.request({
+      method: 'get',
+      url: vocabulary.collectionUrl,
+      headers: {
+        Accept: 'application/ld+json'
+      },
+    }).then(response => commit('set', {resourceName: vocabulary.resourceName, data: response.data}))
+  },
+  fetchAll({commit, rootGetters}) {
+    rootGetters["api/vocabularyResources"].forEach((voc) => {
+      return this.$axios.request({
+        method: 'get',
+        url: voc.collectionUrl,
+        headers: {
+          Accept: 'application/ld+json'
+        },
+      }).then(response => commit('set', {resourceName: voc.resourceName, data: response.data}))
+    }, this)
   }
 }

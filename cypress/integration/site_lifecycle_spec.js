@@ -4,7 +4,9 @@ describe('The Site resource lifecycle', () => {
   })
 
   it ('Site resource lifecycle (admin)', () => {
-    cy.login('user_admin@example.com','0002')
+    cy.visit('/')
+
+    cy.programmaticLogin('user_admin@example.com','0002')
 
     cy.visit('/app/sites')
 
@@ -24,7 +26,7 @@ describe('The Site resource lifecycle', () => {
 
     cy.get('[data-cy=resource-update-btn]').click()
 
-    cy.get('[data-cy=action-resource-card] .v-toolbar__title').contains('sites')
+    cy.get('[data-cy=action-resource-card] .v-toolbar__title').contains('site')
 
     cy.get('[data-cy=action-resource-card] .v-toolbar__title').contains('edit')
 
@@ -112,13 +114,13 @@ describe('The Site resource lifecycle', () => {
       .find('[data-cy=resource-update-btn]')
       .click()
 
-    cy.get('[data-cy=action-resource-card] .v-toolbar__title').contains('sites')
+    cy.get('[data-cy=action-resource-card] .v-toolbar__title').contains('site')
 
     cy.get('[data-cy=action-resource-card] .v-toolbar__title').contains('edit')
 
     cy.get('[data-cy=navigation-prev-btn]').click()
 
-    cy.get('[data-cy=sites-navigation-chip]')
+    cy.get('[data-cy=site-navigation-chip]')
       .last()
       .click()
 

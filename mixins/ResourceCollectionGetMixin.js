@@ -1,5 +1,6 @@
 import {isEmpty, clone, mergeLeft} from "ramda";
 import ResourceFetchMixin from "~/mixins/ResourceFetchMixin";
+import ResourceNavigationMixin from "~/mixins/ResourceNavigationMixin";
 import {formatOptionsArrayForQueryString} from "~/src/request";
 import {paginationQueryToOptions, optionsToPaginationQuery} from "~/src/utils";
 
@@ -10,7 +11,8 @@ export default {
     }
   },
   mixins: [
-    ResourceFetchMixin
+    ResourceFetchMixin,
+    ResourceNavigationMixin
   ],
   props: {
     tab: {
@@ -79,7 +81,7 @@ export default {
       return this.responseData['hydra:totalItems'] || 0
     },
     url() {
-      return `${this.resourceName}`
+      return this.resource.collectionUrl
     }
   },
   watch: {

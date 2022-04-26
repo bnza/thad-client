@@ -1,5 +1,5 @@
 <template>
-  <item-su-card resource-name="stratigraphic_units" />
+  <item-su-card resource-name="stratigraphicUnit" />
 </template>
 
 <script>

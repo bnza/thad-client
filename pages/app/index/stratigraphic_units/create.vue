@@ -1,6 +1,6 @@
 <template>
-  <action-resource-card resource-name="stratigraphic_units" action="new">
-    <edit-su-card resource-name="stratigraphic_units"/>
+  <action-resource-card resource-name="stratigraphicUnit" action="new">
+    <edit-su-card resource-name="stratigraphicUnit"/>
   </action-resource-card>
 </template>
 

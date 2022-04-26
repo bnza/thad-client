@@ -47,6 +47,7 @@
 
 <script>
 import {mapActions} from "vuex";
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import SelectSuAutocomplete from "@/components/SelectSuAutocomplete";
 
@@ -56,7 +57,8 @@ export default {
     SelectSuAutocomplete
   },
   mixins: [
-    ResourceItemDataAccessorMixin
+    ResourceItemDataAccessorMixin,
+    ResourceNavigationMixin
   ],
   props: {
     visible: {
@@ -96,7 +98,7 @@ export default {
       try {
         await this.request({
           method: 'post',
-          url: 'stratigraphic_relationships',
+          url: this.resource.collectionUrl,
           data: this.requestData,
           headers: {
             Accept: 'application/ld+json'

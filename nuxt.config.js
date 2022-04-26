@@ -79,7 +79,7 @@ export default {
   },
 
   axios: {
-    baseURL: process.env.API_BASE_URL + process.env.API_PREFIX
+    baseURL: process.env.API_BASE_URL
   },
 
   auth: {
@@ -97,8 +97,8 @@ export default {
           autoFetch: true
         },
         endpoints: {
-          login: { url: '/login', method: 'post' },
-          user: { url: '/users/me', method: 'get' }
+          login: { url: process.env.API_PREFIX + '/login', method: 'post' },
+          user: { url: process.env.API_PREFIX + '/users/me', method: 'get' }
         }
       }
     }

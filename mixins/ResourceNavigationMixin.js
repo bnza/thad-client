@@ -6,11 +6,14 @@ export default {
     }
   },
   computed: {
+    resource() {
+      return this.$store.getters['api/getResource'](this.resourceName)
+    },
     resourceBasePath() {
-      return `/app/${this.resourceName}`
+      return this.resource.collectionPath
     },
     resourceBaseUrl() {
-      return this.resourceName
+      return this.resource.collectionUrl
     },
     createResourcePath() {
       return `${this.resourceBasePath}/create`
@@ -18,13 +21,13 @@ export default {
   },
   methods: {
     getItemResourcePath(id) {
-      return `${this.resourceBasePath}/${id}`
+      return this.resource.itemPath(id)
     },
     getItemResourceUpdatePath(id) {
-      return `${this.resourceBasePath}/${id}/update`
+      return `${this.getItemResourcePath(id)}/update`
     },
     getItemResourceUrl(id) {
-      return `${this.resourceBaseUrl}/${id}`
+      return this.resource.itemUrl(id)
     },
   }
 }

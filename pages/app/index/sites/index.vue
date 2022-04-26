@@ -1,5 +1,5 @@
 <template>
-  <collection-sites-card resource-name="sites"/>
+  <collection-sites-card resource-name="site"/>
 </template>
 
 <script>

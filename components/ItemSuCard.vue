@@ -6,11 +6,11 @@
       <v-spacer />
       <v-toolbar-title v-if="ready"><strong class="secondary--text">{{formatCode('stratigraphic_units', item)}}</strong></v-toolbar-title>
       <v-spacer />
-      <navigation-collection-resource-button resource-name="stratigraphic_units" />
-      <navigation-update-resource-button :item-id="id" resource-name="stratigraphic_units" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
+      <navigation-collection-resource-button :resource-name="resourceName" />
+      <navigation-update-resource-button :item-id="id" :resource-name="resourceName" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
       <navigation-delete-resource-button
         :item-id="id"
-        resource-name="stratigraphic_units"
+        :resource-name="resourceName"
         :disabled="!$auth.hasScope('ROLE_EDITOR')"
         @delete="openDeleteDialog(item)"
       />
@@ -32,7 +32,7 @@
       </v-tab-item>
       <v-tab-item value="rels">
         <v-card-text>
-          <collection-su-rels-container :parent="item" resource-name="stratigraphic_relationships"/>
+          <collection-su-rels-container :parent="item" resource-name="stratigraphicRelationship"/>
         </v-card-text>
       </v-tab-item>
       <v-tab-item value="pottery">
@@ -63,7 +63,7 @@
     </v-tabs-items>
     <delete-resource-dialog
       v-if="deletingItem"
-      resource-name="stratigraphic_units"
+      :resource-name="resourceName"
       :visible.sync="deleteDialog"
       :item="deletingItem"
       @itemDeleted="resetAndPrev"

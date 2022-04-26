@@ -6,11 +6,11 @@
       <v-spacer />
       <v-toolbar-title v-if="item"><strong class="secondary--text">{{item.code}}</strong></v-toolbar-title>
       <v-spacer />
-      <navigation-collection-resource-button resource-name="sites" />
-      <navigation-update-resource-button :item-id="id" resource-name="sites" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
+      <navigation-collection-resource-button :resource-name="resourceName" />
+      <navigation-update-resource-button :item-id="id" :resource-name="resourceName" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
       <navigation-delete-resource-button
         :item-id="id"
-        resource-name="sites"
+        :resource-name="resourceName"
         :disabled="!$auth.hasScope('ROLE_ADMIN')"
         @delete="openDeleteDialog(item)"
       />
@@ -31,13 +31,13 @@
           tab="areas"
           :parent="item"
           parent-request-filter-key="site.id"
-          resource-name="areas"
+          resource-name="area"
         />
       </v-tab-item>
     </v-tabs-items>
     <delete-resource-dialog
       v-if="deletingItem"
-      resource-name="sites"
+      :resource-name="resourceName"
       :visible.sync="deleteDialog"
       :item="deletingItem"
       @itemDeleted="resetAndPrev"

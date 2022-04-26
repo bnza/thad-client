@@ -5,7 +5,7 @@
       <v-spacer />
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_ADMIN')"
-        resource-name="areas"
+        :resource-name="resourceName"
         :disabled="false"
       />
     </v-toolbar>
@@ -43,7 +43,8 @@
     >
       <template #[`item.id`]="{ item : tItem }">
         <navigation-resource-item-crud
-          :item-id="tItem.id" resource-name="areas"
+          :item-id="tItem.id"
+          :resource-name="resourceName"
           @delete="openDeleteDialog(tItem)"
         />
       </template>
@@ -51,18 +52,19 @@
         <navigation-resource-item-chip
           :link-text="tItem.code"
           :item-id="tItem.id"
-          resource-name="areas" />
+          :resource-name="resourceName"
+        />
       </template>
       <template #[`item.site.code`]="{ item : tItem }">
         <navigation-resource-item-chip
           :link-text="tItem.site.code"
           :item-id="tItem.site.id"
-          resource-name="sites" />
+          resource-name="site" />
       </template>
     </v-data-table>
     <delete-resource-dialog
       v-if="deletingItem"
-      resource-name="areas"
+      :resource-name="resourceName"
       :visible.sync="deleteDialog"
       :item="deletingItem"
       @itemDeleted="resetAndFetch"

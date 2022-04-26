@@ -1,6 +1,6 @@
 <template>
-  <action-resource-card resource-name="areas" action="edit">
-    <edit-area-card resource-name="areas"/>
+  <action-resource-card resource-name="area" action="edit">
+    <edit-area-card resource-name="area"/>
   </action-resource-card>
 </template>
 

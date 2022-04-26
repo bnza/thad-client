@@ -6,11 +6,11 @@
       <v-spacer />
       <v-toolbar-title v-if="ready"><strong class="secondary--text">{{formatCode(resourceName, item)}}</strong></v-toolbar-title>
       <v-spacer />
-      <navigation-collection-resource-button resource-name="areas" />
-      <navigation-update-resource-button :item-id="id" resource-name="areas" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
+      <navigation-collection-resource-button :resource-name="resourceName" />
+      <navigation-update-resource-button :item-id="id" :resource-name="resourceName" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
       <navigation-delete-resource-button
         :item-id="id"
-        resource-name="areas"
+        :resource-name="resourceName"
         :disabled="!$auth.hasScope('ROLE_ADMIN')"
         @delete="openDeleteDialog(item)"
       />
@@ -28,7 +28,7 @@
       <v-tab-item value="sus">
         <collection-sus-card
           v-if="ready"
-          resource-name="stratigraphic_units"
+          resource-name="stratigraphicUnit"
           tab="sus"
           :parent="item"
           parent-request-filter-key="area.id"
@@ -37,7 +37,7 @@
     </v-tabs-items>
     <delete-resource-dialog
       v-if="deletingItem"
-      resource-name="areas"
+      :resource-name="resourceName"
       :visible.sync="deleteDialog"
       :item="deletingItem"
       @itemDeleted="resetAndPrev"

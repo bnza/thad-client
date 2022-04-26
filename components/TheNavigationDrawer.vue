@@ -17,37 +17,7 @@
         <v-list-item-title>Home</v-list-item-title>
       </v-list-item>
     </v-list>
-    <v-list-group
-      v-if="$auth.loggedIn"
-      v-model="dataGroup"
-      no-action
-      prepend-icon="mdi-text-box"
-    >
-      <template #activator>
-        <v-list-item-title>Data</v-list-item-title>
-      </template>
-      <v-list-item
-        nuxt
-        to="/app/sites"
-        router
-      >
-        <v-list-item-title>Site</v-list-item-title>
-      </v-list-item>
-      <v-list-item
-        nuxt
-        to="/app/areas"
-        router
-      >
-        <v-list-item-title>Area</v-list-item-title>
-      </v-list-item>
-      <v-list-item
-        nuxt
-        to="/app/stratigraphic_units"
-        router
-      >
-        <v-list-item-title>Stratigraphic Unit</v-list-item-title>
-      </v-list-item>
-    </v-list-group>
+    <main-resources-list-group v-if="$auth.loggedIn" />
     <v-list>
       <v-list-item
         nuxt
@@ -64,8 +34,12 @@
 </template>
 
 <script>
+import MainResourcesListGroup from "@/components/MainResourcesListGroup";
 export default {
   name: "TheNavigationDrawer",
+  components: {
+    MainResourcesListGroup
+  },
   props: {
     visible: {
       type: Boolean,

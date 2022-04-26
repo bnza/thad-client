@@ -20,17 +20,19 @@ export const actions = {
     commit('increment')
     return state.counter
   },
-  getSites({dispatch}) {
+  getSites({dispatch, rootGetters}) {
+    const resource = rootGetters['api/getResource']('site')
     return dispatch('request',
       {
         method: 'get',
-        url: '/sites',
+        url: resource.collectionUrl,
         headers: {
           Accept: 'application/ld+json'
         },
       })
   },
-  getAreas({dispatch}, site) {
+  getAreas({dispatch, rootGetters}, site) {
+    const resource = rootGetters['api/getResource']('area')
     const params = {}
     if (site) {
       params['site.id'] = site
@@ -38,14 +40,15 @@ export const actions = {
     return dispatch('request',
       {
         method: 'get',
-        url: '/areas',
+        url: resource.collectionUrl,
         headers: {
           Accept: 'application/ld+json'
         },
         params
       })
   },
-  getSus({dispatch}, {area}) {
+  getSus({dispatch, rootGetters}, {area}) {
+    const resource = rootGetters['api/getResource']('stratigraphicUnit')
     const params = {}
     if (area?.id) {
       params['area.id'] = area.id
@@ -53,18 +56,19 @@ export const actions = {
     return dispatch('request',
       {
         method: 'get',
-        url: '/stratigraphic_units',
+        url: resource.collectionUrl,
         headers: {
           Accept: 'application/ld+json'
         },
         params
       })
   },
-  getSu({dispatch}, id) {
+  getSu({dispatch, rootGetters}, id) {
+    const resource = rootGetters['api/getResource']('stratigraphicUnit')
     return dispatch('request',
       {
         method: 'get',
-        url: `/stratigraphic_units/${id}`,
+        url: resource.itemUrl(id),
         headers: {
           Accept: 'application/ld+json'
         },

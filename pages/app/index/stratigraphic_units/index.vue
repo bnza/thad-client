@@ -1,5 +1,5 @@
 <template>
-  <collection-sus-card resource-name="stratigraphic_units"/>
+  <collection-sus-card resource-name="stratigraphicUnit"/>
 </template>
 
 <script>

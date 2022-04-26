@@ -1,5 +1,5 @@
 <template>
-  <item-site-card resource-name="sites" />
+  <item-site-card resource-name="site" />
 </template>
 
 <script>

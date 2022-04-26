@@ -78,6 +78,7 @@
       />
     </v-row>
     <create-su-rel-dialog
+      :resource-name="resourceName"
       v-if="!isEmpty(createSuRelDialog.sxSu)"
       :relationship="createSuRelDialog.relationship"
       :sx-su="createSuRelDialog.sxSu"
@@ -86,7 +87,7 @@
     />
     <delete-resource-dialog
       v-if="deletingItem"
-      resource-name="stratigraphic_relationships"
+      :resource-name="resourceName"
       :visible.sync="deleteDialog"
       :item="deletingItem"
       @itemDeleted="resetAndFetch"
@@ -98,7 +99,8 @@
 
 <script>
 import {isEmpty} from "ramda";
-import {mapState} from "vuex";
+import {mapGetters} from "vuex";
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceFetchMixin from "@/mixins/ResourceFetchMixin";
 import CreateSuRelDialog from "@/components/CreateSuRelDialog";
@@ -116,7 +118,8 @@ export default {
   },
   mixins: [
     ResourceDeleteDialogMixin,
-    ResourceFetchMixin
+    ResourceFetchMixin,
+    ResourceNavigationMixin
   ],
   props: {
     parent: {
@@ -139,7 +142,7 @@ export default {
     }
     this.response = await this.request({
       method: 'get',
-      url: this.resourceName,
+      url: this.resource.collectionUrl,
       headers: {
         Accept: 'application/ld+json'
       },
@@ -149,7 +152,10 @@ export default {
     })
   },
   computed: {
-    ...mapState('vocabularies', {relationships: 'su_relationships'}),
+    ...mapGetters('vocabularies', ['getVocabulary']),
+    relationships() {
+      return this.getVocabulary('relationship')
+    },
     items() {
       return this.responseData['hydra:member'] || []
     }

@@ -1,5 +1,5 @@
 <template>
-  <item-area-card resource-name="areas" />
+  <item-area-card resource-name="area" />
 </template>
 
 <script>
