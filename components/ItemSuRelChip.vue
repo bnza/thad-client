@@ -25,7 +25,7 @@
       <v-card-title v-if="su.id" class="text-overline secondary--text">
         {{formatCode('stratigraphic_units', su)}}
         <v-spacer />
-        <NavigationResourceReadButton :item-id="su.id" resource-name="stratigraphic_units" />
+        <NavigationResourceReadButton :item-id="su.id" resource-name="stratigraphicUnit" />
       </v-card-title>
       <v-card-text >
         <v-progress-circular v-if="loading" indeterminate/>
