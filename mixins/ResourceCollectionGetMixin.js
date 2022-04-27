@@ -1,8 +1,8 @@
 import {isEmpty, clone, mergeLeft} from "ramda";
+import { mapGetters } from "vuex";
 import ResourceFetchMixin from "~/mixins/ResourceFetchMixin";
 import ResourceNavigationMixin from "~/mixins/ResourceNavigationMixin";
 import {formatOptionsArrayForQueryString} from "~/src/request";
-import {paginationQueryToOptions, optionsToPaginationQuery} from "~/src/utils";
 
 export default {
   data() {
@@ -45,9 +45,17 @@ export default {
     })
   },
   computed: {
+    ...mapGetters('collections', ['getPagination']),
+    componentId() {
+      let id = `Collection.${this.resourceName}`
+      if (this.isChild) {
+        id += `Collection.${this.parent['@type']}.${this.parent.id}`
+      }
+      return id
+    },
     normalizedRequestOptions() {
       return formatOptionsArrayForQueryString({
-        pagination: this.pagination,
+        pagination: this.pagination || {},
         filters: this.normalizedFilters
       })
     },
@@ -65,13 +73,15 @@ export default {
     },
     pagination: {
       get() {
-        const paginationParent = this.tab ?
+/*         const paginationParent = this.tab ?
           (this.$route.query.tabs && this.$route.query.tabs[this.tab]) || {} :
           this.$route.query
-        return paginationQueryToOptions(paginationParent.p || {})
+        return paginationQueryToOptions(paginationParent.p || {}) */
+        return this.getPagination(this.componentId)
       },
-      set(pagination) {
-        this.$router.replace({ query: optionsToPaginationQuery(pagination, this.tab, this.$route.query)})
+      set(options) {
+        this.$store.commit('collections/setPagination', {componentId:this.componentId, options})
+       /*  this.$router.replace({ query: optionsToPaginationQuery(pagination, this.tab, this.$route.query)}) */
       }
     },
     items() {

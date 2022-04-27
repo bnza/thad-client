@@ -1,15 +1,4 @@
-import {clone, mergeLeft, map, is} from "ramda";
-import {hasOwnProperty} from "~/src/utils";
-
-export const setAuthorizationHeader = (token, headers) => {
-  headers = clone(headers || {})
-
-  if (!hasOwnProperty(headers, 'Authorization')) {
-    headers.Authorization = `Bearer ${token}`
-  }
-
-  return headers
-}
+import {mergeLeft, map, is, has} from "ramda";
 
 const formatPaginationOptions = (options) =>
 {
@@ -24,18 +13,20 @@ const formatPaginationOptions = (options) =>
     })
   }
   paginationOptions.page = options.page || 1
-  paginationOptions.pagination = hasOwnProperty(options, 'pagination') ? options.pagination : true
-  paginationOptions.itemsPerPage = options.itemsPerPage || 10
-
+  paginationOptions.pagination = has('pagination', options) ? options.pagination : true
+  if (has('itemsPerPage', options)) {
+    paginationOptions.itemsPerPage = options.itemsPerPage
+  }
+  
   return paginationOptions
 }
 
 export const formatOptionsArrayForQueryString = (options) => {
   let requestOptions = {}
-  if (hasOwnProperty(options, 'pagination')) {
+  if (has('pagination', options)) {
     requestOptions = mergeLeft(formatPaginationOptions(options.pagination), {})
   }
-  if (hasOwnProperty(options, 'filters')) {
+  if (has('filters', options)) {
     requestOptions = mergeLeft(options.filters, requestOptions)
   }
   return requestOptions
