@@ -1,4 +1,5 @@
-import qs from 'qs'
+import {stringify} from 'qs'
+import {filterByWorkSite} from "~/src/request";
 
 export const state = () => ({
   counter: 0,
@@ -12,9 +13,10 @@ export const mutations = {
 
 export const actions = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  request({commit}, axiosRequestConfig) {
-    axiosRequestConfig.paramsSerializer = params => qs.stringify(params)
-    return this.$axios.request(axiosRequestConfig)
+  request({commit, rootState}, axiosRequestConfig) {
+    const arc = filterByWorkSite(rootState.workSite.id, axiosRequestConfig)
+    arc.paramsSerializer = params => stringify(params)
+    return this.$axios.request(arc)
   },
   nextRequestCounter({commit, state}) {
     commit('increment')

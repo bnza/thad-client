@@ -1,4 +1,25 @@
-import {mergeLeft, map, is, has} from "ramda";
+import {mergeLeft, map, is, has, clone} from "ramda";
+
+const workSiteFilterableResources = {
+  sites: 'id',
+  areas: 'site.id',
+  stratigraphic_units: 'site.id',
+  potteries: 'su.site.id'
+}
+
+const workSiteResourcesRegex = new RegExp(`/(?<resource>${Object.keys(workSiteFilterableResources).join('|')})/?`)
+
+export const filterByWorkSite = (workSiteId, axiosRequestConfig) => {
+  if (workSiteId && axiosRequestConfig.method.toLowerCase() === 'get') {
+    const matches = axiosRequestConfig.url.match(workSiteResourcesRegex)
+    if (matches) {
+      const params = has('params', axiosRequestConfig) ? clone(axiosRequestConfig.params) : {}
+      params[workSiteFilterableResources[matches.groups.resource]] = workSiteId
+      axiosRequestConfig.params = params
+    }
+  }
+  return axiosRequestConfig
+}
 
 const formatPaginationOptions = (options) =>
 {
@@ -17,7 +38,7 @@ const formatPaginationOptions = (options) =>
   if (has('itemsPerPage', options)) {
     paginationOptions.itemsPerPage = options.itemsPerPage
   }
-  
+
   return paginationOptions
 }
 

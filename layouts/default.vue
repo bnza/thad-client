@@ -4,6 +4,7 @@
     <v-app-bar :clipped-left="clipped" fixed app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title class="title" v-text="title"/>
+      <work-site-container />
       <v-spacer />
       <auth-span-status />
     </v-app-bar>
@@ -23,12 +24,14 @@
 import AuthSpanStatus from '@/components/AuthSpanStatus'
 import TheNavigationDrawer from "@/components/TheNavigationDrawer";
 import TheSnackbar from "@/components/TheSnackbar";
+import WorkSiteContainer from "@/components/WorkSiteContainer";
 export default {
   name: 'DefaultLayout',
   components: {
     AuthSpanStatus,
     TheNavigationDrawer,
-    TheSnackbar
+    TheSnackbar,
+    WorkSiteContainer
   },
   middleware: ['auth'],
   data() {

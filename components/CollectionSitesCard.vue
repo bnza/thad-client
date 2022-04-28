@@ -37,11 +37,14 @@
       :server-items-length="totalItems"
     >
       <template #[`item.id`]="{ item : tItem }">
+
         <navigation-resource-item-crud
           :item-id="tItem.id.toString()"
           :resource-name="resourceName"
           @delete="openDeleteDialog(tItem)"
-        />
+        >
+          <work-site-selector-button :site="tItem"/>
+        </navigation-resource-item-crud>
       </template>
       <template #[`item.code`]="{ item : tItem }">
         <navigation-resource-item-chip
@@ -66,6 +69,7 @@
 <script>
 import DeleteResourceDialog from "@/components/DeleteResourceDialog";
 import DeleteSiteCardText from "@/components/DeleteSiteCardText";
+import WorkSiteSelectorButton from "@/components/WorkSiteSelectorButton";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
 import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
@@ -79,7 +83,8 @@ export default {
     DeleteSiteCardText,
     NavigationCreateResourceButton,
     NavigationResourceItemChip,
-    NavigationResourceItemCrud
+    NavigationResourceItemCrud,
+    WorkSiteSelectorButton
   },
   mixins: [
     ResourceDeleteDialogMixin,

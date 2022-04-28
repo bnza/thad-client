@@ -1,5 +1,8 @@
+import Vue from "vue";
+
 export const state = () => ({
   apiPrefix: '',
+  workSite: {},
   ready: false
 })
 
@@ -10,6 +13,9 @@ export const mutations = {
   setReady(state) {
     state.ready = true
   },
+  setWorkSite(state, site) {
+    Vue.set(state, 'workSite', site)
+  }
 }
 
 export const actions = {

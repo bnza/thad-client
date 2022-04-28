@@ -1,16 +1,9 @@
 <template>
-  <div>
-    <p>AppPage</p>
     <NuxtChild />
-  </div>
 </template>
 
 <script>
 export default {
-  name: "AppPage"
+  name: "AppPage",
 }
 </script>
-
-<style scoped>
-
-</style>

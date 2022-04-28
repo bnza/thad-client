@@ -1,5 +1,6 @@
 <template>
   <div data-cy="item-crud-navigation">
+    <slot />
     <navigation-resource-read-button :item-id="itemId" :resource-name="resourceName" />
     <navigation-update-resource-button :item-id="itemId" :resource-name="resourceName" :disabled="disabled" />
     <navigation-delete-resource-button

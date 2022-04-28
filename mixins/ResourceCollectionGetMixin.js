@@ -1,5 +1,5 @@
 import {isEmpty, clone, mergeLeft} from "ramda";
-import { mapGetters } from "vuex";
+import {mapGetters, mapState} from "vuex";
 import ResourceFetchMixin from "~/mixins/ResourceFetchMixin";
 import ResourceNavigationMixin from "~/mixins/ResourceNavigationMixin";
 import {formatOptionsArrayForQueryString} from "~/src/request";
@@ -46,6 +46,7 @@ export default {
   },
   computed: {
     ...mapGetters('collections', ['getPagination']),
+    ...mapState(['workSite']),
     componentId() {
       let id = `Collection.${this.resourceName}`
       if (this.isChild) {
@@ -73,15 +74,10 @@ export default {
     },
     pagination: {
       get() {
-/*         const paginationParent = this.tab ?
-          (this.$route.query.tabs && this.$route.query.tabs[this.tab]) || {} :
-          this.$route.query
-        return paginationQueryToOptions(paginationParent.p || {}) */
         return this.getPagination(this.componentId)
       },
       set(options) {
         this.$store.commit('collections/setPagination', {componentId:this.componentId, options})
-       /*  this.$router.replace({ query: optionsToPaginationQuery(pagination, this.tab, this.$route.query)}) */
       }
     },
     items() {
@@ -95,6 +91,12 @@ export default {
     }
   },
   watch: {
+    workSite: {
+      handler() {
+        this.$fetch()
+      },
+      deep: true
+    },
     normalizedRequestOptions: {
       handler() {
         this.$fetch()
