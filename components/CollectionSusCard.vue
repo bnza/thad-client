@@ -10,51 +10,83 @@
       />
     </v-toolbar>
     <v-data-table
+      height="100%"
+      fixed-header
       multi-sort
       dense
       :headers="[
       {
         text: 'id',
         value: 'id',
-        align: 'center'
+        align: 'center',
+        width: '200px'
       },
       {
         text: 'site',
         value: 'site.code',
-        align: 'center'
+        align: 'center',
+        width: '100px'
       },
       {
         text: 'area',
         value: 'area.code',
-        align: 'center'
+        align: 'center',
+        width: '100px'
       },
       {
         text: 'number',
-        value: 'number'
+        value: 'number',
+        width: '100px'
       },
       {
         text: 'type',
-        value: 'type.value'
+        value: 'type.value',
+        width: '100px'
       },
       {
         text: 'preservation',
-        value: 'preservationState.value'
+        value: 'preservationState.value',
+        width: '130px'
       },
       {
         text: 'top elev. (m)',
-        value: 'topElevation'
+        value: 'topElevation',
+        width: '150px'
       },
       {
         text: 'bottom elev. (m)',
-        value: 'bottomElevation'
+        value: 'bottomElevation',
+        width: '170px'
+      },
+      {
+        text: 'supervisor',
+        value: 'areaSupervisor',
+        width: '120px'
       },
       {
         text: 'compiler',
-        value: 'compiler'
+        value: 'compiler',
+        width: '200px'
+      },
+      {
+        text: 'summary',
+        value: 'summary',
+        width: '200px'
+      },
+      {
+        text: 'description',
+        value: 'description',
+        width: '200px'
+      },
+      {
+        text: 'interpretation',
+        value: 'interpretation',
+        width: '200px'
       },
       {
         text: 'date',
-        value: 'date'
+        value: 'date',
+        width: '100px'
       }
     ]"
       :items="items"
@@ -85,6 +117,15 @@
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}
       </template>
+      <template #[`item.description`]="{ item }">
+        <long-text-table-data-tooltip :text="item.description" />
+      </template>
+      <template #[`item.summary`]="{ item }">
+        <long-text-table-data-tooltip :text="item.summary" />
+      </template>
+      <template #[`item.interpretation`]="{ item }">
+        <long-text-table-data-tooltip :text="item.interpretation" />
+      </template>
     </v-data-table>
     <delete-resource-dialog
       v-if="deletingItem"
@@ -106,12 +147,14 @@ import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
 import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
 import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
+import LongTextTableDataTooltip from "@/components/LongTextTableDataTooltip";
 
 export default {
   name: "CollectionSusCard",
   components: {
     DeleteSuCardText,
     DeleteResourceDialog,
+    LongTextTableDataTooltip,
     NavigationCreateResourceButton,
     NavigationResourceItemChip,
     NavigationResourceItemCrud
