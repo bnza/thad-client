@@ -11,6 +11,11 @@ export const capitalize = when(
   pipe(toLower, replace(/^./, toUpper()))
 )
 
+export const capitalizeFirst = when(
+  is(String),
+  replace(/^./, toUpper())
+)
+
 export const hasOwnProperty = (object, key) =>
   object &&
   typeof object === 'object' &&

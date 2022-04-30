@@ -22,6 +22,7 @@ export const actions = {
   nuxtClientInit({dispatch, commit}) {
     commit('setApiPrefix', this.$config.apiPrefix)
     dispatch('api/fetchEntrypoint').then(() => {
+      dispatch('api/fetchDocs')
       commit('setReady')
       dispatch('vocabularies/fetchAll')
     })

@@ -34,7 +34,6 @@ export const mutations = {
     state[componentId] = options
   },
   /**
-   *
    * @param {Object} state
    * @param {string} componentId
    * @param {VuetifyPaginationOption} options
@@ -44,13 +43,27 @@ export const mutations = {
       Vue.set(state, componentId, {})
     }
     Vue.set(state[componentId], 'pagination', options)
-   }
+   },
+  /**
+   * @param {Object} state
+   * @param {string} componentId
+   * @param {VuetifyPaginationOption} filters
+   */
+  setFilters(state, {componentId, filters}) {
+    if (!has(componentId, state)) {
+      Vue.set(state, componentId, {})
+    }
+    Vue.set(state[componentId], 'filters', filters)
+  },
 }
 
 export const getters = {
   get: (state) => (componentId) => state[componentId],
   getPagination: (state) => (componentId) => {
     return state[componentId]?.pagination
+  },
+  getFilters: (state) => (componentId) => {
+    return state[componentId]?.filters || []
   }
 }
 

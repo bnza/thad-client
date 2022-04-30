@@ -1,4 +1,5 @@
 import {toPairs} from "ramda";
+import {capitalizeFirst} from "~/src/utils";
 
 const toItemResourceLabel = (resourceName) => resourceName.replace(/([A-Z])/, ' $1').toLowerCase()
 const toCollectionResourceLabel = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1].replace(/_/, ' ')
@@ -13,7 +14,8 @@ const expandResource = (apiPrefix) => (resource) => {
     itemLabel: toItemResourceLabel(resourceName),
     collectionLabel: toCollectionResourceLabel(url),
     itemPath: (id) => `${collectionPath}/${id}`,
-    itemUrl: (id) => `${url}/${id}`
+    itemUrl: (id) => `${url}/${id}`,
+    id: `#${capitalizeFirst(resourceName)}`
   }
 }
 
@@ -26,12 +28,16 @@ const mainResources = [
 
 export const state = () => ({
   Entrypoint: [],
+  docs: {}
 })
 
 export const mutations = {
   setEntrypoint(state, entrypoint) {
     state.Entrypoint = toPairs(entrypoint)
-  }
+  },
+  setDocs(state, docs) {
+    state.docs = docs
+  },
 }
 
 export const getters = {
@@ -44,7 +50,13 @@ export const getters = {
     ).sort((a, b) => mainResources.indexOf(b) - mainResources.indexOf(a)
   ),
   vocabularyResources: (_, getters) => getters.resources.filter(r => /\/vocabulary\//.test(r.collectionUrl)),
-  getResource: (_, getters) => (resourceName) => getters.resources.find(r => r.resourceName === resourceName)
+  getResource: (_, getters) => (resourceName) => getters.resources.find(r => r.resourceName === resourceName),
+  getResourceClass: (state) => (resourceName) => state.docs['hydra:supportedClass']?.find(r => r['@id'] === `#${capitalizeFirst(resourceName)}`),
+  getResourceClassSupportedProperty:
+    (_, getters) => (resourceName, property) => {
+      const resourceClass = getters.getResourceClass(resourceName)
+      return resourceClass ? resourceClass['hydra:supportedProperty'].find(p => p['hydra:property']['@id'] === `#${capitalizeFirst(resourceName)}/${property}`) : null
+    }
 }
 
 export const actions = {
@@ -57,6 +69,17 @@ export const actions = {
       },
     }).then(response => {
       commit('setEntrypoint', response.data)
+    })
+  },
+  fetchDocs({commit}) {
+    return this.$axios.request({
+      method: 'get',
+      url: `${this.$config.apiPrefix}/docs`,
+      headers: {
+        Accept: 'application/ld+json'
+      },
+    }).then(response => {
+      commit('setDocs', response.data)
     })
   }
 }

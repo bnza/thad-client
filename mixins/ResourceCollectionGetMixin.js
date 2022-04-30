@@ -3,13 +3,9 @@ import {mapGetters, mapState} from "vuex";
 import ResourceFetchMixin from "~/mixins/ResourceFetchMixin";
 import ResourceNavigationMixin from "~/mixins/ResourceNavigationMixin";
 import {formatOptionsArrayForQueryString} from "~/src/request";
+import {appFiltersToQueryStringObject} from "~/src/hydra/filters";
 
 export default {
-  data() {
-    return {
-      filters: {}
-    }
-  },
   mixins: [
     ResourceFetchMixin,
     ResourceNavigationMixin
@@ -45,7 +41,7 @@ export default {
     })
   },
   computed: {
-    ...mapGetters('collections', ['getPagination']),
+    ...mapGetters('collections', ['getPagination', 'getFilters']),
     ...mapState(['workSite']),
     componentId() {
       let id = `Collection.${this.resourceName}`
@@ -62,12 +58,16 @@ export default {
     },
     normalizedFilters() {
       let filters = clone(this.filters)
+      filters = appFiltersToQueryStringObject(filters)
       if (this.isChild) {
         filters = mergeLeft({
           [this.parentRequestFilterKey]: this.parent[this.parentFilterKey]
         }, this.filters)
       }
       return filters
+    },
+    isFiltered() {
+      return !!this.filters.length
     },
     isChild() {
       return this.parent && !isEmpty(this.parent)
@@ -78,6 +78,14 @@ export default {
       },
       set(options) {
         this.$store.commit('collections/setPagination', {componentId:this.componentId, options})
+      }
+    },
+    filters: {
+      get() {
+        return this.getFilters(this.componentId)
+      },
+      set(filters) {
+        this.$store.commit('collections/setFilters', {componentId:this.componentId, filters})
       }
     },
     items() {
