@@ -1,8 +1,8 @@
-import {isEmpty, clone, mergeLeft} from "ramda";
+import {isEmpty, clone, mergeLeft, has} from "ramda";
 import {mapGetters, mapState} from "vuex";
 import ResourceFetchMixin from "~/mixins/ResourceFetchMixin";
 import ResourceNavigationMixin from "~/mixins/ResourceNavigationMixin";
-import {formatOptionsArrayForQueryString} from "~/src/request";
+import {formatOptionsArrayForQueryString, downloadCsv} from "~/src/request";
 import {appFiltersToQueryStringObject} from "~/src/hydra/filters";
 
 export default {
@@ -32,7 +32,9 @@ export default {
   },
   data() {
     return {
-      filterDialog: false
+      filterDialog: false,
+      downloadDialog: false,
+      downloading: false
     }
   },
   async fetch() {
@@ -44,6 +46,33 @@ export default {
       },
       params: this.normalizedRequestOptions
     })
+  },
+  methods: {
+    async downloadCsv() {
+      const params = clone(this.normalizedRequestOptions)
+      if (has('itemsPerPage', params)) {
+        delete params.itemsPerPage
+        delete params.page
+      }
+      params.pagination = false
+      this.downloading = true
+      try {
+        const response = await this.request({
+          method: 'get',
+          url: `${this.url}/export`,
+          headers: {
+            Accept: 'text/csv'
+          },
+          params
+        })
+        downloadCsv(this.resourceName, response.data)
+        this.downloadDialog = false
+      } catch (e) {
+        await this.$store.dispatch('snackbar/requestError', e)
+      } finally {
+        this.downloading = false
+      }
+    }
   },
   computed: {
     ...mapGetters('collections', ['getPagination', 'getFilters']),

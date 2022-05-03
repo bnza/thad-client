@@ -12,8 +12,7 @@ export const mutations = {
 }
 
 export const actions = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  request({commit, rootState}, axiosRequestConfig) {
+  request({rootState}, axiosRequestConfig) {
     const arc = filterByWorkSite(rootState.workSite.id, axiosRequestConfig)
     arc.paramsSerializer = params => stringify(params)
     return this.$axios.request(arc)

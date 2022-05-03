@@ -4,6 +4,7 @@
       <v-toolbar-title v-if="!isChild">Stratigraphic units</v-toolbar-title>
       <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
       <v-spacer />
+      <navigation-download-collection-button :disabled="!totalItems" @click="downloadDialog = true"/>
       <navigation-filter-collection-button @click="filterDialog = true"/>
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_EDITOR')"
@@ -135,6 +136,13 @@
       :visible.sync="filterDialog"
       :hydra-search="responseData['hydra:search']"
       :filters.sync="filters"
+    />
+    <download-collection-dialog
+      :downloading="downloading"
+      :visible.sync="downloadDialog"
+      :resource-name="resourceName"
+      :total-items="totalItems"
+      @download="downloadCsv"
     />
     <delete-resource-dialog
       v-if="deletingItem"
