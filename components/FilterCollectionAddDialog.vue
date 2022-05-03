@@ -62,10 +62,16 @@
               />
             </v-col>
             <v-col sm="4">
+              <v-checkbox
+                v-if="model.mapping && model.mapping.operator === 'exists'"
+                v-model="model.value"
+                :indeterminate="model.value === null"
+              />
               <v-text-field
-                v-if="model.mapping"
+                v-else-if="model.mapping"
                 v-model="model.value"
               />
+              <span v-else/>
             </v-col>
           </v-row>
         </v-container>
@@ -80,7 +86,7 @@ import {clone} from "ramda";
 const defaultModel = () => {return {
     property: '',
     mapping: null,
-    value: ''
+    value: null
   }
 }
 
@@ -111,7 +117,7 @@ export default {
   },
   computed: {
     isValid() {
-      return !!this.model.property && this.model.mapping && this.model.value
+      return !!this.model.property && this.model.mapping && this.model.value !== null
     },
     isEdit() {
       return !!this.filter

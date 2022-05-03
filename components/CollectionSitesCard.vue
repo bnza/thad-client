@@ -103,11 +103,6 @@ export default {
   mixins: [
     ResourceDeleteDialogMixin,
     ResourceCollectionGetMixin
-  ],
-  data() {
-    return {
-      filterDialog: false
-    }
-  }
+  ]
 }
 </script>

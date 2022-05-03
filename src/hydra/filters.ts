@@ -1,19 +1,4 @@
 import {clone, has} from 'ramda'
-/**
- * @typedef {Object} HydraMapping
- * @property {string} @type
- * @property {string} variable
- * @property {string} property
- * @property {boolean} required
- */
-
-/**
- * @typedef {Object} HydraSearch
- * @property {string} @type
- * @property {string} hydra:template
- * @property {string} hydra:variableRepresentation
- * @property {HydraMapping[]} hydra:mapping
- */
 
 interface HydraMapping {
   '@type': string,
@@ -43,6 +28,7 @@ interface AppFilter {
 
 interface QueryStringObject extends Object {
   [key: string]: any
+  [key: number]: any
 }
 
 const testSearchArrayVariableExists =
@@ -70,6 +56,10 @@ export const parseHydraSearchMapping = ( hydraSearch: HydraSearch): Array<AppFil
       const matches = mapping.variable.match(/\[(?<type>\w+)\]/)
       appMapping.operator = matches?.groups?.type || 'search'
     }
+    // @TODO implement between filter in FilterCollectionAddDialog component
+    if (appMapping.operator === 'between') {
+      continue
+    }
     appMapping.multiple = /\w+\[\]/.test(mapping.variable)
     appMappings.push(appMapping)
   }
@@ -77,17 +67,28 @@ export const parseHydraSearchMapping = ( hydraSearch: HydraSearch): Array<AppFil
 }
 
 export const appFiltersToQueryStringObject = (appFilters: Array<AppFilter>): QueryStringObject => {
-  const filters: QueryStringObject = {}
+  const filters: QueryStringObject = {};
   for (const filter of appFilters) {
-    if (!has(filter.mapping.property, filters)) {
+    if (filter.mapping.operator === 'exists') {
+      if (!has(filter.mapping.operator, filters)) {
+        // @ts-ignore
+        filters[filter.mapping.operator] = {}
+      }
       // @ts-ignore
-      filters[filter.mapping.property] = {}
-    }
-    if (filter.mapping.operator === 'search') {
-      // @ts-ignore
-      filters[filter.mapping.property][Object.keys(filters[filter.mapping.property]).length] = filter.value
+      filters[filter.mapping.operator][filter.mapping.property] = `${filter.value}`
+    } else  {
+      if (!has(filter.mapping.property, filters)) {
+        // @ts-ignore
+        filters[filter.mapping.property] = {}
+      }
+      const filterPropertyKey = filter.mapping.operator === 'search'
+        // @ts-ignore
+        ? Object.keys(filters[filter.mapping.property]).length
+        : filter.mapping.operator
+
+        // @ts-ignore
+        filters[filter.mapping.property][filterPropertyKey] = filter.value
     }
   }
   return filters
-
 }

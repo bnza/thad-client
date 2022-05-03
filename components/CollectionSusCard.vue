@@ -2,7 +2,9 @@
   <v-card>
     <v-toolbar flat dense>
       <v-toolbar-title v-if="!isChild">Stratigraphic units</v-toolbar-title>
+      <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
       <v-spacer />
+      <navigation-filter-collection-button @click="filterDialog = true"/>
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_EDITOR')"
         :resource-name="resourceName"
@@ -127,6 +129,13 @@
         <long-text-table-data-tooltip :text="item.interpretation" />
       </template>
     </v-data-table>
+    <filter-collection-dialog
+      v-if="responseData['hydra:search']"
+      resource-name="stratigraphicUnit"
+      :visible.sync="filterDialog"
+      :hydra-search="responseData['hydra:search']"
+      :filters.sync="filters"
+    />
     <delete-resource-dialog
       v-if="deletingItem"
       :resource-name="resourceName"
@@ -142,6 +151,7 @@
 <script>
 import DeleteResourceDialog from "@/components/DeleteResourceDialog";
 import DeleteSuCardText from "@/components/DeleteSuCardText";
+import FilterCollectionDialog from "@/components/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
@@ -154,6 +164,7 @@ export default {
   components: {
     DeleteSuCardText,
     DeleteResourceDialog,
+    FilterCollectionDialog,
     LongTextTableDataTooltip,
     NavigationCreateResourceButton,
     NavigationResourceItemChip,

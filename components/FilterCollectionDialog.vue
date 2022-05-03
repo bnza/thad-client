@@ -123,7 +123,7 @@
 <script>
 import Vue from "vue";
 import {clone} from "ramda"
-import {parseHydraSearchMapping, appFiltersToQueryStringObject} from "@/src/hydra/filters";
+import {parseHydraSearchMapping} from "@/src/hydra/filters";
 import FilterCollectionAddDialog from "@/components/FilterCollectionAddDialog";
 
 export default {
@@ -175,9 +175,6 @@ export default {
          Vue.set(this.modelFilters, this.currentFilterIndex, filter)
        }
       }
-    },
-    normalizedFilters() {
-      return appFiltersToQueryStringObject(this.modelFilters)
     }
   },
   watch: {

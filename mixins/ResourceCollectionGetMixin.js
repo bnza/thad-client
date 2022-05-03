@@ -30,6 +30,11 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      filterDialog: false
+    }
+  },
   async fetch() {
     this.response = await this.request({
       method: 'get',
