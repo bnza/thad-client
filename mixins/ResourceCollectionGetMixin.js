@@ -1,34 +1,22 @@
-import {isEmpty, clone, mergeLeft, has} from "ramda";
+import {clone, mergeLeft, has} from "ramda";
 import {mapGetters, mapState} from "vuex";
 import ResourceFetchMixin from "~/mixins/ResourceFetchMixin";
 import ResourceNavigationMixin from "~/mixins/ResourceNavigationMixin";
+import ResourceCollectionParentMixin from "~/mixins/ResourceCollectionParentMixin";
 import {formatOptionsArrayForQueryString, downloadCsv} from "~/src/request";
 import {appFiltersToQueryStringObject} from "~/src/hydra/filters";
 
 export default {
   mixins: [
     ResourceFetchMixin,
-    ResourceNavigationMixin
+    ResourceNavigationMixin,
+    ResourceCollectionParentMixin
   ],
   props: {
     tab: {
       type: String,
       default: ''
     },
-    parentRequestFilterKey: {
-      type: String,
-      default: 'id'
-    },
-    parentFilterKey: {
-      type: String,
-      default: 'id'
-    },
-    parent: {
-      default: null,
-      validator (value) {
-        return value === null || (typeof value === 'object')
-      }
-    }
   },
   data() {
     return {
@@ -102,9 +90,6 @@ export default {
     },
     isFiltered() {
       return !!this.filters.length
-    },
-    isChild() {
-      return this.parent && !isEmpty(this.parent)
     },
     pagination: {
       get() {

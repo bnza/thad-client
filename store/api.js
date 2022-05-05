@@ -2,6 +2,7 @@ import {toPairs} from "ramda";
 import {capitalizeFirst} from "~/src/utils";
 
 const toItemResourceLabel = (resourceName) => resourceName.replace(/([A-Z])/, ' $1').toLowerCase()
+const toCollectionResourceId = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1]
 const toCollectionResourceLabel = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1].replace(/_/, ' ')
 const toCollectionResourcePath = (resourceUrl, apiPrefix) => resourceUrl.replace(new RegExp(`^(${apiPrefix})`), '/app')
 const expandResource = (apiPrefix) => (resource) => {
@@ -13,6 +14,7 @@ const expandResource = (apiPrefix) => (resource) => {
     collectionPath,
     itemLabel: toItemResourceLabel(resourceName),
     collectionLabel: toCollectionResourceLabel(url),
+    collectionResourceId: toCollectionResourceId(url),
     itemPath: (id) => `${collectionPath}/${id}`,
     itemUrl: (id) => `${url}/${id}`,
     id: `#${capitalizeFirst(resourceName)}`
@@ -41,6 +43,9 @@ export const mutations = {
 }
 
 export const getters = {
+  findByType: (_ , getters) => (type) => {
+    return getters.resources.find(r => r.id === `#${type}`)
+  },
   resources: (state, _, rootState) => {
     const _expandResource = expandResource(rootState.apiPrefix)
     return state.Entrypoint.filter(r => r[0][0] !== '@').map(_expandResource)

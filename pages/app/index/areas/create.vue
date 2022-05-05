@@ -1,10 +1,11 @@
 <template>
   <action-resource-card resource-name="area" action="new">
-    <edit-area-card resource-name="area"/>
+    <edit-area-card resource-name="area" :parent="creatingResourceParent"/>
   </action-resource-card>
 </template>
 
 <script>
+import ResourceCreateParentMixin from "@/mixins/ResourceCreateParentMixin";
 import ActionResourceCard from "@/components/ActionResourceCard";
 import EditAreaCard from "@/components/EditAreaCard";
 
@@ -14,7 +15,10 @@ export default {
     ActionResourceCard,
     EditAreaCard
   },
-  middleware: ['editor-auth']
+  mixins: [
+    ResourceCreateParentMixin
+  ],
+  middleware: ['editor-auth'],
 }
 </script>
 

@@ -8,6 +8,7 @@
       <navigation-filter-collection-button @click="filterDialog = true"/>
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_EDITOR')"
+        :parent="parent"
         :resource-name="resourceName"
         :disabled="false"
       />

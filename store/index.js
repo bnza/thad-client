@@ -3,7 +3,8 @@ import Vue from "vue";
 export const state = () => ({
   apiPrefix: '',
   workSite: {},
-  ready: false
+  ready: false,
+  creatingResourceParent: null
 })
 
 export const mutations = {
@@ -15,6 +16,9 @@ export const mutations = {
   },
   setWorkSite(state, site) {
     Vue.set(state, 'workSite', site)
+  },
+  setCreatingResourceParent(state, parent) {
+    Vue.set(state, 'creatingResourceParent', parent)
   }
 }
 

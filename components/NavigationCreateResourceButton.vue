@@ -6,8 +6,8 @@
         icon
         v-bind="attrs"
         :disabled="disabled"
-        :to="createResourcePath"
         data-cy="resource-create-btn"
+        @click="navigate"
         v-on="on"
       >
         <v-icon class="mx-3">mdi-plus</v-icon>
@@ -18,17 +18,29 @@
 </template>
 
 <script>
+import {mapMutations} from "vuex";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
+import ResourceCollectionParentMixin from "~/mixins/ResourceCollectionParentMixin";
 export default {
   name: "NavigationCreateResourceButton",
   mixins: [
-    ResourceNavigationMixin
+    ResourceNavigationMixin,
+    ResourceCollectionParentMixin
   ],
   props: {
     disabled: {
       type: Boolean,
       required: true
     },
+  },
+  methods: {
+    ...mapMutations(['setCreatingResourceParent']),
+    navigate() {
+      if (this.parent) {
+        this.setCreatingResourceParent(this.parent)
+      }
+      this.$router.push(this.createResourcePath)
+    }
   }
 }
 </script>

@@ -3,7 +3,16 @@
         <v-container>
           <v-row dense>
             <v-col data-cy="site-select-col">
+              <v-text-field
+                v-if="parent"
+                data-cy="site-code-input"
+                :value="getResponseValue('site.code', modelItem)"
+                label="site code"
+                readonly
+                class="mx-4"
+              />
               <select-sites-autocomplete
+                v-else
                 :readonly="!$auth.hasScope('ROLE_ADMIN')"
                 :select.sync="modelItem.site"
                 :error-messages="siteErrors"
@@ -60,10 +69,11 @@
 </template>
 
 <script>
-import {has} from "ramda";
+import {has, clone} from "ramda";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceValidationAreaMixin from "@/mixins/validation/ResourceValidationAreaMixin";
+import ResourceCollectionParentMixin from "@/mixins/ResourceCollectionParentMixin";
 import ResourceItemEditMixin from "@/mixins/ResourceItemEditMixin";
 import SelectSitesAutocomplete from "@/components/SelectSitesAutocomplete";
 import {normalizeRequestBodyData} from "@/src/request";
@@ -77,6 +87,7 @@ export default {
     ResourceItemDataAccessorMixin,
     ResourceNavigationMixin,
     ResourceValidationAreaMixin,
+    ResourceCollectionParentMixin,
     ResourceItemEditMixin
   ],
   data() {
@@ -93,6 +104,16 @@ export default {
         data.site = data.site['@id']
       }
       return data
+    }
+  },
+  watch: {
+    parent: {
+      handler(parent) {
+        if (parent) {
+          this.modelItem.site = clone(parent)
+        }
+      },
+      immediate: true
     }
   }
 }

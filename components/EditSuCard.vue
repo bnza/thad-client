@@ -3,7 +3,16 @@
         <v-container>
           <v-row dense>
             <v-col data-cy="area-select-col">
+              <v-text-field
+                v-if="parent"
+                data-cy="area-code-input"
+                :value="getResponseValue('area.site.code', modelItem)"
+                label="area code"
+                readonly
+                class="mx-4"
+              />
               <select-areas-autocomplete
+                v-else
                 :select.sync="modelItem.area"
                 :error-messages="areaErrors"
                 class="mx-4"
@@ -45,7 +54,7 @@
                 :select.sync="modelItem.type"
                 :error-messages="typeErrors"
                 class="mx-4"
-                vocabulary-name="su_types"
+                vocabulary-name="type"
                 v-on="$listeners"
                 @input="$v.modelItem.type.$touch()"
                 @blur="$v.modelItem.type.$touch()"
@@ -56,7 +65,7 @@
                 label="preservation"
                 :select.sync="modelItem.preservationState"
                 class="mx-4"
-                vocabulary-name="su_preservation_states"
+                vocabulary-name="preservationState"
                 v-on="$listeners"
               />
             </v-col>
@@ -173,14 +182,16 @@
 </template>
 
 <script>
-import {has, hasPath} from "ramda";
+import {clone, has, hasPath} from "ramda";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceValidationSuMixin from "@/mixins/validation/ResourceValidationSuMixin";
 import ResourceItemEditMixin from "@/mixins/ResourceItemEditMixin";
+import ResourceCollectionParentMixin from "@/mixins/ResourceCollectionParentMixin";
 import SelectVocabularyAutocomplete from "@/components/SelectVocabularyAutocomplete";
 import SelectAreasAutocomplete from "@/components/SelectAreasAutocomplete";
 import {normalizeRequestBodyData} from "@/src/request";
+
 
 export default {
   name: "EditSuCard",
@@ -192,6 +203,7 @@ export default {
     ResourceItemDataAccessorMixin,
     ResourceNavigationMixin,
     ResourceValidationSuMixin,
+    ResourceCollectionParentMixin,
     ResourceItemEditMixin
   ],
   data() {
@@ -230,6 +242,16 @@ export default {
         data.number = 1 * data.number
       }
       return data
+    }
+  },
+  watch: {
+    parent: {
+      handler(parent) {
+        if (parent) {
+          this.modelItem.area = clone(parent)
+        }
+      },
+      immediate: true
     }
   }
 }

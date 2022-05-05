@@ -5,6 +5,7 @@
       <v-spacer />
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_ADMIN')"
+        :parent="parent"
         :resource-name="resourceName"
         :disabled="false"
       />
