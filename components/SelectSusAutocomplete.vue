@@ -20,7 +20,7 @@
 <script>
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 export default {
-  name: "SelectSitesAutocomplete",
+  name: "SelectSusAutocomplete",
   mixins: [
     ResourceItemDataAccessorMixin
   ],
@@ -58,7 +58,7 @@ export default {
     try {
       const response = await this.$store.dispatch('http/getSus', {area: this.area});
       this.items = response.data['hydra:member'].map(item => {
-        item['@code'] = this.formatCode('stratigraphic_units', item)
+        item['@code'] = this.formatCode('stratigraphicUnit', item)
         return item
       })
     } catch (e) {

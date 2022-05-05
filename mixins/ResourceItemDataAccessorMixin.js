@@ -11,10 +11,13 @@ const getResponseValue = (key, item) => {
     return undefined
   }, item)
 }
+const twoDigitYear = su => getResponseValue('date', su).substring(2,4)
+const paddedSUNumber = su => su.number.toString().padStart(5,'0')
 const codeFormatters = {
-  sites: item => item.code || '',
-  areas: item => `${getResponseValue('site.code', item)}.${item.code}`,
-  stratigraphic_units: item => `${getResponseValue('site.code', item)}.${getResponseValue('date', item).substring(2,4)}.SU.${item.number.toString().padStart(5,'0')}`
+  site: item => item.code || '',
+  area: item => `${getResponseValue('site.code', item)}.${item.code}`,
+  stratigraphicUnit: item => `${getResponseValue('site.code', item)}.${twoDigitYear(item)}.SU.${paddedSUNumber(item)}`,
+  pottery: item => `${getResponseValue('stratigraphicUnit.site.code', item)}.${twoDigitYear(item.stratigraphicUnit)}.${paddedSUNumber(item)}.P.${item.number}`
 }
 
 export default {

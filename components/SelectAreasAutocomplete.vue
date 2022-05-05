@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "SelectSitesAutocomplete",
+  name: "SelectAreasAutocomplete",
   props: {
     errorMessages: {
       type: Array,

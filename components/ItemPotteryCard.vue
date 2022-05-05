@@ -2,9 +2,9 @@
   <v-card>
     <v-toolbar flat dense>
       <navigation-prev-button />
-      <v-toolbar-title>Stratigraphic unit</v-toolbar-title>
+      <v-toolbar-title>Pottery</v-toolbar-title>
       <v-spacer />
-      <v-toolbar-title v-if="ready"><strong class="secondary--text">{{formatCode('stratigraphicUnit', item)}}</strong></v-toolbar-title>
+      <v-toolbar-title v-if="ready"><strong class="secondary--text">{{formatCode(resourceName, item)}}</strong></v-toolbar-title>
       <v-spacer />
       <navigation-collection-resource-button :resource-name="resourceName" />
       <navigation-update-resource-button :item-id="id" :resource-name="resourceName" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
@@ -17,47 +17,21 @@
       <template #extension>
         <v-tabs v-model="tab" align-with-title>
           <v-tab href="#data">Data</v-tab>
-          <v-tab href="#rels">Relationships</v-tab>
-          <v-tab href="#pottery">Pottery</v-tab>
-          <v-tab href="#c_pottery">Cumulative pottery</v-tab>
-          <v-tab href="#finds">Small finds</v-tab>
-          <v-tab href="#eco">Ecofacts</v-tab>
+          <v-tab href="#su">SU</v-tab>
           <v-tab href="#images">Images</v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
     <v-tabs-items v-model="tab">
       <v-tab-item value="data">
-        <read-su-card v-if="ready" :item="item" />
+        <read-pottery-card v-if="ready" :item="item" />
       </v-tab-item>
-      <v-tab-item value="rels">
-        <v-card-text>
-          <collection-su-rels-container :parent="item" resource-name="stratigraphicRelationship"/>
-        </v-card-text>
-      </v-tab-item>
-      <v-tab-item value="pottery">
-        <collection-potteries-card
-          v-if="ready"
-          tab="pottery"
-          :parent="item"
-          parent-request-filter-key="stratigraphicUnit.id"
-          resource-name="pottery"
-        />
-      </v-tab-item>
-      <v-tab-item value="c_pottery">
-        <v-card-text>
-          Cumulative pottery
-        </v-card-text>
-      </v-tab-item>
-      <v-tab-item value="finds">
-        <v-card-text>
-          Small finds
-        </v-card-text>
-      </v-tab-item>
-      <v-tab-item value="eco">
-        <v-card-text>
-          Ecofacts
-        </v-card-text>
+      <v-tab-item value="su">
+       <resource-fetch-item v-if="item.stratigraphicUnit" :item-id="`${item.stratigraphicUnit.id}`" resource-name="stratigraphicUnit">
+          <template #default="su">
+            <read-su-card v-if="su.item.id" :item="su.item" />
+          </template>
+        </resource-fetch-item>
       </v-tab-item>
       <v-tab-item value="images">
         <v-card-text>
@@ -72,7 +46,7 @@
       :item="deletingItem"
       @itemDeleted="resetAndPrev"
     >
-      <delete-su-card-text :item="deletingItem" />
+      <delete-pottery-card-text :item="deletingItem" />
     </delete-resource-dialog>
   </v-card>
 </template>
@@ -83,24 +57,20 @@ import ResourceItemGetMixin from "@/mixins/ResourceItemGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import RouteTabbedComponentMixin from "@/mixins/RouteTabbedComponentMixin";
 import NavigationPrevButton from "@/components/NavigationPrevButton";
-import ReadSuCard from "@/components/ReadSuCard";
+import ReadPotteryCard from "@/components/ReadPotteryCard";
 import NavigationCollectionResourceButton from "@/components/NavigationCollectionResourceButton";
 import NavigationDeleteResourceButton from "@/components/NavigationDeleteResourceButton";
 import NavigationUpdateResourceButton from "@/components/NavigationUpdateResourceButton";
-import CollectionSuRelsContainer from "@/components/CollectionSuRelsContainer";
-import CollectionPotteriesCard from "@/components/CollectionPotteriesCard";
+import ResourceFetchItem from "@/components/ResourceFetchItem";
 import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import DeleteSuCardText from "@/components/DeleteSuCardText";
 
 export default {
-  name: "ItemAreaCard",
+  name: "ItemPotteryCard",
   components: {
-    CollectionSuRelsContainer,
-    CollectionPotteriesCard,
-    ReadSuCard,
+    ReadPotteryCard,
     DeleteResourceDialog,
-    DeleteSuCardText,
     NavigationPrevButton,
+    ResourceFetchItem,
     NavigationCollectionResourceButton,
     NavigationDeleteResourceButton,
     NavigationUpdateResourceButton,

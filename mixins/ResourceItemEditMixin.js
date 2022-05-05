@@ -1,6 +1,6 @@
 import {clone, has, isEmpty} from "ramda";
 import {diff} from "deep-object-diff";
-import {normalizeRequestBodyData} from "~/src/request";
+import {normalizeRequestBodyData, normalizeResource} from "~/src/request";
 import ResourceItemGetMixin from "~/mixins/ResourceItemGetMixin";
 import ResourceNavigationMixin from "~/mixins/ResourceNavigationMixin";
 
@@ -17,6 +17,9 @@ export default {
     }
   },
   computed: {
+    normalizeResource() {
+      return normalizeResource(this.modelItem)
+    },
     updateItem() {
       return diff(this.item, this.modelItem)
     },

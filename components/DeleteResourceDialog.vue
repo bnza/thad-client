@@ -8,7 +8,8 @@
         Delete
       </v-card-title>
       <v-card-text>
-        Are you sure you want delete this resource?
+        Are you sure you want delete this resource?<br/>
+        <span class="text-overline secondary--text">{{resource.itemLabel}}</span>
       </v-card-text>
       <slot />
       <v-divider />

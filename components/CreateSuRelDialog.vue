@@ -9,7 +9,7 @@
       </v-card-title>
       <v-card-text>
         <v-text-field
-          :value="formatCode('stratigraphic_units', sxSu)"
+          :value="formatCode('stratigraphicUnit', sxSu)"
           label="stratigraphic unit"
           readonly
         />
@@ -18,7 +18,7 @@
           label="relationship"
           readonly
         />
-        <select-su-autocomplete
+        <select-sus-autocomplete
           :select.sync="modelItem.dxSu"
           :area="sxSu.area"
           v-on="$listeners"
@@ -49,12 +49,12 @@
 import {mapActions} from "vuex";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
-import SelectSuAutocomplete from "@/components/SelectSuAutocomplete";
+import SelectSusAutocomplete from "@/components/SelectSusAutocomplete";
 
 export default {
   name: "CreateSuRelDialog",
   components: {
-    SelectSuAutocomplete
+    SelectSusAutocomplete
   },
   mixins: [
     ResourceItemDataAccessorMixin,

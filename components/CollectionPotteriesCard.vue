@@ -1,13 +1,14 @@
 <template>
   <v-card>
     <v-toolbar flat dense>
-      <v-toolbar-title v-if="!isChild">Stratigraphic units</v-toolbar-title>
+      <v-toolbar-title v-if="!isChild">Potteries</v-toolbar-title>
       <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
       <v-spacer />
       <navigation-download-collection-button :disabled="!totalItems" @click="downloadDialog = true"/>
       <navigation-filter-collection-button @click="filterDialog = true"/>
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_EDITOR')"
+        :parent="parent"
         :resource-name="resourceName"
         :disabled="false"
       />
@@ -242,14 +243,13 @@
       :item="deletingItem"
       @itemDeleted="resetAndFetch"
     >
-      <delete-su-card-text :item="deletingItem" />
+      <delete-pottery-card-text :item="deletingItem" />
     </delete-resource-dialog>
   </v-card>
 </template>
 
 <script>
 import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import DeleteSuCardText from "@/components/DeleteSuCardText";
 import FilterCollectionDialog from "@/components/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
@@ -261,7 +261,6 @@ import LongTextTableDataTooltip from "@/components/LongTextTableDataTooltip";
 export default {
   name: "CollectionPotteriesCard",
   components: {
-    DeleteSuCardText,
     DeleteResourceDialog,
     FilterCollectionDialog,
     LongTextTableDataTooltip,

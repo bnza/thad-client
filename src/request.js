@@ -57,6 +57,10 @@ export const normalizeRequestBodyData = (data) => {
   return map(v => is(String)(v) ? v || null : v, data)
 }
 
+export const normalizeResourceId = resource => resource['@id'] || null
+
+export const normalizeResource = (item) => (key) => normalizeResourceId(item[key])
+
 export const downloadCsv = (resourceName, data) => {
   const fileURL = window.URL.createObjectURL(new Blob([data]));
   const fileLink = document.createElement('a');
