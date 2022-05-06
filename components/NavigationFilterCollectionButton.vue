@@ -4,7 +4,7 @@
       <v-btn
         icon
         v-bind="attrs"
-        data-cy="resource-create-btn"
+        data-cy="resource-filter-btn"
         v-on="on"
         @click="$emit('click')"
       >

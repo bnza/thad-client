@@ -1,8 +1,8 @@
 <template>
-  <v-card>
+  <v-card data-cy="item-su-card">
     <v-toolbar flat dense>
       <navigation-prev-button />
-      <v-toolbar-title>Stratigraphic unit</v-toolbar-title>
+      <v-toolbar-title class="text-capitalize">{{resource.itemLabel}}</v-toolbar-title>
       <v-spacer />
       <v-toolbar-title v-if="ready"><strong class="secondary--text">{{formatCode('stratigraphicUnit', item)}}</strong></v-toolbar-title>
       <v-spacer />

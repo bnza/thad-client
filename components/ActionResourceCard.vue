@@ -3,7 +3,7 @@
     <v-toolbar flat dense>
       <navigation-prev-button />
       <v-toolbar-title data-cy="resource-action-toolbar-title">
-        <span class="text-capitalize">{{getResourceProperty(resourceName, 'name')}}</span>
+        <span class="text-capitalize">{{resource.itemLabel}}</span>
         <small>({{action}})</small>
       </v-toolbar-title>
     </v-toolbar>
@@ -38,20 +38,16 @@
 </template>
 
 <script>
+import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import {getResourceProperty} from "@/src/utils";
 
-import NavigationPrevButton from "@/components/NavigationPrevButton";
 export default {
   name: "ActionResourceCard",
-  components: {
-    NavigationPrevButton
-  },
+  mixins: [
+    ResourceNavigationMixin
+  ],
   props: {
     action: {
-      type: String,
-      required: true
-    },
-    resourceName: {
       type: String,
       required: true
     }

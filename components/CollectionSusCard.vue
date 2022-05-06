@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card data-cy="collection-sus-card">
     <v-toolbar flat dense>
       <v-toolbar-title v-if="!isChild">Stratigraphic units</v-toolbar-title>
       <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>

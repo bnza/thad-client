@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card data-cy="item-pottery-card">
     <v-toolbar flat dense>
       <navigation-prev-button />
       <v-toolbar-title>Pottery</v-toolbar-title>
@@ -7,11 +7,11 @@
       <v-toolbar-title v-if="ready"><strong class="secondary--text">{{formatCode(resourceName, item)}}</strong></v-toolbar-title>
       <v-spacer />
       <navigation-collection-resource-button :resource-name="resourceName" />
-      <navigation-update-resource-button :item-id="id" :resource-name="resourceName" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
+      <navigation-update-resource-button :item-id="id" :resource-name="resourceName" :disabled="!ready || !$auth.hasScope('ROLE_EDITOR')" />
       <navigation-delete-resource-button
         :item-id="id"
         :resource-name="resourceName"
-        :disabled="!$auth.hasScope('ROLE_EDITOR')"
+        :disabled="!ready || !$auth.hasScope('ROLE_EDITOR')"
         @delete="openDeleteDialog(item)"
       />
       <template #extension>

@@ -9,7 +9,7 @@
       <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col data-cy="su-select-col" sm="2">
+          <v-col data-cy="pottery-select-col" sm="2">
             <v-text-field
               v-if="parent"
               data-cy="su-code-input"
@@ -41,7 +41,7 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="vessel-shape-select-col">
             <select-vocabulary-autocomplete
               label="shape"
               :select.sync="modelItem.vesselShape"
@@ -50,7 +50,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="ware-select-col">
             <select-vocabulary-autocomplete
               label="ware"
               :select.sync="modelItem.ware"
@@ -59,7 +59,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="preservation-select-col">
             <select-vocabulary-autocomplete
               label="preservation"
               :select.sync="modelItem.preservation"
@@ -75,7 +75,7 @@
       <v-expansion-panel-header class="grey--text text-overline">Colour</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="ext-colour-select-col">
             <select-vocabulary-autocomplete
               label="external surface colour"
               :select.sync="modelItem.externalSurfaceColour"
@@ -84,7 +84,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="int-colour-select-col">
             <select-vocabulary-autocomplete
               label="internal surface colour"
               :select.sync="modelItem.internalSurfaceColour"
@@ -93,7 +93,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="fracture-colour-select-col">
             <select-vocabulary-autocomplete
               label="fracture colour"
               :select.sync="modelItem.fractureColour"
@@ -109,7 +109,7 @@
       <v-expansion-panel-header class="grey--text text-overline">Manufacturing</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="manufacturing-technique-select-col">
             <select-vocabulary-autocomplete
               label="manufacturing technique"
               :select.sync="modelItem.manufacturingTechnique"
@@ -118,7 +118,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="firing-select-col">
             <select-vocabulary-autocomplete
               label="firing"
               :select.sync="modelItem.firing"
@@ -127,7 +127,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="fabric-select-col">
             <select-vocabulary-autocomplete
               label="fabric"
               :select.sync="modelItem.fabric"
@@ -138,7 +138,7 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="surface-characteristic-select-col">
             <select-vocabulary-autocomplete
               label="surface characteristic"
               :select.sync="modelItem.surfaceCharacteristic"
@@ -147,7 +147,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="surface-treatment-select-col">
             <select-vocabulary-autocomplete
               label="surface treatment"
               :select.sync="modelItem.surfaceTreatment"
@@ -156,7 +156,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="decoration-select-col">
             <select-vocabulary-autocomplete
               label="decoration"
               :select.sync="modelItem.decoration"
@@ -172,7 +172,7 @@
       <v-expansion-panel-header class="grey--text text-overline">Morphology</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="body-select-col">
             <select-vocabulary-autocomplete
               label="body"
               :select.sync="modelItem.body"
@@ -181,7 +181,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="spout-select-col">
             <select-vocabulary-autocomplete
               label="spout"
               :select.sync="modelItem.spout"
@@ -190,7 +190,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="handle-select-col">
             <select-vocabulary-autocomplete
               label="handle/lug/suspender"
               :select.sync="modelItem.handle"
@@ -201,7 +201,7 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="rim-shape-select-col">
             <select-vocabulary-autocomplete
               label="rim shape"
               :select.sync="modelItem.rimShape"
@@ -210,7 +210,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="rim-characterization-select-col">
             <select-vocabulary-autocomplete
               label="rim characterization"
               :select.sync="modelItem.rimCharacterization"
@@ -219,7 +219,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="rim-direction-select-col">
             <select-vocabulary-autocomplete
               label="rim direction"
               :select.sync="modelItem.rimDirection"
@@ -230,7 +230,7 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="neck-select-col">
             <select-vocabulary-autocomplete
               label="neck"
               :select.sync="modelItem.neck"
@@ -239,7 +239,7 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col>
+          <v-col data-cy="neck-length-select-col">
             <select-vocabulary-autocomplete
               label="neck length"
               :select.sync="modelItem.neckLength"
@@ -251,7 +251,7 @@
           <v-col />
         </v-row>
         <v-row dense>
-          <v-col >
+          <v-col data-cy="base-shape-select-col">
             <select-vocabulary-autocomplete
               label="base shape"
               :select.sync="modelItem.baseShape"
@@ -269,7 +269,7 @@
       <v-expansion-panel-header class="grey--text text-overline">Measures</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="size-group-select-col">
             <select-vocabulary-autocomplete
               label="size group"
               :select.sync="modelItem.sizeGroup"
@@ -318,7 +318,7 @@
       <v-expansion-panel-header class="grey--text text-overline">Misc</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="note-input">
             <v-textarea
               v-model="modelItem.note"
               label="note"
@@ -328,7 +328,7 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col sm="2">
+          <v-col sm="2" data-cy="compiler-input">
             <v-text-field
               v-model="modelItem.compiler"
               label="compiler"

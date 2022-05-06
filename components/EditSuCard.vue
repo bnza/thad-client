@@ -22,14 +22,13 @@
               />
             </v-col>
             <v-text-field
-              data-cy="area-name-input"
-              :value="getResponseValue('area.site.name', modelItem)"
+              data-cy="site-name-input"
+              :value="getResponseValue('area.site.name', modelItem) || getResponseValue('site.name', modelItem)"
               label="site name"
               readonly
-              class="mx-4"
             />
             <v-text-field
-              data-cy="site-name-input"
+              data-cy="area-name-input"
               :value="getResponseValue('area.name', modelItem)"
               label="area name"
               readonly
@@ -41,14 +40,13 @@
                 label="number"
                 required
                 :error-messages="numberErrors"
-                class="mx-4"
                 @input="$v.modelItem.number.$touch()"
                 @blur="$v.modelItem.number.$touch()"
               />
             </v-col>
           </v-row>
           <v-row dense>
-            <v-col data-cy="site-select-col">
+            <v-col data-cy="type-select-col">
               <select-vocabulary-autocomplete
                 label="type"
                 :select.sync="modelItem.type"
@@ -60,7 +58,7 @@
                 @blur="$v.modelItem.type.$touch()"
               />
             </v-col>
-            <v-col data-cy="site-select-col">
+            <v-col data-cy="preservation-select-col">
               <select-vocabulary-autocomplete
                 label="preservation"
                 :select.sync="modelItem.preservationState"
@@ -76,7 +74,7 @@
                 v-model="modelItem.description"
                 label="description"
                 class="mx-4"
-                data-cy="area-description-input"
+                data-cy="su-description-input"
               />
             </v-col>
             <v-col>
@@ -84,7 +82,7 @@
                 v-model="modelItem.summary"
                 label="summary"
                 class="mx-4"
-                data-cy="area-summary-input"
+                data-cy="su-summary-input"
               />
             </v-col>
             <v-col>
@@ -92,12 +90,12 @@
                 v-model="modelItem.interpretation"
                 label="summary"
                 class="mx-4"
-                data-cy="area-interpretation-input"
+                data-cy="su-interpretation-input"
               />
             </v-col>
           </v-row>
           <v-row dense>
-            <v-col>
+            <v-col data-cy="top-elevation-col">
               <v-text-field
                 v-model="modelItem.topElevation"
                 label="top elevation (m)"
@@ -107,7 +105,7 @@
                 @blur="$v.modelItem.topElevation.$touch()"
               />
             </v-col>
-            <v-col>
+            <v-col data-cy="bottom-elevation-col">
               <v-text-field
                 v-model="modelItem.bottomElevation"
                 label="bottom elevation (m)"
@@ -124,6 +122,7 @@
                 v-model="modelItem.compiler"
                 label="compiler"
                 class="mx-4"
+                data-cy="compiler-input"
               />
             </v-col>
             <v-col>
@@ -131,6 +130,7 @@
                 v-model="modelItem.areaSupervisor"
                 label="supervisor"
                 class="mx-4"
+                data-cy="area-supervisor-input"
               />
             </v-col>
             <v-col>
@@ -211,8 +211,6 @@ export default {
       dateMenu: false,
       modelItem: {
         area: {},
-        type: {},
-        preservationState: {},
         date: new Date().toISOString().substring(0, 10),
       },
     }
@@ -220,26 +218,27 @@ export default {
   computed: {
     requestData() {
       const data = normalizeRequestBodyData(this.updateItem)
-      if (has('area', data)) {
-        data.area = data.area['@id']
+      for (const key of [
+        'area',
+        'type',
+        'preservationState',
+      ]) {
+        if (has(key, data)) {
+          data[key] = this.normalizeResource(key)
+        }
+      }
+
+      for (const key of [
+        'number',
+        'topElevation',
+        'bottomElevation',
+      ]) {
+        if (has(key, data)) {
+          data[key] = 1 * data[key]
+        }
       }
       if (hasPath(['area','site'], data)) {
         data.site = data.area.site['@id']
-      }
-      if (has('type', data)) {
-        data.type = data.type ? data.type['@id'] : null
-      }
-      if (has('preservationState', data)) {
-        data.preservationState = data.preservationState ? data.preservationState['@id'] : null
-      }
-      if (has('topElevation', data)) {
-        data.topElevation = 1 * data.bottomElevation
-      }
-      if (has('bottomElevation', data)) {
-        data.bottomElevation = 1 * data.bottomElevation
-      }
-      if (has('number', data)) {
-        data.number = 1 * data.number
       }
       return data
     }
