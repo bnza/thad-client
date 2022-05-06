@@ -9,31 +9,55 @@
                 :value="getResponseValue('area.site.code', modelItem)"
                 label="area code"
                 readonly
-                class="mx-4"
               />
               <select-areas-autocomplete
                 v-else
                 :select.sync="modelItem.area"
                 :error-messages="areaErrors"
-                class="mx-4"
                 v-on="$listeners"
                 @input="$v.modelItem.area.$touch()"
                 @blur="$v.modelItem.area.$touch()"
               />
             </v-col>
-            <v-text-field
-              data-cy="site-name-input"
-              :value="getResponseValue('area.site.name', modelItem) || getResponseValue('site.name', modelItem)"
-              label="site name"
-              readonly
-            />
-            <v-text-field
-              data-cy="area-name-input"
-              :value="getResponseValue('area.name', modelItem)"
-              label="area name"
-              readonly
-              class="mx-4"
-            />
+            <v-col>
+              <v-text-field
+                data-cy="site-name-input"
+                :value="getResponseValue('area.site.name', modelItem) || getResponseValue('site.name', modelItem)"
+                label="site name"
+                readonly
+              />
+            </v-col>
+            <v-col>
+              <v-text-field
+                data-cy="area-name-input"
+                :value="getResponseValue('area.name', modelItem)"
+                label="area name"
+                readonly
+              />
+            </v-col>
+            <v-col data-cy="square-input-col">
+              <v-text-field
+                v-model="modelItem.square"
+                label="square"
+                required
+                :error-messages="squareErrors"
+                @input="$v.modelItem.square.$touch()"
+                @blur="$v.modelItem.square.$touch()"
+              />
+            </v-col>
+          </v-row>
+          <v-row dense>
+            <v-col data-cy="year-select-col">
+              <v-autocomplete
+                v-model="modelItem.year"
+                label="excavation year"
+                required
+                :items="years"
+                :error-messages="yearErrors"
+                @input="$v.modelItem.year.$touch()"
+                @blur="$v.modelItem.year.$touch()"
+              />
+            </v-col>
             <v-col data-cy="number-input-col">
               <v-text-field
                 v-model="modelItem.number"
@@ -44,6 +68,8 @@
                 @blur="$v.modelItem.number.$touch()"
               />
             </v-col>
+            <v-col />
+            <v-col />
           </v-row>
           <v-row dense>
             <v-col data-cy="type-select-col">
@@ -51,7 +77,6 @@
                 label="type"
                 :select.sync="modelItem.type"
                 :error-messages="typeErrors"
-                class="mx-4"
                 vocabulary-name="type"
                 v-on="$listeners"
                 @input="$v.modelItem.type.$touch()"
@@ -62,7 +87,6 @@
               <select-vocabulary-autocomplete
                 label="preservation"
                 :select.sync="modelItem.preservationState"
-                class="mx-4"
                 vocabulary-name="preservationState"
                 v-on="$listeners"
               />
@@ -73,7 +97,6 @@
               <v-textarea
                 v-model="modelItem.description"
                 label="description"
-                class="mx-4"
                 data-cy="su-description-input"
               />
             </v-col>
@@ -89,7 +112,6 @@
               <v-textarea
                 v-model="modelItem.interpretation"
                 label="summary"
-                class="mx-4"
                 data-cy="su-interpretation-input"
               />
             </v-col>
@@ -100,7 +122,6 @@
                 v-model="modelItem.topElevation"
                 label="top elevation (m)"
                 :error-messages="topElevationErrors"
-                class="mx-4"
                 @input="$v.modelItem.topElevation.$touch()"
                 @blur="$v.modelItem.topElevation.$touch()"
               />
@@ -110,7 +131,6 @@
                 v-model="modelItem.bottomElevation"
                 label="bottom elevation (m)"
                 :error-messages="bottomElevationErrors"
-                class="mx-4"
                 @input="$v.modelItem.bottomElevation.$touch()"
                 @blur="$v.modelItem.bottomElevation.$touch()"
               />
@@ -121,7 +141,6 @@
               <v-text-field
                 v-model="modelItem.compiler"
                 label="compiler"
-                class="mx-4"
                 data-cy="compiler-input"
               />
             </v-col>
@@ -129,7 +148,6 @@
               <v-text-field
                 v-model="modelItem.areaSupervisor"
                 label="supervisor"
-                class="mx-4"
                 data-cy="area-supervisor-input"
               />
             </v-col>
@@ -216,6 +234,11 @@ export default {
     }
   },
   computed: {
+    years() {
+        const start = 2000;
+        const end = (new Date()).getFullYear();
+        return [...Array(end - start + 1).keys()].map(x => x + start);
+    },
     requestData() {
       const data = normalizeRequestBodyData(this.updateItem)
       for (const key of [
@@ -227,7 +250,6 @@ export default {
           data[key] = this.normalizeResource(key)
         }
       }
-
       for (const key of [
         'number',
         'topElevation',

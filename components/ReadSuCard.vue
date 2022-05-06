@@ -5,41 +5,43 @@
     multiple
   >
     <v-expansion-panel>
-      <v-expansion-panel-header class="grey--text text-overline">Site</v-expansion-panel-header>
+      <v-expansion-panel-header class="grey--text text-overline">Location</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col>
+          <v-col sm="3">
             <v-text-field
               :value="getResponseValue('site.code', item)"
-              label="code"
+              label="site code"
               readonly
             />
           </v-col>
-          <v-col>
+          <v-col sm="3">
             <v-text-field
               :value="getResponseValue('site.name', item)"
-              label="name"
+              label="site name"
               readonly
             />
           </v-col>
         </v-row>
-      </v-expansion-panel-content>
-    </v-expansion-panel>
-    <v-expansion-panel>
-      <v-expansion-panel-header class="grey--text text-overline">Area</v-expansion-panel-header>
-      <v-expansion-panel-content>
         <v-row dense>
-          <v-col>
+          <v-col sm="3">
             <v-text-field
               :value="getResponseValue('area.code', item)"
-              label="code"
+              label="area code"
               readonly
             />
           </v-col>
-          <v-col>
+          <v-col sm="3">
             <v-text-field
               :value="getResponseValue('area.name', item)"
-              label="name"
+              label="area name"
+              readonly
+            />
+          </v-col>
+          <v-col sm="3">
+            <v-text-field
+              :value="getResponseValue('square', item)"
+              label="square"
               readonly
             />
           </v-col>
@@ -50,7 +52,7 @@
       <v-expansion-panel-header class="grey--text text-overline">Stratigraphic Unit</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col sm="2">
+          <v-col sm="3">
             <v-text-field
               class="secondary--text font-weight-bold" color="secondary"
               :value="formatCode('stratigraphicUnit', item)"
@@ -58,7 +60,14 @@
               readonly
             />
           </v-col>
-          <v-col sm="2">
+          <v-col sm="3">
+            <v-text-field
+              :value="getResponseValue('year', item)"
+              label="excavation year"
+              readonly
+            />
+          </v-col>
+          <v-col sm="3">
             <v-text-field
               :value="getResponseValue('number', item)"
               label="number"
@@ -139,7 +148,7 @@
           <v-col>
             <v-text-field
               :value="getResponseValue('date', item).substring(0,10)"
-              label="date"
+              label="compilation date"
               readonly
             />
           </v-col>
@@ -166,7 +175,7 @@ export default {
   data() {
     return {
       panels: [
-        1,2
+        0,1
       ],
     }
   }

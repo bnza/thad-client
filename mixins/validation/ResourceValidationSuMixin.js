@@ -1,7 +1,9 @@
 import { validationMixin } from 'vuelidate'
-import { required, integer } from 'vuelidate/lib/validators'
+import { required, integer, helpers, between } from 'vuelidate/lib/validators'
 import {optionalDecimal} from "~/src/validator";
 import greaterThan from "~/src/validators/greaterThan";
+
+const squareCode = helpers.regex('squareCode', /^[A-Z]+\d+$/)
 
 export default {
   mixins: [validationMixin],
@@ -10,6 +12,8 @@ export default {
       area: { required },
       number: { required, integer },
       type: { required },
+      square: { squareCode },
+      year: { required, integer, between: between(2000, 2099)},
       topElevation: { optionalDecimal, optionalGreaterThan: greaterThan('bottomElevation')},
       bottomElevation: { optionalDecimal }
     },
@@ -28,10 +32,24 @@ export default {
       !this.$v.modelItem.number.integer && errors.push('SU number must be an integer number.')
       return errors
     },
+    yearErrors() {
+      const errors = []
+      if (!this.$v.modelItem.year.$dirty) return errors
+      !this.$v.modelItem.year.required && errors.push('SU excavation year is required.')
+      !this.$v.modelItem.year.integer && errors.push('SU excavation year must be an integer number.')
+      !this.$v.modelItem.year.between && errors.push('SU must be between 2000 and 2099')
+      return errors
+    },
     typeErrors() {
       const errors = []
       if (!this.$v.modelItem.type.$dirty) return errors
       !this.$v.modelItem.type.required && errors.push('SU type is required.')
+      return errors
+    },
+    squareErrors() {
+      const errors = []
+      if (!this.$v.modelItem.square.$dirty) return errors
+      !this.$v.modelItem.square.squareCode && errors.push('Square identifier must be one or more capital letters followed by one or more digit (eg. B2, AZ12)')
       return errors
     },
     bottomElevationErrors() {

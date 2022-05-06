@@ -11,7 +11,7 @@ const getResponseValue = (key, item) => {
     return undefined
   }, item)
 }
-const twoDigitYear = su => getResponseValue('date', su).substring(2,4)
+const twoDigitYear = su => `${getResponseValue('year', su)}`.substring(2,4)
 const paddedSUNumber = su => su.number.toString().padStart(5,'0')
 const codeFormatters = {
   site: item => item.code || '',
