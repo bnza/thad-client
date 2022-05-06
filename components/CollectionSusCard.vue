@@ -22,8 +22,8 @@
       {
         text: 'id',
         value: 'id',
-        align: 'center',
-        width: '200px'
+        align: 'center fixed',
+        width: '150px'
       },
       {
         text: 'site',
@@ -103,7 +103,9 @@
           :item-id="tItem.id"
           :resource-name="resourceName"
           @delete="openDeleteDialog(tItem)"
-        />
+        >
+          <div class="secondary--text">{{formatCode(resourceName, tItem)}}</div>
+        </navigation-resource-item-crud>
       </template>
       <template #[`item.site.code`]="{ item }">
         <navigation-resource-item-chip
@@ -163,6 +165,7 @@ import DeleteSuCardText from "@/components/DeleteSuCardText";
 import FilterCollectionDialog from "@/components/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
+import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
 import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
 import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
@@ -181,11 +184,26 @@ export default {
   },
   mixins: [
     ResourceCollectionGetMixin,
-    ResourceDeleteDialogMixin
+    ResourceDeleteDialogMixin,
+    ResourceItemDataAccessorMixin
   ],
 }
 </script>
 
-<style scoped>
+<style>
+table > tbody > tr > td.fixed,
+table > thead > tr > th.fixed {
+  position: sticky !important;
+  position: -webkit-sticky !important;
+  left: 0;
+  z-index: 98;
+  background: rgba(30,30,30);
+  -webkit-box-shadow: -1px 0 3px -1px rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: -1px 0 3px -1px rgba(0, 0, 0, 0.19);
+  box-shadow: -1px 0 3px -1px rgba(0, 0, 0, 0.19);
+}
 
+table > thead > tr > th.fixed {
+  z-index: 99 !important;
+}
 </style>

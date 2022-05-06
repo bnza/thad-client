@@ -2,6 +2,7 @@
   <v-dialog
     :value="visible"
     width="500"
+    persistent
   >
     <v-card data-cy="delete-resource-dialog-card">
       <v-card-title class="error--text">
