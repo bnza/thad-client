@@ -8,7 +8,10 @@
       <v-card-title class="text-overline mb-4" style="margin-bottom: 0; margin-top: 0; padding-top: 0; padding-bottom: 0">
           {{name}}
         <v-spacer />
-        <v-tooltip bottom>
+        <v-tooltip
+          v-if="enabled"
+          bottom
+        >
           <template #activator="{ on, attrs }">
             <v-btn
               v-bind="attrs"
@@ -26,12 +29,15 @@
         </v-tooltip>
       </v-card-title>
       <v-card-text >
-        <item-su-rel-chip
-          v-for="item in filteredItems"
-          :key="item.id"
-          :item="item"
-          @delete="$emit('delete', $event)"
-        />
+        <v-chip-group>
+          <item-su-rel-chip
+            v-for="item in filteredItems"
+            :key="item.id"
+            :enabled="enabled"
+            :item="item"
+            @delete="$emit('delete', $event)"
+          />
+        </v-chip-group>
       </v-card-text>
     </v-card>
   </v-col>
@@ -45,6 +51,10 @@ export default {
     ItemSuRelChip
   },
   props: {
+    enabled: {
+      type: Boolean,
+      required: true
+    },
     name: {
       type: String,
       required: true

@@ -9,7 +9,7 @@
       <v-tooltip bottom>
         <template #activator="{ on: tooltip }">
           <v-chip
-            :close="$auth.hasScope('ROLE_EDITOR')"
+            :close="enabled && $auth.hasScope('ROLE_EDITOR')"
             label
             v-bind="attrs"
             @click:close="$emit('delete', item)"
@@ -74,6 +74,10 @@ export default {
     ResourceItemDataAccessorMixin
   ],
   props: {
+    enabled: {
+      type: Boolean,
+      required: true
+    },
     item: {
       type: Object,
       required: true

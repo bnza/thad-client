@@ -31,9 +31,7 @@
         <read-su-card v-if="ready" :item="item" />
       </v-tab-item>
       <v-tab-item value="rels">
-        <v-card-text>
-          <collection-su-rels-container :parent="item" resource-name="stratigraphicRelationship"/>
-        </v-card-text>
+        <collection-su-rels-container :parent="item" resource-name="stratigraphicRelationship"/>
       </v-tab-item>
       <v-tab-item value="pottery">
         <collection-potteries-card

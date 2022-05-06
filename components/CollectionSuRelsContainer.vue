@@ -1,7 +1,31 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row dense class="text-right">
+      <v-spacer />
+      <v-col>
+        <v-tooltip bottom>
+          <template #activator="{ on, attrs }">
+            <v-btn
+              :disabled="!$auth.hasScope('ROLE_EDITOR')"
+              color="primary"
+              v-bind="attrs"
+              icon
+              x-small
+              v-on="on"
+              @click="isEditingEnabled = !isEditingEnabled"
+            >
+              <v-icon>
+                {{editingButtonIcon}}
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>{{editingButtonTooltip}}</span>
+        </v-tooltip>
+      </v-col>
+    </v-row>
+    <v-row dense>
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/c"
         name="covers"
@@ -9,6 +33,7 @@
         @create="openCreateDialog"
       />
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/C"
         name="covered by"
@@ -16,6 +41,7 @@
         @create="openCreateDialog"
       />
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/x"
         name="cuts"
@@ -23,6 +49,7 @@
         @create="openCreateDialog"
       />
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/X"
         name="cut by"
@@ -30,8 +57,9 @@
         @create="openCreateDialog"
       />
     </v-row>
-    <v-row>
+    <v-row dense>
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/f"
         name="fills"
@@ -39,6 +67,7 @@
         @create="openCreateDialog"
       />
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/F"
         name="filled by"
@@ -46,6 +75,7 @@
         @create="openCreateDialog"
       />
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/a"
         name="abuts"
@@ -53,6 +83,7 @@
         @create="openCreateDialog"
       />
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/A"
         name="abutted by"
@@ -60,8 +91,9 @@
         @create="openCreateDialog"
       />
     </v-row>
-    <v-row>
+    <v-row dense>
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/b"
         name="binds with"
@@ -70,6 +102,7 @@
 
       />
       <collection-su-rel-card
+        :enabled="isEditingEnabled"
         :items="items"
         iri="/api/vocabulary/su/relationships/e"
         name="equals"
@@ -78,8 +111,8 @@
       />
     </v-row>
     <create-su-rel-dialog
-      :resource-name="resourceName"
       v-if="!isEmpty(createSuRelDialog.sxSu)"
+      :resource-name="resourceName"
       :relationship="createSuRelDialog.relationship"
       :sx-su="createSuRelDialog.sxSu"
       :visible.sync="createSuRelDialog.visible"
@@ -129,6 +162,7 @@ export default {
   },
   data() {
     return {
+      isEditingEnabled: false,
       createSuRelDialog: {
         visible: false,
         sxSu: {},
@@ -153,19 +187,17 @@ export default {
   },
   computed: {
     ...mapGetters('vocabularies', ['getVocabulary']),
+    editingButtonTooltip() {
+      return this.isEditingEnabled ? 'Disable editing' : 'Enable editing'
+    },
+    editingButtonIcon() {
+      return this.isEditingEnabled ? 'mdi-pencil-outline' : 'mdi-pencil'
+    },
     relationships() {
       return this.getVocabulary('relationship')
     },
     items() {
       return this.responseData['hydra:member'] || []
-    }
-  },
-  methods: {
-    isEmpty,
-    openCreateDialog(relationship) {
-      this.createSuRelDialog.relationship = this.relationships.find(r => r['@id'] === relationship)
-      this.createSuRelDialog.sxSu = this.parent
-      this.createSuRelDialog.visible = true
     }
   },
   watch: {
@@ -174,6 +206,14 @@ export default {
         this.$fetch()
       },
       immediate: true
+    }
+  },
+  methods: {
+    isEmpty,
+    openCreateDialog(relationship) {
+      this.createSuRelDialog.relationship = this.relationships.find(r => r['@id'] === relationship)
+      this.createSuRelDialog.sxSu = this.parent
+      this.createSuRelDialog.visible = true
     }
   }
 }
