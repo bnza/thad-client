@@ -88,7 +88,7 @@
                 label="type"
                 :select.sync="modelItem.type"
                 :error-messages="typeErrors"
-                vocabulary-name="type"
+                vocabulary-name="suType"
                 v-on="$listeners"
                 @input="$v.modelItem.type.$touch()"
                 @blur="$v.modelItem.type.$touch()"

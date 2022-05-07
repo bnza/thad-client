@@ -1,7 +1,7 @@
 <template>
-  <v-card data-cy="collection-potteries-card">
+  <v-card data-cy="collection-ecofacts-card">
     <v-toolbar flat dense>
-      <v-toolbar-title v-if="!isChild">Potteries</v-toolbar-title>
+      <v-toolbar-title v-if="!isChild">Ecofacts</v-toolbar-title>
       <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
       <v-spacer />
       <navigation-download-collection-button :disabled="!totalItems" @click="downloadDialog = true"/>
@@ -49,113 +49,38 @@
         width: '100px'
       },
       {
-        text: 'period',
-        value: 'period.code',
-        width: '100px'
+        text: 'quantity',
+        value: 'quantity',
+        width: '150px'
       },
       {
-        text: 'ware',
-        value: 'ware.value',
-        width: '130px'
-      },
-      {
-        text: 'fabric',
-        value: 'fabric.value',
-        width: '170px'
+        text: 'type',
+        value: 'type.value',
+        width: '150px'
       },
       {
         text: 'preservation',
-        value: 'preservation.value',
+        value: 'preservationState.value',
         width: '170px'
       },
       {
-        text: 'ext. surface colour',
-        value: 'externalSurfaceColour.value',
-        width: '190px'
+        text: 'analyzed',
+        value: 'selectedForAnalysis',
+        width: '170px'
       },
       {
-        text: 'int. surface colour',
-        value: 'internalSurfaceColour.value',
-        width: '190px'
-      },
-      {
-        text: 'fracture colour',
-        value: 'fractureColour.value',
+        text: 'length (cm)',
+        value: 'length',
         width: '150px'
       },
       {
-        text: 'surf. characteristic',
-        value: 'surfaceCharacteristic.value',
-        width: '180px'
-      },
-      {
-        text: 'surf. treatment',
-        value: 'surfaceTreatment.value',
+        text: 'width (cm)',
+        value: 'width',
         width: '150px'
       },
       {
-        text: 'manufacturing tech.',
-        value: 'manufacturingTechnique.value',
-        width: '200px'
-      },
-      {
-        text: 'firing',
-        value: 'firing.value',
-        width: '150px'
-      },
-      {
-        text: 'decoration',
-        value: 'decoration.value',
-        width: '150px'
-      },
-      {
-        text: 'vessel shape',
-        value: 'vesselShape.value',
-        width: '150px'
-      },
-      {
-        text: 'base shape',
-        value: 'baseShape.value',
-        width: '150px'
-      },
-      {
-        text: 'rim shape',
-        value: 'rimShape.value',
-        width: '150px'
-      },
-      {
-        text: 'neck',
-        value: 'neck.value',
-        width: '150px'
-      },
-      {
-        text: 'neck length',
-        value: 'neckLength.value',
-        width: '150px'
-      },
-      {
-        text: 'body',
-        value: 'body.value',
-        width: '150px'
-      },
-      {
-        text: 'spout',
-        value: 'spout.value',
-        width: '150px'
-      },
-      {
-        text: 'handle',
-        value: 'handle.value',
-        width: '150px'
-      },
-      {
-        text: 'size group',
-        value: 'sizeGroup.value',
-        width: '150px'
-      },
-      {
-        text: 'decoration',
-        value: 'decoration.value',
+        text: 'height (cm)',
+        value: 'height',
         width: '150px'
       },
       {
@@ -164,13 +89,13 @@
         width: '150px'
       },
       {
-        text: 'rim diam. (cm)',
-        value: 'rimDiameter',
+        text: 'min diam. (cm)',
+        value: 'minDiameter',
         width: '150px'
       },
       {
-        text: 'base diam. (cm)',
-        value: 'baseDiameter',
+        text: 'max diam. (cm)',
+        value: 'maxDiameter',
         width: '150px'
       },
       {
@@ -223,16 +148,19 @@
           resource-name="stratigraphicUnit"
         />
       </template>
+      <template #[`item.selectedForAnalysis`]="{ item : tItem }">
+        <v-simple-checkbox :value="tItem.selectedForAnalysis" />
+      </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}
       </template>
-      <template #[`item.note`]="{ item }">
-        <long-text-table-data-tooltip :text="item.note" />
+      <template #[`item.notes`]="{ item }">
+        <long-text-table-data-tooltip :text="item.notes" />
       </template>
     </v-data-table>
     <filter-collection-dialog
       v-if="responseData['hydra:search']"
-      resource-name="pottery"
+      resource-name="ecofact"
       :visible.sync="filterDialog"
       :hydra-search="responseData['hydra:search']"
       :filters.sync="filters"
@@ -251,32 +179,18 @@
       :item="deletingItem"
       @itemDeleted="resetAndFetch"
     >
-      <delete-pottery-card-text :item="deletingItem" />
+      <delete-ecofact-card-text :item="deletingItem" />
     </delete-resource-dialog>
   </v-card>
 </template>
 
 <script>
-import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import FilterCollectionDialog from "@/components/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
-import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
-import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
-import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
-import LongTextTableDataTooltip from "@/components/LongTextTableDataTooltip";
 
 export default {
-  name: "CollectionPotteriesCard",
-  components: {
-    DeleteResourceDialog,
-    FilterCollectionDialog,
-    LongTextTableDataTooltip,
-    NavigationCreateResourceButton,
-    NavigationResourceItemChip,
-    NavigationResourceItemCrud
-  },
+  name: "CollectionEcofactsCard",
   mixins: [
     ResourceCollectionGetMixin,
     ResourceDeleteDialogMixin,

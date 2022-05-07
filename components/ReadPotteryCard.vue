@@ -270,7 +270,7 @@
             <v-row dense>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('note', item)"
+                  :value="getResponseValue('notes', item)"
                   label="note"
                   readonly
                 />

@@ -326,8 +326,8 @@
         <v-row dense>
           <v-col data-cy="note-input">
             <v-textarea
-              v-model="modelItem.note"
-              label="note"
+              v-model="modelItem.notes"
+              label="notes"
               class="mx-4"
               data-cy="pottery-description-input"
             />

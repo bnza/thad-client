@@ -17,7 +17,8 @@ const codeFormatters = {
   site: item => item.code || '',
   area: item => `${getResponseValue('site.code', item)}.${item.code}`,
   stratigraphicUnit: item => `${getResponseValue('site.code', item)}.${twoDigitYear(item)}.SU.${paddedSUNumber(item)}`,
-  pottery: item => `${getResponseValue('stratigraphicUnit.site.code', item)}.${twoDigitYear(item.stratigraphicUnit)}.${paddedSUNumber(item)}.P.${item.number}`
+  pottery: item => `${getResponseValue('stratigraphicUnit.site.code', item)}.${twoDigitYear(item.stratigraphicUnit)}.${paddedSUNumber(item)}.P.${item.number}`,
+  ecofact: item => `${getResponseValue('stratigraphicUnit.site.code', item)}.${twoDigitYear(item.stratigraphicUnit)}.${paddedSUNumber(item)}.E.${item.number}`
 }
 
 export default {

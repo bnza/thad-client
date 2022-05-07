@@ -3,8 +3,8 @@
     <template #activator="{ on, attrs }">
       <v-btn
         icon
-        :disabled="disabled"
         v-bind="attrs"
+        :disabled="disabled"
         data-cy="resource-download-btn"
         v-on="on"
         @click="$emit('click')"

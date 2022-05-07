@@ -25,7 +25,8 @@ const mainResources = [
   'site',
   'area',
   'stratigraphicUnit',
-  'pottery'
+  'pottery',
+  'ecofact'
 ]
 
 export const state = () => ({

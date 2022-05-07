@@ -53,9 +53,13 @@
         </v-card-text>
       </v-tab-item>
       <v-tab-item value="eco">
-        <v-card-text>
-          Ecofacts
-        </v-card-text>
+        <collection-ecofacts-card
+          v-if="ready"
+          tab="eco"
+          :parent="item"
+          parent-request-filter-key="stratigraphicUnit.id"
+          resource-name="ecofact"
+        />
       </v-tab-item>
       <v-tab-item value="images">
         <v-card-text>
@@ -91,7 +95,7 @@ import DeleteResourceDialog from "@/components/DeleteResourceDialog";
 import DeleteSuCardText from "@/components/DeleteSuCardText";
 
 export default {
-  name: "ItemAreaCard",
+  name: "ItemSuCard",
   components: {
     CollectionSuRelsContainer,
     CollectionPotteriesCard,
