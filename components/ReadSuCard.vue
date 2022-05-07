@@ -52,7 +52,7 @@
       <v-expansion-panel-header class="grey--text text-overline">Stratigraphic Unit</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col sm="3">
+          <v-col>
             <v-text-field
               class="secondary--text font-weight-bold" color="secondary"
               :value="formatCode('stratigraphicUnit', item)"
@@ -60,14 +60,15 @@
               readonly
             />
           </v-col>
-          <v-col sm="3">
+          <v-col>
             <v-text-field
               :value="getResponseValue('year', item)"
               label="excavation year"
               readonly
             />
           </v-col>
-          <v-col sm="3">
+          <v-spacer />
+          <v-col>
             <v-text-field
               :value="getResponseValue('number', item)"
               label="number"
@@ -87,6 +88,21 @@
             <v-text-field
               :value="getResponseValue('preservationState.value', item)"
               label="state of preservation"
+              readonly
+            />
+          </v-col>
+          <v-spacer />
+          <v-col sm="1">
+            <v-text-field
+              :value="getResponseValue('period.code', item)"
+              label="period code"
+              readonly
+            />
+          </v-col>
+          <v-col sm="2">
+            <v-text-field
+              :value="getResponseValue('period.value', item)"
+              label="period"
               readonly
             />
           </v-col>

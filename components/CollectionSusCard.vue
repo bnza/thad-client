@@ -54,6 +54,11 @@
         width: '100px'
       },
       {
+        text: 'period',
+        value: 'period.code',
+        width: '100px'
+      },
+      {
         text: 'type',
         value: 'type.value',
         width: '100px'

@@ -49,6 +49,11 @@
         width: '100px'
       },
       {
+        text: 'period',
+        value: 'period.code',
+        width: '100px'
+      },
+      {
         text: 'ware',
         value: 'ware.value',
         width: '130px'

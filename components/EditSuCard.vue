@@ -47,6 +47,17 @@
             </v-col>
           </v-row>
           <v-row dense>
+            <v-col data-cy="period-select-col">
+              <select-period-vocabulary-autocomplete
+                :sub-periods="false"
+                :select.sync="modelItem.period"
+              />
+            </v-col>
+            <v-col />
+            <v-col />
+            <v-col />
+          </v-row>
+          <v-row dense>
             <v-col data-cy="year-select-col">
               <v-autocomplete
                 v-model="modelItem.year"
@@ -244,6 +255,7 @@ export default {
       for (const key of [
         'area',
         'type',
+        'period',
         'preservationState',
       ]) {
         if (has(key, data)) {

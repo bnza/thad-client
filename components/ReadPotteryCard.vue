@@ -31,6 +31,20 @@
                   readonly
                 />
               </v-col>
+              <v-col sm="1">
+                <v-text-field
+                  :value="getResponseValue('period.code', item)"
+                  label="period code"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="3">
+                <v-text-field
+                  :value="getResponseValue('period.value', item)"
+                  label="period"
+                  readonly
+                />
+              </v-col>
             </v-row>
             <v-row dense>
               <v-col>

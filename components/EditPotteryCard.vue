@@ -39,6 +39,12 @@
               @blur="$v.modelItem.number.$touch()"
             />
           </v-col>
+          <v-col data-cy="period-select-col" sm="4">
+            <select-period-vocabulary-autocomplete
+              class="mx-4"
+              :select.sync="modelItem.period"
+            />
+          </v-col>
         </v-row>
         <v-row dense>
           <v-col data-cy="vessel-shape-select-col">
@@ -420,6 +426,7 @@ export default {
       const data = normalizeRequestBodyData(this.updateItem)
       for (const key of [
         'stratigraphicUnit',
+        'period',
         'vesselShape',
         'ware',
         'preservation',

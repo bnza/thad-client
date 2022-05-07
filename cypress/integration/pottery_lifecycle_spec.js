@@ -45,6 +45,10 @@ describe('The Pottery resource lifecycle', () => {
 
     cy.get('[data-cy=number-input-col]').click().type('{backspace}9')
 
+    cy.get('[data-cy=period-select-col]').click().type('ep{downArrow}{enter}')
+
+    cy.get('[data-cy=period-select-col] input').should('have.value', 'EPN: Early Pottery Neolithic')
+
     cy.get('[data-cy=vessel-shape-select-col]').click().type('ba{downArrow}{enter}')
 
     cy.get('[data-cy=vessel-shape-select-col] input').should('have.value', 'basin')

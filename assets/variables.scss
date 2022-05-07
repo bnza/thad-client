@@ -23,5 +23,9 @@ tbody {
   color: var(--v-secondary-base) !important;
 }
 
+.theme--dark.v-label {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 @import '~vuetify/src/styles/styles.sass';
 
