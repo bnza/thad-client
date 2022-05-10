@@ -24,6 +24,7 @@ const expandResource = (apiPrefix) => (resource) => {
 const mainResources = [
   'site',
   'area',
+  'smallFind',
   'stratigraphicUnit',
   'pottery',
   'ecofact'

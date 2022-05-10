@@ -5,7 +5,8 @@ const workSiteFilterableResources = {
   areas: 'site.id',
   stratigraphic_units: 'site.id',
   potteries: 'stratigraphicUnit.site.id',
-  ecofacts: 'stratigraphicUnit.site.id'
+  ecofacts: 'stratigraphicUnit.site.id',
+  small_finds: 'stratigraphicUnit.site.id'
 }
 
 const workSiteResourcesRegex = new RegExp(`/(?<resource>${Object.keys(workSiteFilterableResources).join('|')})/?`)

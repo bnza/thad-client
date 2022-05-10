@@ -1,7 +1,7 @@
 <template>
-  <v-card data-cy="collection-ecofacts-card">
+  <v-card data-cy="collection-small-finds-card">
     <v-toolbar flat dense>
-      <v-toolbar-title v-if="!isChild">Ecofacts</v-toolbar-title>
+      <v-toolbar-title v-if="!isChild">Small Finds</v-toolbar-title>
       <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
       <v-spacer />
       <navigation-download-collection-button :disabled="!totalItems" @click="downloadDialog = true"/>
@@ -49,24 +49,39 @@
         width: '100px'
       },
       {
-        text: 'quantity',
-        value: 'quantity',
-        width: '150px'
-      },
-      {
         text: 'type',
         value: 'type.value',
         width: '150px'
       },
       {
+        text: 'material',
+        value: 'material.value',
+        width: '150px'
+      },
+      {
         text: 'preservation',
+        value: 'preservation.value',
+        width: '170px'
+      },
+      {
+        text: 'preservation state',
         value: 'preservationState.value',
         width: '170px'
       },
       {
-        text: 'analyzed',
-        value: 'selectedForAnalysis',
-        width: '170px'
+        text: 'ext. surface colour',
+        value: 'externalSurfaceColour.value',
+        width: '190px'
+      },
+      {
+        text: 'int. surface colour',
+        value: 'internalSurfaceColour.value',
+        width: '190px'
+      },
+      {
+        text: 'fracture colour',
+        value: 'fractureColour.value',
+        width: '150px'
       },
       {
         text: 'length (cm)',
@@ -79,6 +94,16 @@
         width: '150px'
       },
       {
+        text: 'min width (cm)',
+        value: 'minWidth',
+        width: '150px'
+      },
+      {
+        text: 'max width (cm)',
+        value: 'maxWidth',
+        width: '150px'
+      },
+      {
         text: 'height (cm)',
         value: 'height',
         width: '150px'
@@ -88,9 +113,10 @@
         value: 'thickness',
         width: '150px'
       },
+
       {
-        text: 'min diam. (cm)',
-        value: 'minDiameter',
+        text: 'base diam. (cm)',
+        value: 'baseDiameter',
         width: '150px'
       },
       {
@@ -99,8 +125,23 @@
         width: '150px'
       },
       {
+        text: 'weight (g)',
+        value: 'weight',
+        width: '150px'
+      },
+      {
         text: 'compiler',
         value: 'compiler',
+        width: '200px'
+      },
+      {
+        text: 'description',
+        value: 'description',
+        width: '200px'
+      },
+      {
+        text: 'summary',
+        value: 'summary',
         width: '200px'
       },
       {
@@ -148,14 +189,17 @@
           resource-name="stratigraphicUnit"
         />
       </template>
-      <template #[`item.selectedForAnalysis`]="{ item : tItem }">
-        <v-simple-checkbox :value="tItem.selectedForAnalysis" :ripple="false"/>
-      </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}
       </template>
       <template #[`item.notes`]="{ item }">
         <long-text-table-data-tooltip :text="item.notes" />
+      </template>
+      <template #[`item.summary`]="{ item }">
+        <long-text-table-data-tooltip :text="item.summary" />
+      </template>
+      <template #[`item.description`]="{ item }">
+        <long-text-table-data-tooltip :text="item.description" />
       </template>
     </v-data-table>
     <filter-collection-dialog
@@ -179,7 +223,7 @@
       :item="deletingItem"
       @itemDeleted="resetAndFetch"
     >
-      <delete-ecofact-card-text :item="deletingItem" />
+      <delete-small-find-card-text :item="deletingItem" />
     </delete-resource-dialog>
   </v-card>
 </template>
@@ -190,7 +234,7 @@ import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
-  name: "CollectionEcofactsCard",
+  name: "CollectionSmallFindsCard",
   mixins: [
     ResourceCollectionGetMixin,
     ResourceDeleteDialogMixin,

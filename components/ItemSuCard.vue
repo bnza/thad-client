@@ -48,9 +48,13 @@
         </v-card-text>
       </v-tab-item>
       <v-tab-item value="finds">
-        <v-card-text>
-          Small finds
-        </v-card-text>
+        <collection-small-finds-card
+          v-if="ready"
+          tab="finds"
+          :parent="item"
+          parent-request-filter-key="stratigraphicUnit.id"
+          resource-name="smallFind"
+        />
       </v-tab-item>
       <v-tab-item value="eco">
         <collection-ecofacts-card

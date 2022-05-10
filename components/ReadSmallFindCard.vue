@@ -11,7 +11,7 @@
               <v-col sm="4">
                 <v-text-field
                   class="secondary--text font-weight-bold" color="secondary"
-                  :value="formatCode('pottery', item)"
+                  :value="formatCode('smallFind', item)"
                   label="code"
                   readonly
                 />
@@ -23,7 +23,8 @@
                   readonly
                 />
               </v-col>
-              <v-col sm="2">
+              <v-col sm="3"/>
+              <v-col sm="3">
                 <v-text-field
                   class="secondary--text font-weight-bold" color="secondary"
                   :value="getResponseValue('number', item)"
@@ -31,87 +32,24 @@
                   readonly
                 />
               </v-col>
-              <v-col sm="1">
-                <v-text-field
-                  :value="getResponseValue('period.code', item)"
-                  label="period code"
-                  readonly
-                />
-              </v-col>
-              <v-col sm="3">
-                <v-text-field
-                  :value="getResponseValue('period.value', item)"
-                  label="period"
-                  readonly
-                />
-              </v-col>
+              <v-col />
             </v-row>
             <v-row dense>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('vesselShape.value', item)"
-                  label="shape"
+                  :value="getResponseValue('type.value', item)"
+                  label="type"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('ware.value', item)"
-                  label="ware"
+                  :value="getResponseValue('material.value', item)"
+                  label="material"
                   readonly
                 />
               </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('preservation.value', item)"
-                  label="preservation"
-                  readonly
-                />
-              </v-col>
-            </v-row>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-        <v-expansion-panel>
-          <v-expansion-panel-header class="grey--text text-overline">Manufacturing</v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-row dense>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('manufacturingTechnique.value', item)"
-                  label="manufacturing technique"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('firing.value', item)"
-                  label="firing"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('fabric.value', item)"
-                  label="fabric"
-                  readonly
-                />
-              </v-col>
-            </v-row>
-            <v-row dense>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('surfaceCharacteristic.value', item)"
-                  label="surface characteristic"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('surfaceTreatment.value', item)"
-                  label="surface treatment"
-                  readonly
-                />
-              </v-col>
+              <v-col />
               <v-col>
                 <v-text-field
                   :value="getResponseValue('decoration.value', item)"
@@ -119,7 +57,25 @@
                   readonly
                 />
               </v-col>
-          </v-row>
+            </v-row>
+            <v-row dense>
+              <v-col>
+                <v-text-field
+                  :value="getResponseValue('preservation.value', item)"
+                  label="preservation"
+                  readonly
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  :value="getResponseValue('preservationState.value', item)"
+                  label="preservation state"
+                  readonly
+                />
+              </v-col>
+              <v-col />
+              <v-col />
+            </v-row>
           </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>
@@ -151,92 +107,20 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>
-          <v-expansion-panel-header class="grey--text text-overline">Morphology</v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-row dense>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('body.value', item)"
-                  label="body/wall"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('spout.value', item)"
-                  label="spout"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('handle.value', item)"
-                  label="handle/lug/suspender"
-                  readonly
-                />
-              </v-col>
-            </v-row>
-            <v-row dense>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('rimShape.value', item)"
-                  label="rim shape"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('rimCharacterization.value', item)"
-                  label="rim characterization"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('rimDirection.value', item)"
-                  label="rim direction"
-                  readonly
-                />
-              </v-col>
-            </v-row>
-            <v-row dense>
-              <v-col >
-                <v-text-field
-                  :value="getResponseValue('neck.value', item)"
-                  label="neck"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('neckLength.value', item)"
-                  label="neck length"
-                  readonly
-                />
-              </v-col>
-              <v-col />
-            </v-row>
-            <v-row dense>
-              <v-col >
-                <v-text-field
-                  :value="getResponseValue('baseShape.value', item)"
-                  label="base shape"
-                  readonly
-                />
-              </v-col>
-              <v-col />
-              <v-col />
-            </v-row>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-        <v-expansion-panel>
           <v-expansion-panel-header class="grey--text text-overline">Measures</v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-row dense>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('sizeGroup.value', item)"
-                  label="size group"
+                  :value="getResponseValue('length', item)"
+                  label="length (cm)"
+                  readonly
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  :value="getResponseValue('height', item)"
+                  label="height (cm)"
                   readonly
                 />
               </v-col>
@@ -249,15 +133,56 @@
               </v-col>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('rimDiameter', item)"
-                  label="rim diameter (cm)"
+                  :value="getResponseValue('weight', item)"
+                  label="weight (g)"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col>
+                <v-text-field
+                  :value="getResponseValue('width', item)"
+                  label="width (cm)"
+                  readonly
+                />
+              </v-col>
+              <v-col />
+              <v-col>
+                <v-text-field
+                  :value="getResponseValue('minWidth', item)"
+                  label="min width (cm)"
                   readonly
                 />
               </v-col>
               <v-col>
                 <v-text-field
+                  :value="getResponseValue('maxWidth', item)"
+                  label="max width (cm)"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col>
+                <v-text-field
                   :value="getResponseValue('baseDiameter', item)"
                   label="base diameter (cm)"
+                  readonly
+                />
+              </v-col>
+              <v-col />
+              <v-col>
+                <v-text-field
+                  :value="getResponseValue('minDiameter', item)"
+                  label="min diameter (cm)"
+                  readonly
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  :value="getResponseValue('maxDiameter', item)"
+                  label="max diameter (cm)"
                   readonly
                 />
               </v-col>
@@ -269,9 +194,23 @@
           <v-expansion-panel-content>
             <v-row dense>
               <v-col>
-                <v-text-field
+                <v-textarea
+                  :value="getResponseValue('description', item)"
+                  label="description"
+                  readonly
+                />
+              </v-col>
+              <v-col>
+                <v-textarea
+                  :value="getResponseValue('summary', item)"
+                  label="summary"
+                  readonly
+                />
+              </v-col>
+              <v-col>
+                <v-textarea
                   :value="getResponseValue('notes', item)"
-                  label="note"
+                  label="notes"
                   readonly
                 />
               </v-col>
@@ -284,6 +223,8 @@
                   readonly
                 />
               </v-col>
+              <v-col />
+              <v-col />
               <v-col>
                 <v-text-field
                   :value="getResponseValue('date', item).substring(0,10)"
@@ -301,7 +242,7 @@
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
-  name: "ReadPotteryCard",
+  name: "ReadSmallFindCard",
   mixins: [
     ResourceItemDataAccessorMixin
   ],
@@ -314,7 +255,7 @@ export default {
   data() {
     return {
       panels: [
-        0,1,2,3,4,5
+        0,1,2,3
       ],
     }
   }
