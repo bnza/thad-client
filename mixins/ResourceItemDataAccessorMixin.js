@@ -13,7 +13,7 @@ const getResponseValue = (key, item) => {
 }
 const twoDigitYear = su => `${getResponseValue('year', su)}`.substring(2,4)
 const paddedSUNumber = su => su.number.toString().padStart(5,'0')
-const itemBaseCode = (item, infix) => `${getResponseValue('stratigraphicUnit.site.code', item)}.${twoDigitYear(item.stratigraphicUnit)}.${paddedSUNumber(item)}.${infix}.${item.number}`
+const itemBaseCode = (item, infix) => `${getResponseValue('stratigraphicUnit.site.code', item)}.${twoDigitYear(item.stratigraphicUnit)}.${paddedSUNumber(item.stratigraphicUnit)}.${infix}.${item.number}`
 const codeFormatters = {
   site: item => item.code || '',
   area: item => `${getResponseValue('site.code', item)}.${item.code}`,
@@ -21,6 +21,7 @@ const codeFormatters = {
   stratigraphicUnit: item => `${getResponseValue('site.code', item)}.${twoDigitYear(item)}.SU.${paddedSUNumber(item)}`,
   pottery: item => itemBaseCode(item, 'P'),
   ecofact: item => itemBaseCode(item, 'E'),
+  cumulativePotterySheet: item => itemBaseCode(item, 'CP'),
 }
 
 export default {

@@ -1,9 +1,9 @@
 import {toPairs} from "ramda";
 import {capitalizeFirst} from "~/src/utils";
 
-const toItemResourceLabel = (resourceName) => resourceName.replace(/([A-Z])/, ' $1').toLowerCase()
+const toItemResourceLabel = (resourceName) => resourceName.replace(/([A-Z])/g, ' $1').toLowerCase()
 const toCollectionResourceId = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1]
-const toCollectionResourceLabel = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1].replace(/_/, ' ')
+const toCollectionResourceLabel = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1].replaceAll(/_/g, ' ')
 const toCollectionResourcePath = (resourceUrl, apiPrefix) => resourceUrl.replace(new RegExp(`^(${apiPrefix})`), '/app')
 const expandResource = (apiPrefix) => (resource) => {
   const [resourceName, url] = resource
@@ -27,7 +27,8 @@ const mainResources = [
   'smallFind',
   'stratigraphicUnit',
   'pottery',
-  'ecofact'
+  'ecofact',
+  'cumulativePotterySheet'
 ]
 
 export const state = () => ({

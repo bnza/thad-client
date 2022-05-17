@@ -6,7 +6,8 @@ const workSiteFilterableResources = {
   stratigraphic_units: 'site.id',
   potteries: 'stratigraphicUnit.site.id',
   ecofacts: 'stratigraphicUnit.site.id',
-  small_finds: 'stratigraphicUnit.site.id'
+  small_finds: 'stratigraphicUnit.site.id',
+  cumulative_pottery_sheet: 'stratigraphicUnit.site.id',
 }
 
 const workSiteResourcesRegex = new RegExp(`/(?<resource>${Object.keys(workSiteFilterableResources).join('|')})/?`)

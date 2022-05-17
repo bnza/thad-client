@@ -43,9 +43,13 @@
         />
       </v-tab-item>
       <v-tab-item value="c_pottery">
-        <v-card-text>
-          Cumulative pottery
-        </v-card-text>
+        <collection-cumulative-pottery-sheets-card
+          v-if="ready"
+          tab="c_pottery"
+          :parent="item"
+          parent-request-filter-key="stratigraphicUnit.id"
+          resource-name="cumulativePotterySheet"
+        />
       </v-tab-item>
       <v-tab-item value="finds">
         <collection-small-finds-card
