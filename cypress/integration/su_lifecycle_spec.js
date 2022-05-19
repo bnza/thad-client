@@ -39,11 +39,6 @@ describe('The SU resource lifecycle', () => {
     cy.get('[data-cy=type-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=year-select-col] .v-messages__message').should('be.visible')
 
-    cy.get('[data-cy=square-input-col] input').type('xx{downArrow}{enter}')
-
-    cy.get('[data-cy=square-input-col] .v-messages__message').should('be.visible')
-    cy.get('[data-cy=square-input-col]').click().type('{backspace}{backspace}X2{enter}')
-
     cy.get('[data-cy=year-select-col]').click().type('22{downArrow}{enter}')
 
     cy.get('[data-cy=area-select-col]').click().type('w{downArrow}{enter}')

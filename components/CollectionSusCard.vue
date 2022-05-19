@@ -38,12 +38,6 @@
         width: '100px'
       },
       {
-        text: 'square',
-        value: 'square',
-        align: 'center',
-        width: '100px'
-      },
-      {
         text: 'year',
         value: 'year',
         width: '100px'

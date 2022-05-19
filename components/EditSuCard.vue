@@ -35,16 +35,7 @@
                 readonly
               />
             </v-col>
-            <v-col data-cy="square-input-col">
-              <v-text-field
-                v-model="modelItem.square"
-                label="square"
-                required
-                :error-messages="squareErrors"
-                @input="$v.modelItem.square.$touch()"
-                @blur="$v.modelItem.square.$touch()"
-              />
-            </v-col>
+            <v-col />
           </v-row>
           <v-row dense>
             <v-col data-cy="period-select-col">

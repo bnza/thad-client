@@ -38,13 +38,7 @@
               readonly
             />
           </v-col>
-          <v-col sm="3">
-            <v-text-field
-              :value="getResponseValue('square', item)"
-              label="square"
-              readonly
-            />
-          </v-col>
+          <v-col sm="3" />
         </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>
