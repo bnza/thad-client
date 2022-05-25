@@ -51,7 +51,8 @@ export default {
   ],
 
   publicRuntimeConfig: {
-    apiPrefix: process.env.API_PREFIX || '/api'
+    apiPrefix: process.env.API_PREFIX || '/api',
+    apiBaseUrl: process.env.API_BASE_URL
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

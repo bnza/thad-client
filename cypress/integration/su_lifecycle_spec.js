@@ -3,7 +3,7 @@ describe('The SU resource lifecycle', () => {
     cy.loadFixtures()
   })
 
-  it ('SU resource lifecycle (admin)', () => {
+  it.skip ('SU resource lifecycle (admin)', () => {
     cy.visit('/')
 
     cy.programmaticLogin('user_admin@example.com','0002')
@@ -169,6 +169,74 @@ describe('The SU resource lifecycle', () => {
       .click()
 
     cy.get('[data-cy=item-area-card] .v-toolbar__title').contains('Area')
+
+  })
+
+  it ('SU media lifecycle', () => {
+    cy.resetMedia()
+
+    cy.visit('/')
+
+    cy.programmaticLogin('user_admin@example.com','0002')
+
+    cy.visit('/app/stratigraphic_units')
+
+    cy.get('[data-cy=collection-sus-card]')
+
+    cy.get('[data-cy=item-crud-navigation]')
+      .first()
+      .find('[data-cy=resource-read-btn]')
+      .click()
+
+    cy.get('[data-cy=tab-images]').click()
+
+    cy.get('[data-cy=tab-item-images]')
+
+    cy.get('[data-cy=resource-create-btn]').click()
+
+    cy.get('[data-cy=file-input]').selectFile('cypress/fixtures/kitten.jpg', {force: true})
+
+    cy.intercept({method: 'post', path: '**/api/media_object_stratigraphic_units'}).as('successfulCreateRequest')
+
+    cy.get('[data-cy=add-btn]').click()
+
+    cy.wait('@successfulCreateRequest').its('response.statusCode').should('eq', 201)
+
+    cy.get('[data-cy=resource-create-btn]').click()
+
+    cy.get('[data-cy=file-input]').selectFile('cypress/fixtures/kitten.jpg', {force: true})
+
+    cy.get('[data-cy=add-btn]').click()
+
+    cy.wait('@successfulCreateRequest').its('response.statusCode').should('eq', 422)
+
+    cy.get('[data-cy=snackbar-close-btn]').click()
+
+    cy.get('[data-cy=cancel-btn]').click()
+
+
+    cy.intercept({method: 'delete', path: '**/api/media_object_stratigraphic_units/*'}).as('successfulDeleteRequest')
+
+    cy.get('[data-cy=media-object-card]')
+      .last()
+      .find('[data-cy=resource-delete-btn]')
+      .click()
+
+    cy.get('[data-cy=delete-resource-dialog-card]').as('deleteResourceDialogCard')
+
+    cy.get('@deleteResourceDialogCard').should('be.visible')
+
+    cy.get('@deleteResourceDialogCard').find('[data-cy=delete-btn]').click()
+
+    cy.wait('@successfulDeleteRequest').its('response.statusCode').should('eq', 204)
+
+    cy.get('[data-cy=resource-create-btn]').click()
+
+    cy.get('[data-cy=file-input]').selectFile('cypress/fixtures/kitten.jpg', {force: true})
+
+    cy.get('[data-cy=add-btn]').click()
+
+    cy.wait('@successfulCreateRequest').its('response.statusCode').should('eq', 201)
 
   })
 })

@@ -1,5 +1,5 @@
 <template>
-  <v-card data-cy="item-su-card">
+  <v-card data-cy="item-su-card" flat>
     <v-toolbar flat dense>
       <navigation-prev-button />
       <v-toolbar-title class="text-capitalize">{{resource.itemLabel}}</v-toolbar-title>
@@ -22,7 +22,7 @@
           <v-tab href="#c_pottery">Cumulative pottery</v-tab>
           <v-tab href="#finds">Small finds</v-tab>
           <v-tab href="#eco">Ecofacts</v-tab>
-          <v-tab href="#images">Images</v-tab>
+          <v-tab href="#images" data-cy="tab-images">Images</v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
@@ -69,10 +69,16 @@
           resource-name="ecofact"
         />
       </v-tab-item>
-      <v-tab-item value="images">
-        <v-card-text>
-          Images
-        </v-card-text>
+      <v-tab-item value="images" data-cy="tab-item-images">
+        <collection-media-objects-card
+          v-if="ready"
+          tab="images"
+          :parent="item"
+          parent-request-filter-key="stratigraphicUnit.id"
+          resource-name="mediaObjectStratigraphicUnit"
+          parent-request-key="stratigraphicUnit"
+          @created="$fetch"
+        />
       </v-tab-item>
     </v-tabs-items>
     <delete-resource-dialog

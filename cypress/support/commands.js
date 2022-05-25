@@ -52,3 +52,7 @@ Cypress.Commands.add('snackbarContains', (content) => {
 Cypress.Commands.add('loadFixtures', () => {
   cy.exec(`cd ${Cypress.env('api_compose_path')} && docker-compose exec php bin/console hautelook:fixtures:load --env=dev --quiet`)
 })
+
+Cypress.Commands.add('resetMedia', () => {
+  cy.exec(`cd ${Cypress.env('api_compose_path')} && docker-compose exec php bin/console app:fixtures:reset-media --env=dev --quiet`)
+})
