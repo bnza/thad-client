@@ -27,6 +27,7 @@ const mainResources = [
   'smallFind',
   'stratigraphicUnit',
   'pottery',
+  'sample',
   'ecofact',
   'cumulativePotterySheet'
 ]

@@ -21,6 +21,7 @@ const codeFormatters = {
   stratigraphicUnit: item => `${getResponseValue('site.code', item)}.${twoDigitYear(item)}.SU.${paddedSUNumber(item)}`,
   pottery: item => itemBaseCode(item, 'P'),
   ecofact: item => itemBaseCode(item, 'E'),
+  sample: item => itemBaseCode(item, 'S'),
   cumulativePotterySheet: item => itemBaseCode(item, 'CP'),
 }
 
