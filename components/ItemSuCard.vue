@@ -21,6 +21,7 @@
           <v-tab href="#pottery">Pottery</v-tab>
           <v-tab href="#c_pottery">Cumulative pottery</v-tab>
           <v-tab href="#finds">Small finds</v-tab>
+          <v-tab href="#sample">Samples</v-tab>
           <v-tab href="#eco">Ecofacts</v-tab>
           <v-tab href="#images" data-cy="tab-images">Images</v-tab>
         </v-tabs>
@@ -67,6 +68,15 @@
           :parent="item"
           parent-request-filter-key="stratigraphicUnit.id"
           resource-name="ecofact"
+        />
+      </v-tab-item>
+      <v-tab-item value="sample">
+        <collection-samples-card
+          v-if="ready"
+          tab="sample"
+          :parent="item"
+          parent-request-filter-key="stratigraphicUnit.id"
+          resource-name="sample"
         />
       </v-tab-item>
       <v-tab-item value="images" data-cy="tab-item-images">

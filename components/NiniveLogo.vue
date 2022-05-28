@@ -1,5 +1,5 @@
 <template>
-  <img class="ninive-logo" alt="Ninive Logo" src="/Ninive.png" />
+  <img class="ninive-logo" alt="Ninive Logo" src="Ninive.png" />
 </template>
 
 <style>

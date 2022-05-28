@@ -115,6 +115,7 @@ export default {
   },
 
   router: {
+    base: process.env.NODE_ENV === 'production' ? process.env.APP_ROUTER_BASE : undefined,
     parseQuery(q) {
       return require('qs').parse(q)
     },
@@ -125,5 +126,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {
+    publicPath: process.env.NODE_ENV === 'production' ? process.env.APP_PUBLIC_PATH : undefined
+  }
 }
