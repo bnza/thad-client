@@ -1,8 +1,17 @@
 <template>
   <fragment>
     <template v-if="$auth.loggedIn">
-      <v-btn icon>
-        <v-icon :color="color" class="mx-3">mdi-account-circle</v-icon>
+      <v-btn
+        icon
+        nuxt
+        to="/users/me"
+      >
+        <v-icon
+          :color="color"
+          class="mx-3"
+        >
+          mdi-account-circle
+        </v-icon>
       </v-btn>
       <p class="text-body-2 align-center username" data-cy="logged_user">
         {{ $auth.user.email }}

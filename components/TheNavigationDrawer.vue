@@ -18,6 +18,7 @@
       </v-list-item>
     </v-list>
     <main-resources-list-group v-if="$auth.loggedIn" />
+    <settings-resources-list-group v-if="$auth.loggedIn" />
     <v-list>
       <v-list-item
         nuxt
