@@ -22,7 +22,7 @@
         </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            data-cy="logout_btn"
+            data-cy="logout-btn"
             color="warning"
             text
             @click="$emit('logout')"

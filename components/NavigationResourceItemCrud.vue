@@ -20,6 +20,10 @@ import NavigationDeleteResourceButton from "@/components/NavigationDeleteResourc
 import NavigationResourceReadButton from "@/components/NavigationResourceReadButton";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 
+const isInteger = v => !isNaN(v) && Number.isInteger(+v)
+const isString = v => typeof v === 'string' || v instanceof String
+const isUuid = v => isString(v) && v.test(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[089ab][\da-f]{3}-[\da-f]{12}$/)
+
 export default {
   name: "NavigationResourceItemCrud",
   components: {
@@ -31,18 +35,22 @@ export default {
     ResourceNavigationMixin
   ],
   props: {
+    forceDisable: {
+      type: Boolean,
+      default: false
+    },
     scope: {
       type: String,
       default: 'ROLE_ADMIN'
     },
     itemId: {
       required: true,
-      validation: v => !isNaN(v) && Number.isInteger(+v)
+      validation: v => isInteger(v) || isUuid(v)
     },
   },
   computed: {
     disabled() {
-      return !this.$auth.hasScope(this.scope)
+      return this.forceDisable || !this.$auth.hasScope(this.scope)
     }
   }
 }

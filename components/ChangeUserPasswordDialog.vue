@@ -4,16 +4,17 @@
     width="500"
     persistent
   >
-    <v-card data-cy="delete-resource-dialog-card">
-      <v-card-title>
+    <v-card flat data-cy="change-user-password-dialog-card">
+      <v-card-title flat>
         Change password
       </v-card-title>
     </v-card>
     <v-card-text>
       <v-container>
-        <v-form lazy-validation novalidate autocomplete="off">
+        <p class="mx-4">Fill the form to change current user's password</p>
+        <v-form lazy-validation novalidate>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="old-password-input-col">
             <v-text-field
               v-model="modelItem.oldPassword"
               :append-icon="show[0] ? 'mdi-eye' : 'mdi-eye-off'"
@@ -32,29 +33,25 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col>
+          <v-col data-cy="password-input-col">
             <v-text-field
-              v-model="modelItem.newPassword"
+              v-model="modelItem.password"
               autocomplete="new-password"
               :append-icon="show[1] ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show[1] || !modelItem.newPassword ? 'text' : 'password'"
+              :type="(show[1] || !modelItem.password) ? 'text' : 'password'"
               label="new password"
               required
-              :readonly="readonly[1]"
-              :error-messages="newPasswordErrors"
+              :error-messages="passwordErrors"
               class="mx-4"
               @click:append="toggleView(1)"
-              @input="$v.modelItem.newPassword.$touch()"
-              @blur="setReadonly(1)"
-              @focus="setWritable(1)"
+              @input="$v.modelItem.password.$touch()"
             />
           </v-col>
         </v-row>
         <v-row desnse>
-          <v-col>
+          <v-col data-cy="repeat-password-input-col">
             <v-text-field
               v-model="modelItem.repeatPassword"
-              autocomplete="new-password"
               :append-icon="show[2] || !modelItem.repeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show[2] ? 'text' : 'password'"
               label="repeat password"
@@ -95,8 +92,7 @@
 
 <script>
 import Vue from "vue";
-import {clone} from "ramda";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import ChangeUserPasswordValidationMixin from "@/mixins/validation/ChangeUserPasswordValidationMixin";
 
 
@@ -119,6 +115,12 @@ export default {
       readonly: [true, true, true]
     }
   },
+  computed: {
+    ...mapGetters('api', ['getResource']),
+    resource() {
+      return this.getResource('user')
+    }
+  },
   methods: {
     ...mapActions('http', [
       'request',
@@ -133,17 +135,22 @@ export default {
       }
       try {
         await this.request({
-          method: 'post',
-          url: 'api/me/change-password',
-          data: clone(this.modelItem),
-          headers: {
-            Accept: 'application/ld+json'
+          method: 'patch',
+          url: this.resource.itemUrl(this.$auth.user.id),
+          data: {
+            oldPassword: this.modelItem.oldPassword,
+            password: this.modelItem.password
           },
+          headers: {
+            Accept: 'application/ld+json',
+            'Content-Type':'application/merge-patch+json'
+          }
         })
         await this.$store.dispatch('snackbar/show', {
           text: 'Successfully changed user\'s password',
           color: 'success'
         })
+        await this.$auth.loginWith('local', { data: {username: this.$auth.user.email, password: this.modelItem.password} })
         this.close()
         this.modelItem = {}
       } catch (e) {

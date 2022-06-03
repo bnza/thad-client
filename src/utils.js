@@ -58,3 +58,44 @@ export const getResourceProperty = (resourceName, key) => {
   }
   return resourcesNamesMap[resourceName][key]
 }
+
+export const roleColor = role => {
+  return role ? ['error', 'warning', 'success'][['ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_USER'].indexOf(role)] || 'white' : 'white'
+}
+
+export const generatePassword = length => {
+
+  const shuffleArray = array => {
+    const _array = [...array]
+    for (let i = _array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = _array[i];
+      _array[i] = _array[j];
+      _array[j] = temp;
+    }
+    return _array
+  }
+
+  const randomIndex = array => Math.floor(Math.random() * array.length)
+
+  const randomItem = indexed => {
+    const rIndex = randomIndex(indexed)
+    return Array.isArray(indexed) ? indexed[rIndex] : indexed.charAt(rIndex)
+  }
+
+  length = length < 8 ? 8 : length
+  const digits = '0123456789'
+  const uppercases = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const lowercases = 'abcdefghijklmnopqrstuvwxyz'
+  const nonWords = '!@#$%^&*()'
+
+  const types = [digits, uppercases, lowercases, nonWords]
+
+  const _types = []
+
+  for (let i = 0; i < length - types.length; i++) {
+    _types.push(randomItem(types))
+  }
+
+  return shuffleArray(_types.concat(types)).map(randomItem).join('')
+}

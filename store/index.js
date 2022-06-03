@@ -1,10 +1,20 @@
 import Vue from "vue";
 
+/**
+ * @typedef ResetPasswordInfo
+ *
+ * @type {object} user
+ * @property {string} email
+ * @property {[string]} roles
+ * @property {string} password
+ */
+
 export const state = () => ({
   apiPrefix: '',
   workSite: {},
   ready: false,
-  creatingResourceParent: null
+  creatingResourceParent: null,
+  resetPasswordInfo: null
 })
 
 export const mutations = {
@@ -19,6 +29,16 @@ export const mutations = {
   },
   setCreatingResourceParent(state, parent) {
     Vue.set(state, 'creatingResourceParent', parent)
+  },
+  /**
+   * @param state
+   * @param {ResetPasswordInfo} user
+   */
+  setResetPasswordInfo(state, user) {
+    state.resetPasswordInfo = user
+  },
+  clearResetPasswordInfo(state) {
+    state.resetPasswordInfo = null
   }
 }
 

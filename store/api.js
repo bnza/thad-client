@@ -6,7 +6,12 @@ const toCollectionResourceId = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1]
 const toCollectionResourceLabel = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1].replaceAll(/_/g, ' ')
 const toCollectionResourcePath = (resourceUrl, apiPrefix) => resourceUrl.replace(new RegExp(`^(${apiPrefix})`), '/app')
 const expandResource = (apiPrefix) => (resource) => {
-  const [resourceName, url] = resource
+  // eslint-disable-next-line prefer-const
+  let [resourceName, url] = resource
+  // quickfix: API returns wrong resource url for users
+  if (resourceName === 'user') {
+    url = `${apiPrefix}/users`
+  }
   const collectionPath =  toCollectionResourcePath(url, apiPrefix)
   return {
     resourceName,

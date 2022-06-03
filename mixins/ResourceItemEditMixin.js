@@ -59,12 +59,22 @@ export default {
       }
       return iri
     },
-    async submit() {
-      this.$v.$touch()
-      if (this.$v.$invalid) {
-        return
+    async isInvalid() {
+      if (!this.$v) {
+        return false
       }
+      await this.$v.$touch()
+      return this.$v.$invalid
+    },
+    async beforeSubmit() {},
+    async afterCreate() {},
+    async afterUpdate() {},
+    async submit() {
       try {
+        await this.beforeSubmit()
+        if (await this.isInvalid()) {
+          return
+        }
         const response = await this.request({
           method: this.requestMethod,
           url: this.requestUrl,
@@ -72,13 +82,22 @@ export default {
           headers: this.requestHeaders
         })
         if (!this.isUpdate) {
-          await this.$router.replace(this.createdResourcePath(response.data))
+          await this.afterCreate(response)
+          await this.navigateAfterCreate(response)
         } else {
-          await this.$router.go(-1)
+          await this.afterUpdate(response)
+          await this.navigateAfterUpdate(response)
         }
       } catch (e) {
         await this.$store.dispatch('snackbar/requestError', e)
       }
+    },
+    async navigateAfterCreate(response) {
+      await this.$router.replace(this.createdResourcePath(response.data))
+    },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async navigateAfterUpdate(response) {
+      await this.$router.go(-1)
     }
   },
   watch: {

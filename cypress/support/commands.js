@@ -42,6 +42,14 @@ Cypress.Commands.add('programmaticLogin', (username, password) => {
   cy.get('[data-cy=logged_user]')
 })
 
+Cypress.Commands.add('programmaticRoute', (path) => {
+  cy.window()
+    .its('$nuxt')
+    .then((nuxt) => {
+      nuxt.$router.push(path)
+    })
+})
+
 Cypress.Commands.add('snackbarContains', (content) => {
   cy.get('[data-cy=the_snackbar]').within( () => {
     cy.get('.v-snack__wrapper').should('be.visible')

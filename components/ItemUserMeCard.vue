@@ -27,6 +27,7 @@
           </v-col>
           <v-col>
             <v-btn
+              data-cy="open-dialog-btn"
               color="primary"
               @click="dialogVisible=true"
             >
@@ -42,6 +43,7 @@
 </template>
 
 <script>
+import {roleColor} from "@/src/utils";
 export default {
   name: "ItemUserMeCard",
   data() {
@@ -51,7 +53,7 @@ export default {
   },
   computed: {
     color() {
-      return ['error', 'warning', 'success'][['ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_USER'].indexOf(this.$auth.user.roles[0])]
+      return roleColor(this.$auth.user?.roles[0])
     }
   }
 }
