@@ -3,7 +3,7 @@ describe('The SU resource lifecycle', () => {
     cy.loadFixtures()
   })
 
-  it.skip ('SU resource lifecycle (admin)', () => {
+  it('SU resource lifecycle (admin)', () => {
     cy.visit('/')
 
     cy.programmaticLogin('user_admin@example.com','0002')

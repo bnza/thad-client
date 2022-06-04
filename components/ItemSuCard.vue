@@ -33,12 +33,13 @@
       </v-tab-item>
       <v-tab-item value="rels">
         <v-container>
-          <v-row>
+          <v-row data-cy="collection-su-seq-row">
             <p class="ms-4 text-overline">Sequence Relationships</p>
+            <lazy-collection-su-seq-container :parent="item" resource-name="stratigraphicSequence"/>
           </v-row>
           <v-row data-cy="collection-su-st-row">
             <p class="ms-4 text-overline">Stratigraphic Relationships</p>
-            <collection-su-rels-container :parent="item" resource-name="stratigraphicRelationship"/>
+            <lazy-collection-su-rels-container :parent="item" resource-name="stratigraphicRelationship"/>
           </v-row>
         </v-container>
       </v-tab-item>
@@ -116,29 +117,9 @@ import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceItemGetMixin from "@/mixins/ResourceItemGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import RouteTabbedComponentMixin from "@/mixins/RouteTabbedComponentMixin";
-import NavigationPrevButton from "@/components/NavigationPrevButton";
-import ReadSuCard from "@/components/ReadSuCard";
-import NavigationCollectionResourceButton from "@/components/NavigationCollectionResourceButton";
-import NavigationDeleteResourceButton from "@/components/NavigationDeleteResourceButton";
-import NavigationUpdateResourceButton from "@/components/NavigationUpdateResourceButton";
-import CollectionSuRelsContainer from "@/components/CollectionSuRelsContainer";
-import CollectionPotteriesCard from "@/components/CollectionPotteriesCard";
-import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import DeleteSuCardText from "@/components/DeleteSuCardText";
 
 export default {
   name: "ItemSuCard",
-  components: {
-    CollectionSuRelsContainer,
-    CollectionPotteriesCard,
-    ReadSuCard,
-    DeleteResourceDialog,
-    DeleteSuCardText,
-    NavigationPrevButton,
-    NavigationCollectionResourceButton,
-    NavigationDeleteResourceButton,
-    NavigationUpdateResourceButton,
-  },
   mixins: [
     ResourceItemGetMixin,
     ResourceItemDataAccessorMixin,

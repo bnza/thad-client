@@ -2,7 +2,7 @@ describe('The User resource lifecycle', () => {
   beforeEach(() => {
     cy.loadFixtures()
   })
-  it ('Base user password change', () => {
+  it('Base user password change', () => {
     cy.visit('/')
 
     cy.programmaticLogin('user_base@example.com','0000')
@@ -210,6 +210,7 @@ describe('The User resource lifecycle', () => {
     });
 
     cy.get('@resetPassword').then(password => {
+      cy.programmaticRoute('/')
       cy.intercept({method: 'post', path: '**/api/login'}).as('login')
       cy.programmaticLogin('you@example.com',password)
       cy.wait('@login').its('response.statusCode').should('eq', 200)

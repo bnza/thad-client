@@ -3,6 +3,7 @@
     data-cy="create-su-rel-dialog"
     :value="visible"
     width="500"
+    persistent
   >
     <v-card data-cy="create-su-rel-card">
       <v-card-title class="text-overline mb-4 secondary--text" >

@@ -40,11 +40,18 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    resourceName: {
+      type: String,
+      required: true,
     }
   },
   computed: {
+    resourceKey() {
+      return this.resourceName.substring(13).toLowerCase()
+    },
     relationships() {
-      return this.$store.getters['vocabularies/getVocabulary']('relationship')
+      return this.$store.getters['vocabularies/getVocabulary'](this.resourceKey)
     },
     relationship() {
       const relationIri = this.item.relationship
