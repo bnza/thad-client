@@ -2,7 +2,7 @@
   <v-app dark>
     <the-navigation-drawer :visible="drawer"></the-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app color="primary">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon data-cy="app-bar-nav-icon" @click.stop="drawer = !drawer" />
       <v-toolbar-title class="title" v-text="title"/>
       <work-site-container />
       <v-spacer />

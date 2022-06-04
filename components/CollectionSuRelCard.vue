@@ -1,6 +1,7 @@
 <template>
   <v-col>
     <v-card
+      data-cy="collection-su-rel-card"
       height="100%"
       class="mx-auto"
       outlined
@@ -14,6 +15,7 @@
         >
           <template #activator="{ on, attrs }">
             <v-btn
+              data-cy="create-su-rel-btn"
               v-bind="attrs"
               icon
               x-small

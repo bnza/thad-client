@@ -1,11 +1,12 @@
 <template>
-  <v-container>
+  <v-container data-cy="collection-su-st-rel-container">
     <v-row dense class="text-right">
       <v-spacer />
       <v-col>
         <v-tooltip bottom>
           <template #activator="{ on, attrs }">
             <v-btn
+              data-cy="su-st-enable-editing-btn"
               :disabled="!$auth.hasScope('ROLE_EDITOR')"
               color="primary"
               v-bind="attrs"

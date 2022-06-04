@@ -9,6 +9,7 @@
       <v-tooltip bottom>
         <template #activator="{ on: tooltip }">
           <v-chip
+            data-cy="item-su-rel-chip"
             :close="enabled && $auth.hasScope('ROLE_EDITOR')"
             label
             v-bind="attrs"
@@ -21,7 +22,7 @@
         <span>Show more</span>
       </v-tooltip>
     </template>
-    <v-card>
+    <v-card data-cy="su-rel-dx-read">
       <v-card-title v-if="su.id" class="text-overline secondary--text">
         {{formatCode('stratigraphicUnit', su)}}
         <v-spacer />

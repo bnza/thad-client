@@ -1,6 +1,7 @@
 <template>
   <v-list-group
     v-model="groupOpen"
+    data-cy="main-resources-list-group"
     no-action
     prepend-icon="mdi-text-box"
   >
@@ -10,6 +11,7 @@
     <v-list-item
       v-for="(resource, i) in mainResources"
       :key="i"
+      :data-cy="`${resource.resourceName}-drawer-list-item`"
       nuxt
       :to="resource.collectionPath"
       router

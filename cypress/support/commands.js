@@ -50,6 +50,14 @@ Cypress.Commands.add('programmaticRoute', (path) => {
     })
 })
 
+Cypress.Commands.add('drawerNavigateToResource', (resourceName) => {
+  cy.get('[data-cy=app-bar-nav-icon]').click()
+  cy.get('[data-cy=main-resources-list-group]').click()
+  cy.get('[data-cy=app-navigation-drawer]').find(`[data-cy=${resourceName}-drawer-list-item]`).click()
+  // cy.get('[data-cy=main-resources-list-group]').click()
+  // cy.get('[data-cy=app-bar-nav-icon]').click()
+})
+
 Cypress.Commands.add('snackbarContains', (content) => {
   cy.get('[data-cy=the_snackbar]').within( () => {
     cy.get('.v-snack__wrapper').should('be.visible')

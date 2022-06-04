@@ -1,5 +1,6 @@
 <template>
   <v-dialog
+    data-cy="create-su-rel-dialog"
     :value="visible"
     width="500"
   >
@@ -19,6 +20,7 @@
           readonly
         />
         <select-sus-autocomplete
+          data-cy="dx-su-input"
           :select.sync="modelItem.dxSu"
           :area="sxSu.area"
           v-on="$listeners"

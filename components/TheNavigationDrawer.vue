@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    data-cy="app-navigation-drawer"
     :value="visible"
     fixed
     app

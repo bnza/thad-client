@@ -17,7 +17,7 @@
       <template #extension>
         <v-tabs v-model="tab" align-with-title>
           <v-tab href="#data">Data</v-tab>
-          <v-tab href="#rels">Relationships</v-tab>
+          <v-tab href="#rels" data-cy="tab-rels">Relationships</v-tab>
           <v-tab href="#pottery">Pottery</v-tab>
           <v-tab href="#c_pottery">Cumulative pottery</v-tab>
           <v-tab href="#finds">Small finds</v-tab>
@@ -32,7 +32,15 @@
         <read-su-card v-if="ready" :item="item" />
       </v-tab-item>
       <v-tab-item value="rels">
-        <collection-su-rels-container :parent="item" resource-name="stratigraphicRelationship"/>
+        <v-container>
+          <v-row>
+            <p class="ms-4 text-overline">Sequence Relationships</p>
+          </v-row>
+          <v-row data-cy="collection-su-st-row">
+            <p class="ms-4 text-overline">Stratigraphic Relationships</p>
+            <collection-su-rels-container :parent="item" resource-name="stratigraphicRelationship"/>
+          </v-row>
+        </v-container>
       </v-tab-item>
       <v-tab-item value="pottery">
         <collection-potteries-card
@@ -136,7 +144,7 @@ export default {
     ResourceItemDataAccessorMixin,
     ResourceDeleteDialogMixin,
     RouteTabbedComponentMixin
-  ]
+  ],
 }
 </script>
 
