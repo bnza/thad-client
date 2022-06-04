@@ -52,7 +52,11 @@
               :value="formatCode('stratigraphicUnit', item)"
               label="code"
               readonly
-            />
+            >
+              <template #prepend>
+                <navigation-resource-read-button :item-id="getResponseValue('id', item)" resource-name="stratigraphicUnit" />
+              </template>
+            </v-text-field>
           </v-col>
           <v-col>
             <v-text-field
@@ -180,6 +184,10 @@ export default {
     item: {
       type: Object,
       default: () => {}
+    },
+    isChild: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

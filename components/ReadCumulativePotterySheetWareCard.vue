@@ -1,6 +1,9 @@
 <template>
   <div class="px-6">
     <v-row dense>
+      <p class="mx-2 mt-4 grey--text text-overline">Sherd count by ware</p>
+    </v-row>
+    <v-row dense>
       <v-col>
         <v-text-field
           v-if="ready"

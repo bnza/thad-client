@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot :resource-name="resourceName" :item="item" />
+    <slot :resource-name="resourceName" :item="item" :ready="ready"/>
   </div>
 </template>
 <script>

@@ -15,7 +15,6 @@ export default {
   validations() {
     const localRules = {
         stratigraphicUnit: {required},
-        number: {required, integer, minValue: minValue(0)}
     }
     return {
       modelItem: mergeLeft(fromPairs(countFields.map(field => [field, {integer, minValue: minValue(0)}])), localRules)
@@ -26,14 +25,6 @@ export default {
       const errors = []
       if (!this.$v.modelItem.stratigraphicUnit.$dirty) return errors
       !this.$v.modelItem.stratigraphicUnit.required && errors.push('SU is required.')
-      return errors
-    },
-    numberErrors() {
-      const errors = []
-      if (!this.$v.modelItem.number.$dirty) return errors
-      !this.$v.modelItem.number.required && errors.push('Ecofact number is required.')
-      !this.$v.modelItem.number.integer && errors.push('Ecofact number must be an integer number.')
-      !this.$v.modelItem.number.minValue && errors.push('Ecofact number must be a positive number.')
       return errors
     },
     errors() {

@@ -28,17 +28,18 @@
               @blur="$v.modelItem.stratigraphicUnit.$touch()"
             />
           </v-col>
-          <v-col data-cy="number-input-col" sm="2">
-            <v-text-field
-              v-model="modelItem.number"
-              label="number"
-              required
-              :error-messages="numberErrors"
-              class="mx-4"
-              @input="$v.modelItem.number.$touch()"
-              @blur="$v.modelItem.number.$touch()"
-            />
-          </v-col>
+<!--          <v-col data-cy="number-input-col" sm="2">-->
+<!--            <v-text-field-->
+<!--              v-model="modelItem.number"-->
+<!--              label="number"-->
+<!--              required-->
+<!--              :error-messages="numberErrors"-->
+<!--              class="mx-4"-->
+<!--              @input="$v.modelItem.number.$touch()"-->
+<!--              @blur="$v.modelItem.number.$touch()"-->
+<!--            />-->
+<!--          </v-col>-->
+          <v-col sm="4" />
           <v-col sm="4" />
           <v-col sm="4" />
         </v-row>

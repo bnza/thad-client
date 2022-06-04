@@ -53,13 +53,12 @@
         />
       </v-tab-item>
       <v-tab-item value="c_pottery">
-        <collection-cumulative-pottery-sheets-card
-          v-if="ready"
-          tab="c_pottery"
-          :parent="item"
-          parent-request-filter-key="stratigraphicUnit.id"
-          resource-name="cumulativePotterySheet"
-        />
+        <resource-fetch-item v-if="item.cumulativePotterySheet" :item-id="`${item.cumulativePotterySheet.id}`" resource-name="cumulativePotterySheet">
+          <template #default="cps">
+            <lazy-read-cumulative-pottery-sheet-card v-if="cps.ready" :item="cps.item" :parent="item" @deleted="$fetch()"/>
+          </template>
+        </resource-fetch-item>
+        <lazy-read-cumulative-pottery-sheet-card v-else :item="{}" :parent="item"/>
       </v-tab-item>
       <v-tab-item value="finds">
         <collection-small-finds-card
