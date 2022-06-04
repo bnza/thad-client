@@ -3,7 +3,7 @@ describe('The Site resource lifecycle', () => {
     cy.loadFixtures()
   })
 
-  it ('Site resource lifecycle (admin)', () => {
+  it ('Area resource lifecycle (admin)', () => {
     cy.visit('/')
 
     cy.programmaticLogin('user_admin@example.com','0002')

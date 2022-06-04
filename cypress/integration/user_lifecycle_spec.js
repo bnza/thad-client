@@ -85,6 +85,8 @@ describe('The User resource lifecycle', () => {
 
     cy.intercept({method: 'post', path: '**/api/login'}).as('login')
 
+    cy.programmaticRoute('/')
+
     cy.programmaticLogin('user_base@example.com','12345Aa@')
 
     cy.wait('@login').its('response.statusCode').should('eq', 200)
@@ -219,6 +221,8 @@ describe('The User resource lifecycle', () => {
     cy.programmaticLogin('user_admin@example.com','0002')
 
     cy.programmaticRoute('/app/users')
+
+    cy.get('[data-cy=collection-users-card]')
 
     cy.get('[data-cy=resource-delete-btn]')
       .last()

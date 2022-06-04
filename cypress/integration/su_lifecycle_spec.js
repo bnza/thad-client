@@ -82,7 +82,7 @@ describe('The SU resource lifecycle', () => {
 
     cy.get('[data-cy=bottom-elevation-col] input').type('{backspace}179.90')
 
-    cy.get('[data-cy=bottom-elevation-col] .v-messages__message').should('be.hidden')
+    cy.get('[data-cy=bottom-elevation-col] .v-messages__message').should('not.exist')
 
     cy.get('[data-cy=compiler-input]').type('Some One')
 
@@ -172,7 +172,7 @@ describe('The SU resource lifecycle', () => {
 
   })
 
-  it ('SU media lifecycle', () => {
+  it('SU media lifecycle', () => {
     cy.resetMedia()
 
     cy.visit('/')

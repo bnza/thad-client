@@ -12,7 +12,8 @@
     "lint": "yarn lint:js && yarn lint:prettier",
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
     "test": "jest",
-    "e2e": "yarn run cypress open"
+    "e2e": "yarn run cypress open",
+    "e2e-headless": "yarn run cypress run --headless --record false"
   },
   "dependencies": {
     "@nuxtjs/auth-next": "5.0.0-1648802546.c9880dc",
