@@ -11,7 +11,7 @@
     <v-card-text v-if="ready" class="no-gutters">
       <v-row v-if="$auth.hasScope('ROLE_EDITOR')">
         <v-spacer />
-          <div class="d-flex justify-end" >
+          <div class="d-flex justify-end mb-2" >
             <navigation-update-resource-button :item-id="item.id" resource-name="cumulativePotterySheet" :disabled="false" />
             <navigation-delete-resource-button
               :item-id="item.id"

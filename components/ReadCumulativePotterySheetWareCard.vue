@@ -20,14 +20,7 @@
           readonly
         />
       </v-col>
-      <v-col>
-        <v-text-field
-          class="secondary--text font-weight-bold" color="secondary"
-          :value="getResponseValue('number', item)"
-          label="identification number"
-          readonly
-        />
-      </v-col>
+      <v-col />
     </v-row>
     <v-row dense>
       <v-col>
