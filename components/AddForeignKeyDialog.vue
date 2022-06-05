@@ -49,14 +49,14 @@
 
 <script>
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
-import SetStratigraphicUnitGraveForeignKeyMixin from "@/mixins/validation/SetStratigraphicUnitGraveForeignKeyMixin";
+import SetForeignKeyMixin from "@/mixins/validation/SetForeignKeyMixin";
 import {normalizeResourceId} from "@/src/request";
 
 export default {
   name: "AddForeignKeyDialog",
   mixins: [
     ResourceNavigationMixin,
-    SetStratigraphicUnitGraveForeignKeyMixin
+    SetForeignKeyMixin
   ],
   data() {
     return {
