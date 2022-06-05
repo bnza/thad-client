@@ -34,7 +34,8 @@ const mainResources = [
   'pottery',
   'sample',
   'ecofact',
-  'cumulativePotterySheet'
+  'cumulativePotterySheet',
+  'grave'
 ]
 
 export const state = () => ({

@@ -14,6 +14,7 @@
           <v-row justify="center">
             <v-col>
               <v-btn
+                color="primary"
                 text
                 data-cy="submit-btn"
                 @click="submit"

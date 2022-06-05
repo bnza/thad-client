@@ -1,19 +1,14 @@
 <template>
-  <v-card data-cy="collection-sus-card">
+  <v-card data-cy="collection-graves-card">
     <v-toolbar flat dense>
-      <v-toolbar-title v-if="!isChild">Stratigraphic units</v-toolbar-title>
-      <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
+      <v-toolbar-title v-if="!isChild">Graves</v-toolbar-title>
       <v-spacer />
-      <navigation-download-collection-button :disabled="!totalItems" @click="downloadDialog = true"/>
-      <navigation-filter-collection-button @click="filterDialog = true"/>
-      <slot name="create-action">
-        <navigation-create-resource-button
-          v-if="$auth.hasScope('ROLE_EDITOR')"
-          :parent="parent"
-          :resource-name="resourceName"
-          :disabled="false"
-        />
-      </slot>
+      <navigation-create-resource-button
+        v-if="$auth.hasScope('ROLE_EDITOR')"
+        :parent="parent"
+        :resource-name="resourceName"
+        :disabled="false"
+      />
     </v-toolbar>
     <v-data-table
       height="100%"
@@ -65,13 +60,28 @@
         width: '130px'
       },
       {
-        text: 'top elev. (m)',
-        value: 'topElevation',
-        width: '150px'
+        text: 'cut SU',
+        value: 'cutStratigraphicUnit',
+        width: '170px'
       },
       {
-        text: 'bottom elev. (m)',
-        value: 'bottomElevation',
+        text: 'fill SU',
+        value: 'fillStratigraphicUnit',
+        width: '170px'
+      },
+      {
+        text: 'skel. SU',
+        value: 'skeletonStratigraphicUnit',
+        width: '170px'
+      },
+      {
+        text: 'earlier than',
+        value: 'earlierThan',
+        width: '170px'
+      },
+      {
+        text: 'later than',
+        value: 'laterThan',
         width: '170px'
       },
       {
@@ -132,6 +142,46 @@
           resource-name="area"
         />
       </template>
+      <template #[`item.cutStratigraphicUnit`]="{ item }">
+        <navigation-resource-item-chip
+          v-if="item.cutStratigraphicUnit"
+          :link-text="formatCode('stratigraphicUnit', item.cutStratigraphicUnit)"
+          :item-id="item.cutStratigraphicUnit.id"
+          resource-name="stratigraphicUnit"
+        />
+      </template>
+      <template #[`item.fillStratigraphicUnit`]="{ item }">
+        <navigation-resource-item-chip
+          v-if="item.fillStratigraphicUnit"
+          :link-text="formatCode('stratigraphicUnit', item.fillStratigraphicUnit)"
+          :item-id="item.fillStratigraphicUnit.id"
+          resource-name="stratigraphicUnit"
+        />
+      </template>
+      <template #[`item.skeletonStratigraphicUnit`]="{ item }">
+        <navigation-resource-item-chip
+          v-if="item.skeletonStratigraphicUnit"
+          :link-text="formatCode('stratigraphicUnit', item.skeletonStratigraphicUnit)"
+          :item-id="item.skeletonStratigraphicUnit.id"
+          resource-name="stratigraphicUnit"
+        />
+      </template>
+      <template #[`item.earlierThan`]="{ item }">
+        <navigation-resource-item-chip
+          v-if="item.earlierThan"
+          :link-text="formatCode('stratigraphicUnit', item.earlierThan)"
+          :item-id="item.earlierThan.id"
+          resource-name="stratigraphicUnit"
+        />
+      </template>
+      <template #[`item.laterThan`]="{ item }">
+        <navigation-resource-item-chip
+          v-if="item.laterThan"
+          :link-text="formatCode('stratigraphicUnit', item.laterThan)"
+          :item-id="item.laterThan.id"
+          resource-name="stratigraphicUnit"
+        />
+      </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}
       </template>
@@ -145,79 +195,33 @@
         <long-text-table-data-tooltip :text="item.interpretation" />
       </template>
     </v-data-table>
-    <filter-collection-dialog
-      v-if="responseData['hydra:search']"
-      resource-name="stratigraphicUnit"
-      :visible.sync="filterDialog"
-      :hydra-search="responseData['hydra:search']"
-      :filters.sync="filters"
-    />
-    <download-collection-dialog
-      :downloading="downloading"
-      :visible.sync="downloadDialog"
+    <delete-resource-dialog
+      v-if="deletingItem"
       :resource-name="resourceName"
-      :total-items="totalItems"
-      @download="downloadCsv"
-    />
-    <slot name="delete-dialog" v-bind="{deletingItem, visible: deleteDialog, events: {closeDeleteDialog}}">
-      <delete-resource-dialog
-        v-if="deletingItem"
-        :resource-name="resourceName"
-        :visible.sync="deleteDialog"
-        :item="deletingItem"
-        @itemDeleted="resetAndFetch"
-      >
-        <delete-su-card-text :item="deletingItem" />
-      </delete-resource-dialog>
-    </slot>
+      :visible.sync="deleteDialog"
+      :item="deletingItem"
+      @itemDeleted="resetAndFetch"
+    >
+      <lazy-delete-grave-card-text :item="deletingItem" />
+    </delete-resource-dialog>
   </v-card>
 </template>
 
 <script>
-import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import DeleteSuCardText from "@/components/DeleteSuCardText";
-import FilterCollectionDialog from "@/components/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
-import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
-import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
-import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
-import LongTextTableDataTooltip from "@/components/LongTextTableDataTooltip";
 
 export default {
-  name: "CollectionSusCard",
-  components: {
-    DeleteSuCardText,
-    DeleteResourceDialog,
-    FilterCollectionDialog,
-    LongTextTableDataTooltip,
-    NavigationCreateResourceButton,
-    NavigationResourceItemChip,
-    NavigationResourceItemCrud
-  },
+  name: "CollectionGravesCard",
   mixins: [
-    ResourceCollectionGetMixin,
     ResourceDeleteDialogMixin,
+    ResourceCollectionGetMixin,
     ResourceItemDataAccessorMixin
   ],
 }
 </script>
 
-<style>
-table > tbody > tr > td.fixed,
-table > thead > tr > th.fixed {
-  position: sticky !important;
-  position: -webkit-sticky !important;
-  left: 0;
-  z-index: 98;
-  background: rgba(30,30,30);
-  -webkit-box-shadow: -1px 0 3px -1px rgba(0, 0, 0, 0.19);
-  -moz-box-shadow: -1px 0 3px -1px rgba(0, 0, 0, 0.19);
-  box-shadow: -1px 0 3px -1px rgba(0, 0, 0, 0.19);
-}
+<style scoped>
 
-table > thead > tr > th.fixed {
-  z-index: 99 !important;
-}
 </style>

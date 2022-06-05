@@ -17,7 +17,8 @@
       <template #extension>
         <v-tabs v-model="tab" align-with-title>
           <v-tab href="#data">Data</v-tab>
-          <v-tab href="#sus">SUS</v-tab>
+          <v-tab href="#sus">stratigraphic units</v-tab>
+          <v-tab href="#graves">graves</v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
@@ -30,6 +31,15 @@
           v-if="ready"
           resource-name="stratigraphicUnit"
           tab="sus"
+          :parent="item"
+          parent-request-filter-key="area.id"
+        />
+      </v-tab-item>
+      <v-tab-item value="graves">
+        <lazy-collection-graves-card
+          v-if="ready"
+          resource-name="grave"
+          tab="graves"
           :parent="item"
           parent-request-filter-key="area.id"
         />

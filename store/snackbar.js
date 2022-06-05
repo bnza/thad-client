@@ -1,3 +1,10 @@
+/**
+ * @typedef {Object} SnackbarData
+ * @property {string} text
+ * @property {string} [color]
+ * @property {number} [timeout=5000]
+ */
+
 export const state = () => ({
   visible: false,
   color: undefined,
@@ -28,6 +35,11 @@ export const getters = {
 }
 
 export const actions = {
+  /**
+   *
+   * @param commit
+   * @param {SnackbarData} snackbar
+   */
   show({commit}, snackbar) {
     commit('resetTimeout')
     commit('set', snackbar)

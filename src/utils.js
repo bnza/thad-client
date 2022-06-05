@@ -99,3 +99,9 @@ export const generatePassword = length => {
 
   return shuffleArray(_types.concat(types)).map(randomItem).join('')
 }
+
+export const yearsRange = (start, end) => {
+  start = start || 2000;
+  end = end || (new Date()).getFullYear();
+  return [...Array(end - start + 1).keys()].map(x => x + start).reverse();
+}

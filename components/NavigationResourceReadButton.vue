@@ -4,6 +4,7 @@
       <v-btn
         nuxt
         icon
+        :disabled="disabled"
         v-bind="attrs"
         :to="getItemResourcePath(itemId)"
         data-cy="resource-read-btn"
@@ -28,6 +29,10 @@ export default {
     itemId: {
       required: true,
       validation: v => !isNaN(v) && Number.isInteger(+v)
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   }
 }

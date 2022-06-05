@@ -75,12 +75,19 @@ export default {
         if (await this.isInvalid()) {
           return
         }
-        const response = await this.request({
-          method: this.requestMethod,
-          url: this.requestUrl,
-          data: this.requestData,
-          headers: this.requestHeaders
-        })
+        let response = null
+        if (this.requestData && !isEmpty(this.requestData)){
+          response = await this.request({
+            method: this.requestMethod,
+            url: this.requestUrl,
+            data: this.requestData,
+            headers: this.requestHeaders
+          })
+        } else {
+          await this.$store.dispatch('snackbar/show', {
+            text: 'No change. Skip'
+          })
+        }
         if (!this.isUpdate) {
           await this.afterCreate(response)
           await this.navigateAfterCreate(response)

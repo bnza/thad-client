@@ -113,7 +113,7 @@
             <v-col>
               <v-textarea
                 v-model="modelItem.interpretation"
-                label="summary"
+                label="interpretation"
                 data-cy="su-interpretation-input"
               />
             </v-col>
@@ -211,6 +211,7 @@ import ResourceCollectionParentMixin from "@/mixins/ResourceCollectionParentMixi
 import SelectVocabularyAutocomplete from "@/components/SelectVocabularyAutocomplete";
 import SelectAreasAutocomplete from "@/components/SelectAreasAutocomplete";
 import {normalizeRequestBodyData} from "@/src/request";
+import {yearsRange} from "@/src/utils";
 
 
 export default {
@@ -236,11 +237,7 @@ export default {
     }
   },
   computed: {
-    years() {
-        const start = 2000;
-        const end = (new Date()).getFullYear();
-        return [...Array(end - start + 1).keys()].map(x => x + start);
-    },
+    years: () => yearsRange(),
     requestData() {
       const data = normalizeRequestBodyData(this.updateItem)
       for (const key of [

@@ -6,6 +6,10 @@ export default {
     }
   },
   methods: {
+    closeDeleteDialog() {
+      this.deleteDialog = false
+      this.deletingItem = null
+    },
     openDeleteDialog(item) {
       this.deletingItem = item
       this.deleteDialog = true

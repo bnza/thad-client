@@ -11,19 +11,23 @@ const getResponseValue = (key, item) => {
     return undefined
   }, item)
 }
-const twoDigitYear = su => `${getResponseValue('year', su)}`.substring(2,4)
-const paddedSUNumber = su => su.number.toString().padStart(5,'0')
-const itemBaseCode = (item, infix) =>  `${getResponseValue('stratigraphicUnit.site.code', item)}.${twoDigitYear(item.stratigraphicUnit)}.${paddedSUNumber(item.stratigraphicUnit)}.${infix}`
+const twoDigitYear = year => `${year}`.substring(2,4)
+const paddedSUNumber = number => number.toString().padStart(5,'0')
+const itemBaseCode = (item, infix) =>  `${getResponseValue('stratigraphicUnit.site.code', item)}.${twoDigitYear(getResponseValue('stratigraphicUnit.year', item))}.${paddedSUNumber(getResponseValue('stratigraphicUnit.number', item))}.${infix}`
 const itemNumberedCode = (item, infix) => `${itemBaseCode(item, infix)}.${item.number}`
 const codeFormatters = {
   site: item => item.code || '',
-  area: item => `${getResponseValue('site.code', item)}.${item.code}`,
+  area: item => getResponseValue('area.code', item)
+    ? `${getResponseValue('site.code', item)}.${getResponseValue('area.code', item)}`
+    : `${getResponseValue('site.code', item)}.${getResponseValue('code', item)}`,
   smallFind: item => itemNumberedCode(item, 'O'),
-  stratigraphicUnit: item => `${getResponseValue('site.code', item)}.${twoDigitYear(item)}.SU.${paddedSUNumber(item)}`,
+  stratigraphicUnit: item => `${getResponseValue('site.code', item)}.${twoDigitYear(item.year)}.SU.${paddedSUNumber(item.number)}`,
   pottery: item => itemNumberedCode(item, 'P'),
   ecofact: item => itemNumberedCode(item, 'E'),
   sample: item => itemNumberedCode(item, 'S'),
   cumulativePotterySheet: item => itemBaseCode(item, 'CP'),
+  grave: item => `${getResponseValue('site.code', item)}.${twoDigitYear(item.year)}.G.${paddedSUNumber(item.number)}`,
+
 }
 
 export default {
@@ -44,6 +48,9 @@ export default {
       return (new Date(date)).toLocaleDateString()
     },
     formatCode(resourceName, item) {
+      if (!item) {
+        return ''
+      }
       if (has(resourceName, codeFormatters)) {
         return codeFormatters[resourceName](item)
       }

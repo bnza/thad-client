@@ -8,11 +8,12 @@
     item-value="id"
     :search-input.sync="search"
     :readonly="readonly"
+    :clearable="clearable"
     return-object
     cache-items
     flat
     hide-no-data
-    label="stratigraphic unit"
+    :label="label"
     @change="$emit('update:select', $event)"
   />
 </template>
@@ -31,6 +32,10 @@ export default {
         return []
       }
     },
+    label: {
+      type: String,
+      default: 'stratigraphic unit'
+    },
     area: {
       type: Object,
       default() {
@@ -39,9 +44,13 @@ export default {
     },
     select: {
       type: Object,
-      required: true
+      default: null
     },
     readonly: {
+      type: Boolean,
+      default: false
+    },
+    clearable: {
       type: Boolean,
       default: false
     }
