@@ -12,6 +12,7 @@
     </v-toolbar>
     <v-layout style="background-color: rgb(18,18,18)">
       <v-row
+        v-if="items && items.length"
         align-content="start"
         no-gutters
       >
@@ -35,6 +36,15 @@
           </media-object-card>
         </v-col>
         <v-spacer />
+      </v-row>
+      <v-row v-else>
+        <v-col />
+        <v-col class="my-16">
+          <div class="d-flex justify-center" >
+            <p>No media associated</p>
+          </div>
+        </v-col>
+        <v-col />
       </v-row>
     </v-layout>
     <delete-resource-dialog

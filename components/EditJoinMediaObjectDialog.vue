@@ -75,6 +75,8 @@ export default {
     requestData() {
       const model = {}
       for (const key of [
+        'grave',
+        'smallFind',
         'pottery',
         'stratigraphicUnit',
         'mediaObject',
