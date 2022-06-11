@@ -7,7 +7,7 @@ describe('The User resource lifecycle', () => {
 
     cy.programmaticLogin('user_base@example.com','0000')
 
-    cy.visit('/app/users/me')
+    cy.visit('/data/users/me')
 
     cy.get('[data-cy=open-dialog-btn]').click()
 
@@ -100,7 +100,7 @@ describe('The User resource lifecycle', () => {
 
     cy.intercept({method: 'get', path: '**/api/users/*'}).as('getUsersRequest')
 
-    cy.visit('/app/users')
+    cy.visit('/data/users')
 
     cy.get('[data-cy=collection-users-card]')
 
@@ -175,7 +175,7 @@ describe('The User resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.programmaticRoute('/app/users')
+    cy.programmaticRoute('/data/users')
 
     cy.get('[data-cy=resource-create-btn]').click()
 
@@ -220,7 +220,7 @@ describe('The User resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.programmaticRoute('/app/users')
+    cy.programmaticRoute('/data/users')
 
     cy.get('[data-cy=collection-users-card]')
 

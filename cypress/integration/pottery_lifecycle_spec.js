@@ -8,7 +8,7 @@ describe('The Pottery resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/app/potteries')
+    cy.visit('/data/potteries')
 
     cy.get('[data-cy=collection-potteries-card]')
 

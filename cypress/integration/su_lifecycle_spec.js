@@ -8,7 +8,7 @@ describe('The SU resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/app/stratigraphic_units')
+    cy.visit('/data/stratigraphic_units')
 
     cy.get('[data-cy=collection-sus-card]')
 
@@ -179,7 +179,7 @@ describe('The SU resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/app/stratigraphic_units')
+    cy.visit('/data/stratigraphic_units')
 
     cy.get('[data-cy=collection-sus-card]')
 

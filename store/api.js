@@ -4,7 +4,8 @@ import {capitalizeFirst} from "~/src/utils";
 const toItemResourceLabel = (resourceName) => resourceName.replace(/([A-Z])/g, ' $1').toLowerCase()
 const toCollectionResourceId = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1]
 const toCollectionResourceLabel = (resourceUrl) => resourceUrl.match(/\/(\w+)$/)[1].replaceAll(/_/g, ' ')
-const toCollectionResourcePath = (resourceUrl, apiPrefix) => resourceUrl.replace(new RegExp(`^(${apiPrefix})`), '/app')
+const toCollectionResourcePath = (resourceUrl, apiPrefix) => resourceUrl.replace(new RegExp(`^.*${apiPrefix}/`), '/data/')
+
 const expandResource = (apiPrefix) => (resource) => {
   // eslint-disable-next-line prefer-const
   let [resourceName, url] = resource

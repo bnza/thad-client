@@ -10,7 +10,7 @@
     <v-list>
       <v-list-item
         nuxt
-        to="/app/users/me"
+        to="/data/users/me"
         router
       >
         <v-list-item-icon>
@@ -21,7 +21,7 @@
       <v-list-item
         v-if="$auth.hasScope('ROLE_ADMIN')"
         nuxt
-        to="/app/users"
+        to="/data/users"
         router
       >
         <v-list-item-icon>
