@@ -22,6 +22,24 @@
         </v-tabs>
       </template>
     </v-toolbar>
+    <v-row v-if="ready && tab!=='su'" dense class="px-6 pt-6">
+      <v-col sm="3">
+        <v-text-field
+          class="secondary--text font-weight-bold" color="secondary"
+          :value="formatCode('cumulativePotterySheet', item)"
+          label="code"
+          readonly
+        />
+      </v-col>
+      <v-col sm="3">
+        <v-text-field
+          :value="formatCode('stratigraphicUnit', item.stratigraphicUnit)"
+          label="SU"
+          readonly
+        />
+      </v-col>
+      <v-col />
+    </v-row>
     <v-tabs-items v-model="tab">
       <v-tab-item value="ware">
         <read-cumulative-pottery-sheet-ware-card v-if="ready" :item="item" />

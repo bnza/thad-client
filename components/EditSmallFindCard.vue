@@ -39,6 +39,21 @@
               @blur="$v.modelItem.number.$touch()"
             />
           </v-col>
+          <v-col data-cy="period-select-col" sm="3">
+            <select-period-vocabulary-autocomplete
+              class="mx-4"
+              :select.sync="modelItem.period"
+            />
+          </v-col>
+          <v-col data-cy="subperiod-select-col" sm="3">
+            <select-vocabulary-autocomplete
+              label="subperiod"
+              :select.sync="modelItem.subperiod"
+              class="mx-4"
+              vocabulary-name="subperiod"
+              v-on="$listeners"
+            />
+          </v-col>
         </v-row>
         <v-row dense>
           <v-col data-cy="type-select-col">
@@ -389,7 +404,9 @@ export default {
         'preservation',
         'internalSurfaceColour',
         'externalSurfaceColour',
-        'fractureColour'
+        'fractureColour',
+        'period',
+        'subperiod'
       ]) {
         if (has(key, data)) {
           data[key] = this.normalizeResource(key)

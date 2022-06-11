@@ -198,8 +198,9 @@
           </v-col>
           <v-col />
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
-          <v-col>
+          <v-col sm="2">
             <v-text-field
               v-model="modelItem.subperiodLCACount"
               label="Late Chalcolithic (generic)"
@@ -209,6 +210,8 @@
               @blur="$v.modelItem.subperiodLCACount.$touch()"
             />
           </v-col>
+        </v-row>
+        <v-row dense>
           <v-col>
             <v-text-field
               v-model="modelItem.subperiodLCA1Count"
@@ -259,8 +262,6 @@
               @blur="$v.modelItem.subperiodLCA5Count.$touch()"
             />
           </v-col>
-        </v-row>
-        <v-row dense>
           <v-col sm="2">
             <v-text-field
               v-model="modelItem.subperiodSURCount"
@@ -272,8 +273,9 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
-          <v-col>
+          <v-col sm="2">
             <v-text-field
               v-model="modelItem.subperiodEMTCount"
               label="Early Middle Tigris (generic)"
@@ -281,6 +283,18 @@
               class="mx-4"
               @input="$v.modelItem.subperiodEMTCount.$touch()"
               @blur="$v.modelItem.subperiodEMTCount.$touch()"
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col>
+            <v-text-field
+              v-model="modelItem.subperiodEMT0Count"
+              label="Early Middle Tigris 0"
+              :error-messages="errors('subperiodEMT0Count')"
+              class="mx-4"
+              @input="$v.modelItem.subperiodEMT0Count.$touch()"
+              @blur="$v.modelItem.subperiodEMT0Count.$touch()"
             />
           </v-col>
           <v-col>
@@ -334,6 +348,7 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
           <v-col sm="2">
             <v-text-field
@@ -366,17 +381,8 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
-          <v-col sm="2">
-            <v-text-field
-              v-model="modelItem.subperiodLBACount"
-              label="Late Bronze Age (generic)"
-              :error-messages="errors('subperiodLBACount')"
-              class="mx-4"
-              @input="$v.modelItem.subperiodLBACount.$touch()"
-              @blur="$v.modelItem.subperiodLBACount.$touch()"
-            />
-          </v-col>
           <v-col sm="2">
             <v-text-field
               v-model="modelItem.subperiodLBA1Count"
@@ -398,17 +404,8 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
-          <v-col sm="2">
-            <v-text-field
-              v-model="modelItem.subperiodIRACount"
-              label="Iron Age (generic)"
-              :error-messages="errors('subperiodIRACount')"
-              class="mx-4"
-              @input="$v.modelItem.subperiodIRACount.$touch()"
-              @blur="$v.modelItem.subperiodIRACount.$touch()"
-            />
-          </v-col>
           <v-col sm="2">
             <v-text-field
               v-model="modelItem.subperiodIRA1Count"
@@ -430,6 +427,7 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
           <v-col sm="2">
             <v-text-field
@@ -472,6 +470,7 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
           <v-col sm="2">
             <v-text-field

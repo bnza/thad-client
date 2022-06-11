@@ -49,6 +49,16 @@
         width: '100px'
       },
       {
+        text: 'period',
+        value: 'period.code',
+        width: '100px'
+      },
+      {
+        text: 'subperiod',
+        value: 'subperiod.code',
+        width: '130px'
+      },
+      {
         text: 'type',
         value: 'type.value',
         width: '150px'

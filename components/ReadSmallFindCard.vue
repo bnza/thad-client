@@ -23,8 +23,7 @@
                   readonly
                 />
               </v-col>
-              <v-col sm="3"/>
-              <v-col sm="3">
+              <v-col sm="2">
                 <v-text-field
                   class="secondary--text font-weight-bold" color="secondary"
                   :value="getResponseValue('number', item)"
@@ -32,7 +31,37 @@
                   readonly
                 />
               </v-col>
-              <v-col />
+              <v-col sm="1">
+                <v-text-field
+                  :value="getResponseValue('period.code', item)"
+                  label="period code"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="3">
+                <v-text-field
+                  :value="getResponseValue('period.value', item)"
+                  label="period"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-spacer />
+              <v-col sm="1">
+                <v-text-field
+                  :value="getResponseValue('subperiod.code', item)"
+                  label="subperiod code"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="3">
+                <v-text-field
+                  :value="getResponseValue('subperiod.value', item)"
+                  label="subperiod"
+                  readonly
+                />
+              </v-col>
             </v-row>
             <v-row dense>
               <v-col>

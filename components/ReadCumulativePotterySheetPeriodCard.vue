@@ -8,6 +8,24 @@
       <v-expansion-panel-header class="grey--text text-overline">Sherd count by period</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
+          <v-col sm="3">
+            <v-text-field
+              :value="getResponseValue('diagnosticWareCount', item)"
+              label="diagnostic sherd count"
+              readonly
+            />
+          </v-col>
+          <v-col sm="3">
+            <v-text-field
+              :value="getResponseValue('subperiodUndeterminedCount', item)"
+              label="undetermined period sherd count"
+              readonly
+            />
+          </v-col>
+          <v-col />
+          <v-col />
+        </v-row>
+        <v-row dense>
           <v-col>
             <v-text-field
               :value="getResponseValue('periodEPNCount', item)"
@@ -52,13 +70,7 @@
               readonly
             />
           </v-col>
-          <v-col>
-            <v-text-field
-              :value="getResponseValue('periodSURCount', item)"
-              label="Southern Uruk"
-              readonly
-            />
-          </v-col>
+
           <v-col>
             <v-text-field
               :value="getResponseValue('periodEMTCount', item)"
@@ -66,6 +78,7 @@
               readonly
             />
           </v-col>
+          <v-col />
         </v-row>
         <v-row dense>
           <v-col>
@@ -77,7 +90,7 @@
           </v-col>
           <v-col>
             <v-text-field
-              :value="getResponseValue('subperiodIRACount', item)"
+              :value="getResponseValue('periodIRACount', item)"
               label="Iron Age"
               readonly
             />
@@ -164,14 +177,17 @@
           </v-col>
           <v-col />
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
-          <v-col>
+          <v-col sm="2">
             <v-text-field
               :value="getResponseValue('subperiodLCACount', item)"
               label="Late Chalcolithic (generic)"
               readonly
             />
           </v-col>
+        </v-row>
+        <v-row dense>
           <v-col>
             <v-text-field
               :value="getResponseValue('subperiodLCA1Count', item)"
@@ -207,8 +223,6 @@
               readonly
             />
           </v-col>
-        </v-row>
-        <v-row dense>
           <v-col sm="2">
             <v-text-field
               :value="getResponseValue('subperiodSURCount', item)"
@@ -217,11 +231,21 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
-          <v-col>
+          <v-col sm="2">
             <v-text-field
               :value="getResponseValue('subperiodEMTCount', item)"
               label="Early Middle Tigris (generic)"
+              readonly
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col>
+            <v-text-field
+              :value="getResponseValue('subperiodEMT0Count', item)"
+              label="Early Middle Tigris 0"
               readonly
             />
           </v-col>
@@ -261,6 +285,7 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
           <v-col sm="2">
             <v-text-field
@@ -284,14 +309,8 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
-          <v-col sm="2">
-            <v-text-field
-              :value="getResponseValue('subperiodLBACount', item)"
-              label="Late Bronze Age (generic)"
-              readonly
-            />
-          </v-col>
           <v-col sm="2">
             <v-text-field
               :value="getResponseValue('subperiodLBA1Count', item)"
@@ -307,14 +326,8 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
-          <v-col sm="2">
-            <v-text-field
-              :value="getResponseValue('subperiodIRACount', item)"
-              label="Iron Age (generic)"
-              readonly
-            />
-          </v-col>
           <v-col sm="2">
             <v-text-field
               :value="getResponseValue('subperiodIRA1Count', item)"
@@ -330,6 +343,7 @@
             />
           </v-col>
         </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
           <v-col sm="2">
             <v-text-field
@@ -359,7 +373,8 @@
               readonly
             />
           </v-col>
-      </v-row>
+        </v-row>
+        <v-divider class="my-4"/>
         <v-row dense>
           <v-col sm="2">
             <v-text-field

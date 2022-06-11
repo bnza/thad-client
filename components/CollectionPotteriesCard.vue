@@ -54,6 +54,11 @@
         width: '100px'
       },
       {
+        text: 'subperiod',
+        value: 'subperiod.code',
+        width: '130px'
+      },
+      {
         text: 'ware',
         value: 'ware.value',
         width: '130px'

@@ -45,6 +45,15 @@
               :select.sync="modelItem.period"
             />
           </v-col>
+          <v-col data-cy="subperiod-select-col" sm="4">
+            <select-vocabulary-autocomplete
+              label="subperiod"
+              :select.sync="modelItem.subperiod"
+              class="mx-4"
+              vocabulary-name="subperiod"
+              v-on="$listeners"
+            />
+          </v-col>
         </v-row>
         <v-row dense>
           <v-col data-cy="vessel-shape-select-col">
@@ -427,6 +436,7 @@ export default {
       for (const key of [
         'stratigraphicUnit',
         'period',
+        'subperiod',
         'vesselShape',
         'ware',
         'preservation',

@@ -47,6 +47,23 @@
               </v-col>
             </v-row>
             <v-row dense>
+              <v-spacer />
+              <v-col sm="1">
+                <v-text-field
+                  :value="getResponseValue('subperiod.code', item)"
+                  label="subperiod code"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="3">
+                <v-text-field
+                  :value="getResponseValue('subperiod.value', item)"
+                  label="subperiod"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
               <v-col>
                 <v-text-field
                   :value="getResponseValue('vesselShape.value', item)"
