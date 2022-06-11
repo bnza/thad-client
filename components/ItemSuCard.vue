@@ -96,7 +96,9 @@
           resource-name="mediaObjectStratigraphicUnit"
           parent-request-key="stratigraphicUnit"
           @created="$fetch"
-        />
+        >
+          <delete-su-card-text :item="item" />
+        </collection-media-objects-card>
       </v-tab-item>
     </v-tabs-items>
     <delete-resource-dialog

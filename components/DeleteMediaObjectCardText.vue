@@ -1,7 +1,7 @@
 <template>
   <v-card-text>
     <v-container>
-      <delete-su-card-text :item="parent" />
+      <slot />
       <v-row dense justify="center">
         <v-col class="d-flex justify-center align-center">
           <media-object-card  :media="item" />

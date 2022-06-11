@@ -22,7 +22,7 @@
           md="4"
           class="d-flex child-flex my-4"
         >
-          <media-object-card :media="item">
+          <media-object-card :media="item" class="mx-4">
             <template #actions>
               <navigation-download-image-button :media="item"/>
               <navigation-delete-resource-button
@@ -44,7 +44,9 @@
       :item="deletingItem"
       @itemDeleted="resetAndFetch"
     >
-      <delete-media-object-card-text :item="deletingItem" :parent="parent"/>
+      <delete-media-object-card-text :item="deletingItem" :parent="parent">
+        <slot />
+      </delete-media-object-card-text>
     </delete-resource-dialog>
     <edit-join-media-object-dialog
       :visible.sync="mediaDialog"

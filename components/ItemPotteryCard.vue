@@ -33,10 +33,18 @@
           </template>
         </resource-fetch-item>
       </v-tab-item>
-      <v-tab-item value="images">
-        <v-card-text>
-          Images
-        </v-card-text>
+      <v-tab-item value="images" data-cy="tab-item-images">
+        <collection-media-objects-card
+          v-if="ready"
+          tab="images"
+          :parent="item"
+          parent-request-filter-key="pottery.id"
+          resource-name="mediaObjectPottery"
+          parent-request-key="pottery"
+          @created="$fetch"
+        >
+          <delete-pottery-card-text :item="item" />
+        </collection-media-objects-card>
       </v-tab-item>
     </v-tabs-items>
     <delete-resource-dialog

@@ -75,6 +75,7 @@ export default {
     requestData() {
       const model = {}
       for (const key of [
+        'pottery',
         'stratigraphicUnit',
         'mediaObject',
       ]){
