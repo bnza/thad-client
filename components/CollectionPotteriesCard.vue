@@ -51,7 +51,7 @@
       {
         text: 'period',
         value: 'period.code',
-        width: '100px'
+        width: '130px'
       },
       {
         text: 'subperiod',
