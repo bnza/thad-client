@@ -34,9 +34,17 @@
         </resource-fetch-item>
       </v-tab-item>
       <v-tab-item value="images">
-        <v-card-text>
-          Images
-        </v-card-text>
+        <collection-media-objects-card
+          v-if="ready"
+          tab="images"
+          :parent="item"
+          parent-request-filter-key="ecofact.id"
+          resource-name="mediaObjectEcofact"
+          parent-request-key="ecofact"
+          @created="$fetch"
+        >
+          <delete-ecofact-card-text :item="item" />
+        </collection-media-objects-card>
       </v-tab-item>
     </v-tabs-items>
     <delete-resource-dialog
