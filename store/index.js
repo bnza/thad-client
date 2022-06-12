@@ -1,4 +1,5 @@
 import Vue from "vue";
+import {isEmpty} from "ramda";
 
 /**
  * @typedef ResetPasswordInfo
@@ -12,6 +13,8 @@ import Vue from "vue";
 export const state = () => ({
   apiPrefix: '',
   workSite: {},
+  proposedWorkSite: {},
+  workSiteDialog: false,
   ready: false,
   creatingResourceParent: null,
   resetPasswordInfo: null
@@ -27,6 +30,12 @@ export const mutations = {
   setWorkSite(state, site) {
     Vue.set(state, 'workSite', site)
   },
+  setProposedWorkSite(state, site) {
+    Vue.set(state, 'proposedWorkSite', site)
+  },
+  setWorkSiteDialog(state, flag) {
+    state.workSiteDialog = flag
+  },
   setCreatingResourceParent(state, parent) {
     Vue.set(state, 'creatingResourceParent', parent)
   },
@@ -40,6 +49,15 @@ export const mutations = {
   clearResetPasswordInfo(state) {
     state.resetPasswordInfo = null
   }
+}
+
+export const getters = {
+  hasWorkSite(state) {
+    return !isEmpty(state.workSite)
+  },
+  hasProposedWorkSite(state) {
+    return !isEmpty(state.proposedWorkSite)
+  },
 }
 
 export const actions = {

@@ -1,5 +1,5 @@
 <template>
-  <fragment v-if="workSite.id">
+  <fragment v-if="hasWorkSite">
     <v-spacer/>
     <v-tooltip bottom >
       <template #activator="{ on, attrs }">
@@ -24,7 +24,7 @@
           data-cy="work-site-btn"
           color="grey"
           v-on="on"
-          @click="setWorkSite({})"
+          @click="openDialog"
         >
           <v-icon class="mx-3">mdi-close-circle-outline</v-icon>
         </v-btn>
@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import {mapMutations, mapState} from "vuex";
-import { Fragment } from 'vue-frag'
+import {mapGetters, mapMutations, mapState} from "vuex";
+import {Fragment} from 'vue-frag'
 
 export default {
   name: "WorkSiteContainer",
@@ -44,11 +44,16 @@ export default {
     Fragment
   },
   computed: {
-    ...mapState(['workSite'])
+    ...mapState(['workSite', 'workSiteDialog']),
+    ...mapGetters(['hasWorkSite'])
   },
   methods: {
-    ...mapMutations(['setWorkSite'])
-  }
+    ...mapMutations(['setWorkSiteDialog', 'setProposedWorkSite']),
+    openDialog() {
+      this.setProposedWorkSite({})
+      this.setWorkSiteDialog(true)
+    }
+  },
 }
 </script>
 

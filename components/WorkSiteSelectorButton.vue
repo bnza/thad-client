@@ -6,8 +6,9 @@
         icon
         v-bind="attrs"
         data-cy="work-site-btn"
+        :disabled="hasWorkSite"
         v-on="on"
-        @click="setWorkSite(site)"
+        @click="openDialog"
       >
         <v-icon color="primary" class="mx-3">mdi-bullseye</v-icon>
       </v-btn>
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-import {mapMutations} from "vuex";
+import {mapMutations, mapGetters} from "vuex";
 
 export default {
   name: "WorkSiteSelectorButton",
@@ -27,8 +28,15 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapGetters(['hasWorkSite'])
+  },
   methods: {
-    ...mapMutations(['setWorkSite'])
+    ...mapMutations(['setProposedWorkSite', 'setWorkSiteDialog']),
+    openDialog() {
+      this.setProposedWorkSite(this.site)
+      this.setWorkSiteDialog(true)
+    }
   }
 }
 </script>
