@@ -79,15 +79,22 @@ export const appFiltersToQueryStringObject = (appFilters: Array<AppFilter>): Que
     } else  {
       if (!has(filter.mapping.property, filters)) {
         // @ts-ignore
-        filters[filter.mapping.property] = {}
+        filters[filter.mapping.property] = filter.mapping.multiple ? [] : {}
       }
-      const filterPropertyKey = filter.mapping.operator === 'search'
+      if (filter.mapping.multiple) {
+        // @ts-ignore
+        filters[filter.mapping.property].push(filter.value)
+      } else {
+        // @ts-ignore
+        filters[filter.mapping.property][filter.mapping.operator] = filter.value
+      }
+/*       const filterPropertyKey = filter.mapping.operator === 'search'
         // @ts-ignore
         ? Object.keys(filters[filter.mapping.property]).length
         : filter.mapping.operator
 
         // @ts-ignore
-        filters[filter.mapping.property][filterPropertyKey] = filter.value
+        filters[filter.mapping.property][filterPropertyKey] = filter.value */
     }
   }
   return filters

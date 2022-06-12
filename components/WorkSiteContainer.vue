@@ -1,5 +1,5 @@
 <template>
-  <fragment v-if="hasWorkSite">
+  <fragment v-if="$auth.loggedIn && hasWorkSite">
     <v-spacer/>
     <v-tooltip bottom >
       <template #activator="{ on, attrs }">

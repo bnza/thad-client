@@ -42,6 +42,7 @@
           </template>
           <template #delete-dialog="{deletingItem, visible, events}" >
             <lazy-delete-foreign-key-dialog
+              v-if="deletingItem"
               :visible="visible"
               :item="deletingItem"
               resource-field="grave"

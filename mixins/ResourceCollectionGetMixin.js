@@ -86,7 +86,7 @@ export default {
       if (this.isChild) {
         filters = mergeLeft({
           [this.parentRequestFilterKey]: this.parent[this.parentFilterKey]
-        }, this.filters)
+        }, filters)
       }
       return filters
     },
