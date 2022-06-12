@@ -13,6 +13,10 @@
     <v-data-table
       multi-sort
       dense
+      :items-per-page="10"
+      :footer-props="{
+        disableItemsPerPage: true
+      }"
       :headers="[
       {
         text: 'actions',

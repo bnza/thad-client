@@ -18,6 +18,10 @@
       fixed-header
       multi-sort
       dense
+      :items-per-page="10"
+      :footer-props="{
+        disableItemsPerPage: true
+      }"
       :headers="[
       {
         text: 'action',

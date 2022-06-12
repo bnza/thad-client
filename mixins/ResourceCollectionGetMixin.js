@@ -74,7 +74,9 @@ export default {
     },
     normalizedRequestOptions() {
       return formatOptionsArrayForQueryString({
-        pagination: this.pagination || {},
+        pagination: this.pagination || {
+          itemsPerPage: 10
+        },
         filters: this.normalizedFilters
       })
     },
