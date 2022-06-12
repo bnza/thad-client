@@ -34,9 +34,17 @@
         </resource-fetch-item>
       </v-tab-item>
       <v-tab-item value="images">
-        <v-card-text>
-          Images
-        </v-card-text>
+        <collection-media-objects-card
+          v-if="ready"
+          tab="images"
+          :parent="item"
+          parent-request-filter-key="sample.id"
+          resource-name="mediaObjectSample"
+          parent-request-key="sample"
+          @created="$fetch"
+        >
+          <delete-sample-card-text :item="item" />
+        </collection-media-objects-card>
       </v-tab-item>
     </v-tabs-items>
     <delete-resource-dialog
