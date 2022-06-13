@@ -3,6 +3,7 @@
     <v-dialog
       :value="dialog"
       width="500"
+      persistent
     >
       <v-card>
         <v-card-title class="warning--text">
