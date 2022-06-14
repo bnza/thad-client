@@ -38,7 +38,30 @@
               readonly
             />
           </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col sm="3">
+            <v-text-field
+              :value="getResponseValue('building', item)"
+              label="building"
+              readonly
+            />
+          </v-col>
+          <v-col sm="3">
+            <v-text-field
+              :value="getResponseValue('room', item)"
+              label="room"
+              readonly
+            />
+          </v-col>
           <v-col sm="3" />
+          <v-col sm="3">
+            <v-text-field
+              :value="getResponseValue('phase', item)"
+              label="phase"
+              readonly
+            />
+          </v-col>
         </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>

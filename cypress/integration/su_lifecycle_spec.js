@@ -46,9 +46,33 @@ describe('The SU resource lifecycle', () => {
     cy.get('[data-cy=site-name-input]').click().should('have.value', 'Tell Wadi')
     cy.get('[data-cy=area-name-input]').click().should('have.value', 'A')
 
+    cy.get('[data-cy=building-input-col]').click().type('b')
+
+    cy.get('[data-cy=building-input-col] .v-messages__message').should('be.visible')
+
+    cy.get('[data-cy=building-input-col]').click().type('{backspace}2')
+
+    cy.get('[data-cy=building-input-col] .v-messages__message').should('not.exist')
+
+    cy.get('[data-cy=room-input-col]').click().type('1')
+
+    cy.get('[data-cy=room-input-col] .v-messages__message').should('be.visible')
+
+    cy.get('[data-cy=room-input-col]').click().type('{backspace}x')
+
+    cy.get('[data-cy=room-input-col] .v-messages__message').should('not.exist')
+
     cy.get('[data-cy=period-select-col]').click().type('ep{downArrow}{enter}')
 
     cy.get('[data-cy=period-select-col] input').should('have.value', 'EPN: Early Pottery Neolithic')
+
+    cy.get('[data-cy=phase-input-col]').click().type('b')
+
+    cy.get('[data-cy=phase-input-col] .v-messages__message').should('be.visible')
+
+    cy.get('[data-cy=phase-input-col]').click().type('{backspace}2')
+
+    cy.get('[data-cy=phase-input-col] .v-messages__message').should('not.exist')
 
     cy.get('[data-cy=number-input-col]').click().type('{backspace}x')
 

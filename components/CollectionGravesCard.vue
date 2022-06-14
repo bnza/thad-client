@@ -49,6 +49,21 @@
         width: '100px'
       },
       {
+        text: 'building',
+        value: 'building',
+        width: '100px'
+      },
+      {
+        text: 'room',
+        value: 'room',
+        width: '100px'
+      },
+      {
+        text: 'phase',
+        value: 'phase',
+        width: '100px'
+      },
+      {
         text: 'period',
         value: 'period.code',
         width: '100px'

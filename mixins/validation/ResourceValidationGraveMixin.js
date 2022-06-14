@@ -1,5 +1,5 @@
 import { validationMixin } from 'vuelidate'
-import { required, integer, between } from 'vuelidate/lib/validators'
+import {required, integer, between, maxLength, helpers} from 'vuelidate/lib/validators'
 
 export default {
   mixins: [validationMixin],
@@ -9,6 +9,9 @@ export default {
       number: { required, integer },
       type: { required },
       year: { required, integer, between: between(2000, 2099)},
+      building: { integer },
+      room: {maxLength: maxLength(3), lowercase: helpers.regex('isLowercase',/^[a-z]*$/)},
+      phase: { integer },
     },
   },
   computed: {
@@ -37,6 +40,25 @@ export default {
       const errors = []
       if (!this.$v.modelItem.type.$dirty) return errors
       !this.$v.modelItem.type.required && errors.push('Grave type is required.')
+      return errors
+    },
+    buildingErrors() {
+      const errors = []
+      if (!this.$v.modelItem.building.$dirty) return errors
+      !this.$v.modelItem.building.integer && errors.push('Room identifier must be an integer number')
+      return errors
+    },
+    roomErrors() {
+      const errors = []
+      if (!this.$v.modelItem.room.$dirty) return errors
+      !this.$v.modelItem.room.maxLength && errors.push('Room identifier must be less than 4 characters')
+      !this.$v.modelItem.room.lowercase && errors.push('Room identifier must be lowercase alphabetic character')
+      return errors
+    },
+    phaseErrors() {
+      const errors = []
+      if (!this.$v.modelItem.phase.$dirty) return errors
+      !this.$v.modelItem.phase.integer && errors.push('Phase identifier must be an integer number')
       return errors
     },
   }

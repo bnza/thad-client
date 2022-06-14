@@ -1,5 +1,5 @@
 import { validationMixin } from 'vuelidate'
-import { required, integer, helpers, between } from 'vuelidate/lib/validators'
+import { required, integer, helpers, between, maxLength } from 'vuelidate/lib/validators'
 import {optionalDecimal} from "~/src/validator";
 import greaterThan from "~/src/validators/greaterThan";
 
@@ -11,6 +11,9 @@ export default {
       number: { required, integer },
       type: { required },
       year: { required, integer, between: between(2000, 2099)},
+      building: { integer },
+      room: {maxLength: maxLength(3), lowercase: helpers.regex('isLowercase',/^[a-z]*$/)},
+      phase: { integer },
       topElevation: { optionalDecimal, optionalGreaterThan: greaterThan('bottomElevation')},
       bottomElevation: { optionalDecimal }
     },
@@ -54,6 +57,25 @@ export default {
       if (!this.$v.modelItem.topElevation.$dirty) return errors
       !this.$v.modelItem.topElevation.optionalDecimal && errors.push('Elevation must be decimal.')
       !this.$v.modelItem.topElevation.optionalGreaterThan && errors.push('Top elevation must be greater than bottom elevation.')
+      return errors
+    },
+    buildingErrors() {
+      const errors = []
+      if (!this.$v.modelItem.building.$dirty) return errors
+      !this.$v.modelItem.building.integer && errors.push('Room identifier must be an integer number')
+      return errors
+    },
+    roomErrors() {
+      const errors = []
+      if (!this.$v.modelItem.room.$dirty) return errors
+      !this.$v.modelItem.room.maxLength && errors.push('Room identifier must be less than 4 characters')
+      !this.$v.modelItem.room.lowercase && errors.push('Room identifier must be lowercase alphabetic character')
+      return errors
+    },
+    phaseErrors() {
+      const errors = []
+      if (!this.$v.modelItem.phase.$dirty) return errors
+      !this.$v.modelItem.phase.integer && errors.push('Phase identifier must be an integer number')
       return errors
     },
   },

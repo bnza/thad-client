@@ -1,24 +1,104 @@
 <template>
       <v-expansion-panels
-        :value="[0,1,2,3]"
+        :value="[0,1,2,3,4]"
         accordion
         multiple
         readonly
+        flat
       >
+        <v-expansion-panel>
+          <v-expansion-panel-header class="grey--text text-overline">Location</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-row dense>
+              <v-col sm="3">
+                <v-text-field
+                  data-cy="site-code-input"
+                  :value="getResponseValue('area.code.name', modelItem) || getResponseValue('site.code', modelItem)"
+                  label="site code"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="3">
+                <v-text-field
+                  data-cy="site-name-input"
+                  :value="getResponseValue('area.site.name', modelItem) || getResponseValue('site.name', modelItem)"
+                  label="site name"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col data-cy="area-select-col" sm="3">
+                <v-text-field
+                  v-if="parent"
+                  data-cy="area-code-input"
+                  :value="getResponseValue('area.site.code', modelItem)"
+                  label="area code"
+                  readonly
+                />
+                <select-areas-autocomplete
+                  v-else
+                  :select.sync="modelItem.area"
+                  :error-messages="areaErrors"
+                  v-on="$listeners"
+                  @input="$v.modelItem.area.$touch()"
+                  @blur="$v.modelItem.area.$touch()"
+                />
+              </v-col>
+              <v-col sm="3">
+                <v-text-field
+                  data-cy="area-name-input"
+                  :value="getResponseValue('area.name', modelItem)"
+                  label="area name"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col data-cy="building-input-col" sm="3">
+                <v-text-field
+                  v-model="modelItem.building"
+                  label="building"
+                  :error-messages="buildingErrors"
+                  @input="$v.modelItem.building.$touch()"
+                  @blur="$v.modelItem.building.$touch()"
+                />
+              </v-col>
+              <v-col data-cy="room-input-col" sm="3">
+                <v-text-field
+                  v-model="modelItem.room"
+                  label="room"
+                  :error-messages="roomErrors"
+                  @input="$v.modelItem.room.$touch()"
+                  @blur="$v.modelItem.room.$touch()"
+                />
+              </v-col>
+              <v-col sm="3" />
+<!--              <v-col data-cy="phase-input-col" sm="3">
+                <v-text-field
+                  v-model="modelItem.phase"
+                  label="phase"
+                  :error-messages="phaseErrors"
+                  @input="$v.modelItem.phase.$touch()"
+                  @blur="$v.modelItem.phase.$touch()"
+                />
+              </v-col>-->
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
         <v-expansion-panel>
           <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
           <v-expansion-panel-content>
           <v-row dense>
             <v-col sm="4">
               <v-text-field
-                v-if="isUpdate"
                 class="secondary--text font-weight-bold" color="secondary"
-                :value="formatCode('grave', item)"
+                :value="isUpdate ? formatCode('grave', item) : undefined"
                 label="code"
                 readonly
               />
             </v-col>
-            <v-col
+<!--            <v-col
               data-cy="area-select-col"
               sm="2"
             >
@@ -37,10 +117,10 @@
                 @input="$v.modelItem.area.$touch()"
                 @blur="$v.modelItem.area.$touch()"
               />
-            </v-col>
+            </v-col>-->
             <v-col
               data-cy="year-select-col"
-              sm="2"
+              sm="4"
             >
               <v-autocomplete
                 v-model="modelItem.year"
@@ -52,13 +132,10 @@
                 @blur="$v.modelItem.year.$touch()"
               />
             </v-col>
-<!--              <v-text-field-->
-<!--                data-cy="site-name-input"-->
-<!--                :value="getResponseValue('area.site.name', modelItem) || getResponseValue('site.name', modelItem)"-->
-<!--                label="site name"-->
-<!--                readonly-->
-<!--              />-->
-            <v-col data-cy="number-input-col">
+            <v-col
+              data-cy="number-input-col"
+              sm="4"
+            >
               <v-text-field
                 v-model="modelItem.number"
                 label="number"
@@ -68,14 +145,6 @@
                 @blur="$v.modelItem.number.$touch()"
               />
             </v-col>
-<!--            <v-col>
-              <v-text-field
-                data-cy="area-name-input"
-                :value="getResponseValue('area.name', modelItem)"
-                label="area name"
-                readonly
-              />
-            </v-col>-->
           </v-row>
           <v-row dense>
             <v-col
@@ -144,21 +213,22 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>
-          <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
+          <v-expansion-panel-header class="grey--text text-overline">Periodization</v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-row dense>
               <v-col data-cy="period-select-col">
                 <select-period-vocabulary-autocomplete
-                  :sub-periods="false"
                   :select.sync="modelItem.period"
                 />
               </v-col>
               <v-col />
-              <v-col>
+              <v-col data-cy="phase-input-col" sm="3">
                 <v-text-field
                   v-model="modelItem.phase"
-                  data-cy="phase-input"
                   label="phase"
+                  :error-messages="phaseErrors"
+                  @input="$v.modelItem.phase.$touch()"
+                  @blur="$v.modelItem.phase.$touch()"
                 />
               </v-col>
             </v-row>
@@ -210,7 +280,7 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>
-          <v-expansion-panel-header class="grey--text text-overline">Stratigraphy</v-expansion-panel-header>
+          <v-expansion-panel-header class="grey--text text-overline">Misc</v-expansion-panel-header>
           <v-expansion-panel-content>
           <v-row dense>
             <v-col>
@@ -360,6 +430,8 @@ export default {
       }
       for (const key of [
         'number',
+        'building',
+        'phase',
       ]) {
         if (has(key, data)) {
           data[key] = 1 * data[key]

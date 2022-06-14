@@ -6,6 +6,66 @@
     flat
   >
     <v-expansion-panel>
+      <v-expansion-panel-header class="grey--text text-overline">Location</v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <v-row dense>
+          <v-col sm="4">
+            <v-text-field
+              :value="getResponseValue('area.site.code', item)"
+              label="site code"
+              readonly
+            />
+          </v-col>
+          <v-col sm="4">
+            <v-text-field
+              :value="getResponseValue('area.site.name', item)"
+              label="site name"
+              readonly
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col sm="4">
+            <v-text-field
+              :value="getResponseValue('area.code', item)"
+              label="area code"
+              readonly
+            />
+          </v-col>
+          <v-col sm="4">
+            <v-text-field
+              :value="getResponseValue('area.name', item)"
+              label="area name"
+              readonly
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col sm="4">
+            <v-text-field
+              :value="getResponseValue('building', item)"
+              label="building"
+              readonly
+            />
+          </v-col>
+          <v-col sm="4">
+            <v-text-field
+              :value="getResponseValue('room', item)"
+              label="room"
+              readonly
+            />
+          </v-col>
+<!--          <v-col sm="4">
+            <v-text-field
+              :value="getResponseValue('phase', item)"
+              label="phase"
+              readonly
+            />
+          </v-col>-->
+        </v-row>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+    <v-expansion-panel>
       <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
@@ -17,14 +77,7 @@
               readonly
             />
           </v-col>
-          <v-col sm="2">
-            <v-text-field
-              :value="formatCode('area', item)"
-              label="area"
-              readonly
-            />
-          </v-col>
-          <v-col sm="2">
+          <v-col sm="4">
             <v-text-field
               :value="getResponseValue('year', item)"
               label="year"
@@ -89,7 +142,7 @@
         <v-row dense>
           <v-col>
             <v-text-field
-              :value="getResponseValue('period.code', item)"
+              :value="getResponseValue('period.value', item)"
               label="period"
               readonly
             />

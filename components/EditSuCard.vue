@@ -1,8 +1,34 @@
 <template>
-    <v-card-text>
-        <v-container>
+    <v-expansion-panels
+      :value="[0,1,2,3]"
+      accordion
+      readonly
+      multiple
+      flat
+    >
+      <v-expansion-panel>
+        <v-expansion-panel-header class="grey--text text-overline">Location</v-expansion-panel-header>
+        <v-expansion-panel-content>
           <v-row dense>
-            <v-col data-cy="area-select-col">
+            <v-col sm="3">
+              <v-text-field
+                data-cy="site-code-input"
+                :value="getResponseValue('area.code.name', modelItem) || getResponseValue('site.code', modelItem)"
+                label="site code"
+                readonly
+              />
+            </v-col>
+            <v-col sm="3">
+              <v-text-field
+                data-cy="site-name-input"
+                :value="getResponseValue('area.site.name', modelItem) || getResponseValue('site.name', modelItem)"
+                label="site name"
+                readonly
+              />
+            </v-col>
+          </v-row>
+          <v-row dense>
+            <v-col data-cy="area-select-col" sm="3">
               <v-text-field
                 v-if="parent"
                 data-cy="area-code-input"
@@ -19,15 +45,7 @@
                 @blur="$v.modelItem.area.$touch()"
               />
             </v-col>
-            <v-col>
-              <v-text-field
-                data-cy="site-name-input"
-                :value="getResponseValue('area.site.name', modelItem) || getResponseValue('site.name', modelItem)"
-                label="site name"
-                readonly
-              />
-            </v-col>
-            <v-col>
+            <v-col sm="3">
               <v-text-field
                 data-cy="area-name-input"
                 :value="getResponseValue('area.name', modelItem)"
@@ -35,170 +53,207 @@
                 readonly
               />
             </v-col>
-            <v-col />
           </v-row>
           <v-row dense>
-            <v-col data-cy="period-select-col">
-              <select-period-vocabulary-autocomplete
-                :sub-periods="false"
-                :select.sync="modelItem.period"
-              />
-            </v-col>
-            <v-col />
-            <v-col />
-            <v-col />
-          </v-row>
-          <v-row dense>
-            <v-col data-cy="year-select-col">
-              <v-autocomplete
-                v-model="modelItem.year"
-                label="excavation year"
-                required
-                :items="years"
-                :error-messages="yearErrors"
-                @input="$v.modelItem.year.$touch()"
-                @blur="$v.modelItem.year.$touch()"
-              />
-            </v-col>
-            <v-col data-cy="number-input-col">
+            <v-col data-cy="building-input-col" sm="3">
               <v-text-field
-                v-model="modelItem.number"
-                label="number"
-                required
-                :error-messages="numberErrors"
-                @input="$v.modelItem.number.$touch()"
-                @blur="$v.modelItem.number.$touch()"
+                v-model="modelItem.building"
+                label="building"
+                :error-messages="buildingErrors"
+                @input="$v.modelItem.building.$touch()"
+                @blur="$v.modelItem.building.$touch()"
               />
             </v-col>
-            <v-col />
-            <v-col />
-          </v-row>
-          <v-row dense>
-            <v-col data-cy="type-select-col">
-              <select-vocabulary-autocomplete
-                label="type"
-                :select.sync="modelItem.type"
-                :error-messages="typeErrors"
-                vocabulary-name="suType"
-                v-on="$listeners"
-                @input="$v.modelItem.type.$touch()"
-                @blur="$v.modelItem.type.$touch()"
+            <v-col data-cy="room-input-col" sm="3">
+              <v-text-field
+                v-model="modelItem.room"
+                label="room"
+                :error-messages="roomErrors"
+                @input="$v.modelItem.room.$touch()"
+                @blur="$v.modelItem.room.$touch()"
               />
             </v-col>
-            <v-col data-cy="preservation-select-col">
-              <select-vocabulary-autocomplete
-                label="preservation"
-                :select.sync="modelItem.preservationState"
-                vocabulary-name="preservationState"
-                v-on="$listeners"
+            <v-col sm="3" />
+            <v-col data-cy="phase-input-col" sm="3">
+              <v-text-field
+                v-model="modelItem.phase"
+                label="phase"
+                :error-messages="phaseErrors"
+                @input="$v.modelItem.phase.$touch()"
+                @blur="$v.modelItem.phase.$touch()"
               />
             </v-col>
           </v-row>
-          <v-row dense>
-            <v-col>
-              <v-textarea
-                v-model="modelItem.description"
-                label="description"
-                data-cy="su-description-input"
-              />
-            </v-col>
-            <v-col>
-              <v-textarea
-                v-model="modelItem.summary"
-                label="summary"
-                class="mx-4"
-                data-cy="su-summary-input"
-              />
-            </v-col>
-            <v-col>
-              <v-textarea
-                v-model="modelItem.interpretation"
-                label="interpretation"
-                data-cy="su-interpretation-input"
-              />
-            </v-col>
-          </v-row>
-          <v-row dense>
-            <v-col data-cy="top-elevation-col">
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+      <v-expansion-panel>
+        <v-expansion-panel-header class="grey--text text-overline">Stratigraphic Unit</v-expansion-panel-header>
+        <v-expansion-panel-content>
+      <v-row dense>
+        <v-col sm="3">
+          <v-text-field
+            class="secondary--text font-weight-bold" color="secondary"
+            :value="isUpdate ? formatCode('stratigraphicUnit', item) : undefined"
+            label="code"
+            readonly
+          />
+        </v-col>
+        <v-col data-cy="year-select-col" sm="3">
+          <v-autocomplete
+            v-model="modelItem.year"
+            label="excavation year"
+            required
+            :items="years"
+            :error-messages="yearErrors"
+            @input="$v.modelItem.year.$touch()"
+            @blur="$v.modelItem.year.$touch()"
+          />
+        </v-col>
+        <v-col />
+        <v-col data-cy="number-input-col">
+          <v-text-field
+            v-model="modelItem.number"
+            label="number"
+            required
+            :error-messages="numberErrors"
+            @input="$v.modelItem.number.$touch()"
+            @blur="$v.modelItem.number.$touch()"
+          />
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-col data-cy="type-select-col">
+          <select-vocabulary-autocomplete
+            label="type"
+            :select.sync="modelItem.type"
+            :error-messages="typeErrors"
+            vocabulary-name="suType"
+            v-on="$listeners"
+            @input="$v.modelItem.type.$touch()"
+            @blur="$v.modelItem.type.$touch()"
+          />
+        </v-col>
+        <v-col data-cy="preservation-select-col">
+          <select-vocabulary-autocomplete
+            label="preservation"
+            :select.sync="modelItem.preservationState"
+            vocabulary-name="preservationState"
+            v-on="$listeners"
+          />
+        </v-col>
+        <v-col />
+        <v-col data-cy="period-select-col">
+          <select-period-vocabulary-autocomplete
+            :select.sync="modelItem.period"
+          />
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-col>
+          <v-textarea
+            v-model="modelItem.description"
+            label="description"
+            data-cy="su-description-input"
+          />
+        </v-col>
+        <v-col>
+          <v-textarea
+            v-model="modelItem.summary"
+            label="summary"
+            class="mx-4"
+            data-cy="su-summary-input"
+          />
+        </v-col>
+        <v-col>
+          <v-textarea
+            v-model="modelItem.interpretation"
+            label="interpretation"
+            data-cy="su-interpretation-input"
+          />
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-col data-cy="top-elevation-col">
+          <v-text-field
+            v-model="modelItem.topElevation"
+            label="top elevation (m)"
+            :error-messages="topElevationErrors"
+            @input="$v.modelItem.topElevation.$touch()"
+            @blur="$v.modelItem.topElevation.$touch()"
+          />
+        </v-col>
+        <v-col data-cy="bottom-elevation-col">
+          <v-text-field
+            v-model="modelItem.bottomElevation"
+            label="bottom elevation (m)"
+            :error-messages="bottomElevationErrors"
+            @input="$v.modelItem.bottomElevation.$touch()"
+            @blur="$v.modelItem.bottomElevation.$touch()"
+          />
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-col>
+          <v-text-field
+            v-model="modelItem.compiler"
+            label="compiler"
+            data-cy="compiler-input"
+          />
+        </v-col>
+        <v-col>
+          <v-text-field
+            v-model="modelItem.areaSupervisor"
+            label="supervisor"
+            data-cy="area-supervisor-input"
+          />
+        </v-col>
+        <v-col>
+          <v-menu
+            ref="menu"
+            v-model="dateMenu"
+            :close-on-content-click="false"
+            :return-value.sync="modelItem.date"
+            transition="scale-transition"
+            offset-y
+            min-width="auto"
+          >
+            <template #activator="{ on, attrs }">
               <v-text-field
-                v-model="modelItem.topElevation"
-                label="top elevation (m)"
-                :error-messages="topElevationErrors"
-                @input="$v.modelItem.topElevation.$touch()"
-                @blur="$v.modelItem.topElevation.$touch()"
-              />
-            </v-col>
-            <v-col data-cy="bottom-elevation-col">
-              <v-text-field
-                v-model="modelItem.bottomElevation"
-                label="bottom elevation (m)"
-                :error-messages="bottomElevationErrors"
-                @input="$v.modelItem.bottomElevation.$touch()"
-                @blur="$v.modelItem.bottomElevation.$touch()"
-              />
-            </v-col>
-          </v-row>
-          <v-row dense>
-            <v-col>
-              <v-text-field
-                v-model="modelItem.compiler"
-                label="compiler"
-                data-cy="compiler-input"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="modelItem.areaSupervisor"
-                label="supervisor"
-                data-cy="area-supervisor-input"
-              />
-            </v-col>
-            <v-col>
-              <v-menu
-                ref="menu"
-                v-model="dateMenu"
-                :close-on-content-click="false"
-                :return-value.sync="modelItem.date"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
+                v-model="modelItem.date"
+                label="compilation date"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+              v-model="modelItem.date"
+              no-title
+              scrollable
+            >
+              <v-spacer></v-spacer>
+              <v-btn
+                text
+                color="primary"
+                @click="dateMenu = false"
               >
-                <template #activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="modelItem.date"
-                    label="compilation date"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="modelItem.date"
-                  no-title
-                  scrollable
-                >
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="dateMenu = false"
-                  >
-                    Cancel
-                  </v-btn>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.menu.save(modelItem.date)"
-                  >
-                    OK
-                  </v-btn>
-                </v-date-picker>
-              </v-menu>
-            </v-col>
-          </v-row>
-      </v-container>
-    </v-card-text>
+                Cancel
+              </v-btn>
+              <v-btn
+                text
+                color="primary"
+                @click="$refs.menu.save(modelItem.date)"
+              >
+                OK
+              </v-btn>
+            </v-date-picker>
+          </v-menu>
+        </v-col>
+      </v-row>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
+    </v-expansion-panels>
 </template>
 
 <script>
@@ -254,6 +309,8 @@ export default {
         'number',
         'topElevation',
         'bottomElevation',
+        'building',
+        'phase',
       ]) {
         if (has(key, data)) {
           data[key] = 1 * data[key]
