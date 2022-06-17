@@ -296,6 +296,13 @@ export default {
         width: '100px'
       },
       {
+        text: 'sP-EMT0',
+        value: 'subperiodEMT1Count',
+        label: 'subperiod Early Middle Tigris 0 sherd count',
+        align: 'right',
+        width: '120px'
+      },
+      {
         text: 'sP-EMT1',
         value: 'subperiodEMT1Count',
         label: 'subperiod Early Middle Tigris 1 sherd count',
@@ -352,13 +359,6 @@ export default {
         width: '120px'
       },
       {
-        text: 'sP-LBA',
-        value: 'subperiodLBACount',
-        label: 'subperiod (generic) Late Bronze Age sherd count',
-        align: 'right',
-        width: '100px'
-      },
-      {
         text: 'sP-LBA1',
         value: 'subperiodLBA1Count',
         label: 'subperiod Late Bronze Age 1 / Mitanni sherd count',
@@ -371,13 +371,6 @@ export default {
         label: 'subperiod Late Bronze Age 2 / Middle Assyrian sherd count',
         align: 'right',
         width: '120px'
-      },
-      {
-        text: 'sP-IRA',
-        value: 'subperiodIRACount',
-        label: 'subperiod (generic) Iron Age sherd count',
-        align: 'right',
-        width: '100px'
       },
       {
         text: 'sP-IRA1',
@@ -499,13 +492,6 @@ export default {
         width: '100px'
       },
       {
-        text: 'P-SUR',
-        value: 'periodSURCount',
-        label: 'period Southern Uruk sherd count',
-        align: 'right',
-        width: '100px'
-      },
-      {
         text: 'P-EMT',
         value: 'periodEMTCount',
         label: 'period Early Middle Tigris sherd count',
@@ -521,7 +507,7 @@ export default {
       },
       {
         text: 'P-IRA',
-        value: 'subperiodIRACount',
+        value: 'periodIRACount',
         label: 'period Iron Age sherd count',
         align: 'right',
         width: '100px'
