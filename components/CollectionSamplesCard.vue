@@ -45,6 +45,7 @@
       {
         text: 'SU',
         value: 'stratigraphicUnit.number',
+        align: 'center',
         width: '100px'
       },
       {
@@ -157,7 +158,7 @@
       </template>
       <template #[`item.stratigraphicUnit.number`]="{ item }">
         <navigation-resource-item-chip
-          :link-text="`${item.stratigraphicUnit.number}`"
+          :link-text="item.stratigraphicUnit.appId"
           :item-id="item.stratigraphicUnit.id"
           resource-name="stratigraphicUnit"
         />

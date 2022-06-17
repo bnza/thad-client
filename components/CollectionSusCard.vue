@@ -69,6 +69,11 @@
         width: '100px'
       },
       {
+        text: 'grave',
+        value: 'grave.id',
+        width: '100px'
+      },
+      {
         text: 'period',
         value: 'period.code',
         width: '100px'
@@ -149,6 +154,14 @@
           :link-text="item.area.code"
           :item-id="item.area.id"
           resource-name="area"
+        />
+      </template>
+      <template #[`item.grave.id`]="{ item }">
+        <navigation-resource-item-chip
+          v-if="item.grave"
+          :link-text="item.grave.appId"
+          :item-id="item.grave.id"
+          resource-name="grave"
         />
       </template>
       <template #[`item.date`]="{ item }">
