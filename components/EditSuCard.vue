@@ -158,17 +158,17 @@
         </v-col>
         <v-col>
           <v-textarea
-            v-model="modelItem.summary"
-            label="summary"
-            class="mx-4"
-            data-cy="su-summary-input"
+            v-model="modelItem.interpretation"
+            label="interpretation"
+            data-cy="su-interpretation-input"
           />
         </v-col>
         <v-col>
           <v-textarea
-            v-model="modelItem.interpretation"
-            label="interpretation"
-            data-cy="su-interpretation-input"
+            v-model="modelItem.summary"
+            label="summary"
+            class="mx-4"
+            data-cy="su-summary-input"
           />
         </v-col>
       </v-row>

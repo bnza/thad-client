@@ -255,15 +255,15 @@
           </v-col>
           <v-col>
             <v-textarea
-              :value="getResponseValue('summary', item)"
-              label="summary"
+              :value="getResponseValue('interpretation', item)"
+              label="interpretation"
               readonly
             />
           </v-col>
           <v-col>
             <v-textarea
-              :value="getResponseValue('interpretation', item)"
-              label="interpretation"
+              :value="getResponseValue('summary', item)"
+              label="summary"
               readonly
             />
           </v-col>

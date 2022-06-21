@@ -289,18 +289,18 @@
           </v-col>
           <v-col>
             <v-textarea
-              v-model="modelItem.summary"
-              label="summary"
-              class="mx-4"
-              data-cy="summary-input"
-            />
-          </v-col>
-          <v-col>
-            <v-textarea
               v-model="modelItem.notes"
               label="note"
               class="mx-4"
               data-cy="notes-input"
+            />
+          </v-col>
+          <v-col>
+            <v-textarea
+              v-model="modelItem.summary"
+              label="summary"
+              class="mx-4"
+              data-cy="summary-input"
             />
           </v-col>
         </v-row>
