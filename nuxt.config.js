@@ -12,7 +12,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: 'THAD: %s',
+    titleTemplate: 'LoNAP: %s',
     title: 'home',
     htmlAttrs: {
       lang: 'en'

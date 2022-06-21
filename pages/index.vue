@@ -1,17 +1,30 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NiniveLogo />
-      </v-card>
+  <v-row justify="center" align="center" class="mt-16">
+    <v-col sm="8">
       <v-card>
         <v-card-title class="text-h2 justify-center title">
-          Tell Hatarah Database
+          <v-row class="mt-16">
+            <v-spacer />
+            <v-col sm="2">
+              <UniudLogo />
+              <p class="secondary--text text--black text-body-1 text-center"><strong>hic sunt futura</strong></p>
+            </v-col>
+            <v-col class="d-flex justify-center text-center" sm="6">
+              <p><span class="secondary--text">LoNAP</span><br />
+              excavations<br />
+              database</p>
+            </v-col>
+            <v-col sm="2" class="logo py-4 d-flex justify-center">
+              <NiniveLogo />
+            </v-col>
+            <v-spacer />
+          </v-row>
+
         </v-card-title>
         <v-card-title class="text-subtitle-1 justify-center">
-          A "Terra di Ninive" Project
+          Università degli Studi di Udine - Dipartimento di Studi Umanistici e del Patrimonio Culturale
         </v-card-title>
-        <v-card-text>
+<!--        <v-card-text>
           <p>
             Vuetify is a progressive Material Design component framework for
             Vue.js. It was designed to empower developers to create amazing
@@ -72,7 +85,7 @@
           >
             Nuxt GitHub
           </a>
-        </v-card-text>
+        </v-card-text>-->
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt to="/about"> About </v-btn>

@@ -54,7 +54,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Tell Hatarah Database',
+      title: 'LoNAP excavations database',
     }
   }
 }
