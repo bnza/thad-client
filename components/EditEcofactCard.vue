@@ -42,7 +42,7 @@
           <v-col data-cy="quantity-input-col" sm="4">
             <v-text-field
               v-model="modelItem.quantity"
-              label="quantity"
+              label="number of ecofact collected"
               required
               :error-messages="quantityErrors"
               class="mx-4"

@@ -56,15 +56,6 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col data-cy="vessel-shape-select-col">
-            <select-vocabulary-autocomplete
-              label="shape"
-              :select.sync="modelItem.vesselShape"
-              class="mx-4"
-              vocabulary-name="vesselShape"
-              v-on="$listeners"
-            />
-          </v-col>
           <v-col data-cy="ware-select-col">
             <select-vocabulary-autocomplete
               label="ware"
@@ -83,6 +74,7 @@
               v-on="$listeners"
             />
           </v-col>
+          <v-col />
         </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>
@@ -121,7 +113,7 @@
       </v-expansion-panel-content>
     </v-expansion-panel>
     <v-expansion-panel>
-      <v-expansion-panel-header class="grey--text text-overline">Manufacturing</v-expansion-panel-header>
+      <v-expansion-panel-header class="grey--text text-overline">Technological characteristics</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
           <v-col data-cy="manufacturing-technique-select-col">
@@ -186,6 +178,21 @@
     <v-expansion-panel>
       <v-expansion-panel-header class="grey--text text-overline">Morphology</v-expansion-panel-header>
       <v-expansion-panel-content>
+        <v-row dense>
+          <v-col
+            data-cy="vessel-shape-select-col"
+          >
+            <select-vocabulary-autocomplete
+              label="shape"
+              :select.sync="modelItem.vesselShape"
+              class="mx-4"
+              vocabulary-name="vesselShape"
+              v-on="$listeners"
+            />
+          </v-col>
+          <v-col />
+          <v-col />
+        </v-row>
         <v-row dense>
           <v-col data-cy="body-select-col">
             <select-vocabulary-autocomplete

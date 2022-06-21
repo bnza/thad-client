@@ -66,13 +66,6 @@
             <v-row dense>
               <v-col>
                 <v-text-field
-                  :value="getResponseValue('vesselShape.value', item)"
-                  label="shape"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
                   :value="getResponseValue('ware.value', item)"
                   label="ware"
                   readonly
@@ -85,11 +78,12 @@
                   readonly
                 />
               </v-col>
+            <v-col />
             </v-row>
           </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>
-          <v-expansion-panel-header class="grey--text text-overline">Manufacturing</v-expansion-panel-header>
+          <v-expansion-panel-header class="grey--text text-overline">Technological characteristics</v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-row dense>
               <v-col>
@@ -170,6 +164,15 @@
         <v-expansion-panel>
           <v-expansion-panel-header class="grey--text text-overline">Morphology</v-expansion-panel-header>
           <v-expansion-panel-content>
+            <v-row>
+              <v-col sm="4">
+                <v-text-field
+                  :value="getResponseValue('vesselShape.value', item)"
+                  label="shape"
+                  readonly
+                />
+              </v-col>
+            </v-row>
             <v-row dense>
               <v-col>
                 <v-text-field

@@ -49,7 +49,13 @@
                   readonly
                 />
               </v-col>
-              <v-col />
+              <v-col>
+                <v-text-field
+                  :value="getResponseValue('quantity', item)"
+                  label="number of ecofact collected"
+                  readonly
+                />
+              </v-col>
               <v-col>
                 <v-checkbox
                   label="selected for analysis"
