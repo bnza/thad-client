@@ -19,7 +19,9 @@ export default {
       return ['image/jpeg'].includes(this.media.mediaObject.mimeType)
     },
     documentThumbnail() {
-      return 'file-document-outline.svg'
+      return this.$config.appRouterBase.slice(-1) === '/'
+        ? `${this.$config.appRouterBase}file-document-outline.svg`
+        : `${this.$config.appRouterBase}/file-document-outline.svg`
     },
     thumbnailUrl() {
       return this.hasThumbnail ? `${this.$config.apiBaseUrl}${this.thumbFilename}` : this.documentThumbnail

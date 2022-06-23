@@ -21,8 +21,9 @@
           </v-row>
 
         </v-card-title>
-        <v-card-title class="text-subtitle-1 justify-center">
-          Università degli Studi di Udine - Dipartimento di Studi Umanistici e del Patrimonio Culturale
+        <v-card-title class="text-subtitle-1 justify-center text-center">
+          <p>Università degli Studi di Udine - Dipartimento di Studi Umanistici e del Patrimonio Culturale<br/>
+          Land of Nineveh Archaeological Project</p>
         </v-card-title>
 <!--        <v-card-text>
           <p>

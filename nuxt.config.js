@@ -51,6 +51,7 @@ export default {
   ],
 
   publicRuntimeConfig: {
+    appRouterBase: process.env.APP_ROUTER_BASE || '/',
     apiPrefix: process.env.API_PREFIX || '/api',
     apiBaseUrl: process.env.API_BASE_URL
   },

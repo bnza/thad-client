@@ -170,7 +170,7 @@
             >
               <template #prepend>
                 <navigation-resource-read-button
-                  :disabled="!getResponseValue('fillStratigraphicUnit.id', item)"
+                  :disabled="!getResponseValue('cutStratigraphicUnit.id', item)"
                   :item-id="getResponseValue('cutStratigraphicUnit.id', item)"
                   resource-name="stratigraphicUnit" />
               </template>
@@ -179,7 +179,7 @@
           <v-col>
             <v-text-field
               :value="formatCode('stratigraphicUnit', getResponseValue('fillStratigraphicUnit', item))"
-              label="cut SU"
+              label="fill SU"
               readonly
             >
               <template #prepend>
@@ -194,7 +194,7 @@
           <v-col>
             <v-text-field
               :value="formatCode('stratigraphicUnit', getResponseValue('skeletonStratigraphicUnit', item))"
-              label="cut SU"
+              label="skeleton SU"
               readonly
             >
               <template #prepend>
@@ -279,7 +279,7 @@
           <v-col>
             <v-text-field
               :value="getResponseValue('areaSupervisor', item)"
-              label="compiler"
+              label="supervisor"
               readonly
             />
           </v-col>
@@ -313,7 +313,7 @@ export default {
   data() {
     return {
       panels: [
-        0,1,2,3
+        0,1,2,3,4
       ],
     }
   }
