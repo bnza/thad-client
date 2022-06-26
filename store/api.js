@@ -30,6 +30,7 @@ const expandResource = (apiPrefix) => (resource) => {
 const mainResources = [
   'site',
   'area',
+  'document',
   'smallFind',
   'stratigraphicUnit',
   'pottery',

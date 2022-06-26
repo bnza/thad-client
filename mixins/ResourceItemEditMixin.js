@@ -11,6 +11,12 @@ export default {
     ResourceItemGetMixin,
     ResourceNavigationMixin
   ],
+  props: {
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       modelItem: {}
@@ -71,6 +77,7 @@ export default {
     async afterUpdate() {},
     async submit() {
       try {
+        this.$emit('update:loading', true)
         await this.beforeSubmit()
         if (await this.isInvalid()) {
           return
@@ -97,6 +104,8 @@ export default {
         }
       } catch (e) {
         await this.$store.dispatch('snackbar/requestError', e)
+      } finally {
+        this.$emit('update:loading', false)
       }
     },
     async navigateAfterCreate(response) {

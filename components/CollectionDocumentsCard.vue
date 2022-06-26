@@ -1,19 +1,17 @@
 <template>
-  <v-card data-cy="collection-sus-card">
+  <v-card data-cy="collection-documents-card">
     <v-toolbar flat dense>
-      <v-toolbar-title v-if="!isChild">Stratigraphic units</v-toolbar-title>
+      <v-toolbar-title v-if="!isChild">Documents</v-toolbar-title>
       <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
       <v-spacer />
       <navigation-download-collection-button :disabled="!totalItems" @click="downloadDialog = true"/>
       <navigation-filter-collection-button @click="filterDialog = true"/>
-      <slot name="create-action">
-        <navigation-create-resource-button
-          v-if="$auth.hasScope('ROLE_EDITOR')"
-          :parent="parent"
-          :resource-name="resourceName"
-          :disabled="false"
-        />
-      </slot>
+      <navigation-create-resource-button
+        v-if="$auth.hasScope('ROLE_EDITOR')"
+        :parent="parent"
+        :resource-name="resourceName"
+        :disabled="false"
+      />
     </v-toolbar>
     <v-data-table
       height="100%"
@@ -26,10 +24,18 @@
       dense
       :headers="[
       {
-        text: 'id',
+        text: 'action',
         value: 'id',
         align: 'center fixed',
-        width: '150px'
+        width: '150px',
+        sortable: false
+      },
+      {
+        text: 'thumbnail',
+        value: 'mediaObject',
+        sortable: false,
+        align: 'center',
+        width: '100px'
       },
       {
         text: 'site',
@@ -54,59 +60,9 @@
         width: '100px'
       },
       {
-        text: 'building',
-        value: 'building',
-        width: '100px'
-      },
-      {
-        text: 'room',
-        value: 'room',
-        width: '100px'
-      },
-      {
-        text: 'phase',
-        value: 'phase',
-        width: '100px'
-      },
-      {
-        text: 'grave',
-        value: 'grave.id',
-        width: '100px'
-      },
-      {
-        text: 'period',
-        value: 'period.code',
-        width: '100px'
-      },
-      {
         text: 'type',
         value: 'type.value',
-        width: '100px'
-      },
-      {
-        text: 'preservation',
-        value: 'preservationState.value',
-        width: '130px'
-      },
-      {
-        text: 'top elev. (m)',
-        value: 'topElevation',
         width: '150px'
-      },
-      {
-        text: 'bottom elev. (m)',
-        value: 'bottomElevation',
-        width: '170px'
-      },
-      {
-        text: 'supervisor',
-        value: 'areaSupervisor',
-        width: '120px'
-      },
-      {
-        text: 'compiler',
-        value: 'compiler',
-        width: '200px'
       },
       {
         text: 'description',
@@ -121,6 +77,16 @@
       {
         text: 'summary',
         value: 'summary',
+        width: '200px'
+      },
+      {
+        text: 'creator',
+        value: 'creator',
+        width: '200px'
+      },
+      {
+        text: 'areaSupervisor',
+        value: 'supervisor',
         width: '200px'
       },
       {
@@ -156,16 +122,14 @@
           resource-name="area"
         />
       </template>
-      <template #[`item.grave.id`]="{ item }">
-        <navigation-resource-item-chip
-          v-if="item.grave"
-          :link-text="item.grave.appId"
-          :item-id="item.grave.id"
-          resource-name="grave"
-        />
+      <template #[`item.mediaObject`]="{ item }">
+        <item-document-thumbnail-image :media="item" />
       </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}
+      </template>
+      <template #[`item.notes`]="{ item }">
+        <long-text-table-data-tooltip :text="item.notes" />
       </template>
       <template #[`item.description`]="{ item }">
         <long-text-table-data-tooltip :text="item.description" />
@@ -179,7 +143,7 @@
     </v-data-table>
     <filter-collection-dialog
       v-if="responseData['hydra:search']"
-      resource-name="stratigraphicUnit"
+      resource-name="document"
       :visible.sync="filterDialog"
       :hydra-search="responseData['hydra:search']"
       :filters.sync="filters"
@@ -191,43 +155,25 @@
       :total-items="totalItems"
       @download="downloadCsv"
     />
-    <slot name="delete-dialog" v-bind="{deletingItem, visible: deleteDialog, events: {closeDeleteDialog}}">
-      <delete-resource-dialog
-        v-if="deletingItem"
-        :resource-name="resourceName"
-        :visible.sync="deleteDialog"
-        :item="deletingItem"
-        @itemDeleted="resetAndFetch"
-      >
-        <delete-su-card-text :item="deletingItem" />
-      </delete-resource-dialog>
-    </slot>
+    <delete-resource-dialog
+      v-if="deletingItem"
+      :resource-name="resourceName"
+      :visible.sync="deleteDialog"
+      :item="deletingItem"
+      @itemDeleted="resetAndFetch"
+    >
+      <delete-document-card-text :item="deletingItem" />
+    </delete-resource-dialog>
   </v-card>
 </template>
 
 <script>
-import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import DeleteSuCardText from "@/components/DeleteSuCardText";
-import FilterCollectionDialog from "@/components/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
-import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
-import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
-import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
-import LongTextTableDataTooltip from "@/components/LongTextTableDataTooltip";
 
 export default {
-  name: "CollectionSusCard",
-  components: {
-    DeleteSuCardText,
-    DeleteResourceDialog,
-    FilterCollectionDialog,
-    LongTextTableDataTooltip,
-    NavigationCreateResourceButton,
-    NavigationResourceItemChip,
-    NavigationResourceItemCrud
-  },
+  name: "CollectionDocumentsCard",
   mixins: [
     ResourceCollectionGetMixin,
     ResourceDeleteDialogMixin,

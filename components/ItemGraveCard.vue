@@ -18,6 +18,7 @@
         <v-tabs v-model="tab" align-with-title>
           <v-tab href="#data">Data</v-tab>
           <v-tab href="#sus">Stratigraphic units</v-tab>
+          <v-tab href="#images">Media</v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
@@ -58,6 +59,19 @@
             </lazy-delete-foreign-key-dialog>
           </template>
         </collection-sus-card>
+      </v-tab-item>
+      <v-tab-item value="images">
+        <collection-media-objects-card
+          v-if="ready"
+          tab="images"
+          :parent="item"
+          parent-request-filter-key="grave.id"
+          resource-name="mediaObjectGrave"
+          parent-request-key="grave"
+          @created="$fetch"
+        >
+          <lazy-delete-grave-card-text :item="item" />
+        </collection-media-objects-card>
       </v-tab-item>
     </v-tabs-items>
     <delete-resource-dialog

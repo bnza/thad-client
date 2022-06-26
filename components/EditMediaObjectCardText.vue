@@ -5,19 +5,22 @@
         accept="image/jpeg, application/pdf"
         label="Upload file"
         data-cy="file-input"
-      ></v-file-input>
+        :error-messages="fileErrors"
+      />
     </v-card-text>
 </template>
 
 <script>
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceFetchMixin from "@/mixins/ResourceFetchMixin";
+import ResourceValidationMediaObjectMixin from "@/mixins/validation/ResourceValidationMediaObjectMixin";
 
 export default {
   name: "EditMediaObjectCardText",
   mixins: [
     ResourceNavigationMixin,
-    ResourceFetchMixin
+    ResourceFetchMixin,
+    ResourceValidationMediaObjectMixin
   ],
   data() {
     return {
@@ -41,6 +44,10 @@ export default {
       return response.data['hydra:member'][0]
     },
     async submit() {
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        return
+      }
       const data = new FormData()
       data.append('file', this.modelItem.file)
       try {

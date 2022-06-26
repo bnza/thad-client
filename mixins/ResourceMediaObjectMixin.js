@@ -26,6 +26,9 @@ export default {
     thumbnailUrl() {
       return this.hasThumbnail ? `${this.$config.apiBaseUrl}${this.thumbFilename}` : this.documentThumbnail
     },
+    previewMediaUrl() {
+      return this.hasThumbnail ? this.mediaUrl : this.documentThumbnail;
+    },
     mediaUrl() {
       return `${this.$config.apiBaseUrl}${this.media.mediaObject.contentUrl}`
     }

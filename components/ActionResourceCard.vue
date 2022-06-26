@@ -17,6 +17,7 @@
                 color="primary"
                 text
                 data-cy="submit-btn"
+                :disabled="loading"
                 @click="submit"
               >
                 Submit
@@ -51,6 +52,10 @@ export default {
     action: {
       type: String,
       required: true
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

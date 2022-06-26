@@ -27,7 +27,7 @@ const codeFormatters = {
   sample: item => itemNumberedCode(item, 'S'),
   cumulativePotterySheet: item => itemBaseCode(item, 'CP'),
   grave: item => `${getResponseValue('site.code', item)}.${twoDigitYear(item.year)}.G.${paddedSUNumber(item.number)}`,
-
+  document: item => `${getResponseValue('site.code', item)}.${twoDigitYear(item.year)}.D.${paddedSUNumber(item.number)}`,
 }
 
 export default {

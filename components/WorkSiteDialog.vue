@@ -10,7 +10,7 @@
         </v-card-title>
         <v-card-text>
           <p v-if="!hasProposedWorkSite">This actions will unset the current work site and the application will work with the whole dataset.</p>
-          <p v-else>This actions will set a working site. All related data will be filter and only matching results will be shown</p>
+          <p v-else>This actions will set a work site. All related data will be filtered and only matching results will be shown</p>
           <delete-site-card-text v-if="hasProposedWorkSite" :item="proposedWorkSite" />
           <br /><p>Would you like to proceed?</p>
         </v-card-text>
