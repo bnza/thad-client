@@ -6,28 +6,6 @@
       >
         <v-expansion-panel>
           <v-expansion-panel-header class="grey--text text-overline">Media</v-expansion-panel-header>
-<!--          <v-expansion-panel-content>
-            <v-row>
-              <v-spacer />
-              <v-col>
-                <media-object-filename-text-field :media="item" />
-              </v-col>
-              <v-spacer />
-            </v-row>
-            <v-row>
-              <v-spacer />
-              <v-col>
-                <item-document-thumbnail-image
-                  style="margin: auto"
-                  :media="item"
-                  :height="256"
-                  :width="256"
-                  @click="$emit('showPreview')"
-                />
-              </v-col>
-              <v-spacer />
-            </v-row>
-          </v-expansion-panel-content>-->
           <lazy-item-media-object-expansion-panel-content :item="item" @click="$emit('showPreview')"/>
         </v-expansion-panel>
         <v-expansion-panel>

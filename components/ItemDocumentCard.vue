@@ -18,7 +18,6 @@
         <v-tabs v-model="tab" align-with-title>
           <v-tab href="#data">Data</v-tab>
           <v-tab href="#rels">Related items</v-tab>
-          <!--          <v-tab href="#graves">Graves</v-tab>-->
         </v-tabs>
       </template>
     </v-toolbar>
@@ -27,28 +26,13 @@
         <read-document-card v-if="ready" :item="item" @showPreview="mediaPreview=item"/>
       </v-tab-item>
       <v-tab-item value="rels">
-        <p>Related items</p>
-      </v-tab-item>
-<!--      <v-tab-item value="sus">
-       <resource-fetch-item v-if="item.stratigraphicUnit" :item-id="`${item.stratigraphicUnit.id}`" resource-name="stratigraphicUnit">
-          <template #default="su">
-            <read-su-card v-if="su.item.id" :item="su.item" />
-          </template>
-        </resource-fetch-item>
-      </v-tab-item>
-      <v-tab-item value="graves">
-        <collection-media-objects-card
+        <lazy-collection-document-related-items-container
           v-if="ready"
-          tab="images"
-          :parent="item"
-          parent-request-filter-key="ecofact.id"
-          resource-name="mediaObjectEcofact"
-          parent-request-key="ecofact"
-          @created="$fetch"
-        >
-          <delete-ecofact-card-text :item="item" />
-        </collection-media-objects-card>
-      </v-tab-item>-->
+          :item="item"
+          :resource-name="resourceName"
+          @updated="updateResponse($event)"
+        />
+      </v-tab-item>
     </v-tabs-items>
     <media-object-preview-dialog v-if="mediaPreview" :media="mediaPreview" @close="mediaPreview = null"/>
     <delete-resource-dialog
@@ -58,7 +42,7 @@
       :item="deletingItem"
       @itemDeleted="resetAndPrev"
     >
-      <delete-ecofact-card-text :item="deletingItem" />
+      <delete-document-card-text :item="deletingItem" />
     </delete-resource-dialog>
   </v-card>
 </template>
@@ -80,6 +64,11 @@ export default {
   data() {
     return {
       mediaPreview: null
+    }
+  },
+  methods: {
+    updateResponse(response) {
+      this.response = response
     }
   }
 }
