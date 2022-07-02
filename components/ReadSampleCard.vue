@@ -26,7 +26,8 @@
               <v-col sm="3"/>
               <v-col sm="3">
                 <v-text-field
-                  class="secondary--text font-weight-bold" color="secondary"
+                  class="secondary--text font-weight-bold"
+                  color="secondary"
                   :value="getResponseValue('number', item)"
                   label="identification number"
                   readonly
@@ -49,21 +50,46 @@
                   readonly
                 />
               </v-col>
-              <v-col sm="2">
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+          <v-expansion-panel>
+            <v-expansion-panel-header class="grey--text text-overline">Sampling</v-expansion-panel-header>
+            <v-expansion-panel-content>
+            <v-row dense>
+              <v-col sm="3">
+                <v-text-field
+                  :value="getResponseValue('quantity', item)"
+                  label="number of samples"
+                  readonly
+                />
+              </v-col>
+              <v-spacer />
+              <v-col sm="3">
+                <v-text-field
+                  :value="getResponseValue('collectionDate', item) && getResponseValue('collectionDate', item).substring(0,10)"
+                  label="date of collection"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col sm="3">
                 <v-text-field
                   :value="getResponseValue('exhaustive', item) === null || getResponseValue('exhaustive', item) === undefined ? 'N/A' : getResponseValue('exhaustive', item) ? 'exhaustive' : 'hand-picked'"
                   label="sampling strategy"
                   readonly
                 />
               </v-col>
-              <v-col sm="2">
+              <v-spacer />
+              <v-col sm="3">
                 <v-checkbox
                   label="contamination risk"
                   :input-value="getResponseValue('contaminationRisk', item)"
                   readonly
                 />
               </v-col>
-              <v-col sm="2">
+              <v-col sm="3">
                 <v-checkbox
                   label="selected for analysis"
                   :input-value="getResponseValue('selectedForAnalysis', item)"
@@ -182,7 +208,7 @@ export default {
   data() {
     return {
       panels: [
-        0,1,2
+        0,1,2,3
       ],
     }
   }

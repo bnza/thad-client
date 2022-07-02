@@ -4,11 +4,20 @@
     accordion
     multiple
     flat
+    readonly
   >
     <v-expansion-panel>
       <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
+          <v-col sm="4">
+            <v-text-field
+              class="mx-4 secondary--text font-weight-bold" color="secondary"
+              :value="isUpdate ? formatCode('sample', item) : undefined"
+              label="code"
+              readonly
+            />
+          </v-col>
           <v-col data-cy="su-select-col" sm="2">
             <v-text-field
               v-if="parent"
@@ -23,47 +32,24 @@
               :select.sync="modelItem.stratigraphicUnit"
               :error-messages="stratigraphicUnitErrors"
               class="mx-4"
+              :readonly="updateCodeDisabled"
               v-on="$listeners"
               @input="$v.modelItem.stratigraphicUnit.$touch()"
               @blur="$v.modelItem.stratigraphicUnit.$touch()"
             />
           </v-col>
-          <v-col data-cy="number-input-col" sm="2">
+          <v-col sm="3"/>
+          <v-col data-cy="number-input-col" sm="3">
             <v-text-field
               v-model="modelItem.number"
-              label="number"
+              label="identification number"
               required
               :error-messages="numberErrors"
-              class="mx-4"
+              :readonly="updateCodeDisabled"
+              class="mx-4 secondary--text font-weight-bold"
+              color="secondary"
               @input="$v.modelItem.number.$touch()"
               @blur="$v.modelItem.number.$touch()"
-            />
-          </v-col>
-          <v-col data-cy="quantity-input-col" sm="2">
-            <v-text-field
-              v-model="modelItem.quantity"
-              label="quantity"
-              required
-              :error-messages="quantityErrors"
-              class="mx-4"
-              @input="$v.modelItem.quantity.$touch()"
-              @blur="$v.modelItem.quantity.$touch()"
-            />
-          </v-col>
-          <v-col/>
-          <v-col data-cy="strategy-input-col" sm="2">
-            <v-select
-              v-model="exhaustive"
-              :items ="[{text: 'exhaustive', value: true}, {text: 'hand-picked', value: false},  {text: 'N/A', value: -1}]"
-              label="sampling strategy"
-            />
-          </v-col>
-          <v-col sm="2">
-            <v-checkbox
-              v-model="modelItem.contaminationRisk"
-              data-cy="contamination-input"
-              label="contamination risk"
-              class="mx-4"
             />
           </v-col>
         </v-row>
@@ -89,8 +75,89 @@
               v-on="$listeners"
             />
           </v-col>
+        </v-row>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+    <v-expansion-panel>
+      <v-expansion-panel-header class="grey--text text-overline">Sampling</v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <v-row dense>
+          <v-col data-cy="quantity-input-col" sm="3">
+            <v-text-field
+              v-model="modelItem.quantity"
+              label="number of samples"
+              required
+              :error-messages="quantityErrors"
+              class="mx-4"
+              @input="$v.modelItem.quantity.$touch()"
+              @blur="$v.modelItem.quantity.$touch()"
+            />
+          </v-col>
           <v-spacer />
-          <v-col data-cy="selected-input-col" sm="2">
+          <v-col sm="3">
+            <v-menu
+              ref="menuCollectionDate"
+              v-model="collectionDateMenu"
+              :close-on-content-click="false"
+              :return-value.sync="modelItem.collectionDate"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template #activator="{ on, attrs }">
+                <v-text-field
+                  v-model="modelItem.collectionDate"
+                  label="date of collection"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  class="mx-4"
+                  v-on="on"
+                />
+              </template>
+              <v-date-picker
+                v-model="modelItem.collectionDate"
+                no-title
+                scrollable
+              >
+                <v-spacer></v-spacer>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="collectionDateMenu = false"
+                >
+                  Cancel
+                </v-btn>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.menuCollectionDate.save(modelItem.collectionDate)"
+                >
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col data-cy="strategy-input-col" sm="3">
+            <v-select
+              v-model="exhaustive"
+              class="mx-4"
+              :items ="[{text: 'exhaustive', value: true}, {text: 'hand-picked', value: false},  {text: 'N/A', value: -1}]"
+              label="sampling strategy"
+            />
+          </v-col>
+          <v-spacer />
+          <v-col sm="3">
+            <v-checkbox
+              v-model="modelItem.contaminationRisk"
+              data-cy="contamination-input"
+              label="contamination risk"
+              class="mx-4"
+            />
+          </v-col>
+          <v-col data-cy="selected-input-col" sm="3">
             <v-checkbox
               v-model="modelItem.selectedForAnalysis"
               label="selected for analysis"
@@ -279,6 +346,7 @@ export default {
   data() {
     return {
       dateMenu: false,
+      collectionDateMenu: false,
       modelItem: {
         stratigraphicUnit: {},
         date: new Date().toISOString().substring(0, 10),
