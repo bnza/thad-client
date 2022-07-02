@@ -9,6 +9,14 @@
       <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
+          <v-col sm="4">
+            <v-text-field
+              class="mx-4 secondary--text font-weight-bold" color="secondary"
+              :value="isUpdate ? formatCode('sample', item) : undefined"
+              label="code"
+              readonly
+            />
+          </v-col>
           <v-col data-cy="su-select-col" sm="2">
             <v-text-field
               v-if="parent"
@@ -23,43 +31,29 @@
               :select.sync="modelItem.stratigraphicUnit"
               :error-messages="stratigraphicUnitErrors"
               class="mx-4"
+              :readonly="updateCodeDisabled"
               v-on="$listeners"
               @input="$v.modelItem.stratigraphicUnit.$touch()"
               @blur="$v.modelItem.stratigraphicUnit.$touch()"
             />
           </v-col>
-          <v-col data-cy="number-input-col" sm="2">
+          <v-col sm="3"/>
+          <v-col data-cy="number-input-col" sm="3">
             <v-text-field
               v-model="modelItem.number"
-              label="number"
+              label="identification number"
               required
               :error-messages="numberErrors"
-              class="mx-4"
+              :readonly="updateCodeDisabled"
+              class="mx-4 secondary--text font-weight-bold"
+              color="secondary"
               @input="$v.modelItem.number.$touch()"
               @blur="$v.modelItem.number.$touch()"
             />
           </v-col>
-          <v-col data-cy="quantity-input-col" sm="4">
-            <v-text-field
-              v-model="modelItem.quantity"
-              label="number of ecofact collected"
-              required
-              :error-messages="quantityErrors"
-              class="mx-4"
-              @input="$v.modelItem.quantity.$touch()"
-              @blur="$v.modelItem.quantity.$touch()"
-            />
-          </v-col>
-          <v-col data-cy="selected-input-col" sm="4">
-            <v-checkbox
-              v-model="modelItem.selectedForAnalysis"
-              label="selected for analysis"
-              class="mx-4"
-            />
-          </v-col>
         </v-row>
         <v-row dense>
-          <v-col data-cy="type-select-col">
+          <v-col data-cy="type-select-col" sm="3">
             <select-vocabulary-autocomplete
               label="type"
               :error-messages="typeErrors"
@@ -71,7 +65,7 @@
               @blur="$v.modelItem.type.$touch()"
             />
           </v-col>
-          <v-col data-cy="preservation-state-select-col">
+          <v-col data-cy="preservation-state-select-col" sm="3">
             <select-vocabulary-autocomplete
               label="preservation"
               :select.sync="modelItem.preservationState"
@@ -80,7 +74,24 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col />
+          <v-col data-cy="quantity-input-col" sm="3">
+            <v-text-field
+              v-model="modelItem.quantity"
+              label="number of ecofact collected"
+              required
+              :error-messages="quantityErrors"
+              class="mx-4"
+              @input="$v.modelItem.quantity.$touch()"
+              @blur="$v.modelItem.quantity.$touch()"
+            />
+          </v-col>
+          <v-col data-cy="selected-input-col" sm="3">
+            <v-checkbox
+              v-model="modelItem.selectedForAnalysis"
+              label="selected for analysis"
+              class="mx-4"
+            />
+          </v-col>
         </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>
