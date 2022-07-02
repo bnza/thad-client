@@ -57,7 +57,6 @@ export default {
   mixins: [
     ResourceMediaObjectMixin
   ]
-
 }
 </script>
 

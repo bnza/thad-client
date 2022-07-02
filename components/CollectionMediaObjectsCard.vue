@@ -1,5 +1,9 @@
 <template>
-  <v-card data-cy="collection-media-object-card" flat>
+  <v-card
+    :loading="$fetchState.pending"
+    data-cy="collection-media-object-card"
+    flat
+  >
     <v-toolbar flat dense>
       <v-toolbar-title v-if="!isChild">Media Objects</v-toolbar-title>
       <v-spacer />

@@ -19,6 +19,7 @@
       height="100%"
       fixed-header
       multi-sort
+      :loading="$fetchState.pending"
       :items-per-page="10"
       :footer-props="{
         disableItemsPerPage: true

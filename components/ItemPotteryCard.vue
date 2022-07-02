@@ -1,5 +1,8 @@
 <template>
-  <v-card data-cy="item-pottery-card">
+  <v-card
+    :loading="$fetchState.pending"
+    data-cy="item-pottery-card"
+  >
     <v-toolbar flat dense>
       <navigation-prev-button />
       <v-toolbar-title>Pottery</v-toolbar-title>

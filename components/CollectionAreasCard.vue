@@ -13,6 +13,11 @@
     <v-data-table
       multi-sort
       dense
+      :loading="$fetchState.pending"
+      :items-per-page="10"
+      :footer-props="{
+        disableItemsPerPage: true
+      }"
       :headers="[
       {
         text: 'actions',
