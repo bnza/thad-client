@@ -116,6 +116,7 @@ export default {
   },
 
   router: {
+    mode: 'hash',
     base: process.env.NODE_ENV === 'production' ? process.env.APP_ROUTER_BASE : undefined,
     parseQuery(q) {
       return require('qs').parse(q)
