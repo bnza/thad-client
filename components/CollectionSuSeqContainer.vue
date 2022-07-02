@@ -56,6 +56,7 @@
       :relationship="createSuRelDialog.relationship"
       :sx-su="createSuRelDialog.sxSu"
       :visible.sync="createSuRelDialog.visible"
+      :parent="parent"
       @created="$fetch"
     />
     <delete-resource-dialog

@@ -41,10 +41,10 @@
               :src="mediaUrl"
               min-width="512"
               min-height="512"
-              :max-height="maxWidth"
               :max-width="maxWidth"
               :width="width"
               :height="height"
+              contain
             />
           </v-col>
           <v-spacer />
@@ -69,10 +69,10 @@ export default {
   },
   computed: {
     maxWidth() {
-      return Math.max(window.innerWidth, 512)
+      return Math.max(window.innerWidth-(24*2), 512)
     },
     maxHeight() {
-      return Math.max(window.innerHeight, 512)
+      return Math.max(window.innerHeight-(24*2), 512)
     },
     width() {
       return this.media.mediaObject.dimensions[0]

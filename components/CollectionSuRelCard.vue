@@ -32,11 +32,13 @@
       </v-card-title>
       <v-card-text >
         <v-chip-group>
-          <item-su-rel-chip
+          <item-sub-item-chip
             v-for="item in filteredItems"
             :key="item.id"
             :enabled="enabled"
             :item="item"
+            id-item-path="dxSU"
+            resource-name="stratigraphicUnit"
             @delete="$emit('delete', $event)"
           />
         </v-chip-group>
@@ -46,12 +48,8 @@
 </template>
 
 <script>
-import ItemSuRelChip from "@/components/ItemSuRelChip";
 export default {
   name: "CollectionStratigraphicRelationshipCard",
-  components: {
-    ItemSuRelChip
-  },
   props: {
     enabled: {
       type: Boolean,

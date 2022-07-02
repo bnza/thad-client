@@ -23,8 +23,13 @@
           md="4"
           class="d-flex child-flex my-4"
         >
-          <media-object-card :media="item" class="mx-4">
+          <media-object-card
+            :media="item"
+            class="mx-4"
+            @click="mediaPreview=item"
+          >
             <template #actions>
+              <navigation-resource-read-button v-if="item.mediaObject.document" :item-id="item.mediaObject.document.id" resource-name="document" />
               <navigation-download-image-button :media="item"/>
               <navigation-delete-resource-button
                 :item-id="item.id"
@@ -47,6 +52,7 @@
         <v-col />
       </v-row>
     </v-layout>
+    <media-object-preview-dialog v-if="mediaPreview" :media="mediaPreview" @close="mediaPreview = null"/>
     <delete-resource-dialog
       v-if="deletingItem"
       :resource-name="resourceName"
@@ -88,7 +94,8 @@ export default {
   },
   data() {
     return {
-      mediaDialog: false
+      mediaDialog: false,
+      mediaPreview: null
     }
   },
   computed: {

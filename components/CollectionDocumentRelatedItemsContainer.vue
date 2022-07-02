@@ -62,6 +62,22 @@
         </template>
       </lazy-collection-document-simple-item-card>
     </v-row>
+    <v-row dense>
+      <lazy-collection-document-sus-card
+        :parent="item"
+        parent-request-filter-key="mediaObject.id"
+        :enabled="isEditingEnabled"
+        resource-name="mediaObjectStratigraphicUnit"
+      />
+    </v-row>
+    <v-row dense>
+      <lazy-collection-document-graves-card
+        :parent="item"
+        parent-request-filter-key="mediaObject.id"
+        :enabled="isEditingEnabled"
+        resource-name="mediaObjectGrave"
+      />
+    </v-row>
   </v-container>
 </template>
 

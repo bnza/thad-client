@@ -31,6 +31,9 @@ export default {
     },
     mediaUrl() {
       return `${this.$config.apiBaseUrl}${this.media.mediaObject.contentUrl}`
+    },
+    documentId() {
+      return this.media.mediaObject.document?.appId
     }
   }
 }

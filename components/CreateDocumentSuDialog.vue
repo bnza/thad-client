@@ -7,23 +7,18 @@
   >
     <v-card data-cy="create-su-rel-card">
       <v-card-title class="text-overline mb-4 secondary--text" >
-        Add relationship
+        Add document link
       </v-card-title>
       <v-card-text>
-        <v-text-field
-          :value="formatCode('stratigraphicUnit', sxSu)"
-          label="stratigraphic unit"
-          readonly
-        />
-        <v-text-field
-          :value="getResponseValue('value', relationship)"
-          label="relationship"
-          readonly
-        />
+        <v-row dense justify="center">
+          <v-col class="d-flex justify-center align-center">
+            <media-object-card :media="parent" />
+          </v-col>
+        </v-row>
         <select-sus-autocomplete
           data-cy="dx-su-input"
-          :select.sync="modelItem.dxSu"
-          :area="sxSu.area"
+          :select.sync="modelItem.su"
+          :area="parent.area"
           v-on="$listeners"
         />
       </v-card-text>
@@ -52,35 +47,20 @@
 import ResourceCreateMediaLinkMixin from "@/mixins/ResourceCreateMediaLinkMixin";
 
 export default {
-  name: "CreateSuRelDialog",
+  name: "CreateDocumentSuDialog",
   mixins: [
     ResourceCreateMediaLinkMixin
   ],
-  props: {
-    visible: {
-      type: Boolean,
-      required: true
-    },
-    sxSu: {
-      type: Object,
-      required: true
-    },
-    relationship: {
-      type: Object,
-      required: true
-    }
-  },
   computed: {
     defaultModelItem() {
       return {
-        dxSu: {}
+        su: {}
       }
     },
     requestData() {
       return {
-        sxSU: this.sxSu['@id'],
-        relationship: this.relationship['@id'],
-        dxSU: this.modelItem.dxSu['@id']
+        mediaObject: this.parent.mediaObject['@id'],
+        stratigraphicUnit: this.modelItem.su['@id']
       }
     }
   },

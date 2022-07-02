@@ -117,8 +117,8 @@
       :relationship="createSuRelDialog.relationship"
       :sx-su="createSuRelDialog.sxSu"
       :visible.sync="createSuRelDialog.visible"
-      @created="$fetch"
-    />
+      :parent="parent"
+      @created="$fetch"/>
     <delete-resource-dialog
       v-if="deletingItem"
       :resource-name="resourceName"

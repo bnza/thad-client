@@ -27,7 +27,18 @@
         </v-row>
       </template>
       <v-card-text class="caption">
-        <v-card outlined style="background-color: rgba(0,0,0,0.7)">
+        <v-btn
+          v-if="hasThumbnail"
+          outlined
+          height="256px"
+          width="256px"
+          class="transparent"
+          @click="$emit('click', previewMediaUrl)"
+        />
+        <v-card v-if="documentId" outlined style="background-color: rgba(0,0,0,0.7)" class="secondary--text font-weight-bold">
+          {{documentId}}
+        </v-card>
+        <v-card v-else outlined style="background-color: rgba(0,0,0,0.7)">
           {{originalFilename}}
         </v-card>
       </v-card-text>

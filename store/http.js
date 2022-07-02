@@ -64,6 +64,33 @@ export const actions = {
         params
       })
   },
+  getGraves({dispatch, rootGetters}, {area}) {
+    const resource = rootGetters['api/getResource']('grave')
+    const params = {}
+    if (area?.id) {
+      params['area.id'] = area.id
+    }
+    return dispatch('request',
+      {
+        method: 'get',
+        url: resource.collectionUrl,
+        headers: {
+          Accept: 'application/ld+json'
+        },
+        params
+      })
+  },
+  getResourceItem({dispatch, rootGetters}, {resourceName, id}) {
+    const resource = rootGetters['api/getResource'](resourceName)
+    return dispatch('request',
+      {
+        method: 'get',
+        url: resource.itemUrl(id),
+        headers: {
+          Accept: 'application/ld+json'
+        },
+      })
+  },
   getSu({dispatch, rootGetters}, id) {
     const resource = rootGetters['api/getResource']('stratigraphicUnit')
     return dispatch('request',
@@ -74,5 +101,5 @@ export const actions = {
           Accept: 'application/ld+json'
         },
       })
-  }
+  },
 }
