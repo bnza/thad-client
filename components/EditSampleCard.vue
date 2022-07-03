@@ -4,7 +4,7 @@
     accordion
     multiple
     flat
-    readonly
+    disabled
   >
     <v-expansion-panel>
       <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
@@ -15,7 +15,7 @@
               class="mx-4 secondary--text font-weight-bold" color="secondary"
               :value="isUpdate ? formatCode('sample', item) : undefined"
               label="code"
-              readonly
+              disabled
             />
           </v-col>
           <v-col data-cy="su-select-col" sm="2">
@@ -24,7 +24,7 @@
               data-cy="su-code-input"
               :value="formatCode('stratigraphicUnit', parent)"
               label="SU number"
-              readonly
+              disabled
               class="mx-4"
             />
             <select-sus-autocomplete
@@ -32,7 +32,7 @@
               :select.sync="modelItem.stratigraphicUnit"
               :error-messages="stratigraphicUnitErrors"
               class="mx-4"
-              :readonly="updateCodeDisabled"
+              :disabled="updateCodeDisabled"
               v-on="$listeners"
               @input="$v.modelItem.stratigraphicUnit.$touch()"
               @blur="$v.modelItem.stratigraphicUnit.$touch()"
@@ -45,7 +45,7 @@
               label="identification number"
               required
               :error-messages="numberErrors"
-              :readonly="updateCodeDisabled"
+              :disabled="updateCodeDisabled"
               class="mx-4 secondary--text font-weight-bold"
               color="secondary"
               @input="$v.modelItem.number.$touch()"
