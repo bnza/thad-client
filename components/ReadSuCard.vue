@@ -8,14 +8,14 @@
       <v-expansion-panel-header class="grey--text text-overline">Location</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col sm="3">
+          <v-col sm="1">
             <v-text-field
               :value="getResponseValue('site.code', item)"
               label="site code"
               readonly
             />
           </v-col>
-          <v-col sm="3">
+          <v-col sm="5">
             <v-text-field
               :value="getResponseValue('site.name', item)"
               label="site name"
@@ -24,14 +24,14 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col sm="3">
+          <v-col sm="1">
             <v-text-field
               :value="getResponseValue('area.code', item)"
               label="area code"
               readonly
             />
           </v-col>
-          <v-col sm="3">
+          <v-col sm="5">
             <v-text-field
               :value="getResponseValue('area.name', item)"
               label="area name"
@@ -49,24 +49,39 @@
           </v-col>
           <v-col sm="3">
             <v-text-field
+              :value="getResponseValue('buildingPhase', item)"
+              label="building phase"
+              readonly
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col sm="3">
+            <v-text-field
               :value="getResponseValue('room', item)"
               label="room"
               readonly
             />
           </v-col>
-          <v-col sm="3" />
+        </v-row>
+        <v-row dense>
           <v-col sm="3">
             <v-text-field
-              :value="getResponseValue('phase', item)"
-              label="phase"
+              class="secondary--text font-weight-bold" color="secondary"
+              :value="item.grave ? formatCode('grave', item) : undefined"
+              label="grave"
               readonly
-            />
+            >
+              <template v-if="item.grave" #prepend>
+                <navigation-resource-read-button :item-id="getResponseValue('grave.id', item)" resource-name="grave" />
+              </template>
+            </v-text-field>
           </v-col>
         </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>
     <v-expansion-panel>
-      <v-expansion-panel-header class="grey--text text-overline">Stratigraphic Unit</v-expansion-panel-header>
+      <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
           <v-col>
@@ -75,11 +90,7 @@
               :value="formatCode('stratigraphicUnit', item)"
               label="code"
               readonly
-            >
-              <template #prepend>
-                <navigation-resource-read-button :item-id="getResponseValue('id', item)" resource-name="stratigraphicUnit" />
-              </template>
-            </v-text-field>
+            />
           </v-col>
           <v-col>
             <v-text-field
@@ -92,20 +103,20 @@
           <v-col>
             <v-text-field
               :value="getResponseValue('number', item)"
-              label="number"
+              label="identification number"
               readonly
             />
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col>
+          <v-col sm="3">
             <v-text-field
               :value="getResponseValue('type.value', item)"
               label="type"
               readonly
             />
           </v-col>
-          <v-col>
+          <v-col sm="3">
             <v-text-field
               :value="getResponseValue('preservationState.value', item)"
               label="state of preservation"
@@ -113,6 +124,13 @@
             />
           </v-col>
           <v-spacer />
+        </v-row>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+    <v-expansion-panel>
+      <v-expansion-panel-header class="grey--text text-overline">Periodization</v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <v-row dense>
           <v-col sm="1">
             <v-text-field
               :value="getResponseValue('period.code', item)"
@@ -127,7 +145,27 @@
               readonly
             />
           </v-col>
+          <v-spacer />
+          <v-col sm="2">
+            <v-text-field
+              :value="getResponseValue('phase', item)"
+              label="phase"
+              readonly
+            />
+          </v-col>
+          <v-col sm="1">
+            <v-text-field
+              :value="getResponseValue('subPhase', item)"
+              label="sub phase"
+              readonly
+            />
+          </v-col>
         </v-row>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+    <v-expansion-panel>
+      <v-expansion-panel-header class="grey--text text-overline">Misc</v-expansion-panel-header>
+      <v-expansion-panel-content>
         <v-row dense>
           <v-col>
             <v-textarea
@@ -216,7 +254,7 @@ export default {
   data() {
     return {
       panels: [
-        0,1
+        0,1,2,3
       ],
     }
   }

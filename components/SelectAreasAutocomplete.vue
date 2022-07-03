@@ -8,6 +8,7 @@
     item-value="id"
     :search-input.sync="search"
     :readonly="readonly"
+    :disabled="disabled"
     return-object
     cache-items
     flat
@@ -38,6 +39,10 @@ export default {
       required: true
     },
     readonly: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     }

@@ -12,8 +12,10 @@ export default {
       type: { required },
       year: { required, integer, between: between(2000, 2099)},
       building: { integer },
+      buildingPhase: { integer },
       room: {maxLength: maxLength(3), lowercase: helpers.regex('isLowercase',/^[a-z]*$/)},
       phase: { integer },
+      subPhase: { integer },
       topElevation: { optionalDecimal, optionalGreaterThan: greaterThan('bottomElevation')},
       bottomElevation: { optionalDecimal }
     },
@@ -76,6 +78,18 @@ export default {
       const errors = []
       if (!this.$v.modelItem.phase.$dirty) return errors
       !this.$v.modelItem.phase.integer && errors.push('Phase identifier must be an integer number')
+      return errors
+    },
+    subPhaseErrors() {
+      const errors = []
+      if (!this.$v.modelItem.subPhase.$dirty) return errors
+      !this.$v.modelItem.subPhase.integer && errors.push('Sub phase identifier must be an integer number')
+      return errors
+    },
+    buildingPhaseErrors() {
+      const errors = []
+      if (!this.$v.modelItem.buildingPhase.$dirty) return errors
+      !this.$v.modelItem.buildingPhase.integer && errors.push('Building phase identifier must be an integer number')
       return errors
     },
   },
