@@ -7,7 +7,7 @@ describe('The User resource lifecycle', () => {
 
     cy.programmaticLogin('user_base@example.com','0000')
 
-    cy.visit('/data/users/me')
+    cy.visit('/#/data/users/me')
 
     cy.get('[data-cy=open-dialog-btn]').click()
 
@@ -100,11 +100,11 @@ describe('The User resource lifecycle', () => {
 
     cy.intercept({method: 'get', path: '**/api/users/*'}).as('getUsersRequest')
 
-    cy.visit('/data/users')
+    cy.visit('/#/data/users')
 
     cy.get('[data-cy=collection-users-card]')
 
-    cy.wait('@getUsersRequest')
+    // cy.wait('@getUsersRequest')
 
     cy.get('[data-cy=reset-password-btn].v-btn--disabled')
       .parentsUntil('tbody')

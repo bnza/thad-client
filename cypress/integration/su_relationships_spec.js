@@ -28,7 +28,7 @@ describe('The SU relationship lifecycle', () => {
 
     cy.get('[data-cy=collection-su-st-row]').find('[data-cy=create-su-rel-btn]').should('not.exist')
 
-    cy.get('[data-cy=item-su-rel-chip] button').should('not.exist')
+    cy.get('[data-cy=item-rel-chip] button').should('not.exist')
 
     cy.get('[data-cy=su-st-enable-editing-btn]').click()
 
@@ -63,11 +63,11 @@ describe('The SU relationship lifecycle', () => {
     cy.get('[data-cy=collection-su-st-row]')
       .find('[data-cy=collection-su-rel-card]')
       .eq(1)
-      .find('[data-cy=item-su-rel-chip]')
+      .find('[data-cy=item-rel-chip]')
       .first()
       .click('left')
 
-    cy.get('[data-cy=su-rel-dx-read]')
+    cy.get('[data-cy=sub-item-read]')
 
     cy.wait('@getStratigraphicUnit').its('response.statusCode').should('eq', 200)
 
@@ -76,7 +76,7 @@ describe('The SU relationship lifecycle', () => {
     cy.get('[data-cy=collection-su-st-row]')
       .find('[data-cy=collection-su-rel-card]')
       .eq(1)
-      .find('[data-cy=item-su-rel-chip] button')
+      .find('[data-cy=item-rel-chip] button')
       .first()
       .click()
 
@@ -90,7 +90,7 @@ describe('The SU relationship lifecycle', () => {
 
     cy.get('[data-cy=collection-su-st-row]').find('[data-cy=create-su-rel-btn]').should('not.exist')
 
-    cy.get('[data-cy=item-su-rel-chip] button').should('not.exist')
+    cy.get('[data-cy=item-rel-chip] button').should('not.exist')
 
   })
 
@@ -154,11 +154,11 @@ describe('The SU relationship lifecycle', () => {
     cy.get('[data-cy=collection-su-seq-row]')
       .find('[data-cy=collection-su-rel-card]')
       .eq(1)
-      .find('[data-cy=item-su-rel-chip]')
+      .find('[data-cy=item-rel-chip]')
       .first()
       .click('left')
 
-    cy.get('[data-cy=su-rel-dx-read]')
+    cy.get('[data-cy=sub-item-read]')
 
     cy.wait('@getStratigraphicUnit').its('response.statusCode').should('eq', 200)
 
@@ -167,7 +167,7 @@ describe('The SU relationship lifecycle', () => {
     cy.get('[data-cy=collection-su-seq-row]')
       .find('[data-cy=collection-su-rel-card]')
       .eq(1)
-      .find('[data-cy=item-su-rel-chip] button')
+      .find('[data-cy=item-rel-chip] button')
       .first()
       .click()
 
@@ -181,7 +181,7 @@ describe('The SU relationship lifecycle', () => {
 
     cy.get('[data-cy=collection-su-seq-row]').find('[data-cy=create-su-rel-btn]').should('not.exist')
 
-    cy.get('[data-cy=item-su-rel-chip] button').should('not.exist')
+    cy.get('[data-cy=item-rel-chip] button').should('not.exist')
 
   })
 })

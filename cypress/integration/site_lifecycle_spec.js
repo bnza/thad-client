@@ -8,7 +8,7 @@ describe('The Site resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/data/sites')
+    cy.visit('/#/data/sites')
 
     cy.get('[data-cy=collection-sites-card]')
 

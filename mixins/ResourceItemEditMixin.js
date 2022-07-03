@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     updateCodeDisabled() {
-      return !(this.isUpdate && this.$auth.hasScope('ROLE_ADMIN'))
+      return this.isUpdate && !this.$auth.hasScope('ROLE_ADMIN')
     },
     normalizeResource() {
       return normalizeResource(this.modelItem)

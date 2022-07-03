@@ -8,7 +8,7 @@ describe('The SU resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/data/stratigraphic_units')
+    cy.visit('/#/data/stratigraphic_units')
 
     cy.get('[data-cy=collection-sus-card]')
 
@@ -39,12 +39,12 @@ describe('The SU resource lifecycle', () => {
     cy.get('[data-cy=type-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=year-select-col] .v-messages__message').should('be.visible')
 
-    cy.get('[data-cy=year-select-col]').click().type('22{downArrow}{enter}')
+    cy.get('[data-cy=year-select-col] input').first().click().type('22{downArrow}{enter}')
 
-    cy.get('[data-cy=area-select-col]').click().type('w{downArrow}{enter}')
+    cy.get('[data-cy=area-select-col] input').first().click().type('w{downArrow}{enter}')
 
-    cy.get('[data-cy=site-name-input]').click().should('have.value', 'Tell Wadi')
-    cy.get('[data-cy=area-name-input]').click().should('have.value', 'A')
+    cy.get('[data-cy=site-name-input]').should('have.value', 'Tell Wadi')
+    cy.get('[data-cy=area-name-input]').should('have.value', 'A')
 
     cy.get('[data-cy=building-input-col]').click().type('b')
 
@@ -53,6 +53,14 @@ describe('The SU resource lifecycle', () => {
     cy.get('[data-cy=building-input-col]').click().type('{backspace}2')
 
     cy.get('[data-cy=building-input-col] .v-messages__message').should('not.exist')
+
+    cy.get('[data-cy=building-phase-input-col]').click().type('q')
+
+    cy.get('[data-cy=building-phase-input-col] .v-messages__message').should('be.visible')
+
+    cy.get('[data-cy=building-phase-input-col]').click().type('{backspace}6')
+
+    cy.get('[data-cy=building-phase-input-col] .v-messages__message').should('not.exist')
 
     cy.get('[data-cy=room-input-col]').click().type('1')
 
@@ -72,7 +80,15 @@ describe('The SU resource lifecycle', () => {
 
     cy.get('[data-cy=phase-input-col]').click().type('{backspace}2')
 
-    cy.get('[data-cy=phase-input-col] .v-messages__message').should('not.exist')
+    cy.get('[data-cy=subphase-input-col] .v-messages__message').should('not.exist')
+
+    cy.get('[data-cy=subphase-input-col]').click().type('c')
+
+    cy.get('[data-cy=subphase-input-col] .v-messages__message').should('be.visible')
+
+    cy.get('[data-cy=subphase-input-col] input').first().click().type('{backspace}1')
+
+    cy.get('[data-cy=subphase-input-col] .v-messages__message').should('not.exist')
 
     cy.get('[data-cy=number-input-col]').click().type('{backspace}x')
 
@@ -203,7 +219,7 @@ describe('The SU resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/data/stratigraphic_units')
+    cy.visit('/#/data/stratigraphic_units')
 
     cy.get('[data-cy=collection-sus-card]')
 

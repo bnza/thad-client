@@ -8,7 +8,7 @@ describe('The Small Find resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/data/small_finds')
+    cy.visit('/#/data/small_finds')
 
     cy.get('[data-cy=collection-small-finds-card]')
 

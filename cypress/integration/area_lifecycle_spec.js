@@ -8,7 +8,7 @@ describe('The Site resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/data/areas')
+    cy.visit('/#/data/areas')
 
     cy.get('[data-cy=collection-areas-card]')
 

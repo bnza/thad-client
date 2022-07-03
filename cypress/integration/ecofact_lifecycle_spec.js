@@ -8,7 +8,7 @@ describe('The Ecofact resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/data/ecofacts')
+    cy.visit('/#/data/ecofacts')
 
     cy.get('[data-cy=collection-ecofacts-card]')
 

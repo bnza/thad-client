@@ -9,7 +9,7 @@
       <slot />
       <v-row dense justify="center">
         <v-col class="d-flex justify-center align-center">
-          <media-object-card :media="parent" />
+          <media-object-card :media="item" />
         </v-col>
       </v-row>
     </v-container>

@@ -8,7 +8,7 @@ describe('The Sample resource lifecycle', () => {
 
     cy.programmaticLogin('user_admin@example.com','0002')
 
-    cy.visit('/data/samples')
+    cy.visit('/#/data/samples')
 
     cy.get('[data-cy=collection-samples-card]')
 
