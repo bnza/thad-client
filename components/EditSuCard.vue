@@ -94,16 +94,16 @@
               />
             </v-col>
           </v-row>
-          <v-row dense>
-            <v-col data-cy="phase-input-col" sm="3">
-              <v-text-field
-                v-model="modelItem.phase"
-                label="phase"
-                class="mx-4"
-                :error-messages="phaseErrors"
-                @input="$v.modelItem.phase.$touch()"
-                @blur="$v.modelItem.phase.$touch()"
-              />
+          <v-row dense v-if="isUpdate">
+            <v-col sm="3">
+            <select-graves-autocomplete
+              data-cy="grave-input"
+              class="mx-4"
+              clearable
+              :select.sync="modelItem.grave"
+              :area="modelItem.area"
+              v-on="$listeners"
+            />
             </v-col>
           </v-row>
         </v-expansion-panel-content>
@@ -376,6 +376,7 @@ export default {
         'type',
         'period',
         'preservationState',
+        'grave',
       ]) {
         if (has(key, data)) {
           data[key] = this.normalizeResource(key)
