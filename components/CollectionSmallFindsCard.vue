@@ -220,7 +220,7 @@
     </v-data-table>
     <filter-collection-dialog
       v-if="responseData['hydra:search']"
-      resource-name="ecofact"
+      :resource-name="resourceName"
       :visible.sync="filterDialog"
       :hydra-search="responseData['hydra:search']"
       :filters.sync="filters"

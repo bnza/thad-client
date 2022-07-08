@@ -8,8 +8,63 @@
     <v-expansion-panel>
       <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
       <v-expansion-panel-content>
+        <v-row
+          v-if="isUpdate"
+          dense
+        >
+          <v-col
+            sm="4"
+          >
+            <v-text-field
+              class="mx-4 secondary--text font-weight-bold" color="secondary"
+              :value="isUpdate ? formatCode('cumulativePotterySheet', item) : undefined"
+              label="code"
+              disabled
+            />
+          </v-col>
+        </v-row>
         <v-row dense>
-          <v-col data-cy="su-select-col" sm="2">
+          <v-col sm="4">
+            <v-text-field
+              data-cy="site-code-input"
+              class="mx-4"
+              :value="getResponseValue('stratigraphicUnit.site.code', modelItem)"
+              label="site code"
+              disabled
+            />
+          </v-col>
+          <v-col sm="4">
+            <v-text-field
+              data-cy="site-name-input"
+              class="mx-4"
+              :value="getResponseValue('stratigraphicUnit.site.name', modelItem)"
+              label="site name"
+              disabled
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col data-cy="area-select-col" sm="4">
+            <v-text-field
+              data-cy="area-code-input"
+              class="mx-4"
+              :value="getResponseValue('stratigraphicUnit.area.code', modelItem)"
+              label="area code"
+              disabled
+            />
+          </v-col>
+          <v-col sm="4">
+            <v-text-field
+              data-cy="area-name-input"
+              class="mx-4"
+              :value="getResponseValue('stratigraphicUnit.area.name', modelItem)"
+              label="area name"
+              disabled
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col data-cy="su-select-col" sm="4">
             <v-text-field
               v-if="parent"
               data-cy="su-code-input"
@@ -24,24 +79,14 @@
               :error-messages="stratigraphicUnitErrors"
               class="mx-4"
               v-on="$listeners"
+              :disabled="updateCodeDisabled"
               @input="$v.modelItem.stratigraphicUnit.$touch()"
               @blur="$v.modelItem.stratigraphicUnit.$touch()"
             />
           </v-col>
-<!--          <v-col data-cy="number-input-col" sm="2">-->
-<!--            <v-text-field-->
-<!--              v-model="modelItem.number"-->
-<!--              label="number"-->
-<!--              required-->
-<!--              :error-messages="numberErrors"-->
-<!--              class="mx-4"-->
-<!--              @input="$v.modelItem.number.$touch()"-->
-<!--              @blur="$v.modelItem.number.$touch()"-->
-<!--            />-->
-<!--          </v-col>-->
-          <v-col sm="4" />
-          <v-col sm="4" />
-          <v-col sm="4" />
+        </v-row>
+        <v-row dense>
+
         </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>
