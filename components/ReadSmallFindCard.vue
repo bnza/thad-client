@@ -5,6 +5,83 @@
         multiple
       >
         <v-expansion-panel>
+          <v-expansion-panel-header class="grey--text text-overline">Location</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-row dense>
+              <v-col sm="2">
+                <v-text-field
+                  data-cy="site-code-input"
+                  :value="getResponseValue('stratigraphicUnit.site.code', item)"
+                  label="site code"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="4">
+                <v-text-field
+                  data-cy="site-name-input"
+                  :value="getResponseValue('stratigraphicUnit.site.name', item)"
+                  label="site name"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col sm="2">
+                <v-text-field
+                  data-cy="site-code-input"
+                  :value="getResponseValue('stratigraphicUnit.area.name', item)"
+                  label="area code"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="4">
+                <v-text-field
+                  data-cy="site-name-input"
+                  :value="getResponseValue('stratigraphicUnit.area.name', item)"
+                  label="area name"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col sm="2">
+                <v-text-field
+                  :value="formatCode('stratigraphicUnit', item.stratigraphicUnit)"
+                  label="SU"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col sm="2">
+                <v-text-field
+                  :value="getResponseValue('coordN', item)"
+                  label="latitude (degree)"
+                  hint="WGS84 latitude value in degree from -90 (90°S) to 90 (90°N)"
+                  :persistent-hint="true"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="2">
+                <v-text-field
+                  :value="getResponseValue('coordE', item)"
+                  hint="WGS84 longitude value in degree from -180 (180°W) to 180 (180°E)"
+                  :persistent-hint="true"
+                  label="longitude (degree)"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="2">
+                <v-text-field
+                  :value="getResponseValue('coordZ', item)"
+                  label="elevation (meters)"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
           <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-row dense>
@@ -16,13 +93,7 @@
                   readonly
                 />
               </v-col>
-              <v-col sm="2">
-                <v-text-field
-                  :value="formatCode('stratigraphicUnit', item.stratigraphicUnit)"
-                  label="SU"
-                  readonly
-                />
-              </v-col>
+              <v-col sm="2" />
               <v-col sm="2">
                 <v-text-field
                   class="secondary--text font-weight-bold" color="secondary"

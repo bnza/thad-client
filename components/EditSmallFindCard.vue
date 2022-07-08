@@ -6,39 +6,129 @@
     flat
   >
     <v-expansion-panel>
-      <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
+      <v-expansion-panel-header class="grey--text text-overline">Location</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col data-cy="su-select-col" sm="4">
+          <v-col sm="2">
+            <v-text-field
+              data-cy="site-code-input"
+              :value="getResponseValue('stratigraphicUnit.site.code', item)"
+              label="site code"
+              class="mx-4"
+              disabled
+            />
+          </v-col>
+          <v-col sm="4">
+            <v-text-field
+              data-cy="site-name-input"
+              :value="getResponseValue('stratigraphicUnit.site.name', item)"
+              label="site name"
+              class="mx-4"
+              disabled
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col sm="2">
+            <v-text-field
+              data-cy="site-code-input"
+              :value="getResponseValue('stratigraphicUnit.area.name', item)"
+              label="area code"
+              class="mx-4"
+              disabled
+            />
+          </v-col>
+          <v-col sm="4">
+            <v-text-field
+              data-cy="site-name-input"
+              :value="getResponseValue('stratigraphicUnit.area.name', item)"
+              label="area name"
+              class="mx-4"
+              disabled
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col data-cy="pottery-select-col" sm="2">
             <v-text-field
               v-if="parent"
               data-cy="su-code-input"
               :value="formatCode('stratigraphicUnit', parent)"
               label="SU number"
-              readonly
+              disabled
               class="mx-4"
             />
             <select-sus-autocomplete
               v-else
               :select.sync="modelItem.stratigraphicUnit"
               :error-messages="stratigraphicUnitErrors"
+              :disabled="updateCodeDisabled"
               class="mx-4"
               v-on="$listeners"
-              @input="$v.modelItem.stratigraphicUnit.$touch()"
-              @blur="$v.modelItem.stratigraphicUnit.$touch()"
+              @input="$v.modelItem.area.$touch()"
+              @blur="$v.modelItem.area.$touch()"
             />
           </v-col>
-          <v-col data-cy="number-input-col" sm="2">
+        </v-row>
+        <v-row dense>
+          <v-col data-cy="coord-n-input-col" sm="2">
+            <v-text-field
+              v-model="modelItem.coordN"
+              label="latitude (degree)"
+              required
+              :error-messages="coordNErrors"
+              class="mx-4"
+              hint="WGS84 latitude value in degree from -90 (90°S) to 90 (90°N)"
+              :persistent-hint="true"
+              @input="$v.modelItem.coordN.$touch()"
+              @blur="$v.modelItem.coordN.$touch()"
+            />
+          </v-col>
+          <v-col data-cy="coord-e-input-col" sm="2">
+            <v-text-field
+              v-model="modelItem.coordE"
+              label="longitude (degree)"
+              required
+              :error-messages="coordEErrors"
+              class="mx-4"
+              hint="WGS84 latitude value in degree from -90 (90°S) to 90 (90°N)"
+              :persistent-hint="true"
+              @input="$v.modelItem.coordE.$touch()"
+              @blur="$v.modelItem.coordE.$touch()"
+            />
+          </v-col>
+          <v-col data-cy="coord-z-input-col" sm="2">
+            <v-text-field
+              v-model="modelItem.coordZ"
+              label="elevation (m)"
+              required
+              :error-messages="coordZErrors"
+              class="mx-4"
+              @input="$v.modelItem.coordZ.$touch()"
+              @blur="$v.modelItem.coordZ.$touch()"
+            />
+          </v-col>
+        </v-row>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+    <v-expansion-panel>
+      <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <v-row dense>
+          <v-col data-cy="number-input-col" sm="3">
             <v-text-field
               v-model="modelItem.number"
-              label="number"
+              label="identification number"
               required
               :error-messages="numberErrors"
+              :disabled="updateCodeDisabled"
               class="mx-4"
               @input="$v.modelItem.number.$touch()"
               @blur="$v.modelItem.number.$touch()"
             />
           </v-col>
+        </v-row>
+        <v-row dense >
           <v-col data-cy="period-select-col" sm="3">
             <select-period-vocabulary-autocomplete
               class="mx-4"
@@ -424,6 +514,9 @@ export default {
         'baseDiameter',
         'minDiameter',
         'maxDiameter',
+        'coordN',
+        'coordE',
+        'coordZ',
       ]) {
         if (has(key, data)) {
           data[key] = 1 * data[key]

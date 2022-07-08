@@ -1,6 +1,7 @@
 import { validationMixin } from 'vuelidate'
-import { required, integer, decimal } from 'vuelidate/lib/validators'
+import { required, integer, decimal, between } from 'vuelidate/lib/validators'
 import greaterThan from "~/src/validators/greaterThan";
+import coordinateIsATriple from "~/src/validators/coordinateIsATriple";
 
 export default {
   mixins: [validationMixin],
@@ -19,6 +20,9 @@ export default {
       thickness: { decimal },
       baseDiameter: { decimal },
       minDiameter: { decimal },
+      coordN: { decimal, coordinateIsATriple: coordinateIsATriple(), between: between(-90,90) },
+      coordE: { decimal, coordinateIsATriple: coordinateIsATriple(), between: between(-180,180) },
+      coordZ: { decimal, coordinateIsATriple: coordinateIsATriple() },
       maxDiameter: { decimal, greaterThan: greaterThan('minDiameter')},
       weight: {decimal}
     },
@@ -117,7 +121,29 @@ export default {
       !this.$v.modelItem.weight.decimal && errors.push('Weight must be a decimal number.')
       return errors
     },
-
+    coordNErrors() {
+      const errors = []
+      if (!this.$v.modelItem.coordN.$dirty) return errors
+      !this.$v.modelItem.coordN.decimal && errors.push('Latitude must be a decimal number.')
+      !this.$v.modelItem.coordN.between && errors.push('Latitude must be a value between -90 (90S) and 90 (90N).')
+      !this.$v.modelItem.coordN.coordinateIsATriple && errors.push('Coordinate must have all the N, E, Z components.')
+      return errors
+    },
+    coordEErrors() {
+      const errors = []
+      if (!this.$v.modelItem.coordE.$dirty) return errors
+      !this.$v.modelItem.coordE.decimal && errors.push('Longitude must be a decimal number.')
+      !this.$v.modelItem.coordE.between && errors.push('Longitude must be a value between -180 (180W) and 90 (180E).')
+      !this.$v.modelItem.coordE.coordinateIsATriple && errors.push('Coordinate must have all the N, E, Z components.')
+      return errors
+    },
+    coordZErrors() {
+      const errors = []
+      if (!this.$v.modelItem.coordZ.$dirty) return errors
+      !this.$v.modelItem.coordZ.decimal && errors.push('Elevation must be a decimal number.')
+      !this.$v.modelItem.coordZ.coordinateIsATriple && errors.push('Coordinate must have all the N, E, Z components.')
+      return errors
+    },
   },
   watch: {
     modelItem: {
