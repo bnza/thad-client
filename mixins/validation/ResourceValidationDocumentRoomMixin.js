@@ -8,8 +8,8 @@ export default {
     createdItem: {
       required,
       uniqueValue: uniqueValueInArray('items'),
-      maxLength: maxLength(3),
-      lowercase: helpers.regex('isLowercase',/^[a-z]*$/)
+      maxLength: maxLength(2),
+      uppercase: helpers.regex('isUppercase',/^[A-Z]*$/)
     },
   },
   computed: {
@@ -18,7 +18,7 @@ export default {
       if (!this.$v.createdItem.$dirty) return errors
       !this.$v.createdItem.required && errors.push('Value is required.')
       !this.$v.createdItem.uniqueValue && errors.push('Duplicate value.')
-      !this.$v.createdItem.lowercase && errors.push('Value must lowercase.')
+      !this.$v.createdItem.uppercase && errors.push('Value must uppercase.')
       !this.$v.createdItem.maxLength && errors.push('Value must be less than 4 characters.')
       return errors
     },

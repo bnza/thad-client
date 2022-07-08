@@ -4,7 +4,7 @@
       <navigation-prev-button />
       <v-toolbar-title>Grave</v-toolbar-title>
       <v-spacer />
-      <v-toolbar-title v-if="item"><strong class="secondary--text">{{item.code}}</strong></v-toolbar-title>
+      <v-toolbar-title v-if="ready"><strong class="secondary--text">{{formatCode(resourceName, item)}}</strong></v-toolbar-title>
       <v-spacer />
       <navigation-collection-resource-button :resource-name="resourceName" />
       <navigation-update-resource-button :item-id="id" :resource-name="resourceName" :disabled="!$auth.hasScope('ROLE_EDITOR')" />
@@ -100,6 +100,7 @@
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import RouteTabbedComponentMixin from "@/mixins/RouteTabbedComponentMixin";
 import ResourceItemGetMixin from "@/mixins/ResourceItemGetMixin";
+import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
   name: "ItemGraveCard",
@@ -107,7 +108,8 @@ export default {
     ResourceItemGetMixin,
     ResourceDeleteDialogMixin,
     ResourceItemGetMixin,
-    RouteTabbedComponentMixin
+    RouteTabbedComponentMixin,
+    ResourceItemDataAccessorMixin,
   ],
   data() {
     return {
