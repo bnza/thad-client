@@ -15,7 +15,7 @@
                   data-cy="site-code-input"
                   :value="getResponseValue('area.code.name', modelItem) || getResponseValue('site.code', modelItem)"
                   label="site code"
-                  readonly
+                  disabled
                 />
               </v-col>
               <v-col sm="3">
@@ -23,7 +23,7 @@
                   data-cy="site-name-input"
                   :value="getResponseValue('area.site.name', modelItem) || getResponseValue('site.name', modelItem)"
                   label="site name"
-                  readonly
+                  disabled
                 />
               </v-col>
             </v-row>
@@ -34,12 +34,13 @@
                   data-cy="area-code-input"
                   :value="getResponseValue('area.site.code', modelItem)"
                   label="area code"
-                  readonly
+                  disabled
                 />
                 <select-areas-autocomplete
                   v-else
                   :select.sync="modelItem.area"
                   :error-messages="areaErrors"
+                  :disabled="updateCodeDisabled"
                   v-on="$listeners"
                   @input="$v.modelItem.area.$touch()"
                   @blur="$v.modelItem.area.$touch()"
@@ -50,7 +51,7 @@
                   data-cy="area-name-input"
                   :value="getResponseValue('area.name', modelItem)"
                   label="area name"
-                  readonly
+                  disabled
                 />
               </v-col>
             </v-row>
@@ -64,6 +65,18 @@
                   @blur="$v.modelItem.building.$touch()"
                 />
               </v-col>
+              <v-col data-cy="room-building-phase-col" sm="3">
+                <v-text-field
+                  v-model="modelItem.buildingPhase"
+                  label="building phase"
+                  :error-messages="buildingPhaseErrors"
+                  @input="$v.modelItem.buildingPhase.$touch()"
+                  @blur="$v.modelItem.buildingPhase.$touch()"
+                />
+              </v-col>
+              <v-col sm="3" />
+            </v-row>
+            <v-row dense>
               <v-col data-cy="room-input-col" sm="3">
                 <v-text-field
                   v-model="modelItem.room"
@@ -73,16 +86,6 @@
                   @blur="$v.modelItem.room.$touch()"
                 />
               </v-col>
-              <v-col sm="3" />
-<!--              <v-col data-cy="phase-input-col" sm="3">
-                <v-text-field
-                  v-model="modelItem.phase"
-                  label="phase"
-                  :error-messages="phaseErrors"
-                  @input="$v.modelItem.phase.$touch()"
-                  @blur="$v.modelItem.phase.$touch()"
-                />
-              </v-col>-->
             </v-row>
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -95,29 +98,9 @@
                 class="secondary--text font-weight-bold" color="secondary"
                 :value="isUpdate ? formatCode('grave', item) : undefined"
                 label="code"
-                readonly
+                disabled
               />
             </v-col>
-<!--            <v-col
-              data-cy="area-select-col"
-              sm="2"
-            >
-              <v-text-field
-                v-if="parent"
-                data-cy="area-code-input"
-                :value="formatCode('area', modelItem.area)"
-                label="area code"
-                readonly
-              />
-              <select-areas-autocomplete
-                v-else
-                :select.sync="modelItem.area"
-                :error-messages="areaErrors"
-                v-on="$listeners"
-                @input="$v.modelItem.area.$touch()"
-                @blur="$v.modelItem.area.$touch()"
-              />
-            </v-col>-->
             <v-col
               data-cy="year-select-col"
               sm="4"
@@ -126,6 +109,7 @@
                 v-model="modelItem.year"
                 label="excavation year"
                 required
+                :disabled="updateCodeDisabled"
                 :items="years"
                 :error-messages="yearErrors"
                 @input="$v.modelItem.year.$touch()"
@@ -139,6 +123,7 @@
               <v-text-field
                 v-model="modelItem.number"
                 label="number"
+                :disabled="updateCodeDisabled"
                 required
                 :error-messages="numberErrors"
                 @input="$v.modelItem.number.$touch()"
@@ -203,12 +188,6 @@
                 v-on="$listeners"
               />
             </v-col>
-<!--            <v-col data-cy="period-select-col">-->
-<!--              <select-period-vocabulary-autocomplete-->
-<!--                :sub-periods="false"-->
-<!--                :select.sync="modelItem.period"-->
-<!--              />-->
-<!--            </v-col>-->
           </v-row>
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -229,6 +208,15 @@
                   :error-messages="phaseErrors"
                   @input="$v.modelItem.phase.$touch()"
                   @blur="$v.modelItem.phase.$touch()"
+                />
+              </v-col>
+              <v-col data-cy="subphase-input-col" sm="3">
+                <v-text-field
+                  v-model="modelItem.subPhase"
+                  label="sub phase"
+                  :error-messages="subPhaseErrors"
+                  @input="$v.modelItem.subPhase.$touch()"
+                  @blur="$v.modelItem.subPhase.$touch()"
                 />
               </v-col>
             </v-row>
@@ -431,7 +419,9 @@ export default {
       for (const key of [
         'number',
         'building',
+        'buildingPhase',
         'phase',
+        'subPhase',
       ]) {
         if (has(key, data)) {
           data[key] = 1 * data[key]

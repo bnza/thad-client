@@ -50,18 +50,20 @@
           </v-col>
           <v-col sm="4">
             <v-text-field
+              :value="getResponseValue('buildingPhase', item)"
+              label="building phase"
+              readonly
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col sm="4">
+            <v-text-field
               :value="getResponseValue('room', item)"
               label="room"
               readonly
             />
           </v-col>
-<!--          <v-col sm="4">
-            <v-text-field
-              :value="getResponseValue('phase', item)"
-              label="phase"
-              readonly
-            />
-          </v-col>-->
         </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>
@@ -147,11 +149,17 @@
               readonly
             />
           </v-col>
-          <v-col />
           <v-col>
             <v-text-field
               :value="getResponseValue('phase', item)"
               label="phase"
+              readonly
+            />
+          </v-col>
+          <v-col>
+            <v-text-field
+              :value="getResponseValue('subPhase', item)"
+              label="sub phase"
               readonly
             />
           </v-col>
