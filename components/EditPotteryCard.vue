@@ -8,6 +8,19 @@
     <v-expansion-panel>
       <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
       <v-expansion-panel-content>
+        <v-row
+          v-if="isUpdate"
+          dense
+        >
+          <v-col sm="4">
+            <v-text-field
+              class="mx-4 secondary--text font-weight-bold" color="secondary"
+              :value="formatCode('pottery', item)"
+              label="code"
+              disabled
+            />
+          </v-col>
+        </v-row>
         <v-row dense>
           <v-col data-cy="pottery-select-col" sm="2">
             <v-text-field
@@ -15,13 +28,14 @@
               data-cy="su-code-input"
               :value="formatCode('stratigraphicUnit', parent)"
               label="SU number"
-              readonly
+              disabled
               class="mx-4"
             />
             <select-sus-autocomplete
               v-else
               :select.sync="modelItem.stratigraphicUnit"
               :error-messages="stratigraphicUnitErrors"
+              :disabled="updateCodeDisabled"
               class="mx-4"
               v-on="$listeners"
               @input="$v.modelItem.area.$touch()"
@@ -31,27 +45,13 @@
           <v-col data-cy="number-input-col" sm="2">
             <v-text-field
               v-model="modelItem.number"
+              :disabled="updateCodeDisabled"
               label="number"
               required
               :error-messages="numberErrors"
               class="mx-4"
               @input="$v.modelItem.number.$touch()"
               @blur="$v.modelItem.number.$touch()"
-            />
-          </v-col>
-          <v-col data-cy="period-select-col" sm="4">
-            <select-period-vocabulary-autocomplete
-              class="mx-4"
-              :select.sync="modelItem.period"
-            />
-          </v-col>
-          <v-col data-cy="subperiod-select-col" sm="4">
-            <select-vocabulary-autocomplete
-              label="subperiod"
-              :select.sync="modelItem.subperiod"
-              class="mx-4"
-              vocabulary-name="subperiod"
-              v-on="$listeners"
             />
           </v-col>
         </v-row>
@@ -75,6 +75,30 @@
             />
           </v-col>
           <v-col />
+        </v-row>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+    <v-expansion-panel>
+      <v-expansion-panel-header class="grey--text text-overline">Periodization</v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <v-row dense>
+          <v-col data-cy="period-select-col" sm="4">
+            <select-period-vocabulary-autocomplete
+              class="mx-4"
+              :select.sync="modelItem.period"
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col data-cy="subperiod-select-col" sm="4">
+            <select-vocabulary-autocomplete
+              label="subperiod"
+              :select.sync="modelItem.subperiod"
+              class="mx-4"
+              vocabulary-name="subperiod"
+              v-on="$listeners"
+            />
+          </v-col>
         </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>
@@ -433,7 +457,7 @@ export default {
         date: new Date().toISOString().substring(0, 10),
       },
       panels: [
-        0,1,2,3,4,5
+        0,1,2,3,4,5,6
       ],
     }
   },

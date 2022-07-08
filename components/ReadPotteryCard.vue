@@ -16,6 +16,8 @@
                   readonly
                 />
               </v-col>
+            </v-row>
+            <v-row dense>
               <v-col sm="2">
                 <v-text-field
                   :value="formatCode('stratigraphicUnit', item.stratigraphicUnit)"
@@ -28,37 +30,6 @@
                   class="secondary--text font-weight-bold" color="secondary"
                   :value="getResponseValue('number', item)"
                   label="identification number"
-                  readonly
-                />
-              </v-col>
-              <v-col sm="1">
-                <v-text-field
-                  :value="getResponseValue('period.code', item)"
-                  label="period code"
-                  readonly
-                />
-              </v-col>
-              <v-col sm="3">
-                <v-text-field
-                  :value="getResponseValue('period.value', item)"
-                  label="period"
-                  readonly
-                />
-              </v-col>
-            </v-row>
-            <v-row dense>
-              <v-spacer />
-              <v-col sm="1">
-                <v-text-field
-                  :value="getResponseValue('subperiod.code', item)"
-                  label="subperiod code"
-                  readonly
-                />
-              </v-col>
-              <v-col sm="3">
-                <v-text-field
-                  :value="getResponseValue('subperiod.value', item)"
-                  label="subperiod"
                   readonly
                 />
               </v-col>
@@ -79,6 +50,43 @@
                 />
               </v-col>
             <v-col />
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header class="grey--text text-overline">Periodization</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-row dense>
+              <v-col sm="1">
+                <v-text-field
+                  :value="getResponseValue('period.code', item)"
+                  label="period code"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="3">
+                <v-text-field
+                  :value="getResponseValue('period.value', item)"
+                  label="period"
+                  readonly
+                />
+              </v-col>
+            </v-row>
+            <v-row dense>
+              <v-col sm="1">
+                <v-text-field
+                  :value="getResponseValue('subperiod.code', item)"
+                  label="subperiod code"
+                  readonly
+                />
+              </v-col>
+              <v-col sm="3">
+                <v-text-field
+                  :value="getResponseValue('subperiod.value', item)"
+                  label="subperiod"
+                  readonly
+                />
+              </v-col>
             </v-row>
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -334,7 +342,7 @@ export default {
   data() {
     return {
       panels: [
-        0,1,2,3,4,5
+        0,1,2,3,4,5,6
       ],
     }
   }

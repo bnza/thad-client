@@ -8,8 +8,13 @@
     <v-expansion-panel>
       <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
       <v-expansion-panel-content>
-        <v-row dense>
-          <v-col sm="4">
+        <v-row
+          v-if="isUpdate"
+          dense
+        >
+          <v-col
+            sm="3"
+          >
             <v-text-field
               class="mx-4 secondary--text font-weight-bold" color="secondary"
               :value="isUpdate ? formatCode('sample', item) : undefined"
@@ -17,7 +22,9 @@
               disabled
             />
           </v-col>
-          <v-col data-cy="su-select-col" sm="2">
+        </v-row>
+        <v-row>
+          <v-col data-cy="su-select-col" sm="3">
             <v-text-field
               v-if="parent"
               data-cy="su-code-input"
@@ -37,7 +44,6 @@
               @blur="$v.modelItem.stratigraphicUnit.$touch()"
             />
           </v-col>
-          <v-col sm="3"/>
           <v-col data-cy="number-input-col" sm="3">
             <v-text-field
               v-model="modelItem.number"

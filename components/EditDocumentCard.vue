@@ -4,7 +4,7 @@
     accordion
     multiple
     flat
-    readonly
+    disabled
   >
     <v-expansion-panel>
       <v-expansion-panel-header class="grey--text text-overline">Media</v-expansion-panel-header>
@@ -28,7 +28,7 @@
               class="mx-4"
               :value="getResponseValue('site.code', item)"
               label="site code"
-              readonly
+              disabled
             />
           </v-col>
           <v-col sm="3">
@@ -36,7 +36,7 @@
               class="mx-4"
               :value="getResponseValue('site.name', item)"
               label="site name"
-              readonly
+              disabled
             />
           </v-col>
         </v-row>
@@ -48,12 +48,13 @@
               :value="getResponseValue('area.site.code', modelItem)"
               class="mx-4"
               label="area code"
-              readonly
+              disabled
             />
             <select-areas-autocomplete
               v-else
               :select.sync="modelItem.area"
               :error-messages="areaErrors"
+              :disabled="updateCodeDisabled"
               class="mx-4"
               v-on="$listeners"
               @input="$v.modelItem.area.$touch()"
@@ -65,7 +66,7 @@
               class="mx-4"
               :value="getResponseValue('area.name', item)"
               label="area name"
-              readonly
+              disabled
             />
           </v-col>
         </v-row>
@@ -76,7 +77,7 @@
               class="secondary--text font-weight-bold mx-4" color="secondary"
               :value="formatCode('document', item)"
               label="code"
-              readonly
+              disabled
             />
           </v-col>
           <v-col
@@ -89,6 +90,7 @@
               required
               :items="years"
               :error-messages="yearErrors"
+              :disabled="updateCodeDisabled"
               class="mx-4"
               @input="$v.modelItem.year.$touch()"
               @blur="$v.modelItem.year.$touch()"
@@ -102,6 +104,7 @@
               v-model="modelItem.number"
               label="number"
               required
+              :disabled="updateCodeDisabled"
               :error-messages="numberErrors"
               class="mx-4"
               @input="$v.modelItem.number.$touch()"
