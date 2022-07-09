@@ -33,6 +33,7 @@
 <script>
 // eslint-disable-next-line import/named
 import { Fragment } from 'vue-frag'
+import {mapActions} from "vuex";
 import ShowSnackbarMixin from "@/mixins/ShowSnackbarMixin";
 import AuthButtonToggle from '@/components/AuthButtonToggle'
 import AuthLogoutDialog from "@/components/AuthLogoutDialog";
@@ -65,12 +66,14 @@ export default {
     },
   },
   methods: {
+    ...mapActions('http',['invalidateToken']),
      login() {
        this.$router.push('/login')
     },
     logout() {
       this.logoutDialog = false
       this.$auth.logout()
+      this.invalidateToken(this.$auth.strategy?.refreshToken?.$storage._state['_refresh_token.local'])
       this.showSnackbar({text: 'User logged out'})
     },
   },

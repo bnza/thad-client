@@ -21,6 +21,19 @@ export const actions = {
     commit('increment')
     return state.counter
   },
+  invalidateToken({dispatch}, refreshToken) {
+    return dispatch('request',
+      {
+        method: 'post',
+        url: 'api/token/invalidate',
+        headers: {
+          Accept: 'application/ld+json'
+        },
+        data: {
+          refresh_token: refreshToken
+        }
+      })
+  },
   getSites({dispatch, rootGetters}) {
     const resource = rootGetters['api/getResource']('site')
     return dispatch('request',

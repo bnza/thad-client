@@ -16,7 +16,7 @@
       :to="resource.collectionPath"
       router
     >
-      <v-list-item-title class="text-capitalize">{{ resource.collectionLabel }}</v-list-item-title>
+      <v-list-item-title class="text-capitalize">{{ resource.itemLabel }}</v-list-item-title>
     </v-list-item>
   </v-list-group>
 </template>
