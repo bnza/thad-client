@@ -28,6 +28,11 @@ export const filterByWorkSite = (workSiteId, axiosRequestConfig) => {
 
 const formatPaginationOptions = (options) =>
 {
+  if (options === false) {
+    return {
+      pagination: false
+    }
+  }
   const paginationOptions = {}
 
   const castSortOrderAsString = sortDesc => sortDesc ? 'desc' : 'asc'

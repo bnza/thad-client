@@ -38,6 +38,7 @@
           v-if="ready"
           tab="images"
           :parent="item"
+          :enable-pagination="false"
           parent-request-filter-key="ecofact.id"
           resource-name="mediaObjectEcofact"
           parent-request-key="ecofact"

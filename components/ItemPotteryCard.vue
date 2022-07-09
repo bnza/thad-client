@@ -41,6 +41,7 @@
           v-if="ready"
           tab="images"
           :parent="item"
+          :enable-pagination="false"
           parent-request-filter-key="pottery.id"
           resource-name="mediaObjectPottery"
           parent-request-key="pottery"

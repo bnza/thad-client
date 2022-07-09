@@ -92,6 +92,7 @@
           v-if="ready"
           tab="images"
           :parent="item"
+          :enable-pagination="false"
           parent-request-filter-key="stratigraphicUnit.id"
           resource-name="mediaObjectStratigraphicUnit"
           parent-request-key="stratigraphicUnit"

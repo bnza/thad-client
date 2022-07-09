@@ -38,6 +38,7 @@
           v-if="ready"
           tab="images"
           :parent="item"
+          :enable-pagination="false"
           parent-request-filter-key="sample.id"
           resource-name="mediaObjectSample"
           parent-request-key="sample"

@@ -38,6 +38,7 @@
           v-if="ready"
           tab="images"
           :parent="item"
+          :enable-pagination="false"
           parent-request-filter-key="smallFind.id"
           resource-name="mediaObjectSmallFind"
           parent-request-key="smallFind"

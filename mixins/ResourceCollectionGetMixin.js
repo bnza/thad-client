@@ -17,6 +17,10 @@ export default {
       type: String,
       default: ''
     },
+    enablePagination: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -73,10 +77,14 @@ export default {
       return id
     },
     normalizedRequestOptions() {
-      return formatOptionsArrayForQueryString({
-        pagination: this.pagination || {
+      let pagination = false
+      if (this.enablePagination) {
+        pagination = this.pagination || {
           itemsPerPage: 10
-        },
+        }
+      }
+      return formatOptionsArrayForQueryString({
+        pagination,
         filters: this.normalizedFilters
       })
     },

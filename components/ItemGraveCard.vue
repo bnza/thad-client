@@ -65,6 +65,7 @@
           v-if="ready"
           tab="images"
           :parent="item"
+          :enable-pagination="false"
           parent-request-filter-key="grave.id"
           resource-name="mediaObjectGrave"
           parent-request-key="grave"
