@@ -73,12 +73,12 @@
             </v-col>
             <v-col data-cy="building-phase-input-col" sm="3">
               <v-text-field
-                v-model="modelItem.buildingPhase"
-                label="building phase"
+                v-model="modelItem.buildingSubPhase"
+                label="building sub phase"
                 class="mx-4"
-                :error-messages="buildingPhaseErrors"
-                @input="$v.modelItem.buildingPhase.$touch()"
-                @blur="$v.modelItem.buildingPhase.$touch()"
+                :error-messages="buildingSubPhaseErrors"
+                @input="$v.modelItem.buildingSubPhase.$touch()"
+                @blur="$v.modelItem.buildingSubPhase.$touch()"
               />
             </v-col>
           </v-row>
@@ -94,7 +94,7 @@
               />
             </v-col>
           </v-row>
-          <v-row dense v-if="isUpdate">
+          <v-row v-if="isUpdate" dense>
             <v-col sm="3">
             <select-graves-autocomplete
               data-cy="grave-input"
@@ -387,7 +387,7 @@ export default {
         'topElevation',
         'bottomElevation',
         'building',
-        'buildingPhase',
+        'buildingSubPhase',
         'phase',
         'subPhase',
       ]) {

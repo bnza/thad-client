@@ -67,11 +67,11 @@
               </v-col>
               <v-col data-cy="room-building-phase-col" sm="3">
                 <v-text-field
-                  v-model="modelItem.buildingPhase"
-                  label="building phase"
-                  :error-messages="buildingPhaseErrors"
-                  @input="$v.modelItem.buildingPhase.$touch()"
-                  @blur="$v.modelItem.buildingPhase.$touch()"
+                  v-model="modelItem.buildingSubPhase"
+                  label="building sub phase"
+                  :error-messages="buildingSubPhaseErrors"
+                  @input="$v.modelItem.buildingSubPhase.$touch()"
+                  @blur="$v.modelItem.buildingSubPhase.$touch()"
                 />
               </v-col>
               <v-col sm="3" />
@@ -419,7 +419,7 @@ export default {
       for (const key of [
         'number',
         'building',
-        'buildingPhase',
+        'buildingSubPhase',
         'phase',
         'subPhase',
       ]) {

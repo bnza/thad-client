@@ -54,11 +54,11 @@ describe('The SU resource lifecycle', () => {
 
     cy.get('[data-cy=building-input-col] .v-messages__message').should('not.exist')
 
-    cy.get('[data-cy=building-phase-input-col]').click().type('q')
+    cy.get('[data-cy=building-phase-input-col]').click().type('1')
 
     cy.get('[data-cy=building-phase-input-col] .v-messages__message').should('be.visible')
 
-    cy.get('[data-cy=building-phase-input-col]').click().type('{backspace}6')
+    cy.get('[data-cy=building-phase-input-col]').click().type('{backspace}b')
 
     cy.get('[data-cy=building-phase-input-col] .v-messages__message').should('not.exist')
 
@@ -66,7 +66,7 @@ describe('The SU resource lifecycle', () => {
 
     cy.get('[data-cy=room-input-col] .v-messages__message').should('be.visible')
 
-    cy.get('[data-cy=room-input-col]').click().type('{backspace}x')
+    cy.get('[data-cy=room-input-col]').click().type('{backspace}X')
 
     cy.get('[data-cy=room-input-col] .v-messages__message').should('not.exist')
 
@@ -78,15 +78,15 @@ describe('The SU resource lifecycle', () => {
 
     cy.get('[data-cy=phase-input-col] .v-messages__message').should('be.visible')
 
-    cy.get('[data-cy=phase-input-col]').click().type('{backspace}2')
+    cy.get('[data-cy=phase-input-col] input').first().click().type('{backspace}2')
 
     cy.get('[data-cy=subphase-input-col] .v-messages__message').should('not.exist')
 
-    cy.get('[data-cy=subphase-input-col]').click().type('c')
+    cy.get('[data-cy=subphase-input-col]').click().type('1')
 
     cy.get('[data-cy=subphase-input-col] .v-messages__message').should('be.visible')
 
-    cy.get('[data-cy=subphase-input-col] input').first().click().type('{backspace}1')
+    cy.get('[data-cy=subphase-input-col] input').first().click().type('{backspace}c')
 
     cy.get('[data-cy=subphase-input-col] .v-messages__message').should('not.exist')
 

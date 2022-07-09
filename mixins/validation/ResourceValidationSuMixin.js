@@ -12,7 +12,7 @@ export default {
       type: { required },
       year: { required, integer, between: between(2000, 2099)},
       building: { integer },
-      buildingPhase: { lowercase: helpers.regex('isLowercase',/^[a-z]*$/), maxLength: maxLength(1) },
+      buildingSubPhase: { lowercase: helpers.regex('isLowercase',/^[a-z]*$/), maxLength: maxLength(1) },
       room: {maxLength: maxLength(3), uppercase: helpers.regex('isUppercase',/^[A-Z]*$/)},
       phase: { integer },
       subPhase: { lowercase: helpers.regex('isLowercase',/^[a-z]*$/), maxLength: maxLength(1)},
@@ -88,11 +88,11 @@ export default {
       !this.$v.modelItem.subPhase.lowercase && errors.push('Sub phase identifier must be an lowercase number')
       return errors
     },
-    buildingPhaseErrors() {
+    buildingSubPhaseErrors() {
       const errors = []
-      if (!this.$v.modelItem.buildingPhase.$dirty) return errors
-      !this.$v.modelItem.buildingPhase.maxLength && errors.push('Building phase identifier must be a single character')
-      !this.$v.modelItem.buildingPhase.lowercase && errors.push('Building phase identifier must be a lowercase alphabetic character')
+      if (!this.$v.modelItem.buildingSubPhase.$dirty) return errors
+      !this.$v.modelItem.buildingSubPhase.maxLength && errors.push('Building sub phase identifier must be a single character')
+      !this.$v.modelItem.buildingSubPhase.lowercase && errors.push('Building sub phase identifier must be a lowercase alphabetic character')
       return errors
     },
   },

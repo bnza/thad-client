@@ -50,8 +50,8 @@
           </v-col>
           <v-col sm="4">
             <v-text-field
-              :value="getResponseValue('buildingPhase', item)"
-              label="building phase"
+              :value="getResponseValue('buildingSubPhase', item)"
+              label="building sub phase"
               readonly
             />
           </v-col>
