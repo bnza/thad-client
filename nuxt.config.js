@@ -88,11 +88,17 @@ export default {
     scopeKey: 'roles',
     strategies: {
       local: {
+        scheme: 'refresh',
         token: {
           property: 'token',
           global: true,
           required: true,
           type: 'Bearer'
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30
         },
         user: {
           property: '',
@@ -100,6 +106,7 @@ export default {
         },
         endpoints: {
           login: { url: process.env.API_PREFIX + '/login', method: 'post' },
+          refresh: { url: process.env.API_PREFIX + '/token/refresh', method: 'post' },
           user: { url: process.env.API_PREFIX + '/users/me', method: 'get' }
         }
       }
