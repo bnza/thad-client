@@ -191,6 +191,19 @@
       <v-expansion-panel-header class="grey--text text-overline">Sherd count by subperiod</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
+          <v-col sm="2">
+            <v-text-field
+              v-model="modelItem.subperiodUndeterminedCount"
+              label="undetermined"
+              :error-messages="errors('subperiodUndeterminedCount')"
+              class="mx-4"
+              @input="$v.modelItem.subperiodUndeterminedCount.$touch()"
+              @blur="$v.modelItem.subperiodUndeterminedCount.$touch()"
+            />
+          </v-col>
+        </v-row>
+        <v-divider class="my-4"/>
+        <v-row dense>
           <v-col>
             <v-text-field
               v-model="modelItem.subperiodEPNCount"

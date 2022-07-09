@@ -7,6 +7,7 @@ export const CUMULATIVE_POTTERY_SHEET_NUMERIC_FIELDS = Object.freeze( [
   'coarseWareDiagnosticCount',
   'kitchenWareDiagnosticCount',
   'kitchenWareNonDiagnosticCount',
+  'subperiodUndeterminedCount',
   'subperiodEPNCount',
   'subperiodHASCount',
   'subperiodSAMCount',

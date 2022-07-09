@@ -70,15 +70,20 @@
               readonly
             />
           </v-col>
-
           <v-col>
             <v-text-field
-              :value="getResponseValue('periodEMTCount', item)"
-              label="Early Middle Tigris"
+              :value="getResponseValue('periodEBACount', item)"
+              label="Early Bronze Age"
               readonly
             />
           </v-col>
-          <v-col />
+          <v-col>
+            <v-text-field
+              :value="getResponseValue('periodMBACount', item)"
+              label="Middle Bronze Age"
+              readonly
+            />
+          </v-col>
         </v-row>
         <v-row dense>
           <v-col>
