@@ -107,7 +107,8 @@ export default {
         endpoints: {
           login: { url: process.env.API_PREFIX + '/login', method: 'post' },
           refresh: { url: process.env.API_PREFIX + '/token/refresh', method: 'post' },
-          user: { url: process.env.API_PREFIX + '/users/me', method: 'get' }
+          user: { url: process.env.API_PREFIX + '/users/me', method: 'get' },
+          logout: false
         }
       }
     }

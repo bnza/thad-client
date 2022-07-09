@@ -70,10 +70,10 @@ export default {
      login() {
        this.$router.push('/login')
     },
-    logout() {
+    async logout() {
       this.logoutDialog = false
-      this.$auth.logout()
-      this.invalidateToken(this.$auth.strategy?.refreshToken?.$storage._state['_refresh_token.local'])
+      await this.invalidateToken(this.$store.$auth.strategy?.refreshToken.get())
+      await this.$auth.logout()
       this.showSnackbar({text: 'User logged out'})
     },
   },
