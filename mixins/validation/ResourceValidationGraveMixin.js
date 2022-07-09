@@ -1,5 +1,7 @@
 import { validationMixin } from 'vuelidate'
 import {required, integer, between, maxLength, helpers} from 'vuelidate/lib/validators'
+import {optionalDecimal} from "~/src/validator";
+import greaterThan from "~/src/validators/greaterThan";
 
 export default {
   mixins: [validationMixin],
@@ -14,6 +16,8 @@ export default {
       room: {maxLength: maxLength(2), uppercase: helpers.regex('isUppercase',/^[A-Z]*$/)},
       phase: { integer },
       subPhase: { lowercase: helpers.regex('isLowercase',/^[a-z]*$/), maxLength: maxLength(1)},
+      topElevation: { optionalDecimal, optionalGreaterThan: greaterThan('bottomElevation')},
+      bottomElevation: { optionalDecimal }
     },
   },
   computed: {
@@ -75,6 +79,19 @@ export default {
       if (!this.$v.modelItem.buildingSubPhase.$dirty) return errors
       !this.$v.modelItem.buildingSubPhase.maxLength && errors.push('Building sub phase identifier must be a single character')
       !this.$v.modelItem.buildingSubPhase.lowercase && errors.push('Building sub phase identifier must be a lowercase alphabetic character')
+      return errors
+    },
+    bottomElevationErrors() {
+      const errors = []
+      if (!this.$v.modelItem.bottomElevation.$dirty) return errors
+      !this.$v.modelItem.bottomElevation.optionalDecimal && errors.push('Elevation must be decimal.')
+      return errors
+    },
+    topElevationErrors() {
+      const errors = []
+      if (!this.$v.modelItem.topElevation.$dirty) return errors
+      !this.$v.modelItem.topElevation.optionalDecimal && errors.push('Elevation must be decimal.')
+      !this.$v.modelItem.topElevation.optionalGreaterThan && errors.push('Top elevation must be greater than bottom elevation.')
       return errors
     },
   }

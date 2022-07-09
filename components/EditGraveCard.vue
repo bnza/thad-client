@@ -12,6 +12,7 @@
             <v-row dense>
               <v-col sm="3">
                 <v-text-field
+                  class="mx-4"
                   data-cy="site-code-input"
                   :value="getResponseValue('area.code.name', modelItem) || getResponseValue('site.code', modelItem)"
                   label="site code"
@@ -20,6 +21,7 @@
               </v-col>
               <v-col sm="3">
                 <v-text-field
+                  class="mx-4"
                   data-cy="site-name-input"
                   :value="getResponseValue('area.site.name', modelItem) || getResponseValue('site.name', modelItem)"
                   label="site name"
@@ -31,6 +33,7 @@
               <v-col data-cy="area-select-col" sm="3">
                 <v-text-field
                   v-if="parent"
+                  class="mx-4"
                   data-cy="area-code-input"
                   :value="getResponseValue('area.site.code', modelItem)"
                   label="area code"
@@ -38,6 +41,7 @@
                 />
                 <select-areas-autocomplete
                   v-else
+                  class="mx-4"
                   :select.sync="modelItem.area"
                   :error-messages="areaErrors"
                   :disabled="updateCodeDisabled"
@@ -51,6 +55,7 @@
                   data-cy="area-name-input"
                   :value="getResponseValue('area.name', modelItem)"
                   label="area name"
+                  class="mx-4"
                   disabled
                 />
               </v-col>
@@ -59,6 +64,7 @@
               <v-col data-cy="building-input-col" sm="3">
                 <v-text-field
                   v-model="modelItem.building"
+                  class="mx-4"
                   label="building"
                   :error-messages="buildingErrors"
                   @input="$v.modelItem.building.$touch()"
@@ -68,6 +74,7 @@
               <v-col data-cy="room-building-phase-col" sm="3">
                 <v-text-field
                   v-model="modelItem.buildingSubPhase"
+                  class="mx-4"
                   label="building sub phase"
                   :error-messages="buildingSubPhaseErrors"
                   @input="$v.modelItem.buildingSubPhase.$touch()"
@@ -80,6 +87,7 @@
               <v-col data-cy="room-input-col" sm="3">
                 <v-text-field
                   v-model="modelItem.room"
+                  class="mx-4"
                   label="room"
                   :error-messages="roomErrors"
                   @input="$v.modelItem.room.$touch()"
@@ -95,7 +103,7 @@
           <v-row dense>
             <v-col sm="4">
               <v-text-field
-                class="secondary--text font-weight-bold" color="secondary"
+                class="mx-4 secondary--text font-weight-bold" color="secondary"
                 :value="isUpdate ? formatCode('grave', item) : undefined"
                 label="code"
                 disabled
@@ -107,6 +115,7 @@
             >
               <v-autocomplete
                 v-model="modelItem.year"
+                class="mx-4"
                 label="excavation year"
                 required
                 :disabled="updateCodeDisabled"
@@ -122,6 +131,7 @@
             >
               <v-text-field
                 v-model="modelItem.number"
+                class="mx-4"
                 label="number"
                 :disabled="updateCodeDisabled"
                 required
@@ -137,6 +147,7 @@
               sm="4"
             >
               <select-vocabulary-autocomplete
+                class="mx-4"
                 label="type"
                 :select.sync="modelItem.type"
                 :error-messages="typeErrors"
@@ -151,6 +162,7 @@
               sm="4"
             >
               <select-vocabulary-autocomplete
+                class="mx-4"
                 label="ritual"
                 :select.sync="modelItem.ritual"
                 vocabulary-name="ritual"
@@ -163,6 +175,7 @@
             >
               <v-select
                 v-model="isSecondaryDeposition"
+                class="mx-4"
                 label="deposition"
                 vocabulary-name="ritual"
                 :items="[
@@ -175,6 +188,7 @@
             <v-col>
               <v-text-field
                 v-model="modelItem.alignment"
+                class="mx-4"
                 data-cy="alignment-input"
                 label="alignment"
               />
@@ -183,6 +197,7 @@
             <v-col>
               <select-vocabulary-autocomplete
                 label="preservation"
+                class="mx-4"
                 :select.sync="modelItem.preservationState"
                 vocabulary-name="preservationState"
                 v-on="$listeners"
@@ -195,24 +210,26 @@
           <v-expansion-panel-header class="grey--text text-overline">Periodization</v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-row dense>
-              <v-col data-cy="period-select-col">
+              <v-col data-cy="period-select-col" sm="4">
                 <select-period-vocabulary-autocomplete
+                  class="mx-4"
                   :select.sync="modelItem.period"
                 />
               </v-col>
-              <v-col />
-              <v-col data-cy="phase-input-col" sm="3">
+              <v-col data-cy="phase-input-col" sm="4">
                 <v-text-field
                   v-model="modelItem.phase"
+                  class="mx-4"
                   label="phase"
                   :error-messages="phaseErrors"
                   @input="$v.modelItem.phase.$touch()"
                   @blur="$v.modelItem.phase.$touch()"
                 />
               </v-col>
-              <v-col data-cy="subphase-input-col" sm="3">
+              <v-col data-cy="subphase-input-col" sm="4">
                 <v-text-field
                   v-model="modelItem.subPhase"
+                  class="mx-4"
                   label="sub phase"
                   :error-messages="subPhaseErrors"
                   @input="$v.modelItem.subPhase.$touch()"
@@ -228,6 +245,7 @@
             <v-row dense>
               <v-col>
                 <select-sus-autocomplete
+                  class="mx-4"
                   label="cut SU"
                   :select.sync="modelItem.cutStratigraphicUnit"
                   :clearable="true"
@@ -235,6 +253,7 @@
               </v-col>
               <v-col>
                 <select-sus-autocomplete
+                  class="mx-4"
                   label="fill SU"
                   :select.sync="modelItem.fillStratigraphicUnit"
                   :clearable="true"
@@ -242,6 +261,7 @@
               </v-col>
               <v-col>
                 <select-sus-autocomplete
+                  class="mx-4"
                   label="skeleton SU"
                   :select.sync="modelItem.skeletonStratigraphicUnit"
                   :clearable="true"
@@ -251,6 +271,7 @@
           <v-row dense>
             <v-col>
               <select-sus-autocomplete
+                class="mx-4"
                 label="earlier than"
                 :select.sync="modelItem.earlierThan"
                 :clearable="true"
@@ -259,6 +280,7 @@
             <v-col />
             <v-col>
               <select-sus-autocomplete
+                class="mx-4"
                 label="later than"
                 :select.sync="modelItem.laterThan"
                 :clearable="true"
@@ -270,10 +292,33 @@
         <v-expansion-panel>
           <v-expansion-panel-header class="grey--text text-overline">Misc</v-expansion-panel-header>
           <v-expansion-panel-content>
+            <v-row dense>
+              <v-col data-cy="top-elevation-col" sm="4">
+                <v-text-field
+                  v-model="modelItem.topElevation"
+                  class="mx-4"
+                  label="top elevation (m)"
+                  :error-messages="topElevationErrors"
+                  @input="$v.modelItem.topElevation.$touch()"
+                  @blur="$v.modelItem.topElevation.$touch()"
+                />
+              </v-col>
+              <v-col data-cy="bottom-elevation-col" sm="4">
+                <v-text-field
+                  v-model="modelItem.bottomElevation"
+                  class="mx-4"
+                  label="bottom elevation (m)"
+                  :error-messages="bottomElevationErrors"
+                  @input="$v.modelItem.bottomElevation.$touch()"
+                  @blur="$v.modelItem.bottomElevation.$touch()"
+                />
+              </v-col>
+            </v-row>
           <v-row dense>
             <v-col>
               <v-textarea
                 v-model="modelItem.description"
+                class="mx-4"
                 label="description"
                 data-cy="su-description-input"
               />
@@ -281,6 +326,7 @@
             <v-col>
               <v-textarea
                 v-model="modelItem.interpretation"
+                class="mx-4"
                 label="interpretation"
                 data-cy="su-interpretation-input"
               />
@@ -298,6 +344,7 @@
             <v-col>
               <v-text-field
                 v-model="modelItem.compiler"
+                class="mx-4"
                 label="compiler"
                 data-cy="compiler-input"
               />
@@ -305,6 +352,7 @@
             <v-col>
               <v-text-field
                 v-model="modelItem.areaSupervisor"
+                class="mx-4"
                 label="supervisor"
                 data-cy="area-supervisor-input"
               />
@@ -322,6 +370,7 @@
                 <template #activator="{ on, attrs }">
                   <v-text-field
                     v-model="modelItem.date"
+                    class="mx-4"
                     label="compilation date"
                     prepend-icon="mdi-calendar"
                     readonly
@@ -422,6 +471,8 @@ export default {
         'buildingSubPhase',
         'phase',
         'subPhase',
+        'topElevation',
+        'bottomElevation',
       ]) {
         if (has(key, data)) {
           data[key] = 1 * data[key]

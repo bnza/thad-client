@@ -254,6 +254,22 @@
       <v-expansion-panel-header class="grey--text text-overline">Misc</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
+          <v-col sm="4">
+            <v-text-field
+              :value="getResponseValue('topElevation', item)"
+              label="top elevation (m)"
+              readonly
+            />
+          </v-col>
+          <v-col sm="4">
+            <v-text-field
+              :value="getResponseValue('bottomElevation', item)"
+              label="bottom elevation (m)"
+              readonly
+            />
+          </v-col>
+        </v-row>
+        <v-row dense>
           <v-col>
             <v-textarea
               :value="getResponseValue('description', item)"
