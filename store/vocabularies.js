@@ -32,6 +32,9 @@ export const actions = {
         headers: {
           Accept: 'application/ld+json'
         },
+        params: {
+          pagination: false
+        }
       }).then(response => commit('set', {resourceName: voc.resourceName, data: response.data}))
     }, this)
   }
