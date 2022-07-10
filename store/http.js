@@ -115,4 +115,19 @@ export const actions = {
         },
       })
   },
+  getNominatives({dispatch}, {apiPrefix, search}) {
+    const params = {}
+    if (search) {
+      params.name = search
+    }
+    return dispatch('request',
+      {
+        method: 'get',
+        url: `${apiPrefix}/nominatives`,
+        headers: {
+          Accept: 'application/json'
+        },
+        params
+      })
+  }
 }

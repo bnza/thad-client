@@ -10,6 +10,7 @@ export default {
       thickness: { decimal },
       rimDiameter: { decimal },
       baseDiameter: { decimal },
+      compiler: {required}
     },
   },
   computed: {
@@ -42,6 +43,12 @@ export default {
       const errors = []
       if (!this.$v.modelItem.baseDiameter.$dirty) return errors
       !this.$v.modelItem.baseDiameter.decimal && errors.push('Base diameter must be a decimal number.')
+      return errors
+    },
+    compilerErrors() {
+      const errors = []
+      if (!this.$v.modelItem.compiler.$dirty) return errors
+      !this.$v.modelItem.compiler.required && errors.push('Compiler is required.')
       return errors
     },
   },

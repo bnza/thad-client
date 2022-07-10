@@ -36,6 +36,9 @@ describe('The Pottery resource lifecycle', () => {
     cy.get('[data-cy=submit-btn]').click()
     cy.get('[data-cy=pottery-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=number-input-col] .v-messages__message').should('be.visible')
+    cy.get('[data-cy=compiler-select-col] .v-messages__message').should('be.visible')
+
+    cy.get('[data-cy=compiler-select-col]').type('Some One')
 
     cy.get('[data-cy=pottery-select-col]').click().type('1{downArrow}{enter}')
 
@@ -156,8 +159,6 @@ describe('The Pottery resource lifecycle', () => {
     cy.get('[data-cy=base-diameter-input-col] .v-messages__message').should('be.visible')
 
     cy.get('[data-cy=base-diameter-input-col] input').type('{backspace}3.24')
-
-    cy.get('[data-cy=compiler-input]').type('Some One')
 
     cy.intercept({method: 'post', path: '**/api/potteries'}).as('successfulCreateRequest')
 

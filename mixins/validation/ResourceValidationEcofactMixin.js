@@ -15,7 +15,8 @@ export default {
       thickness: { decimal },
       minDiameter: { decimal },
       maxDiameter: { decimal },
-      weight: {decimal}
+      weight: {decimal},
+      compiler: { required },
     },
   },
   computed: {
@@ -29,6 +30,12 @@ export default {
       const errors = []
       if (!this.$v.modelItem.type.$dirty) return errors
       !this.$v.modelItem.type.required && errors.push('type is required.')
+      return errors
+    },
+    compilerErrors() {
+      const errors = []
+      if (!this.$v.modelItem.compiler.$dirty) return errors
+      !this.$v.modelItem.compiler.required && errors.push('Compiler is required.')
       return errors
     },
     numberErrors() {

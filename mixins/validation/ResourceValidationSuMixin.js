@@ -17,7 +17,8 @@ export default {
       phase: { integer },
       subPhase: { lowercase: helpers.regex('isLowercase',/^[a-z]*$/), maxLength: maxLength(1)},
       topElevation: { optionalDecimal, optionalGreaterThan: greaterThan('bottomElevation')},
-      bottomElevation: { optionalDecimal }
+      bottomElevation: { optionalDecimal },
+      compiler: { required },
     },
   },
   computed: {
@@ -25,6 +26,12 @@ export default {
       const errors = []
       if (!this.$v.modelItem.area.$dirty) return errors
       !this.$v.modelItem.area.required && errors.push('Area is required.')
+      return errors
+    },
+    compilerErrors() {
+      const errors = []
+      if (!this.$v.modelItem.compiler.$dirty) return errors
+      !this.$v.modelItem.compiler.required && errors.push('Compiler is required.')
       return errors
     },
     numberErrors() {

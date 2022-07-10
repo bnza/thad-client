@@ -60,6 +60,7 @@
             />
             <select-sus-autocomplete
               v-else
+              data-cy="su-select-col"
               :select.sync="modelItem.stratigraphicUnit"
               :error-messages="stratigraphicUnitErrors"
               :disabled="updateCodeDisabled"
@@ -395,11 +396,16 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col sm="2" data-cy="compiler-input">
-            <v-text-field
-              v-model="modelItem.compiler"
+          <v-col sm="2" data-cy="compiler-select-col">
+            <select-nominatives-autocomplete
               label="compiler"
+              :select.sync="modelItem.compiler"
+              :error-messages="compilerErrors"
+              :disabled="updateCodeDisabled"
               class="mx-4"
+              v-on="$listeners"
+              @input="$v.modelItem.compiler.$touch()"
+              @blur="$v.modelItem.compiler.$touch()"
             />
           </v-col>
           <v-col sm="2">

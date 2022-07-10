@@ -3,8 +3,6 @@ import { fromPairs, mergeLeft } from "ramda";
 import { required, integer, minValue } from 'vuelidate/lib/validators'
 import {CUMULATIVE_POTTERY_SHEET_NUMERIC_FIELDS} from "~/src/constants";
 
-export const countFields = CUMULATIVE_POTTERY_SHEET_NUMERIC_FIELDS
-
 export default {
   mixins: [validationMixin],
   data() {
@@ -14,10 +12,11 @@ export default {
   },
   validations() {
     const localRules = {
-        stratigraphicUnit: {required},
+      stratigraphicUnit: {required},
+      compiler: {required}
     }
     return {
-      modelItem: mergeLeft(fromPairs(countFields.map(field => [field, {integer, minValue: minValue(0)}])), localRules)
+      modelItem: mergeLeft(fromPairs(CUMULATIVE_POTTERY_SHEET_NUMERIC_FIELDS.map(field => [field, {integer, minValue: minValue(0)}])), localRules)
     }
   },
   computed: {
@@ -37,13 +36,13 @@ export default {
         return errors
       }
     },
+    compilerErrors() {
+      const errors = []
+      if (!this.$v.modelItem.compiler.$dirty) return errors
+      !this.$v.modelItem.compiler.required && errors.push('Compiler is required.')
+      return errors
+    },
   },
-/*   methods: {
-    debounceInput: debounce(function (field, e) {
-      this.$v.modelItem[field].$touch()
-      this.modelItem[field] = e.target.value
-    }, 500)
-  }, */
   watch: {
     modelItem: {
       handler(item) {

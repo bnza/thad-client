@@ -341,19 +341,23 @@
             </v-col>
           </v-row>
           <v-row dense>
-            <v-col>
-              <v-text-field
-                v-model="modelItem.compiler"
-                class="mx-4"
+            <v-col data-cy="compiler-select-col">
+              <select-nominatives-autocomplete
                 label="compiler"
-                data-cy="compiler-input"
+                :select.sync="modelItem.compiler"
+                :error-messages="compilerErrors"
+                :disabled="updateCodeDisabled"
+                class="mx-4"
+                v-on="$listeners"
+                @input="$v.modelItem.compiler.$touch()"
+                @blur="$v.modelItem.compiler.$touch()"
               />
             </v-col>
             <v-col>
-              <v-text-field
-                v-model="modelItem.areaSupervisor"
-                class="mx-4"
+              <select-nominatives-autocomplete
                 label="supervisor"
+                :select.sync="modelItem.areaSupervisor"
+                class="mx-4"
                 data-cy="area-supervisor-input"
               />
             </v-col>

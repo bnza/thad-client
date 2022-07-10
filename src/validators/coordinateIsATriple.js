@@ -11,7 +11,7 @@ export default (coordN,coordE,coordZ) =>
     const refValueN = ref(coordN, this, parentVm)
     const refValueE = ref(coordE, this, parentVm)
     const refValueZ = ref(coordZ, this, parentVm)
-    if ( isNullish(coordN) && isNullish(coordE) && isNullish(coordZ)) {
+    if ( isNullish(refValueN) && isNullish(refValueE) && isNullish(refValueZ)) {
       return true
     }
     return !isNaN(refValueN) && !isNaN(refValueE) && !isNaN(refValueZ)

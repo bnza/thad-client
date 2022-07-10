@@ -24,7 +24,8 @@ export default {
       coordE: { decimal, coordinateIsATriple: coordinateIsATriple(), between: between(-180,180) },
       coordZ: { decimal, coordinateIsATriple: coordinateIsATriple() },
       maxDiameter: { decimal, greaterThan: greaterThan('minDiameter')},
-      weight: {decimal}
+      weight: {decimal},
+      compiler: {required}
     },
   },
   computed: {
@@ -142,6 +143,12 @@ export default {
       if (!this.$v.modelItem.coordZ.$dirty) return errors
       !this.$v.modelItem.coordZ.decimal && errors.push('Elevation must be a decimal number.')
       !this.$v.modelItem.coordZ.coordinateIsATriple && errors.push('Coordinate must have all the N, E, Z components.')
+      return errors
+    },
+    compilerErrors() {
+      const errors = []
+      if (!this.$v.modelItem.compiler.$dirty) return errors
+      !this.$v.modelItem.compiler.required && errors.push('Compiler is required.')
       return errors
     },
   },

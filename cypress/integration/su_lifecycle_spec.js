@@ -38,6 +38,7 @@ describe('The SU resource lifecycle', () => {
     cy.get('[data-cy=number-input-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=type-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=year-select-col] .v-messages__message').should('be.visible')
+    cy.get('[data-cy=compiler-select-col] .v-messages__message').should('be.visible')
 
     cy.get('[data-cy=year-select-col] input').first().click().type('22{downArrow}{enter}')
 
@@ -124,7 +125,7 @@ describe('The SU resource lifecycle', () => {
 
     cy.get('[data-cy=bottom-elevation-col] .v-messages__message').should('not.exist')
 
-    cy.get('[data-cy=compiler-input]').type('Some One')
+    cy.get('[data-cy=compiler-select-col]').type('Some One')
 
     cy.get('[data-cy=area-supervisor-input]').type('The Supervisor')
 

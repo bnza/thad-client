@@ -17,7 +17,8 @@ export default {
       phase: { integer },
       subPhase: { lowercase: helpers.regex('isLowercase',/^[a-z]*$/), maxLength: maxLength(1)},
       topElevation: { optionalDecimal, optionalGreaterThan: greaterThan('bottomElevation')},
-      bottomElevation: { optionalDecimal }
+      bottomElevation: { optionalDecimal },
+      compiler: {required}
     },
   },
   computed: {
@@ -92,6 +93,12 @@ export default {
       if (!this.$v.modelItem.topElevation.$dirty) return errors
       !this.$v.modelItem.topElevation.optionalDecimal && errors.push('Elevation must be decimal.')
       !this.$v.modelItem.topElevation.optionalGreaterThan && errors.push('Top elevation must be greater than bottom elevation.')
+      return errors
+    },
+    compilerErrors() {
+      const errors = []
+      if (!this.$v.modelItem.compiler.$dirty) return errors
+      !this.$v.modelItem.compiler.required && errors.push('Compiler is required.')
       return errors
     },
   }

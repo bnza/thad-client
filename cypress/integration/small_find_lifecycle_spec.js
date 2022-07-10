@@ -39,6 +39,9 @@ describe('The Small Find resource lifecycle', () => {
     cy.get('[data-cy=type-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=material-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=preservation-select-col] .v-messages__message').should('be.visible')
+    cy.get('[data-cy=compiler-select-col] .v-messages__message').should('be.visible')
+
+    cy.get('[data-cy=compiler-select-col]').type('Some One')
 
     cy.get('[data-cy=su-select-col]').click().type('1{downArrow}{enter}')
 
@@ -158,8 +161,6 @@ describe('The Small Find resource lifecycle', () => {
 
     cy.get('[data-cy=notes-input]').type('Some interesting note')
 
-    cy.get('[data-cy=compiler-input]').type('Some One')
-
     cy.intercept({method: 'post', path: '**/api/small_finds'}).as('successfulCreateRequest')
 
     cy.get('[data-cy=submit-btn]').click()
@@ -168,7 +169,7 @@ describe('The Small Find resource lifecycle', () => {
 
     cy.get('[data-cy=resource-update-btn]').click()
 
-    cy.get('[data-cy=number-input-col]').type('{backspace}{backspace}1')
+    cy.get('[data-cy=number-input-col]').type('{backspace}{backspace}{backspace}1')
 
     cy.intercept({method: 'patch', path: '**/api/small_finds/*'}).as('failedUpdateRequest')
 

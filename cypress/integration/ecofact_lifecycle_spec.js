@@ -37,6 +37,7 @@ describe('The Ecofact resource lifecycle', () => {
     cy.get('[data-cy=su-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=number-input-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=type-select-col] .v-messages__message').should('be.visible')
+    cy.get('[data-cy=compiler-select-col] .v-messages__message').should('be.visible')
 
     cy.get('[data-cy=su-select-col]').click().type('1{downArrow}{enter}')
 
@@ -61,6 +62,8 @@ describe('The Ecofact resource lifecycle', () => {
     cy.get('[data-cy=preservation-state-select-col] input').should('have.value', 'fair')
 
     cy.get('[data-cy=notes-input]').type('Some interesting note')
+
+    cy.get('[data-cy=compiler-select-col]').type('Some One')
 
     cy.get('[data-cy=length-input-col] input').type('n')
 
@@ -103,8 +106,6 @@ describe('The Ecofact resource lifecycle', () => {
     cy.get('[data-cy=weight-input-col] .v-messages__message').should('be.visible')
 
     cy.get('[data-cy=weight-input-col] input').type('{backspace}7.00')
-
-    cy.get('[data-cy=compiler-input]').type('Some One')
 
     cy.intercept({method: 'post', path: '**/api/ecofacts'}).as('successfulCreateRequest')
 
