@@ -8,14 +8,14 @@
       <v-expansion-panel-header class="grey--text text-overline">Location</v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row dense>
-          <v-col sm="1">
+          <v-col sm="2">
             <v-text-field
               :value="getResponseValue('site.code', item)"
               label="site code"
               readonly
             />
           </v-col>
-          <v-col sm="5">
+          <v-col sm="4">
             <v-text-field
               :value="getResponseValue('site.name', item)"
               label="site name"
@@ -24,14 +24,14 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col sm="1">
+          <v-col sm="2">
             <v-text-field
               :value="getResponseValue('area.code', item)"
               label="area code"
               readonly
             />
           </v-col>
-          <v-col sm="5">
+          <v-col sm="4">
             <v-text-field
               :value="getResponseValue('area.name', item)"
               label="area name"

@@ -30,7 +30,7 @@
             </v-col>
           </v-row>
           <v-row dense>
-            <v-col data-cy="area-select-col" sm="1">
+            <v-col data-cy="area-select-col" sm="2">
               <v-text-field
                 v-if="parent"
                 data-cy="area-code-input"
@@ -50,7 +50,7 @@
                 @blur="$v.modelItem.area.$touch()"
               />
             </v-col>
-            <v-col sm="5">
+            <v-col sm="4">
               <v-text-field
                 data-cy="area-name-input"
                 :value="getResponseValue('area.name', modelItem)"
@@ -266,7 +266,7 @@
         </v-col>
       </v-row>
       <v-row dense>
-        <v-col data-cy="compiler-select-col">>
+        <v-col data-cy="compiler-select-col">
           <select-nominatives-autocomplete
             label="compiler"
             :select.sync="modelItem.compiler"
