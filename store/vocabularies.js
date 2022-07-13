@@ -1,9 +1,14 @@
-export const state = () => ({})
+export const state = () => ({
+  ready: false
+})
 
 export const mutations = {
   set(state, {resourceName, data}) {
     state[resourceName] = data['hydra:member']
   },
+  setReady(state, flag) {
+    state.ready = flag
+  }
 }
 
 export const getters = {
@@ -25,7 +30,8 @@ export const actions = {
     }).then(response => commit('set', {resourceName: vocabulary.resourceName, data: response.data}))
   },
   fetchAll({commit, rootGetters}) {
-    rootGetters["api/vocabularyResources"].forEach((voc) => {
+    Promise.all(
+      rootGetters["api/vocabularyResources"].map((voc) => {
       return this.$axios.request({
         method: 'get',
         url: voc.collectionUrl,
@@ -37,5 +43,8 @@ export const actions = {
         }
       }).then(response => commit('set', {resourceName: voc.resourceName, data: response.data}))
     }, this)
+    ).then(
+      commit('setReady', true)
+    )
   }
 }
