@@ -119,22 +119,22 @@
         <v-row dense>
           <v-col data-cy="cwd-input-col">
             <v-text-field
-              v-model="modelItem.fireWareDiagnosticCount"
-              label="fire ware diagnostic"
-              :error-messages="errors('fireWareDiagnosticCount')"
+              v-model="modelItem.fineWareDiagnosticCount"
+              label="fine ware diagnostic"
+              :error-messages="errors('fineWareDiagnosticCount')"
               class="mx-4"
-              @input="$v.modelItem.fireWareDiagnosticCount.$touch()"
-              @blur="$v.modelItem.fireWareDiagnosticCount.$touch()"
+              @input="$v.modelItem.fineWareDiagnosticCount.$touch()"
+              @blur="$v.modelItem.fineWareDiagnosticCount.$touch()"
             />
           </v-col>
           <v-col data-cy="cwnd-input-col">
             <v-text-field
-              v-model="modelItem.fireWareNonDiagnosticCount"
-              label="fire ware non diagnostic"
-              :error-messages="errors('fireWareNonDiagnosticCount')"
+              v-model="modelItem.fineWareNonDiagnosticCount"
+              label="fine ware non diagnostic"
+              :error-messages="errors('fineWareNonDiagnosticCount')"
               class="mx-4"
-              @input="$v.modelItem.fireWareNonDiagnosticCount.$touch()"
-              @blur="$v.modelItem.fireWareNonDiagnosticCount.$touch()"
+              @input="$v.modelItem.fineWareNonDiagnosticCount.$touch()"
+              @blur="$v.modelItem.fineWareNonDiagnosticCount.$touch()"
             />
           </v-col>
           <v-col />

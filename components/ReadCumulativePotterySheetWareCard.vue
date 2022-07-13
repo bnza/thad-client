@@ -31,15 +31,15 @@
     <v-row dense>
       <v-col sm="3">
         <v-text-field
-          :value="getResponseValue('fireWareDiagnosticCount', item)"
-          label="fire ware diagnostic sherd count"
+          :value="getResponseValue('fineWareDiagnosticCount', item)"
+          label="fine ware diagnostic sherd count"
           readonly
         />
       </v-col>
       <v-col sm="3">
         <v-text-field
-          :value="getResponseValue('fireWareNonDiagnosticCount', item)"
-          label="fire ware non diagnostic sherd count"
+          :value="getResponseValue('fineWareNonDiagnosticCount', item)"
+          label="fine ware non diagnostic sherd count"
           readonly
         />
       </v-col>

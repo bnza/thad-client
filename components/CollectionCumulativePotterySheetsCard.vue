@@ -160,15 +160,15 @@ export default {
       },
       {
         text: 'FW-ND',
-        value: 'fireWareNonDiagnosticCount',
-        label: 'fire ware non diagnostic sherd count',
+        value: 'fineWareNonDiagnosticCount',
+        label: 'fine ware non diagnostic sherd count',
         align: 'right',
         width: '100px'
       },
       {
         text: 'FW-D',
-        value: 'fireWareDiagnosticCount',
-        label: 'fire ware diagnostic sherd count',
+        value: 'fineWareDiagnosticCount',
+        label: 'fine ware diagnostic sherd count',
         align: 'right',
         width: '100px'
       },
