@@ -273,7 +273,6 @@
             :error-messages="compilerErrors"
             :disabled="updateCodeDisabled"
             class="mx-4"
-            data-cy="area-compiler-input"
             v-on="$listeners"
             @input="$v.modelItem.compiler.$touch()"
             @blur="$v.modelItem.compiler.$touch()"

@@ -12,6 +12,7 @@ export default {
       mediaObject: { required },
       description: { required },
       interpretation: { required },
+      creator: { required }
     },
   },
   computed: {
@@ -43,6 +44,12 @@ export default {
       const errors = []
       if (!this.$v.modelItem.interpretation.$dirty) return errors
       !this.$v.modelItem.interpretation.required && errors.push('Interpretation is required.')
+      return errors
+    },
+    creatorErrors() {
+      const errors = []
+      if (!this.$v.modelItem.creator.$dirty) return errors
+      !this.$v.modelItem.creator.required && errors.push('Creator is required.')
       return errors
     },
     numberErrors() {

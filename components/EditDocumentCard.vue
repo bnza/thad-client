@@ -163,14 +163,16 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col
-            sm="4"
-            data-cy="creator-input"
-          >
-            <v-text-field
-              v-model="modelItem.creator"
+          <v-col data-cy="creator-select-col">
+            <select-nominatives-autocomplete
               label="creator"
+              :select.sync="modelItem.creator"
+              :error-messages="creatorErrors"
+              :disabled="updateCodeDisabled"
               class="mx-4"
+              v-on="$listeners"
+              @input="$v.modelItem.creator.$touch()"
+              @blur="$v.modelItem.creator.$touch()"
             />
           </v-col>
           <v-col
