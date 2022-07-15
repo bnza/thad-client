@@ -71,7 +71,7 @@
                   @blur="$v.modelItem.building.$touch()"
                 />
               </v-col>
-              <v-col data-cy="room-building-phase-col" sm="3">
+              <v-col data-cy="building-subphase-input-col" sm="3">
                 <v-text-field
                   v-model="modelItem.buildingSubPhase"
                   class="mx-4"
@@ -180,15 +180,6 @@
                 vocabulary-name="deposition"
                 v-on="$listeners"
               />
-<!--              <v-select
-                v-model="isSecondaryDeposition"
-                class="mx-4"
-                label="deposition"
-                vocabulary-name="ritual"
-                :items="[
-                  {value: 0, text: 'primary'}, {value: 1, text: 'secondary'}
-                  ]"
-              />-->
             </v-col>
           </v-row>
           <v-row dense>
@@ -201,7 +192,7 @@
               />
             </v-col>
             <v-col />
-            <v-col>
+            <v-col data-cy="preservation-state-select-col">
               <select-vocabulary-autocomplete
                 label="preservation"
                 class="mx-4"
