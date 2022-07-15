@@ -44,7 +44,7 @@ export const actions = {
       }).then(response => commit('set', {resourceName: voc.resourceName, data: response.data}))
     }, this)
     ).then(
-      commit('setReady', true)
+      () => commit('setReady', true)
     )
   }
 }
