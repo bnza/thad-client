@@ -113,7 +113,7 @@
           </v-col>
           <v-col>
             <v-text-field
-              :value="getResponseValue('isDepositionSecondary', item) ? 'secondary' : 'primary'"
+              :value="getResponseValue('deposition.value', item)"
               label="deposition"
               readonly
             />

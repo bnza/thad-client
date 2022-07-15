@@ -173,7 +173,14 @@
               data-cy="deposition-select-col"
               sm="4"
             >
-              <v-select
+              <select-vocabulary-autocomplete
+                class="mx-4"
+                label="deposition"
+                :select.sync="modelItem.deposition"
+                vocabulary-name="deposition"
+                v-on="$listeners"
+              />
+<!--              <v-select
                 v-model="isSecondaryDeposition"
                 class="mx-4"
                 label="deposition"
@@ -181,7 +188,7 @@
                 :items="[
                   {value: 0, text: 'primary'}, {value: 1, text: 'secondary'}
                   ]"
-              />
+              />-->
             </v-col>
           </v-row>
           <v-row dense>
@@ -416,7 +423,7 @@ export default {
   },
   computed: {
     years: () => yearsRange(),
-    isSecondaryDeposition: {
+/*     isSecondaryDeposition: {
       get() {
         const isSecondaryDeposition = this.modelItem.isSecondaryDeposition
         return isSecondaryDeposition === undefined ? undefined : isSecondaryDeposition === true ? 1 : 0
@@ -424,7 +431,7 @@ export default {
       set(flag) {
         this.modelItem.isSecondaryDeposition = !!flag
       }
-    },
+    }, */
     requestData() {
       const data = normalizeRequestBodyData(this.updateItem)
       for (const key of [
@@ -435,6 +442,7 @@ export default {
         'preservationState',
         'earlierThan',
         'laterThan',
+        'deposition',
       ]) {
         if (has(key, data)) {
           data[key] = this.normalizeResource(key)

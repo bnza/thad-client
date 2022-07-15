@@ -82,6 +82,11 @@
         width: '130px'
       },
       {
+        text: 'deposition',
+        value: 'deposition.value',
+        width: '130px'
+      },
+      {
         text: 'earlier than',
         value: 'earlierThan',
         width: '170px'

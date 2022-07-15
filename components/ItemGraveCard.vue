@@ -82,7 +82,7 @@
       :item="deletingItem"
       @itemDeleted="resetAndPrev"
     >
-      <delete-site-card-text :item="deletingItem" />
+      <delete-grave-card-text :item="deletingItem" />
     </delete-resource-dialog>
     <add-foreign-key-dialog
       resource-field="grave"
