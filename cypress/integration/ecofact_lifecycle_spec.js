@@ -3,6 +3,10 @@ describe('The Ecofact resource lifecycle', () => {
     cy.loadFixtures()
   })
 
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it ('Ecofact resource lifecycle (admin)', () => {
     cy.visit('/')
 

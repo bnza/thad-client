@@ -3,6 +3,10 @@ describe('The Sample resource lifecycle', () => {
     cy.loadFixtures()
   })
 
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it ('Sample resource lifecycle (admin)', () => {
     cy.visit('/')
 

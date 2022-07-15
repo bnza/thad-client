@@ -3,6 +3,10 @@ describe('The SU resource lifecycle', () => {
     cy.loadFixtures()
   })
 
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it('SU resource lifecycle (admin)', () => {
     cy.visit('/')
 

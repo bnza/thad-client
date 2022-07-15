@@ -3,6 +3,10 @@ describe('The Grave resource lifecycle', () => {
     cy.loadFixtures()
   })
 
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it ('Grave resource lifecycle (admin)', () => {
     cy.visit('/')
 

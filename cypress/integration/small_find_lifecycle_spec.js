@@ -3,6 +3,10 @@ describe('The Small Find resource lifecycle', () => {
     cy.loadFixtures()
   })
 
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it ('Small Find resource lifecycle (admin)', () => {
     cy.visit('/')
 

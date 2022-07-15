@@ -3,6 +3,10 @@ describe('The Document resource lifecycle', () => {
     cy.loadFixtures()
   })
 
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it ('Document resource lifecycle (admin)', () => {
 
     cy.resetMedia()

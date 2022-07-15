@@ -2,6 +2,11 @@ describe('The User resource lifecycle', () => {
   beforeEach(() => {
     cy.loadFixtures()
   })
+
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it('Base user password change', () => {
     cy.visit('/')
 

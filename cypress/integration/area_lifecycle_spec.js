@@ -1,6 +1,10 @@
-describe('The Site resource lifecycle', () => {
+describe('The Area resource lifecycle', () => {
   beforeEach(() => {
     cy.loadFixtures()
+  })
+
+  after(() => {
+    cy.clearRefreshToken()
   })
 
   it ('Area resource lifecycle (admin)', () => {

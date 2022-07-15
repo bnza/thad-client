@@ -3,6 +3,10 @@ describe('The Site resource lifecycle', () => {
     cy.loadFixtures()
   })
 
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it ('Site resource lifecycle (admin)', () => {
     cy.visit('/')
 

@@ -72,3 +72,7 @@ Cypress.Commands.add('loadFixtures', () => {
 Cypress.Commands.add('resetMedia', () => {
   cy.exec(`cd ${Cypress.env('api_compose_path')} && docker-compose exec php bin/console app:fixtures:reset-media --env=dev --quiet`)
 })
+
+Cypress.Commands.add('clearRefreshToken', () => {
+  cy.exec(`cd ${Cypress.env('api_compose_path')} && docker-compose exec php bin/console gesdinet:jwt:clear --env=dev --quiet`)
+})

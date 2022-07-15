@@ -1,4 +1,8 @@
 describe('The auth process', () => {
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it('successful login/logout', () => {
     cy.login('user_base@example.com','0000')
 

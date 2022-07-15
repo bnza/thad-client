@@ -3,6 +3,10 @@ describe('The SU relationship lifecycle', () => {
     cy.loadFixtures()
   })
 
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it('SU stratigraphic relationships lifecycle (editor)', () => {
 
     cy.viewport(1280, 800)

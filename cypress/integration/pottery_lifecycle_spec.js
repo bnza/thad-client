@@ -3,6 +3,10 @@ describe('The Pottery resource lifecycle', () => {
     cy.loadFixtures()
   })
 
+  after(() => {
+    cy.clearRefreshToken()
+  })
+
   it ('Pottery resource lifecycle (admin)', () => {
     cy.visit('/')
 
