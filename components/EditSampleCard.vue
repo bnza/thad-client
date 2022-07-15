@@ -142,11 +142,12 @@
         </v-row>
         <v-row dense>
           <v-col data-cy="strategy-input-col" sm="3">
-            <v-select
-              v-model="exhaustive"
+            <select-vocabulary-autocomplete
+              label="strategy"
+              :select.sync="modelItem.strategy"
               class="mx-4"
-              :items ="[{text: 'exhaustive', value: true}, {text: 'hand-picked', value: false},  {text: 'N/A', value: -1}]"
-              label="sampling strategy"
+              vocabulary-name="sampleStrategy"
+              v-on="$listeners"
             />
           </v-col>
           <v-spacer />
@@ -356,7 +357,6 @@ export default {
       modelItem: {
         stratigraphicUnit: {},
         date: new Date().toISOString().substring(0, 10),
-        exhaustive: null
       },
       panels: [
         0,1,2,3,4,5
@@ -364,20 +364,13 @@ export default {
     }
   },
   computed: {
-    exhaustive: {
-      get() {
-        return this.modelItem.exhaustive === null || this.modelItem.exhaustive === undefined ? -1 : this.modelItem.exhaustive
-      },
-      set(value) {
-        this.modelItem.exhaustive = value === -1 ? null : value
-      }
-    },
     requestData() {
       const data = normalizeRequestBodyData(this.updateItem)
       for (const key of [
         'stratigraphicUnit',
         'preservationState',
         'type',
+        'strategy',
       ]) {
         if (has(key, data)) {
           data[key] = this.normalizeResource(key)

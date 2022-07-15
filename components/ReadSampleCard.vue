@@ -76,7 +76,7 @@
             <v-row dense>
               <v-col sm="3">
                 <v-text-field
-                  :value="getResponseValue('exhaustive', item) === null || getResponseValue('exhaustive', item) === undefined ? 'N/A' : getResponseValue('exhaustive', item) ? 'exhaustive' : 'hand-picked'"
+                  :value="getResponseValue('strategy.value', item)"
                   label="sampling strategy"
                   readonly
                 />

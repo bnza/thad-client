@@ -75,8 +75,8 @@
         width: '120px'
       },
       {
-        text: 'exhaustive',
-        value: 'selectedForAnalysis',
+        text: 'strategy',
+        value: 'strategy.value',
         width: '120px'
       },
       {
