@@ -3,6 +3,8 @@
     <v-toolbar flat dense>
       <v-toolbar-title v-if="!isChild">Graves</v-toolbar-title>
       <v-spacer />
+      <navigation-download-collection-button :disabled="!totalItems" @click="downloadDialog = true"/>
+      <navigation-filter-collection-button @click="filterDialog = true"/>
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_EDITOR')"
         :parent="parent"
@@ -80,21 +82,6 @@
         width: '130px'
       },
       {
-        text: 'cut SU',
-        value: 'cutStratigraphicUnit',
-        width: '170px'
-      },
-      {
-        text: 'fill SU',
-        value: 'fillStratigraphicUnit',
-        width: '170px'
-      },
-      {
-        text: 'skel. SU',
-        value: 'skeletonStratigraphicUnit',
-        width: '170px'
-      },
-      {
         text: 'earlier than',
         value: 'earlierThan',
         width: '170px'
@@ -162,30 +149,6 @@
           resource-name="area"
         />
       </template>
-      <template #[`item.cutStratigraphicUnit`]="{ item }">
-        <navigation-resource-item-chip
-          v-if="item.cutStratigraphicUnit"
-          :link-text="formatCode('stratigraphicUnit', item.cutStratigraphicUnit)"
-          :item-id="item.cutStratigraphicUnit.id"
-          resource-name="stratigraphicUnit"
-        />
-      </template>
-      <template #[`item.fillStratigraphicUnit`]="{ item }">
-        <navigation-resource-item-chip
-          v-if="item.fillStratigraphicUnit"
-          :link-text="formatCode('stratigraphicUnit', item.fillStratigraphicUnit)"
-          :item-id="item.fillStratigraphicUnit.id"
-          resource-name="stratigraphicUnit"
-        />
-      </template>
-      <template #[`item.skeletonStratigraphicUnit`]="{ item }">
-        <navigation-resource-item-chip
-          v-if="item.skeletonStratigraphicUnit"
-          :link-text="formatCode('stratigraphicUnit', item.skeletonStratigraphicUnit)"
-          :item-id="item.skeletonStratigraphicUnit.id"
-          resource-name="stratigraphicUnit"
-        />
-      </template>
       <template #[`item.earlierThan`]="{ item }">
         <navigation-resource-item-chip
           v-if="item.earlierThan"
@@ -215,6 +178,20 @@
         <long-text-table-data-tooltip :text="item.interpretation" />
       </template>
     </v-data-table>
+    <filter-collection-dialog
+      v-if="responseData['hydra:search']"
+      :resource-name="resourceName"
+      :visible.sync="filterDialog"
+      :hydra-search="responseData['hydra:search']"
+      :filters.sync="filters"
+    />
+    <download-collection-dialog
+      :downloading="downloading"
+      :visible.sync="downloadDialog"
+      :resource-name="resourceName"
+      :total-items="totalItems"
+      @download="downloadCsv"
+    />
     <delete-resource-dialog
       v-if="deletingItem"
       :resource-name="resourceName"

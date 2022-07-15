@@ -172,52 +172,6 @@
         <v-row dense>
           <v-col>
             <v-text-field
-              :value="formatCode('stratigraphicUnit', getResponseValue('cutStratigraphicUnit', item))"
-              label="cut SU"
-              readonly
-            >
-              <template #prepend>
-                <navigation-resource-read-button
-                  :disabled="!getResponseValue('cutStratigraphicUnit.id', item)"
-                  :item-id="getResponseValue('cutStratigraphicUnit.id', item)"
-                  resource-name="stratigraphicUnit" />
-              </template>
-            </v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field
-              :value="formatCode('stratigraphicUnit', getResponseValue('fillStratigraphicUnit', item))"
-              label="fill SU"
-              readonly
-            >
-              <template #prepend>
-                <navigation-resource-read-button
-                  :disabled="!getResponseValue('fillStratigraphicUnit.id', item)"
-                  :item-id="getResponseValue('fillStratigraphicUnit.id', item)"
-                  resource-name="stratigraphicUnit"
-                />
-              </template>
-            </v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field
-              :value="formatCode('stratigraphicUnit', getResponseValue('skeletonStratigraphicUnit', item))"
-              label="skeleton SU"
-              readonly
-            >
-              <template #prepend>
-                <navigation-resource-read-button
-                  :disabled="!getResponseValue('skeletonStratigraphicUnit.id', item)"
-                  :item-id="getResponseValue('skeletonStratigraphicUnit.id', item)"
-                  resource-name="stratigraphicUnit"
-                />
-              </template>
-            </v-text-field>
-          </v-col>
-        </v-row>
-        <v-row dense>
-          <v-col>
-            <v-text-field
               :value="formatCode('stratigraphicUnit', getResponseValue('earlierThan', item))"
               label="earlier than"
               readonly

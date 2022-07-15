@@ -242,32 +242,6 @@
         <v-expansion-panel>
           <v-expansion-panel-header class="grey--text text-overline">Stratigraphy</v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-row dense>
-              <v-col>
-                <select-sus-autocomplete
-                  class="mx-4"
-                  label="cut SU"
-                  :select.sync="modelItem.cutStratigraphicUnit"
-                  :clearable="true"
-                />
-              </v-col>
-              <v-col>
-                <select-sus-autocomplete
-                  class="mx-4"
-                  label="fill SU"
-                  :select.sync="modelItem.fillStratigraphicUnit"
-                  :clearable="true"
-                />
-              </v-col>
-              <v-col>
-                <select-sus-autocomplete
-                  class="mx-4"
-                  label="skeleton SU"
-                  :select.sync="modelItem.skeletonStratigraphicUnit"
-                  :clearable="true"
-                />
-              </v-col>
-            </v-row>
           <v-row dense>
             <v-col>
               <select-sus-autocomplete
@@ -459,9 +433,6 @@ export default {
         'period',
         'ritual',
         'preservationState',
-        'cutStratigraphicUnit',
-        'fillStratigraphicUnit',
-        'skeletonStratigraphicUnit',
         'earlierThan',
         'laterThan',
       ]) {
