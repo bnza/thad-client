@@ -117,7 +117,7 @@
           <v-col />
         </v-row>
         <v-row dense>
-          <v-col data-cy="cwd-input-col">
+          <v-col data-cy="fwd-input-col">
             <v-text-field
               v-model="modelItem.fineWareDiagnosticCount"
               label="fine ware diagnostic"
@@ -127,7 +127,7 @@
               @blur="$v.modelItem.fineWareDiagnosticCount.$touch()"
             />
           </v-col>
-          <v-col data-cy="cwnd-input-col">
+          <v-col data-cy="fwnd-input-col">
             <v-text-field
               v-model="modelItem.fineWareNonDiagnosticCount"
               label="fine ware non diagnostic"
@@ -140,7 +140,7 @@
           <v-col />
         </v-row>
         <v-row dense>
-          <v-col data-cy="cwd-input-col">
+          <v-col data-cy="cowd-input-col">
             <v-text-field
               v-model="modelItem.coarseWareDiagnosticCount"
               label="coarse ware diagnostic"
@@ -150,7 +150,7 @@
               @blur="$v.modelItem.coarseWareDiagnosticCount.$touch()"
             />
           </v-col>
-          <v-col data-cy="cwnd-input-col">
+          <v-col data-cy="cownd-input-col">
             <v-text-field
               v-model="modelItem.coarseWareNonDiagnosticCount"
               label="coarse ware non diagnostic"
@@ -163,7 +163,7 @@
           <v-col />
         </v-row>
         <v-row dense>
-          <v-col data-cy="cwd-input-col">
+          <v-col data-cy="kwd-input-col">
             <v-text-field
               v-model="modelItem.kitchenWareDiagnosticCount"
               label="kitchen ware diagnostic"
@@ -173,7 +173,7 @@
               @blur="$v.modelItem.kitchenWareDiagnosticCount.$touch()"
             />
           </v-col>
-          <v-col data-cy="cwnd-input-col">
+          <v-col data-cy="kwnd-input-col">
             <v-text-field
               v-model="modelItem.kitchenWareNonDiagnosticCount"
               label="kitchen ware non diagnostic"
