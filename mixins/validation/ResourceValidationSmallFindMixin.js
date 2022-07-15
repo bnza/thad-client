@@ -20,8 +20,8 @@ export default {
       thickness: { decimal },
       baseDiameter: { decimal },
       minDiameter: { decimal },
-      coordN: { decimal, coordinateIsATriple: coordinateIsATriple(), between: between(-90,90) },
-      coordE: { decimal, coordinateIsATriple: coordinateIsATriple(), between: between(-180,180) },
+      coordN: { decimal, coordinateIsATriple: coordinateIsATriple(), between: between(0.00,9329005.18) },
+      coordE: { decimal, coordinateIsATriple: coordinateIsATriple(), between: between(166021.44,833978.56) },
       coordZ: { decimal, coordinateIsATriple: coordinateIsATriple() },
       maxDiameter: { decimal, greaterThan: greaterThan('minDiameter')},
       weight: {decimal},
@@ -126,7 +126,7 @@ export default {
       const errors = []
       if (!this.$v.modelItem.coordN.$dirty) return errors
       !this.$v.modelItem.coordN.decimal && errors.push('Latitude must be a decimal number.')
-      !this.$v.modelItem.coordN.between && errors.push('Latitude must be a value between -90 (90S) and 90 (90N).')
+      !this.$v.modelItem.coordN.between && errors.push('Latitude must be a value between 0.00 and 9329005.18.')
       !this.$v.modelItem.coordN.coordinateIsATriple && errors.push('Coordinate must have all the N, E, Z components.')
       return errors
     },
@@ -134,7 +134,7 @@ export default {
       const errors = []
       if (!this.$v.modelItem.coordE.$dirty) return errors
       !this.$v.modelItem.coordE.decimal && errors.push('Longitude must be a decimal number.')
-      !this.$v.modelItem.coordE.between && errors.push('Longitude must be a value between -180 (180W) and 90 (180E).')
+      !this.$v.modelItem.coordE.between && errors.push('Longitude must be a value between 166021.44 and 833978.56.')
       !this.$v.modelItem.coordE.coordinateIsATriple && errors.push('Coordinate must have all the N, E, Z components.')
       return errors
     },

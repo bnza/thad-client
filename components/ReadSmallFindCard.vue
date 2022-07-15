@@ -56,8 +56,8 @@
               <v-col sm="2">
                 <v-text-field
                   :value="getResponseValue('coordN', item)"
-                  label="latitude (degree)"
-                  hint="WGS84 latitude value in degree from -90 (90°S) to 90 (90°N)"
+                  label="north (meters)"
+                  hint="North projected coordinate value in meters (WGS 84 / UTM zone 38N)"
                   :persistent-hint="true"
                   readonly
                 />
@@ -65,9 +65,9 @@
               <v-col sm="2">
                 <v-text-field
                   :value="getResponseValue('coordE', item)"
-                  hint="WGS84 longitude value in degree from -180 (180°W) to 180 (180°E)"
+                  hint="East projected coordinate value in meters (WGS 84 / UTM zone 38N)"
                   :persistent-hint="true"
-                  label="longitude (degree)"
+                  label="east (meters)"
                   readonly
                 />
               </v-col>

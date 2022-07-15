@@ -75,11 +75,11 @@
           <v-col data-cy="coord-n-input-col" sm="2">
             <v-text-field
               v-model="modelItem.coordN"
-              label="latitude (degree)"
+              label="north (meter)"
               required
               :error-messages="coordNErrors"
               class="mx-4"
-              hint="WGS84 latitude value in degree from -90 (90°S) to 90 (90°N)"
+              hint="North projected coordinate value in meters (WGS 84 / UTM zone 38N)"
               :persistent-hint="true"
               @input="$v.modelItem.coordN.$touch()"
               @blur="$v.modelItem.coordN.$touch()"
@@ -88,11 +88,11 @@
           <v-col data-cy="coord-e-input-col" sm="2">
             <v-text-field
               v-model="modelItem.coordE"
-              label="longitude (degree)"
+              label="longitude (meter)"
               required
               :error-messages="coordEErrors"
               class="mx-4"
-              hint="WGS84 latitude value in degree from -90 (90°S) to 90 (90°N)"
+              hint="East projected coordinate value in meters (WGS 84 / UTM zone 38N)"
               :persistent-hint="true"
               @input="$v.modelItem.coordE.$touch()"
               @blur="$v.modelItem.coordE.$touch()"
