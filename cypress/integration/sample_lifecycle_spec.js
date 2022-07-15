@@ -57,6 +57,10 @@ describe('The Sample resource lifecycle', () => {
 
     cy.get('[data-cy=type-select-col] input').should('have.value', 'fibre')
 
+    cy.get('[data-cy=strategy-select-col] input').first().click().type('ex{downArrow}{enter}')
+
+    cy.get('[data-cy=strategy-select-col] input').should('have.value', 'exhaustive')
+
     cy.get('[data-cy=preservation-state-select-col] input').first().click().type('fa{downArrow}{enter}')
 
     cy.get('[data-cy=preservation-state-select-col] input').should('have.value', 'fair')

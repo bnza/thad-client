@@ -141,7 +141,7 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col data-cy="strategy-input-col" sm="3">
+          <v-col data-cy="strategy-select-col" sm="3">
             <select-vocabulary-autocomplete
               label="strategy"
               :select.sync="modelItem.strategy"
