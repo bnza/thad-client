@@ -158,7 +158,7 @@
               v-model="modelItem.summary"
               label="summary"
               class="mx-4"
-              data-cy="document-summary-input"
+              data-cy="summary-input"
             />
           </v-col>
         </v-row>

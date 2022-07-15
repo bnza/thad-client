@@ -1,5 +1,5 @@
 <template>
-    <v-card-text>
+    <v-card-text data-cy="file-input-card">
       <v-file-input
         v-model="modelItem.file"
         accept="image/jpeg, application/pdf"
