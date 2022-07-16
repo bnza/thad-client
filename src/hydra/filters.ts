@@ -1,4 +1,6 @@
 import {clone, has} from 'ramda'
+import mappings from './mappings'
+import {RangeLabels, SearchLabels, ExistsLabels} from "~/src/hydra/index";
 
 interface HydraMapping {
   '@type': string,
@@ -18,7 +20,9 @@ interface AppFilterMapping {
   operator: string,
   variable: string,
   property: string,
-  multiple: boolean
+  multiple: boolean,
+  vocabulary?: string,
+  label?: string
 }
 
 interface AppFilter {
@@ -66,36 +70,69 @@ export const parseHydraSearchMapping = ( hydraSearch: HydraSearch): Array<AppFil
   return appMappings
 }
 
+const operatorLabelToOperator = (label: string): string => {
+  // @ts-ignore
+  if ([SearchLabels.equals, SearchLabels.contains, SearchLabels.startWith, SearchLabels.endWith].includes(label)) {
+    return ''
+  }
+  if (RangeLabels.gt === label) {
+    return  'gt'
+  }
+  if (RangeLabels.gte === label) {
+    return  'gte'
+  }
+  if (RangeLabels.lt === label) {
+    return  'lt'
+  }
+  if (RangeLabels.lte === label) {
+    return  'lte'
+  }
+  if (RangeLabels.between === label) {
+    return  'between'
+  }
+  if (ExistsLabels.exists === label) {
+    return 'exists'
+  }
+  return ''
+}
+
 export const appFiltersToQueryStringObject = (appFilters: Array<AppFilter>): QueryStringObject => {
   const filters: QueryStringObject = {};
   for (const filter of appFilters) {
-    if (filter.mapping.operator === 'exists') {
-      if (!has(filter.mapping.operator, filters)) {
+    const operator = operatorLabelToOperator(filter.mapping.operator)
+    if (operator === 'exists') {
+      if (!has(operator, filters)) {
         // @ts-ignore
-        filters[filter.mapping.operator] = {}
+        filters[operator] = {}
       }
+      const property = filter.mapping.property.slice(-3) === '.id' ? filter.mapping.property.slice(0, -3) : filter.mapping.property
       // @ts-ignore
-      filters[filter.mapping.operator][filter.mapping.property] = `${filter.value}`
+      filters[operator][property] = `${filter.value}`
     } else  {
       if (!has(filter.mapping.property, filters)) {
         // @ts-ignore
-        filters[filter.mapping.property] = filter.mapping.multiple ? [] : {}
+        filters[filter.mapping.property] = filter.mapping.multiple || filter.mapping.vocabulary ? [] : {}
       }
-      if (filter.mapping.multiple) {
+      if (filter.mapping.vocabulary) {
+        // @ts-ignore
+        for (const entry of filter.value) {
+          // @ts-ignore
+          filters[filter.mapping.property].push(entry.id)
+        }
+      } else if (filter.mapping.multiple) {
         // @ts-ignore
         filters[filter.mapping.property].push(filter.value)
       } else {
         // @ts-ignore
-        filters[filter.mapping.property][filter.mapping.operator] = filter.value
+        filters[filter.mapping.property][operator] = filter.value
       }
-/*       const filterPropertyKey = filter.mapping.operator === 'search'
-        // @ts-ignore
-        ? Object.keys(filters[filter.mapping.property]).length
-        : filter.mapping.operator
-
-        // @ts-ignore
-        filters[filter.mapping.property][filterPropertyKey] = filter.value */
     }
   }
   return filters
 }
+
+export const getApplicableFilters = (resourceName:string): Array<AppFilterMapping> => {
+  return clone(applicableFilters[resourceName]) || []
+}
+
+const applicableFilters: Record<string, Array<AppFilterMapping>> = mappings

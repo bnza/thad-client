@@ -210,12 +210,16 @@
 </template>
 
 <script>
+import FilterCollectionDialog from "@/components/filters/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
   name: "CollectionGravesCard",
+  components: {
+    FilterCollectionDialog,
+  },
   mixins: [
     ResourceDeleteDialogMixin,
     ResourceCollectionGetMixin,

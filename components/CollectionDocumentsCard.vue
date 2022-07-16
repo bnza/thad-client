@@ -86,8 +86,8 @@
         width: '200px'
       },
       {
-        text: 'areaSupervisor',
-        value: 'supervisor',
+        text: 'supervisor',
+        value: 'areaSupervisor',
         width: '200px'
       },
       {
@@ -169,12 +169,16 @@
 </template>
 
 <script>
+import FilterCollectionDialog from "@/components/filters/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
   name: "CollectionDocumentsCard",
+  components: {
+    FilterCollectionDialog,
+  },
   mixins: [
     ResourceCollectionGetMixin,
     ResourceDeleteDialogMixin,

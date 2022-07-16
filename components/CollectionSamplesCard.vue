@@ -115,6 +115,11 @@
         width: '150px'
       },
       {
+        text: 'weight (g)',
+        value: 'weight',
+        width: '150px'
+      },
+      {
         text: 'compiler',
         value: 'compiler',
         width: '200px'
@@ -207,12 +212,16 @@
 </template>
 
 <script>
+import FilterCollectionDialog from "@/components/filters/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
   name: "CollectionSamplesCard",
+  components: {
+    FilterCollectionDialog,
+  },
   mixins: [
     ResourceCollectionGetMixin,
     ResourceDeleteDialogMixin,

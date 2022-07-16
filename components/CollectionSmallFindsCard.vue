@@ -245,12 +245,16 @@
 </template>
 
 <script>
+import FilterCollectionDialog from "@/components/filters/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
   name: "CollectionSmallFindsCard",
+  components: {
+    FilterCollectionDialog,
+  },
   mixins: [
     ResourceCollectionGetMixin,
     ResourceDeleteDialogMixin,

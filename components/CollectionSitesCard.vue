@@ -63,7 +63,7 @@
     </v-data-table>
     <filter-collection-dialog
       v-if="responseData['hydra:search']"
-      resource-name="site"
+      :resource-name="resourceName"
       :visible.sync="filterDialog"
       :hydra-search="responseData['hydra:search']"
       :filters.sync="filters"
@@ -81,14 +81,7 @@
 </template>
 
 <script>
-import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import DeleteSiteCardText from "@/components/DeleteSiteCardText";
-import FilterCollectionDialog from "@/components/FilterCollectionDialog";
-import WorkSiteSelectorButton from "@/components/WorkSiteSelectorButton";
-import NavigationFilterCollectionButton from "@/components/NavigationFilterCollectionButton";
-import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
-import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
-import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
+import FilterCollectionDialog from "@/components/filters/FilterCollectionDialog";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 
@@ -96,14 +89,7 @@ import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 export default {
   name: "CollectionSitesCard",
   components: {
-    DeleteResourceDialog,
-    DeleteSiteCardText,
     FilterCollectionDialog,
-    NavigationCreateResourceButton,
-    NavigationFilterCollectionButton,
-    NavigationResourceItemChip,
-    NavigationResourceItemCrud,
-    WorkSiteSelectorButton
   },
   mixins: [
     ResourceDeleteDialogMixin,

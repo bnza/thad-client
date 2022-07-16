@@ -2,7 +2,9 @@
   <v-card data-cy="collection-areas-card">
     <v-toolbar flat dense>
       <v-toolbar-title v-if="!isChild">Areas</v-toolbar-title>
+      <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
       <v-spacer />
+      <navigation-filter-collection-button @click="filterDialog = true"/>
       <navigation-create-resource-button
         v-if="$auth.hasScope('ROLE_ADMIN')"
         :parent="parent"
@@ -68,6 +70,13 @@
           resource-name="site" />
       </template>
     </v-data-table>
+    <filter-collection-dialog
+      v-if="responseData['hydra:search']"
+      :resource-name="resourceName"
+      :visible.sync="filterDialog"
+      :hydra-search="responseData['hydra:search']"
+      :filters.sync="filters"
+    />
     <delete-resource-dialog
       v-if="deletingItem"
       :resource-name="resourceName"
@@ -81,22 +90,14 @@
 </template>
 
 <script>
-import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import DeleteAreaCardText from "@/components/DeleteSiteCardText";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
-import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
-import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
-import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
+import FilterCollectionDialog from "@/components/filters/FilterCollectionDialog";
 
 export default {
   name: "CollectionsAreaCard",
   components: {
-    DeleteResourceDialog,
-    DeleteAreaCardText,
-    NavigationCreateResourceButton,
-    NavigationResourceItemChip,
-    NavigationResourceItemCrud
+    FilterCollectionDialog
   },
   mixins: [
     ResourceDeleteDialogMixin,

@@ -99,12 +99,16 @@
 </template>
 
 <script>
+import FilterCollectionDialog from "@/components/filters/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 
 export default {
   name: "CollectionCumulativePotterySheetsCard",
+  components: {
+    FilterCollectionDialog,
+  },
   mixins: [
     ResourceCollectionGetMixin,
     ResourceDeleteDialogMixin,
@@ -231,14 +235,14 @@ export default {
       {
         text: 'sP-NUB',
         value: 'subperiodNUBCount',
-        label: 'subperiod Norther Ubaid sherd count',
+        label: 'subperiod Northern Ubaid sherd count',
         align: 'right',
         width: '100px'
       },
       {
         text: 'sP-LCA',
         value: 'subperiodLCACount',
-        label: 'subperiod (generic) Late Chalcolithic sherd count',
+        label: 'subperiod Late Chalcolithic (generic) sherd count',
         align: 'right',
         width: '100px'
       },
@@ -426,14 +430,14 @@ export default {
       },
       {
         text: 'sP-ISL2',
-        value: 'subperiodISL1Count',
+        value: 'subperiodISL2Count',
         label: 'subperiod Middle Islamic sherd count',
         align: 'right',
         width: '120px'
       },
       {
         text: 'sP-ISL3',
-        value: 'subperiodISL2Count',
+        value: 'subperiodISL3Count',
         label: 'subperiod Late Islamic sherd count',
         align: 'right',
         width: '120px'
@@ -488,9 +492,16 @@ export default {
         width: '100px'
       },
       {
-        text: 'P-EMT',
-        value: 'periodEMTCount',
-        label: 'period Early Middle Tigris sherd count',
+        text: 'P-EBA',
+        value: 'periodEBACount',
+        label: 'period Early Bronze Age sherd count',
+        align: 'right',
+        width: '100px'
+      },
+      {
+        text: 'P-MBA',
+        value: 'periodMBACount',
+        label: 'period Middle Bronze Age sherd count',
         align: 'right',
         width: '100px'
       },

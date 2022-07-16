@@ -268,25 +268,15 @@
 </template>
 
 <script>
-import DeleteResourceDialog from "@/components/DeleteResourceDialog";
-import FilterCollectionDialog from "@/components/FilterCollectionDialog";
+import FilterCollectionDialog from "@/components/filters/FilterCollectionDialog";
 import ResourceDeleteDialogMixin from "@/mixins/ResourceDeleteDialogMixin";
 import ResourceCollectionGetMixin from "@/mixins/ResourceCollectionGetMixin";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
-import NavigationCreateResourceButton from "@/components/NavigationCreateResourceButton";
-import NavigationResourceItemCrud from "@/components/NavigationResourceItemCrud";
-import NavigationResourceItemChip from "@/components/NavigationResourceItemChip";
-import LongTextTableDataTooltip from "@/components/LongTextTableDataTooltip";
 
 export default {
   name: "CollectionPotteriesCard",
   components: {
-    DeleteResourceDialog,
     FilterCollectionDialog,
-    LongTextTableDataTooltip,
-    NavigationCreateResourceButton,
-    NavigationResourceItemChip,
-    NavigationResourceItemCrud
   },
   mixins: [
     ResourceCollectionGetMixin,
