@@ -287,48 +287,7 @@
           />
         </v-col>
         <v-col>
-          <v-menu
-            ref="menu"
-            v-model="dateMenu"
-            :close-on-content-click="false"
-            :return-value.sync="modelItem.date"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template #activator="{ on, attrs }">
-              <v-text-field
-                v-model="modelItem.date"
-                label="compilation date"
-                prepend-icon="mdi-calendar"
-                readonly
-                class="mx-4"
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker
-              v-model="modelItem.date"
-              no-title
-              scrollable
-            >
-              <v-spacer></v-spacer>
-              <v-btn
-                text
-                color="primary"
-                @click="dateMenu = false"
-              >
-                Cancel
-              </v-btn>
-              <v-btn
-                text
-                color="primary"
-                @click="$refs.menu.save(modelItem.date)"
-              >
-                OK
-              </v-btn>
-            </v-date-picker>
-          </v-menu>
+          <select-date-menu :date.sync="modelItem.date" />
         </v-col>
       </v-row>
     </v-expansion-panel-content>
