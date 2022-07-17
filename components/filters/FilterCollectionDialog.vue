@@ -160,8 +160,6 @@ export default {
   },
   data() {
     return {
-      filtersApplied: true,
-      previousFilters: [],
       modelFilters: [],
       addDialog: false,
       currentFilterIndex: -1
@@ -210,20 +208,18 @@ export default {
     }
   },
   methods: {
+    update() {
+      this.$emit('update:filters', this.modelFilters)
+    },
     close() {
       this.$emit('update:visible', false)
-      if (!this.filtersApplied) {
-        this.modelFilters = clone(this.previousFilters)
-        this.filtersApplied = true
-      }
     },
     clear() {
-      this.previousFilters = clone(this.modelFilters)
       this.modelFilters = []
-      this.filtersApplied = false
+      this.update()
     },
     apply() {
-      this.$emit('update:filters', this.modelFilters)
+      this.update()
       this.close()
     },
     removeFilter(i) {

@@ -62,10 +62,13 @@
               />
             </v-col>
             <v-col v-if="model.mapping" sm="4">
-              <v-checkbox
+              <v-select
                 v-if="model.mapping.operator === existsLabel"
                 v-model="model.value"
-                :indeterminate="model.value === null"
+                :items="[
+                  {value: false, text: 'false'},
+                  {value: true, text: 'true'},
+                ]"
               />
               <filter-vocabulary-select
                 v-else-if="model.mapping.vocabulary"
