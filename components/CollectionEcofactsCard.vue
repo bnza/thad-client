@@ -115,6 +115,11 @@
         width: '200px'
       },
       {
+        text: 'collection date',
+        value: 'collectionDate',
+        width: '150px'
+      },
+      {
         text: 'date',
         value: 'date',
         width: '100px'
@@ -156,6 +161,9 @@
       </template>
       <template #[`item.selectedForAnalysis`]="{ item : tItem }">
         <v-simple-checkbox :value="tItem.selectedForAnalysis" :ripple="false"/>
+      </template>
+      <template #[`item.collectionDate`]="{ item }">
+        {{ item.collectionDate ? new Date(item.collectionDate).toLocaleDateString() : undefined}}
       </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}
