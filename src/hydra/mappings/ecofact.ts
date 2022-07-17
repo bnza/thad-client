@@ -448,4 +448,12 @@ export default [
     label: 'date of collection',
     type: Date
   },
+  {
+    property: 'selectedForAnalysis',
+    variable: 'selectedForAnalysis',
+    operator: SearchLabels.equals,
+    multiple: false,
+    label: 'selected for analysis',
+    type: Boolean
+  },
 ]

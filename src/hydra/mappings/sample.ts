@@ -463,4 +463,20 @@ export default [
     label: 'date of collection',
     type: Date
   },
+  {
+    property: 'selectedForAnalysis',
+    variable: 'selectedForAnalysis',
+    operator: SearchLabels.equals,
+    multiple: false,
+    label: 'selected for analysis',
+    type: Boolean
+  },
+  {
+    property: 'contaminationRisk',
+    variable: 'contaminationRisk',
+    operator: SearchLabels.equals,
+    multiple: false,
+    label: 'contamination risk',
+    type: Boolean
+  },
 ]
