@@ -1,4 +1,4 @@
-import {RangeLabels, SearchLabels} from "~/src/hydra";
+import {DateLabels, RangeLabels, SearchLabels} from "~/src/hydra";
 type FilterMapping = {
   property: string;
   variable: string;
@@ -320,6 +320,46 @@ const mappings = [
     operator: SearchLabels.contains,
     multiple: false,
     label: 'notes'
+  },
+  {
+    property: 'date',
+    variable: 'date[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[before]',
+    operator: DateLabels.before,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[strictly_before]',
+    operator: DateLabels.strictlyBefore,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[after]',
+    operator: DateLabels.after,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[strictly_after]',
+    operator: DateLabels.strictlyAfter,
+    multiple: false,
+    label: 'date',
+    type: Date
   },
 ]
 

@@ -63,12 +63,16 @@
             </v-col>
             <v-col v-if="model.mapping" sm="4">
               <v-select
-                v-if="model.mapping.operator === existsLabel"
+                v-if="model.mapping.operator === existsLabel || model.mapping.type === Boolean"
                 v-model="model.value"
                 :items="[
                   {value: false, text: 'false'},
                   {value: true, text: 'true'},
                 ]"
+              />
+              <select-date-menu
+                v-else-if="model.mapping.type === Date"
+                :date.sync="model.value"
               />
               <filter-vocabulary-select
                 v-else-if="model.mapping.vocabulary"

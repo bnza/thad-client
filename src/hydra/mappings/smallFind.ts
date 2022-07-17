@@ -1,4 +1,4 @@
-import {RangeLabels, SearchLabels, ExistsLabels} from "~/src/hydra";
+import {RangeLabels, SearchLabels, ExistsLabels, DateLabels} from "~/src/hydra";
 
 export default [
   {
@@ -520,5 +520,45 @@ export default [
     operator: SearchLabels.contains,
     multiple: false,
     label: 'compiler'
+  },
+  {
+    property: 'date',
+    variable: 'date[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[before]',
+    operator: DateLabels.before,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[strictly_before]',
+    operator: DateLabels.strictlyBefore,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[after]',
+    operator: DateLabels.after,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[strictly_after]',
+    operator: DateLabels.strictlyAfter,
+    multiple: false,
+    label: 'date',
+    type: Date
   },
 ]

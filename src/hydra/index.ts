@@ -16,3 +16,10 @@ export enum RangeLabels {
 export enum ExistsLabels {
   exists = 'has any value',
 }
+
+export enum DateLabels {
+  before = 'before',
+  strictlyBefore = 'strictly before',
+  after = 'after',
+  strictlyAfter = 'strictly after',
+}

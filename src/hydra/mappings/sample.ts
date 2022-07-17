@@ -1,13 +1,13 @@
-import {RangeLabels, SearchLabels, ExistsLabels} from "~/src/hydra";
+import {RangeLabels, SearchLabels, ExistsLabels, DateLabels} from "~/src/hydra";
 
 export default [
-  {
+/*   {
     property: 'stratigraphicUnit.id',
     variable: 'stratigraphicUnit.id[]',
     operator: SearchLabels.equals,
     multiple: true,
     label: 'stratigraphic unit'
-  },
+  }, */
   {
     property: 'stratigraphicUnit.area.code',
     variable: 'stratigraphicUnit.area.code[]',
@@ -157,6 +157,21 @@ export default [
     operator: ExistsLabels.exists,
     multiple: false,
     label: 'preservation state'
+  },
+  {
+    property: 'strategy.id',
+    variable: 'exists[strategy]',
+    operator: ExistsLabels.exists,
+    multiple: false,
+    label: 'sampling strategy'
+  },
+  {
+    property: 'strategy.id',
+    variable: 'strategy.id[]',
+    operator: SearchLabels.equals,
+    multiple: false,
+    vocabulary: 'sampleStrategy',
+    label: 'sampling strategy'
   },
   {
     property: 'notes',
@@ -367,5 +382,85 @@ export default [
     operator: SearchLabels.contains,
     multiple: false,
     label: 'compiler'
+  },
+  {
+    property: 'date',
+    variable: 'date[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[before]',
+    operator: DateLabels.before,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[strictly_before]',
+    operator: DateLabels.strictlyBefore,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[after]',
+    operator: DateLabels.after,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'date',
+    variable: 'date[strictly_after]',
+    operator: DateLabels.strictlyAfter,
+    multiple: false,
+    label: 'date',
+    type: Date
+  },
+  {
+    property: 'collectionDate',
+    variable: 'collectionDate[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'date of collection',
+    type: Date
+  },
+  {
+    property: 'collectionDate',
+    variable: 'collectionDate[before]',
+    operator: DateLabels.before,
+    multiple: false,
+    label: 'date of collection',
+    type: Date
+  },
+  {
+    property: 'collectionDate',
+    variable: 'collectionDate[strictly_before]',
+    operator: DateLabels.strictlyBefore,
+    multiple: false,
+    label: 'date of collection',
+    type: Date
+  },
+  {
+    property: 'collectionDate',
+    variable: 'collectionDate[after]',
+    operator: DateLabels.after,
+    multiple: false,
+    label: 'date of collection',
+    type: Date
+  },
+  {
+    property: 'collectionDate',
+    variable: 'collectionDate[strictly_after]',
+    operator: DateLabels.strictlyAfter,
+    multiple: false,
+    label: 'date of collection',
+    type: Date
   },
 ]

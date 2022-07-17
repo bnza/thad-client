@@ -1,6 +1,6 @@
 import {clone, has} from 'ramda'
 import mappings from './mappings'
-import {RangeLabels, SearchLabels, ExistsLabels} from "~/src/hydra/index";
+import {RangeLabels, ExistsLabels, DateLabels} from "~/src/hydra/index";
 
 interface HydraMapping {
   '@type': string,
@@ -71,10 +71,10 @@ export const parseHydraSearchMapping = ( hydraSearch: HydraSearch): Array<AppFil
 }
 
 const operatorLabelToOperator = (label: string): string => {
-  // @ts-ignore
+/*   // @ts-ignore
   if ([SearchLabels.equals, SearchLabels.contains, SearchLabels.startWith, SearchLabels.endWith].includes(label)) {
     return ''
-  }
+  } */
   if (RangeLabels.gt === label) {
     return  'gt'
   }
@@ -92,6 +92,18 @@ const operatorLabelToOperator = (label: string): string => {
   }
   if (ExistsLabels.exists === label) {
     return 'exists'
+  }
+  if (DateLabels.after === label) {
+    return 'after'
+  }
+  if (DateLabels.strictlyAfter === label) {
+    return 'strictly_after'
+  }
+  if (DateLabels.before === label) {
+    return 'before'
+  }
+  if (DateLabels.strictlyBefore === label) {
+    return 'strictly_before'
   }
   return ''
 }
