@@ -282,4 +282,34 @@ export default [
     label: 'date',
     type: Date
   },
+  {
+    property: 'relations.dxSU',
+    variable: 'relations.dxSU[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'relationship (SU)',
+  },
+  {
+    property: 'relations.relationship',
+    variable: 'relations.relationship[]',
+    operator: SearchLabels.equals,
+    multiple: false,
+    vocabulary: 'relationship',
+    label: 'relationship (type)'
+  },
+  {
+    property: 'sequence.dxSU',
+    variable: 'relations.dxSU[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'sequence (SU)',
+  },
+  {
+    property: 'sequence.relationship',
+    variable: 'sequence.relationship[]',
+    operator: SearchLabels.equals,
+    multiple: false,
+    vocabulary: 'sequence',
+    label: 'sequence (type)'
+  },
 ]
