@@ -70,9 +70,9 @@ export default {
   async fetch() {
     this.loading = true
     try {
-      const response = await this.$store.dispatch('http/getGraves', {area: this.area});
+      const response = await this.$store.dispatch('http/getGraveCodes', {area: this.area, code: this.search});
       this.items = response.data['hydra:member'].map(item => {
-        item['@code'] = this.formatCode('grave', item)
+        item['@code'] = item.appId.code
         return item
       })
     } catch (e) {
@@ -82,10 +82,8 @@ export default {
     }
   },
   watch: {
-    search (val) {
-      val && val !== this.select && this.items.filter(i => {
-        return (new RegExp('^'+val, 'i')).test(i['@code'])
-      })
+    search () {
+      this.$fetch()
     },
   }
 }

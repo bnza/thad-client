@@ -239,7 +239,10 @@ export default {
         return value.map(vocEntry => vocEntry[valueField]).join(',')
       }
       if (
-        ['stratigraphicUnit'].includes(mapping.type)
+        [
+          'stratigraphicUnit',
+          'grave'
+        ].includes(mapping.type)
       ) {
         return value['@code']
       }

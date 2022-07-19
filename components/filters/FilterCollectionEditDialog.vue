@@ -79,6 +79,11 @@
                 :label="model.mapping.label"
                 :select.sync="model.value"
               />
+              <select-graves-autocomplete
+                v-else-if="model.mapping.type === 'grave'"
+                :label="model.mapping.label"
+                :select.sync="model.value"
+              />
               <filter-vocabulary-select
                 v-else-if="model.mapping.vocabulary"
                 :vocabulary-name="model.mapping.vocabulary"

@@ -312,4 +312,19 @@ export default [
     vocabulary: 'sequence',
     label: 'sequence (type)'
   },
+  {
+    property: 'grave.id',
+    variable: 'grave.id[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    type: 'grave',
+    label: 'grave'
+  },
+  {
+    property: 'grave.id',
+    variable: 'exists[grave]',
+    operator: ExistsLabels.exists,
+    multiple: false,
+    label: 'grave'
+  },
 ]

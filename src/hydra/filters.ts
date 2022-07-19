@@ -132,7 +132,10 @@ export const appFiltersToQueryStringObject = (appFilters: Array<AppFilter>): Que
         let value = filter.value
         if (
           filter.mapping.type &&
-          ['stratigraphicUnit'].includes(filter.mapping.type)
+          [
+            'stratigraphicUnit',
+            'grave'
+          ].includes(filter.mapping.type)
         ) {
           // @ts-ignore
           value = value.id
