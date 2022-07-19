@@ -1,13 +1,14 @@
 import {RangeLabels, SearchLabels, ExistsLabels, DateLabels} from "~/src/hydra";
 
 export default [
-/*   {
+  {
     property: 'stratigraphicUnit.id',
     variable: 'stratigraphicUnit.id[]',
     operator: SearchLabels.equals,
     multiple: true,
+    type: 'stratigraphicUnit',
     label: 'stratigraphic unit'
-  }, */
+  },
   {
     property: 'stratigraphicUnit.area.code',
     variable: 'stratigraphicUnit.area.code[]',

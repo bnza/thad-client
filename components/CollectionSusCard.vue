@@ -160,7 +160,7 @@
       <template #[`item.grave.id`]="{ item }">
         <navigation-resource-item-chip
           v-if="item.grave"
-          :link-text="item.grave.appId"
+          :link-text="item.grave.appId.code"
           :item-id="item.grave.id"
           resource-name="grave"
         />

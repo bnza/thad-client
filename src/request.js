@@ -4,6 +4,7 @@ const workSiteFilterableResources = {
   sites: 'id',
   areas: 'site.id',
   stratigraphic_units: 'site.id',
+  stratigraphic_unit_codes: 'site.id',
   potteries: 'stratigraphicUnit.site.id',
   ecofacts: 'stratigraphicUnit.site.id',
   samples: 'stratigraphicUnit.site.id',

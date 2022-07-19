@@ -69,7 +69,7 @@
               <span>{{filter.mapping.operator}}</span>
             </v-col>
             <v-col sm="5">
-              <code>{{readableValue(filter.value)}}</code>
+              <code>{{readableValue(filter.mapping, filter.value)}}</code>
             </v-col>
           </v-row>
         </v-container>
@@ -156,7 +156,7 @@ export default {
     filters: {
       type: Array,
       required: true
-    }
+    },
   },
   data() {
     return {
@@ -233,12 +233,17 @@ export default {
       this.currentFilterIndex = -1
       this.addDialog = true
     },
-    readableValue(value, valueField) {
-      if (!Array.isArray(value)) {
-        return value
+    readableValue(mapping, value, valueField) {
+      if (Array.isArray(value)) {
+        valueField = valueField || 'value'
+        return value.map(vocEntry => vocEntry[valueField]).join(',')
       }
-      valueField = valueField || 'value'
-      return value.map(vocEntry => vocEntry[valueField]).join(',')
+      if (
+        ['stratigraphicUnit'].includes(mapping.type)
+      ) {
+        return value['@code']
+      }
+      return value;
     }
   },
 }

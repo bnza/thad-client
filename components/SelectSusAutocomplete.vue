@@ -10,7 +10,7 @@
     :readonly="readonly"
     :disabled="disabled"
     :clearable="clearable"
-    return-object
+    :return-object="returnObject"
     cache-items
     flat
     hide-no-data
@@ -21,6 +21,7 @@
 
 <script>
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
+
 export default {
   name: "SelectSusAutocomplete",
   mixins: [
@@ -44,7 +45,9 @@ export default {
       }
     },
     select: {
-      type: Object,
+      validator(value) {
+        return value ? typeof value === 'object' || typeof value === 'number' : true
+      },
       default: null
     },
     readonly: {
@@ -58,6 +61,10 @@ export default {
     clearable: {
       type: Boolean,
       default: false
+    },
+    returnObject: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -70,9 +77,9 @@ export default {
   async fetch() {
     this.loading = true
     try {
-      const response = await this.$store.dispatch('http/getSus', {area: this.area});
+      const response = await this.$store.dispatch('http/getSuCodes', {area: this.area, code: this.search});
       this.items = response.data['hydra:member'].map(item => {
-        item['@code'] = this.formatCode('stratigraphicUnit', item)
+        item['@code'] = item.appId.code
         return item
       })
     } catch (e) {
@@ -82,10 +89,8 @@ export default {
     }
   },
   watch: {
-    search (val) {
-      val && val !== this.select && this.items.filter(i => {
-        return (new RegExp('^'+val, 'i')).test(i['@code'])
-      })
+    search () {
+      this.$fetch()
     },
   }
 }

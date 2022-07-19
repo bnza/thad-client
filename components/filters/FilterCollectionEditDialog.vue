@@ -74,6 +74,11 @@
                 v-else-if="model.mapping.type === Date"
                 :date.sync="model.value"
               />
+              <select-sus-autocomplete
+                v-else-if="model.mapping.type === 'stratigraphicUnit'"
+                :label="model.mapping.label"
+                :select.sync="model.value"
+              />
               <filter-vocabulary-select
                 v-else-if="model.mapping.vocabulary"
                 :vocabulary-name="model.mapping.vocabulary"

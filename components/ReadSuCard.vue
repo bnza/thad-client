@@ -68,7 +68,7 @@
           <v-col sm="3">
             <v-text-field
               class="secondary--text font-weight-bold" color="secondary"
-              :value="item.grave ? item.grave.appId : undefined"
+              :value="item.grave ? item.grave.appId.code : undefined"
               label="grave"
               readonly
             >

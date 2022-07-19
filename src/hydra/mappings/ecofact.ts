@@ -6,6 +6,7 @@ export default [
     variable: 'stratigraphicUnit.id[]',
     operator: SearchLabels.equals,
     multiple: true,
+    type: 'stratigraphicUnit',
     label: 'stratigraphic unit'
   },
   {

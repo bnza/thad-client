@@ -284,4 +284,42 @@ export default [
     label: 'date',
     type: Date
   },
+  {
+    property: 'earlierThan.id',
+    variable: 'earlierThan.id[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'earlier than (SU)',
+    type: 'stratigraphicUnit'
+  },
+  {
+    property: 'earlierThan.id',
+    variable: 'exists[earlierThan]',
+    operator: ExistsLabels.exists,
+    multiple: false,
+    label: 'earlier than (SU)'
+  },
+  {
+    property: 'laterThan.id',
+    variable: 'laterThan.id[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'later than (SU)',
+    type: 'stratigraphicUnit'
+  },
+  {
+    property: 'laterThan.id',
+    variable: 'exists[laterThan]',
+    operator: ExistsLabels.exists,
+    multiple: false,
+    label: 'later than (SU)'
+  },
+  {
+    property: 'stratigraphicUnits.id',
+    variable: 'stratigraphicUnits.id[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'stratigraphic unit',
+    type: 'stratigraphicUnit'
+  },
 ]

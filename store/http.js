@@ -77,6 +77,30 @@ export const actions = {
         params
       })
   },
+  getSuCodes({dispatch, rootGetters}, {area, code}) {
+    const resource = rootGetters['api/getResource']('stratigraphicUnit')
+    const params = {
+      properties: {
+        '': 'id',
+        'appId': 'code'
+      }
+    }
+    if (area?.id) {
+      params['area.id'] = area.id
+    }
+    if (code) {
+      params.code = code
+    }
+    return dispatch('request',
+      {
+        method: 'get',
+        url: resource.collectionUrl,
+        headers: {
+          Accept: 'application/ld+json'
+        },
+        params
+      })
+  },
   getGraves({dispatch, rootGetters}, {area}) {
     const resource = rootGetters['api/getResource']('grave')
     const params = {}

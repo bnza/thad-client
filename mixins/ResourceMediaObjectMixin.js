@@ -33,7 +33,7 @@ export default {
       return `${this.$config.apiBaseUrl}${this.media.mediaObject.contentUrl}`
     },
     documentId() {
-      return this.media.mediaObject.document?.appId
+      return this.media.mediaObject.document?.appId.code
     }
   }
 }

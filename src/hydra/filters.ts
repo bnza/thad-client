@@ -17,6 +17,7 @@ interface HydraSearch {
 }
 
 interface AppFilterMapping {
+  type?: string,
   operator: string,
   variable: string,
   property: string,
@@ -71,10 +72,6 @@ export const parseHydraSearchMapping = ( hydraSearch: HydraSearch): Array<AppFil
 }
 
 const operatorLabelToOperator = (label: string): string => {
-/*   // @ts-ignore
-  if ([SearchLabels.equals, SearchLabels.contains, SearchLabels.startWith, SearchLabels.endWith].includes(label)) {
-    return ''
-  } */
   if (RangeLabels.gt === label) {
     return  'gt'
   }
@@ -132,8 +129,16 @@ export const appFiltersToQueryStringObject = (appFilters: Array<AppFilter>): Que
           filters[filter.mapping.property].push(entry.id)
         }
       } else if (filter.mapping.multiple) {
+        let value = filter.value
+        if (
+          filter.mapping.type &&
+          ['stratigraphicUnit'].includes(filter.mapping.type)
+        ) {
+          // @ts-ignore
+          value = value.id
+        }
         // @ts-ignore
-        filters[filter.mapping.property].push(filter.value)
+        filters[filter.mapping.property].push(value)
       } else {
         // @ts-ignore
         filters[filter.mapping.property][operator] = filter.value
@@ -147,4 +152,5 @@ export const getApplicableFilters = (resourceName:string): Array<AppFilterMappin
   return clone(applicableFilters[resourceName]) || []
 }
 
+// @ts-ignore
 const applicableFilters: Record<string, Array<AppFilterMapping>> = mappings

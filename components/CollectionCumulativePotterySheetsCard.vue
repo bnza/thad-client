@@ -57,7 +57,7 @@
       </template>
       <template #[`item.stratigraphicUnit.number`]="{ item }">
         <navigation-resource-item-chip
-          :link-text="item.stratigraphicUnit.appId"
+          :link-text="item.stratigraphicUnit.appId.code"
           :item-id="item.stratigraphicUnit.id"
           resource-name="stratigraphicUnit"
         />

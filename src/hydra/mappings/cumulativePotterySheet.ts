@@ -294,6 +294,14 @@ const generateMappings = () => {
 
 const mappings = [
   {
+    property: 'stratigraphicUnit.id',
+    variable: 'stratigraphicUnit.id[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    type: 'stratigraphicUnit',
+    label: 'stratigraphic unit'
+  },
+  {
     property: 'stratigraphicUnit.area.code',
     variable: 'stratigraphicUnit.area.code[]',
     operator: SearchLabels.equals,

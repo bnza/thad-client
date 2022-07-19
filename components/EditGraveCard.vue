@@ -398,6 +398,18 @@ export default {
           data[key] = this.normalizeResource(key)
         }
       }
+/*
+      for (const key of [
+        'earlierThan',
+        'laterThan',
+      ]) {
+        if (has(key, data)) {
+          console.log(data[key])
+          data[key] = this.toResourceIRI('stratigraphicUnit', data[key])
+          console.log(data[key])
+        }
+      } */
+
       for (const key of [
         'number',
         'building',
