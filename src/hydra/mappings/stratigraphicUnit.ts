@@ -299,7 +299,7 @@ export default [
   },
   {
     property: 'sequence.dxSU',
-    variable: 'relations.dxSU[]',
+    variable: 'sequence.dxSU[]',
     operator: SearchLabels.equals,
     multiple: true,
     label: 'sequence (SU)',

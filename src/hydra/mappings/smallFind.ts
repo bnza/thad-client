@@ -561,4 +561,12 @@ export default [
     label: 'date',
     type: Date
   },
+  {
+    property: 'decorations.decoration',
+    variable: 'decorations.decoration[]',
+    operator: SearchLabels.equals,
+    multiple: false,
+    vocabulary: 'decoration',
+    label: 'decoration'
+  },
 ]

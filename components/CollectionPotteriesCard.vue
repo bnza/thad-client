@@ -115,8 +115,9 @@
         width: '150px'
       },
       {
-        text: 'decoration',
-        value: 'decoration.value',
+        text: 'decorations',
+        value: 'decorations',
+        sortable: false,
         width: '150px'
       },
       {
@@ -236,6 +237,9 @@
       </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}
+      </template>
+      <template #[`item.decorations`]="{ item }">
+        <long-text-table-data-tooltip v-if="Array.isArray(item.decorations)" :text="item.decorations.map(item => item.decoration.value).join(', ')" />
       </template>
       <template #[`item.note`]="{ item }">
         <long-text-table-data-tooltip :text="item.note" />

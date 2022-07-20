@@ -80,6 +80,11 @@
         width: '170px'
       },
       {
+        text: 'decorations',
+        value: 'decorations',
+        sortable: false
+      },
+      {
         text: 'preservation state',
         value: 'preservationState.value',
         width: '170px'
@@ -204,6 +209,9 @@
           :item-id="item.stratigraphicUnit.id"
           resource-name="stratigraphicUnit"
         />
+      </template>
+      <template #[`item.decorations`]="{ item }">
+        <long-text-table-data-tooltip v-if="Array.isArray(item.decorations)" :text="item.decorations.map(item => item.decoration.value).join(', ')" />
       </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}

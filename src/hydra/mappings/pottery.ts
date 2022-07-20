@@ -275,21 +275,6 @@ export default [
     label: 'firing'
   },
   {
-    property: 'decoration.id',
-    variable: 'decoration.id[]',
-    operator: SearchLabels.equals,
-    multiple: false,
-    vocabulary: 'decoration',
-    label: 'decoration'
-  },
-  {
-    property: 'decoration.id',
-    variable: 'exists[decoration]',
-    operator: ExistsLabels.exists,
-    multiple: false,
-    label: 'decoration'
-  },
-  {
     property: 'vesselShape.id',
     variable: 'vesselShape.id[]',
     operator: SearchLabels.equals,
@@ -606,5 +591,13 @@ export default [
     multiple: false,
     label: 'date',
     type: Date
+  },
+  {
+    property: 'decorations.decoration',
+    variable: 'decorations.decoration[]',
+    operator: SearchLabels.equals,
+    multiple: false,
+    vocabulary: 'decoration',
+    label: 'decoration'
   },
 ]

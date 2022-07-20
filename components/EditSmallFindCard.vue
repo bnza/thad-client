@@ -172,15 +172,18 @@
             />
           </v-col>
           <v-col />
-          <v-col data-cy="decoration-select-col">
-            <select-vocabulary-autocomplete
-              label="decoration"
-              :select.sync="modelItem.decoration"
-              class="mx-4"
-              vocabulary-name="decoration"
-              v-on="$listeners"
-            />
-          </v-col>
+          <v-col />
+        </v-row>
+        <v-row>
+          <collection-decorations-join-card
+            v-if="ready && isUpdate"
+            :parent="item"
+            parent-request-filter-key="smallFind.id"
+            :enabled="true"
+            resource-name="decorationSmallFind"
+          >
+            <delete-small-find-card-text :item="item" />
+          </collection-decorations-join-card>
         </v-row>
         <v-row dense>
           <v-col data-cy="preservation-select-col">

@@ -149,12 +149,14 @@
                   readonly
                 />
               </v-col>
-              <v-col />
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('decoration.value', item)"
-                  label="decoration"
+              <v-col sm="2" />
+              <v-col sm="4">
+                <v-select
+                  :value="decorations"
+                  :items="decorations"
+                  label="decorations"
                   readonly
+                  multiple
                 />
               </v-col>
             </v-row>
@@ -358,6 +360,11 @@ export default {
         0,1,2,3,4
       ],
     }
-  }
+  },
+  computed: {
+    decorations() {
+      return (this.getResponseValue('decorations', this.item) || []).map(i => i.decoration.value)
+    }
+  },
 }
 </script>
