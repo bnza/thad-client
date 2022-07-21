@@ -25,42 +25,12 @@
       </v-col>
     </v-row>
     <v-row dense>
-      <lazy-collection-document-simple-item-card
-        :items="item.buildings || []"
-        name="building"
+      <lazy-collection-document-building-room-card
+        :parent="item"
+        parent-request-filter-key="mediaObject.id"
         :enabled="isEditingEnabled"
-        field-name="buildings"
-        @delete="submit({buildings: $event})"
-      >
-        <template #createDialog="{items,visible,events}">
-          <create-document-building-dialog
-            :items="items"
-            name="building"
-            :visible="visible"
-            @close="events.closeCreateDialog"
-            @update="submit({buildings: $event}, events.closeCreateDialog)"
-          />
-        </template>
-      </lazy-collection-document-simple-item-card>
-    </v-row>
-    <v-row dense>
-      <lazy-collection-document-simple-item-card
-        :items="item.rooms || []"
-        name="room"
-        :enabled="isEditingEnabled"
-        field-name="rooms"
-        @delete="submit({rooms: $event})"
-      >
-        <template #createDialog="{items,visible,events}">
-          <create-document-room-dialog
-            :items="items"
-            name="room"
-            :visible="visible"
-            @close="events.closeCreateDialog"
-            @update="submit({rooms: $event}, events.closeCreateDialog)"
-          />
-        </template>
-      </lazy-collection-document-simple-item-card>
+        resource-name="mediaObjectBuildingRoom"
+      />
     </v-row>
     <v-row dense>
       <lazy-collection-document-sus-card

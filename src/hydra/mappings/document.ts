@@ -2,13 +2,6 @@ import {DateLabels, RangeLabels, SearchLabels} from "~/src/hydra";
 
 export default [
   {
-    property: 'stratigraphicUnit.id',
-    variable: 'stratigraphicUnit.id[]',
-    operator: SearchLabels.equals,
-    multiple: true,
-    label: 'stratigraphic unit'
-  },
-  {
     property: 'stratigraphicUnit.area.code',
     variable: 'stratigraphicUnit.area.code[]',
     operator: SearchLabels.equals,
@@ -174,5 +167,35 @@ export default [
     multiple: false,
     label: 'date',
     type: Date
+  },
+  {
+    property: 'mediaObject.buildingRooms.building',
+    variable: '\'mediaObject.buildingRooms.building[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'building'
+  },
+  {
+    property: 'mediaObject.buildingRooms.room',
+    variable: 'mediaObject.buildingRooms.room[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    label: 'room'
+  },
+  {
+    property: 'mediaObject.stratigraphicUnits.stratigraphicUnit.id',
+    variable: 'mediaObject.stratigraphicUnits.stratigraphicUnit.id[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    type: 'stratigraphicUnit',
+    label: 'stratigraphic unit'
+  },
+  {
+    property: 'mediaObject.graves.grave.id',
+    variable: 'mediaObject.graves.grave.id[]',
+    operator: SearchLabels.equals,
+    multiple: true,
+    type: 'grave',
+    label: 'grave'
   },
 ]
