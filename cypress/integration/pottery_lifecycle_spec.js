@@ -100,10 +100,6 @@ describe('The Pottery resource lifecycle', () => {
 
     cy.get('[data-cy=surface-treatment-select-col] input').should('have.value', 'bitumen')
 
-    cy.get('[data-cy=decoration-select-col]').click().type('ex{downArrow}{enter}')
-
-    cy.get('[data-cy=decoration-select-col] input').should('have.value', 'excised')
-
     cy.get('[data-cy=body-select-col]').click().type('inw{downArrow}{enter}')
 
     cy.get('[data-cy=body-select-col] input').should('have.value', 'inward wall')
@@ -231,6 +227,52 @@ describe('The Pottery resource lifecycle', () => {
     cy.get('[data-cy=action-resource-card] .v-toolbar__title').contains('pottery')
 
     cy.get('[data-cy=action-resource-card] .v-toolbar__title').contains('edit')
+
+    cy.get('[data-cy=collection-decorations-potteries-card]').find(
+      '[data-cy=item-voc-chip]'
+    ).should('have.length', 0)
+
+    cy.get('[data-cy=create-rel-btn]').click()
+
+    cy.get('[data-cy=create-su-rel-dialog]')
+
+    cy.get('[data-cy=decoration-input]').click().type('gl{downArrow}{enter}')
+
+    cy.get('[data-cy=decoration-input] input').should('have.value', 'glazed')
+
+    cy.intercept({method: 'post', path: '**/api/decoration_potteries*'}).as('decorationPotteryPost')
+
+    cy.get('[data-cy=submit-btn]').last().click()
+
+    cy.wait('@decorationPotteryPost').its('response.statusCode').should('eq', 201)
+
+    cy.get('[data-cy=create-su-rel-dialog]').should('not.be.visible')
+
+    cy.get('[data-cy=create-rel-btn]').click()
+
+    cy.get('[data-cy=create-su-rel-dialog]')
+
+    cy.get('[data-cy=decoration-input]').click().type('gl{downArrow}{enter}')
+
+    cy.get('[data-cy=decoration-input] input').should('have.value', 'glazed')
+
+    cy.get('[data-cy=submit-btn]').last().click()
+
+    cy.wait('@decorationPotteryPost').its('response.statusCode').should('eq', 422)
+
+    cy.get('[data-cy=snackbar-close-btn]').click()
+
+    cy.get('[data-cy=decoration-input]').click().type('{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}ap{downArrow}{enter}')
+
+    cy.get('[data-cy=decoration-input] input').should('have.value', 'applied')
+
+    cy.get('[data-cy=submit-btn]').last().click()
+
+    cy.wait('@decorationPotteryPost').its('response.statusCode').should('eq', 201)
+
+    cy.get('[data-cy=collection-decorations-potteries-card]').find(
+      '[data-cy=item-voc-chip]'
+    ).should('have.length', 2)
 
     cy.get('[data-cy=navigation-prev-btn]').click()
 

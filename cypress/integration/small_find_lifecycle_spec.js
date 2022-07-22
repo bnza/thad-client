@@ -185,7 +185,53 @@ describe('The Small Find resource lifecycle', () => {
 
     cy.get('[data-cy=number-input-col] input').type('{backspace}9')
 
-    cy.get('[data-cy=submit-btn]').click()
+    cy.get('[data-cy=collection-decorations-potteries-card]').find(
+      '[data-cy=item-voc-chip]'
+    ).should('have.length', 0)
+
+    cy.get('[data-cy=create-rel-btn]').click()
+
+    cy.get('[data-cy=create-su-rel-dialog]')
+
+    cy.get('[data-cy=decoration-input]').click().type('gl{downArrow}{enter}')
+
+    cy.get('[data-cy=decoration-input] input').should('have.value', 'glazed')
+
+    cy.intercept({method: 'post', path: '**/api/decoration_small_finds*'}).as('decorationSmallFindPost')
+
+    cy.get('[data-cy=submit-btn]').last().click()
+
+    cy.wait('@decorationSmallFindPost').its('response.statusCode').should('eq', 201)
+
+    cy.get('[data-cy=create-su-rel-dialog]').should('not.be.visible')
+
+    cy.get('[data-cy=create-rel-btn]').click()
+
+    cy.get('[data-cy=create-su-rel-dialog]')
+
+    cy.get('[data-cy=decoration-input]').click().type('gl{downArrow}{enter}')
+
+    cy.get('[data-cy=decoration-input] input').should('have.value', 'glazed')
+
+    cy.get('[data-cy=submit-btn]').last().click()
+
+    cy.wait('@decorationSmallFindPost').its('response.statusCode').should('eq', 422)
+
+    cy.get('[data-cy=snackbar-close-btn]').click()
+
+    cy.get('[data-cy=decoration-input]').click().type('{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}ap{downArrow}{enter}')
+
+    cy.get('[data-cy=decoration-input] input').should('have.value', 'applied')
+
+    cy.get('[data-cy=submit-btn]').last().click()
+
+    cy.wait('@decorationSmallFindPost').its('response.statusCode').should('eq', 201)
+
+    cy.get('[data-cy=collection-decorations-potteries-card]').find(
+      '[data-cy=item-voc-chip]'
+    ).should('have.length', 2)
+
+    cy.get('[data-cy=submit-btn]').first().click()
 
     cy.get('[data-cy=resource-delete-btn]').click()
 
