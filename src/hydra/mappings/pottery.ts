@@ -94,12 +94,12 @@ export default [
     label: 'year'
   },
   {
-    property: 'type.id',
-    variable: 'type.id[]',
+    property: 'vesselShape.id',
+    variable: 'vesselShape.id[]',
     operator: SearchLabels.equals,
     multiple: false,
-    vocabulary: 'potteryType',
-    label: 'type'
+    vocabulary: 'vesselShape',
+    label: 'vessel shape'
   },
   {
     property: 'period.id',
