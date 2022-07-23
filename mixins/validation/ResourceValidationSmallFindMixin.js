@@ -2,6 +2,7 @@ import { validationMixin } from 'vuelidate'
 import { required, integer, decimal, between } from 'vuelidate/lib/validators'
 import greaterThan from "~/src/validators/greaterThan";
 import coordinateIsATriple from "~/src/validators/coordinateIsATriple";
+import isValidSubPeriod from "~/src/validators/isValidSubPeriod";
 
 export default {
   mixins: [validationMixin],
@@ -25,7 +26,8 @@ export default {
       coordZ: { decimal, coordinateIsATriple: coordinateIsATriple() },
       maxDiameter: { decimal, greaterThan: greaterThan('minDiameter')},
       weight: {decimal},
-      compiler: {required}
+      compiler: {required},
+      subperiod: { isValidSubPeriod: isValidSubPeriod()}
     },
   },
   computed: {
@@ -149,6 +151,12 @@ export default {
       const errors = []
       if (!this.$v.modelItem.compiler.$dirty) return errors
       !this.$v.modelItem.compiler.required && errors.push('Compiler is required.')
+      return errors
+    },
+    subperiodErrors() {
+      const errors = []
+      if (!this.$v.modelItem.subperiod.$dirty) return errors
+      !this.$v.modelItem.subperiod.isValidSubPeriod && errors.push('Period/subperiod mismatch.')
       return errors
     },
   },

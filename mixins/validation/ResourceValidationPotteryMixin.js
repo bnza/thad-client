@@ -1,5 +1,6 @@
 import { validationMixin } from 'vuelidate'
 import { required, integer, decimal } from 'vuelidate/lib/validators'
+import isValidSubPeriod from "~/src/validators/isValidSubPeriod";
 
 export default {
   mixins: [validationMixin],
@@ -10,7 +11,8 @@ export default {
       thickness: { decimal },
       rimDiameter: { decimal },
       baseDiameter: { decimal },
-      compiler: {required}
+      compiler: {required},
+      subperiod: { isValidSubPeriod: isValidSubPeriod()}
     },
   },
   computed: {
@@ -49,6 +51,12 @@ export default {
       const errors = []
       if (!this.$v.modelItem.compiler.$dirty) return errors
       !this.$v.modelItem.compiler.required && errors.push('Compiler is required.')
+      return errors
+    },
+    subperiodErrors() {
+      const errors = []
+      if (!this.$v.modelItem.subperiod.$dirty) return errors
+      !this.$v.modelItem.subperiod.isValidSubPeriod && errors.push('Period/subperiod mismatch.')
       return errors
     },
   },

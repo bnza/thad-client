@@ -83,6 +83,20 @@ describe('The Small Find resource lifecycle', () => {
 
     cy.get('[data-cy=fracture-colour-select-col] input').should('have.value', 'orange')
 
+    cy.get('[data-cy=fracture-colour-select-col]').click().type('or{downArrow}{enter}')
+
+    cy.get('[data-cy=subperiod-select-col]').click()
+
+    cy.get('.menuable__content__active').should('have.text', 'Select period first')
+
+    cy.get('[data-cy=period-select-col]').click().type('ch{downArrow}{enter}')
+
+    // cy.get('[data-cy=period-colour-select-col] input').should('have.value', 'LCA: Late Chalcolithic')
+
+    cy.get('[data-cy=subperiod-select-col] input').first().click().type('{downArrow}{downArrow}{downArrow}{enter}', {force: true})
+
+    // cy.get('[data-cy=subperiod-colour-select-col] input').should('have.value', 'LCA2: Late Chalcolithic')
+
     cy.get('[data-cy=length-input-col] input').type('n')
 
     cy.get('[data-cy=length-input-col] .v-messages__message').should('be.visible')

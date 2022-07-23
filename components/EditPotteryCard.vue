@@ -91,11 +91,16 @@
         </v-row>
         <v-row dense>
           <v-col data-cy="subperiod-select-col" sm="4">
-            <select-vocabulary-autocomplete
+            <select-subperiod-vocabulary-autocomplete
+              :period="modelItem.period || item.period"
               label="subperiod"
+              :error-messages="subperiodErrors"
               :select.sync="modelItem.subperiod"
               class="mx-4"
               vocabulary-name="subperiod"
+              @input="$v.modelItem.subperiod.$touch()"
+              @blur="$v.modelItem.subperiod.$touch()"
+              @select="$v.modelItem.subperiod.$touch()"
               v-on="$listeners"
             />
           </v-col>
@@ -484,6 +489,11 @@ export default {
         }
       },
       immediate: true
+    },
+    modelItem(value, oldValue) {
+      if (value.period && oldValue.period && value.period.id !== oldValue.period.id) {
+        this.modelItem.subperiod = null
+      }
     }
   }
 }
