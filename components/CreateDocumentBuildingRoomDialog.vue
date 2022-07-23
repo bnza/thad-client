@@ -61,13 +61,13 @@
 <script>
 import ResourceValidationDocumentBuildingRoomMixin
   from "@/mixins/validation/ResourceValidationDocumentBuildingRoomMixin";
-import ResourceCreateMediaLinkMixin from "@/mixins/ResourceCreateMediaLinkMixin";
+import ResourceCreateResourceJoinMixin from "@/mixins/ResourceCreateResourceJoinMixin";
 
 export default {
   name: "CreateDocumentBuildingRoomDialog",
   mixins: [
     ResourceValidationDocumentBuildingRoomMixin,
-    ResourceCreateMediaLinkMixin
+    ResourceCreateResourceJoinMixin
   ],
   computed: {
     defaultModelItem() {

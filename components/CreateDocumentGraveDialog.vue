@@ -44,12 +44,12 @@
 </template>
 
 <script>
-import ResourceCreateMediaLinkMixin from "@/mixins/ResourceCreateMediaLinkMixin";
+import ResourceCreateResourceJoinMixin from "@/mixins/ResourceCreateResourceJoinMixin";
 
 export default {
   name: "CreateDocumentGraveDialog",
   mixins: [
-    ResourceCreateMediaLinkMixin
+    ResourceCreateResourceJoinMixin
   ],
   computed: {
     defaultModelItem() {

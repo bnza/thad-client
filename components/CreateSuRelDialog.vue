@@ -49,12 +49,12 @@
 </template>
 
 <script>
-import ResourceCreateMediaLinkMixin from "@/mixins/ResourceCreateMediaLinkMixin";
+import ResourceCreateResourceJoinMixin from "@/mixins/ResourceCreateResourceJoinMixin";
 
 export default {
   name: "CreateSuRelDialog",
   mixins: [
-    ResourceCreateMediaLinkMixin
+    ResourceCreateResourceJoinMixin
   ],
   props: {
     visible: {

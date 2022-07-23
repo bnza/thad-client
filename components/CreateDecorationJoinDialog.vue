@@ -46,13 +46,13 @@
 </template>
 
 <script>
-import ResourceCreateMediaLinkMixin from "@/mixins/ResourceCreateMediaLinkMixin";
+import ResourceCreateResourceJoinMixin from "@/mixins/ResourceCreateResourceJoinMixin";
 import ResourceCollectionParentMixin from "@/mixins/ResourceCollectionParentMixin";
 
 export default {
   name: "CreateDecorationJoinDialog",
   mixins: [
-    ResourceCreateMediaLinkMixin,
+    ResourceCreateResourceJoinMixin,
     ResourceCollectionParentMixin
   ],
   props: {
