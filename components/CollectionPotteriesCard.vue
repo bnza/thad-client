@@ -166,11 +166,6 @@
         width: '150px'
       },
       {
-        text: 'decoration',
-        value: 'decoration.value',
-        width: '150px'
-      },
-      {
         text: 'thickness (cm)',
         value: 'thickness',
         width: '150px'
@@ -234,6 +229,69 @@
           :item-id="item.stratigraphicUnit.id"
           resource-name="stratigraphicUnit"
         />
+      </template>
+      <template #[`item.period.code`]="{ item }">
+        {{ getVocabularValue('period', item.period, 'code') }}
+      </template>
+      <template #[`item.subperiod.code`]="{ item }">
+        {{ getVocabularValue('subperiod', item.subperiod, 'code') }}
+      </template>
+      <template #[`item.ware.value`]="{ item }">
+        {{ getVocabularValue('ware', item.ware) }}
+      </template>
+      <template #[`item.fabric.value`]="{ item }">
+        {{ getVocabularValue('fabric', item.fabric) }}
+      </template>
+      <template #[`item.preservation.value`]="{ item }">
+        {{ getVocabularValue('preservation', item.preservation) }}
+      </template>
+      <template #[`item.externalSurfaceColour.value`]="{ item }">
+        {{ getVocabularValue('potteryColour', item.externalSurfaceColour) }}
+      </template>
+      <template #[`item.internalSurfaceColour.value`]="{ item }">
+        {{ getVocabularValue('potteryColour', item.internalSurfaceColour) }}
+      </template>
+      <template #[`item.fractureColour.value`]="{ item }">
+        {{ getVocabularValue('potteryColour', item.fractureColour) }}
+      </template>
+      <template #[`item.surfaceCharacteristic.value`]="{ item }">
+        {{ getVocabularValue('surfaceCharacteristic', item.surfaceCharacteristic) }}
+      </template>
+      <template #[`item.surfaceTreatment.value`]="{ item }">
+        {{ getVocabularValue('surfaceTreatment', item.surfaceTreatment) }}
+      </template>
+      <template #[`item.manufacturingTechnique.value`]="{ item }">
+        {{ getVocabularValue('manufacturingTechnique', item.manufacturingTechnique) }}
+      </template>
+      <template #[`item.firing.value`]="{ item }">
+        {{ getVocabularValue('firing', item.firing) }}
+      </template>
+      <template #[`item.vesselShape.value`]="{ item }">
+        {{ getVocabularValue('vesselShape', item.vesselShape) }}
+      </template>
+      <template #[`item.baseShape.value`]="{ item }">
+        {{ getVocabularValue('baseShape', item.baseShape) }}
+      </template>
+      <template #[`item.rimShape.value`]="{ item }">
+        {{ getVocabularValue('rimShape', item.rimShape) }}
+      </template>
+      <template #[`item.neck.value`]="{ item }">
+        {{ getVocabularValue('neck', item.neck) }}
+      </template>
+      <template #[`item.neckLength.value`]="{ item }">
+        {{ getVocabularValue('neckLength', item.neckLength) }}
+      </template>
+      <template #[`item.body.value`]="{ item }">
+        {{ getVocabularValue('body', item.body) }}
+      </template>
+      <template #[`item.spout.value`]="{ item }">
+        {{ getVocabularValue('spout', item.spout) }}
+      </template>
+      <template #[`item.handle.value`]="{ item }">
+        {{ getVocabularValue('handle', item.handle) }}
+      </template>
+      <template #[`item.sizeGroup.value`]="{ item }">
+        {{ getVocabularValue('sizeGroup', item.sizeGroup) }}
       </template>
       <template #[`item.date`]="{ item }">
         {{ new Date(item.date).toLocaleDateString() }}

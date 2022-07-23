@@ -1,4 +1,5 @@
 import {has, isEmpty} from "ramda";
+import {mapGetters} from "vuex";
 
 const getResponseValue = (key, item) => {
   if (isEmpty(item)) {
@@ -32,11 +33,18 @@ const codeFormatters = {
 
 export default {
   computed: {
+    ...mapGetters('vocabularies', ['getVocabular']),
     ready() {
       return !isEmpty(this.responseData)
     },
   },
   methods: {
+    getVocabularValue(vocabularyName, id, value = 'value') {
+      return this.getResponseValue(
+        value,
+        this.getVocabular(vocabularyName, id)
+      )
+    },
     getResponseValue(key, item) {
       return getResponseValue(key, item || this.responseData)
     },

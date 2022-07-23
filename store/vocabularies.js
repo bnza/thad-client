@@ -16,6 +16,12 @@ export const getters = {
     return function (vocabularyName) {
       return state[vocabularyName]
     }
+  },
+  getVocabular(_, getters) {
+    return function (vocabularyName, id) {
+      const voc = getters.getVocabulary(vocabularyName)
+      return voc ? voc.find(_v => _v['@id'] === id) : undefined
+    }
   }
 }
 
