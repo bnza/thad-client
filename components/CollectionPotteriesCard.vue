@@ -26,10 +26,9 @@
       :headers="[
       {
         text: 'action',
-        value: 'id',
+        value: 'appId.code',
         align: 'center fixed',
         width: '150px',
-        sortable: false
       },
       {
         text: 'site',
@@ -200,7 +199,7 @@
       :options.sync="pagination"
       :server-items-length="totalItems"
     >
-      <template #[`item.id`]="{ item : tItem }">
+      <template #[`item.appId.code`]="{ item : tItem }">
         <navigation-resource-item-crud
           scope="ROLE_EDITOR"
           :item-id="tItem.id"

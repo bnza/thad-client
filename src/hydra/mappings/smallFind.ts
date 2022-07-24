@@ -569,4 +569,11 @@ export default [
     vocabulary: 'decoration',
     label: 'decoration'
   },
+  {
+    property: 'decorations',
+    variable: 'exists[decorations]',
+    operator: ExistsLabels.exists,
+    multiple: false,
+    label: 'decoration (has any value)'
+  },
 ]

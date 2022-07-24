@@ -55,6 +55,12 @@ export const mutations = {
     }
     Vue.set(state[componentId], 'filters', filters)
   },
+  setCodeFilter(state, {componentId, filter}) {
+    if (!has(componentId, state)) {
+      Vue.set(state, componentId, {})
+    }
+    Vue.set(state[componentId], 'codeFilter', filter)
+  },
 }
 
 export const getters = {
@@ -64,6 +70,9 @@ export const getters = {
   },
   getFilters: (state) => (componentId) => {
     return state[componentId]?.filters || []
+  },
+  getCodeFilter: (state) => (componentId) => {
+    return state[componentId]?.codeFilter
   }
 }
 

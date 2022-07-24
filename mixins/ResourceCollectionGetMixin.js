@@ -67,7 +67,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('collections', ['getPagination', 'getFilters']),
+    ...mapGetters('collections', ['getPagination', 'getFilters', 'getCodeFilter']),
     ...mapState(['workSite']),
     componentId() {
       let id = `Collection.${this.resourceName}`
@@ -91,6 +91,9 @@ export default {
     normalizedFilters() {
       let filters = clone(this.filters)
       filters = appFiltersToQueryStringObject(filters)
+      if (this.codeFilter) {
+        filters['appId.code'] = this.codeFilter
+      }
       if (this.isChild) {
         filters = mergeLeft({
           [this.parentRequestFilterKey]: this.parent[this.parentFilterKey]
@@ -115,6 +118,14 @@ export default {
       },
       set(filters) {
         this.$store.commit('collections/setFilters', {componentId:this.componentId, filters})
+      }
+    },
+    codeFilter: {
+      get() {
+        return this.getCodeFilter(this.componentId)
+      },
+      set(filter) {
+        this.$store.commit('collections/setCodeFilter', {componentId:this.componentId, filter})
       }
     },
     items() {

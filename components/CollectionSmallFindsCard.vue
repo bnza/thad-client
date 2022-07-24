@@ -2,6 +2,7 @@
   <v-card data-cy="collection-small-finds-card">
     <v-toolbar flat dense>
       <v-toolbar-title v-if="!isChild">Small Finds</v-toolbar-title>
+      <search-app-id-text-field :filter.sync="codeFilter"/>
       <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
       <v-spacer />
       <navigation-download-collection-button :disabled="!totalItems" @click="downloadDialog = true"/>
@@ -26,10 +27,9 @@
       :headers="[
       {
         text: 'action',
-        value: 'id',
+        value: 'appId.code',
         align: 'center fixed',
         width: '150px',
-        sortable: false
       },
       {
         text: 'site',
@@ -180,7 +180,7 @@
       :options.sync="pagination"
       :server-items-length="totalItems"
     >
-      <template #[`item.id`]="{ item : tItem }">
+      <template #[`item.appId.code`]="{ item : tItem }">
         <navigation-resource-item-crud
           scope="ROLE_EDITOR"
           :item-id="tItem.id"

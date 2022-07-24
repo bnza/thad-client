@@ -449,7 +449,7 @@ export default [
   },
   {
     property: 'preservation.id',
-    variable: 'exists[preservationS]',
+    variable: 'exists[preservation]',
     operator: ExistsLabels.exists,
     multiple: false,
     label: 'preservation'
@@ -599,5 +599,12 @@ export default [
     multiple: false,
     vocabulary: 'decoration',
     label: 'decoration'
+  },
+  {
+    property: 'decorations',
+    variable: 'exists[decorations]',
+    operator: ExistsLabels.exists,
+    multiple: false,
+    label: 'decoration (has any value)'
   },
 ]
