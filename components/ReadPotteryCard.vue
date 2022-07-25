@@ -23,7 +23,15 @@
                   :value="formatCode('stratigraphicUnit', item.stratigraphicUnit)"
                   label="SU"
                   readonly
-                />
+                >
+                  <template #prepend>
+                    <navigation-resource-read-button
+                      :disabled="!getResponseValue('stratigraphicUnit.id', item)"
+                      :item-id="getResponseValue('stratigraphicUnit.id', item)"
+                      resource-name="stratigraphicUnit"
+                    />
+                  </template>
+                </v-text-field>
               </v-col>
               <v-col sm="2">
                 <v-text-field

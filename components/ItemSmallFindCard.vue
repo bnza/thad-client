@@ -29,7 +29,7 @@
       <v-tab-item value="su">
        <resource-fetch-item v-if="item.stratigraphicUnit" :item-id="`${item.stratigraphicUnit.id}`" resource-name="stratigraphicUnit">
           <template #default="su">
-            <read-su-card v-if="su.item.id" :item="su.item" />
+            <read-su-card v-if="su.item.id" :item="su.item" :is-child="true"/>
           </template>
         </resource-fetch-item>
       </v-tab-item>

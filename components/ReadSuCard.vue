@@ -90,7 +90,15 @@
               :value="formatCode('stratigraphicUnit', item)"
               label="code"
               readonly
-            />
+            >
+              <template v-if="isChild" #prepend>
+                <navigation-resource-read-button
+                  :disabled="!getResponseValue('id', item)"
+                  :item-id="getResponseValue('id', item)"
+                  resource-name="stratigraphicUnit"
+                />
+              </template>
+            </v-text-field>
           </v-col>
           <v-col>
             <v-text-field
