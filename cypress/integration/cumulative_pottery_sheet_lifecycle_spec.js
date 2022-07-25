@@ -81,7 +81,11 @@ describe('The Cumulative Pottery Sheet resource lifecycle', () => {
 
     cy.get('[data-cy=snackbar-close-btn]').click()
 
+    cy.intercept({method: 'get', path: '**/api/cumulative_pottery_sheets/*'}).as('successfulGetItemRequest')
+
     cy.get('[data-cy=cancel-btn]').click()
+
+    cy.wait('@successfulGetItemRequest').its('response.statusCode').should('eq', 200)
 
     cy.get('[data-cy=resource-delete-btn]').click()
 

@@ -109,7 +109,7 @@ describe('The Site resource lifecycle', () => {
 
     cy.get('@deleteResourceDialogCard').find('[data-cy=delete-btn]').click()
 
-    cy.wait('@successfulDeleteRequest').its('response.statusCode').should('eq', 500)
+    cy.wait('@successfulDeleteRequest').its('response.statusCode').should('eq', 422)
 
     cy.get('[data-cy=snackbar-close-btn]').click()
 

@@ -152,13 +152,13 @@ describe('The Grave resource lifecycle', () => {
 
     cy.get('[data-cy=resource-update-btn]').click()
 
-    cy.intercept({method: 'patch', path: '**/api/graves/*'}).as('failedUpdateRequest')
+    cy.intercept({method: 'patch', path: '**/api/graves/*'}).as('updateRequest')
 
     cy.get('[data-cy=number-input-col]').type('{backspace}{backspace}1')
 
     cy.get('[data-cy=submit-btn]').click()
 
-    cy.wait('@failedUpdateRequest').its('response.statusCode').should('eq', 422)
+    cy.wait('@updateRequest').its('response.statusCode').should('eq', 422)
 
     cy.get('[data-cy=snackbar-close-btn]').click()
 
@@ -171,6 +171,8 @@ describe('The Grave resource lifecycle', () => {
     cy.get('[data-cy=su-interpretation-input]').type('Some interpretation')
 
     cy.get('[data-cy=submit-btn]').click()
+
+    cy.wait('@updateRequest').its('response.statusCode').should('eq', 200)
 
     cy.get('[data-cy=resource-delete-btn]').click()
 
