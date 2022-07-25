@@ -26,9 +26,13 @@
       :headers="[
       {
         text: 'action',
-        value: 'appId.code',
+        value: 'id',
         align: 'center fixed',
-        width: '150px',
+        width: '150px'
+      },
+      {
+        text: 'ID',
+        value: 'appId.code',
       },
       {
         text: 'site',
@@ -199,15 +203,16 @@
       :options.sync="pagination"
       :server-items-length="totalItems"
     >
-      <template #[`item.appId.code`]="{ item : tItem }">
+      <template #[`item.id`]="{ item : tItem }">
         <navigation-resource-item-crud
           scope="ROLE_EDITOR"
           :item-id="tItem.id"
           :resource-name="resourceName"
           @delete="openDeleteDialog(tItem)"
-        >
-          <div class="secondary--text">{{formatCode(resourceName, tItem)}}</div>
-        </navigation-resource-item-crud>
+        />
+      </template>
+      <template #[`item.appId.code`]="{ item : tItem }">
+        <span class="secondary--text" >{{formatCode(resourceName, tItem)}}</span>
       </template>
       <template #[`item.stratigraphicUnit.site.code`]="{ item }">
         <navigation-resource-item-chip
