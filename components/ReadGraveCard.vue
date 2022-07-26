@@ -189,7 +189,7 @@
           <v-col>
             <v-text-field
               :value="formatCode('stratigraphicUnit', getResponseValue('laterThan', item))"
-              label="earlier than"
+              label="later than"
               readonly
             >
               <template #prepend>

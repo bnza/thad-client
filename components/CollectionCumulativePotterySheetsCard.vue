@@ -2,6 +2,7 @@
   <v-card data-cy="collection-cps-card">
     <v-toolbar flat dense>
       <v-toolbar-title v-if="!isChild">Cumulative pottery sheets</v-toolbar-title>
+      <search-app-id-text-field :filter.sync="codeFilter"/>
       <v-toolbar-title v-if="isFiltered" class="secondary--text mx-4"> (filtered) </v-toolbar-title>
       <v-spacer />
       <navigation-download-collection-button :disabled="!totalItems" @click="downloadDialog = true"/>
@@ -32,15 +33,16 @@
         </v-tooltip>
       </template>
 
-      <template #[`item.id`]="{ item : tItem }">
+      <template #[`item.id`]="{ item  }">
         <navigation-resource-item-crud
           scope="ROLE_EDITOR"
-          :item-id="tItem.id"
+          :item-id="item.id"
           :resource-name="resourceName"
-          @delete="openDeleteDialog(tItem)"
-        >
-          <div class="secondary--text">{{formatCode(resourceName, tItem)}}</div>
-        </navigation-resource-item-crud>
+          @delete="openDeleteDialog(item)"
+        />
+      </template>
+      <template #[`item.appId.code`]="{ item }">
+        <span class="secondary--text" >{{item.appId.code}}</span>
       </template>
       <template #[`item.stratigraphicUnit.site.code`]="{ item }">
         <navigation-resource-item-chip
@@ -120,8 +122,11 @@ export default {
         text: 'action',
         value: 'id',
         align: 'center fixed',
-        width: '150px',
-        sortable: false
+        width: '150px'
+      },
+      {
+        text: 'ID',
+        value: 'appId.code',
       },
       {
         text: 'site',
