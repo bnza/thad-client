@@ -8,7 +8,7 @@
           <v-expansion-panel-header class="grey--text text-overline">Identification</v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-row dense>
-              <v-col sm="4">
+              <v-col sm="3">
                 <v-text-field
                   class="secondary--text font-weight-bold" color="secondary"
                   :value="formatCode('ecofact', item)"
@@ -16,7 +16,9 @@
                   readonly
                 />
               </v-col>
-              <v-col sm="2">
+            </v-row>
+            <v-row dense>
+              <v-col sm="3">
                 <v-text-field
                   :value="formatCode('stratigraphicUnit', item.stratigraphicUnit)"
                   label="SU"
@@ -31,7 +33,7 @@
                   </template>
                 </v-text-field>
               </v-col>
-              <v-col sm="3"/>
+              <v-col sm="3" />
               <v-col sm="3">
                 <v-text-field
                   class="secondary--text font-weight-bold" color="secondary"
@@ -40,40 +42,55 @@
                   readonly
                 />
               </v-col>
-              <v-col />
             </v-row>
             <v-row dense>
-              <v-col>
+              <v-col sm="3">
                 <v-text-field
                   :value="getResponseValue('type.value', item)"
                   label="type"
                   readonly
                 />
               </v-col>
-              <v-col>
+              <v-col sm="3" />
+              <v-col sm="3">
                 <v-text-field
                   :value="getResponseValue('preservationState.value', item)"
                   label="preservation"
                   readonly
                 />
               </v-col>
-              <v-col>
-                <v-text-field
-                  :value="getResponseValue('quantity', item)"
-                  label="number of ecofact collected"
-                  readonly
-                />
-              </v-col>
-              <v-col>
-                <v-checkbox
-                  label="selected for analysis"
-                  :input-value="getResponseValue('selectedForAnalysis', item)"
-                  readonly
-                />
-              </v-col>
             </v-row>
           </v-expansion-panel-content>
         </v-expansion-panel>
+          <v-expansion-panel>
+            <v-expansion-panel-header class="grey--text text-overline">Sampling</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-row dense>
+                <v-col sm="3">
+                  <v-text-field
+                    :value="item.collectionDate?.substring(0,10)"
+                    label="collection date"
+                    readonly
+                  />
+                </v-col>
+                <v-col sm="3" />
+                <v-col>
+                  <v-text-field
+                    :value="getResponseValue('quantity', item)"
+                    label="number of ecofact collected"
+                    readonly
+                  />
+                </v-col>
+                <v-col>
+                  <v-checkbox
+                    label="selected for analysis"
+                    :input-value="getResponseValue('selectedForAnalysis', item)"
+                    readonly
+                  />
+                </v-col>
+              </v-row>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
         <v-expansion-panel>
           <v-expansion-panel-header class="grey--text text-overline">Measures</v-expansion-panel-header>
           <v-expansion-panel-content>
@@ -183,7 +200,7 @@ export default {
   data() {
     return {
       panels: [
-        0,1,2
+        0,1,2,3,4
       ],
     }
   }

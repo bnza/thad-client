@@ -44,6 +44,7 @@
               @blur="$v.modelItem.stratigraphicUnit.$touch()"
             />
           </v-col>
+          <v-col sm="3" />
           <v-col data-cy="number-input-col" sm="3">
             <v-text-field
               v-model="modelItem.number"
@@ -58,12 +59,6 @@
             />
           </v-col>
           <v-col sm="3" />
-          <v-col sm="3">
-            <select-date-menu
-              label="date of collection"
-              :date.sync="modelItem.collectionDate"
-            />
-          </v-col>
         </v-row>
         <v-row dense>
           <v-col data-cy="type-select-col" sm="3">
@@ -78,6 +73,7 @@
               @blur="$v.modelItem.type.$touch()"
             />
           </v-col>
+          <v-col sm="3" />
           <v-col data-cy="preservation-state-select-col" sm="3">
             <select-vocabulary-autocomplete
               label="preservation"
@@ -87,6 +83,20 @@
               v-on="$listeners"
             />
           </v-col>
+        </v-row>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+    <v-expansion-panel>
+      <v-expansion-panel-header class="grey--text text-overline">Sampling</v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <v-row dense>
+          <v-col sm="3">
+            <select-date-menu
+              label="date of collection"
+              :date.sync="modelItem.collectionDate"
+            />
+          </v-col>
+          <v-col sm="3" />
           <v-col data-cy="quantity-input-col" sm="3">
             <v-text-field
               v-model="modelItem.quantity"

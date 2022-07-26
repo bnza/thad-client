@@ -11,7 +11,7 @@
     <template #activator="{ on, attrs }">
       <v-text-field
         v-model="modelDate"
-        label="compilation date"
+        :label="label"
         prepend-icon="mdi-calendar"
         readonly
         v-bind="attrs"
