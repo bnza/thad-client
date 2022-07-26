@@ -10,8 +10,6 @@ export default {
       year: { required, integer, between: between(2000, 2099)},
       type: { required },
       mediaObject: { required },
-      description: { required },
-      interpretation: { required },
       creator: { required }
     },
   },
@@ -32,18 +30,6 @@ export default {
       const errors = []
       if (!this.$v.modelItem.mediaObject.$dirty) return errors
       !this.$v.modelItem.mediaObject.required && errors.push('Media is required.')
-      return errors
-    },
-    descriptionErrors() {
-      const errors = []
-      if (!this.$v.modelItem.description.$dirty) return errors
-      !this.$v.modelItem.description.required && errors.push('Description is required.')
-      return errors
-    },
-    interpretationErrors() {
-      const errors = []
-      if (!this.$v.modelItem.interpretation.$dirty) return errors
-      !this.$v.modelItem.interpretation.required && errors.push('Interpretation is required.')
       return errors
     },
     creatorErrors() {

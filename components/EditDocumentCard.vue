@@ -138,9 +138,6 @@
               v-model="modelItem.description"
               label="description"
               class="mx-4"
-              :error-messages="descriptionErrors"
-              @input="$v.modelItem.description.$touch()"
-              @blur="$v.modelItem.description.$touch()"
             />
           </v-col>
           <v-col data-cy="interpretation-select-col">
@@ -148,9 +145,6 @@
               v-model="modelItem.interpretation"
               label="interpretation"
               class="mx-4"
-              :error-messages="interpretationErrors"
-              @input="$v.modelItem.interpretation.$touch()"
-              @blur="$v.modelItem.interpretation.$touch()"
             />
           </v-col>
           <v-col>
