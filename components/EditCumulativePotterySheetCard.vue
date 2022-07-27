@@ -444,7 +444,7 @@
           <v-col sm="2">
             <v-text-field
               v-model="modelItem.subperiodLBA1Count"
-              label="Late Bronze Age 1 / Mitanni"
+              label="Late BA 1 / Mitanni"
               :error-messages="errors('subperiodLBA1Count')"
               class="mx-4"
               @input="$v.modelItem.subperiodLBA1Count.$touch()"
@@ -454,7 +454,7 @@
           <v-col sm="2">
             <v-text-field
               v-model="modelItem.subperiodLBA2Count"
-              label="Late Bronze Age 2 / Middle Assyrian"
+              label="Late BA 2 / Middle Assyrian"
               :error-messages="errors('subperiodLBA2Count')"
               class="mx-4"
               @input="$v.modelItem.subperiodLBA2Count.$touch()"
