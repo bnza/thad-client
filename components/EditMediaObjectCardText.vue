@@ -6,6 +6,7 @@
         label="Upload file"
         data-cy="file-input"
         :error-messages="fileErrors"
+        @change="$v.modelItem.file.$touch()"
       />
     </v-card-text>
 </template>
@@ -43,11 +44,12 @@ export default {
       })
       return response.data['hydra:member'][0]
     },
+    async isInvalid() {
+      await this.$v.$touch()
+      return this.$v.$invalid
+    },
     async submit() {
-      this.$v.$touch()
-      if (this.$v.$invalid) {
-        return
-      }
+      await this.isInvalid()
       const data = new FormData()
       data.append('file', this.modelItem.file)
       try {

@@ -53,6 +53,8 @@ export const actions = {
         error.response.data['hydra:description']
     } else if (error.response.data.message) {
       text = error.response.data.message
+    } else if (error.response.status) {
+      text = `${error.response.statusText}: [${error.response.status}]`
     }
     else {
       text = error.message

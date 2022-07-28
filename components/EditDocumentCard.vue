@@ -256,7 +256,15 @@ export default {
   },
   methods: {
     async beforeSubmit() {
+      const mediaObjectIsInvalid =  await this.$refs.media.isInvalid()
       if (this.isUpdate) {
+        return
+      }
+      if (mediaObjectIsInvalid) {
+        return
+      }
+      const documentIsInvalid = await this.partialValidate({exclude: ['mediaObject']})
+      if (documentIsInvalid) {
         return
       }
       this.modelItem.mediaObject = await this.$refs.media.submit()

@@ -102,6 +102,9 @@ export default {
     async submit() {
         try {
           this.modelItem.mediaObject = await this.$refs.media.submit()
+          if (!this.modelItem.mediaObject) {
+            return
+          }
           await this.request({
             method: 'post',
             url: this.resource.collectionUrl,
