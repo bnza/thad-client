@@ -196,5 +196,24 @@ export const actions = {
         }
       })
     return !response.data['hydra:totalItems']
+  },
+  async isUniqueNumberInSU({dispatch, rootGetters}, {resourceName, suId, number}) {
+    const resource = rootGetters['api/getResource'](resourceName)
+    if (!suId || !number) {
+      return true
+    }
+    const response = await dispatch('request',
+      {
+        method: 'get',
+        url: resource.collectionUrl,
+        headers: {
+          Accept: 'application/ld+json'
+        },
+        params: {
+          'stratigraphicUnit.id': suId,
+          number
+        }
+      })
+    return !response.data['hydra:totalItems']
   }
 }

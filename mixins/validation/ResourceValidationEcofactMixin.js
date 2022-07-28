@@ -1,23 +1,30 @@
 import { validationMixin } from 'vuelidate'
 import { required, integer, decimal } from 'vuelidate/lib/validators'
+import isUniqueNumberInSU from "~/src/validators/isUniqueNumberInSU";
 
 export default {
   mixins: [validationMixin],
-  validations: {
-    modelItem: {
-      stratigraphicUnit: { required },
-      number: { required, integer },
-      type: {required },
-      quantity: { integer },
-      length: { decimal },
-      height: { decimal },
-      width: { decimal },
-      thickness: { decimal },
-      minDiameter: { decimal },
-      maxDiameter: { decimal },
-      weight: {decimal},
-      compiler: { required },
-    },
+  validations() {
+    return {
+      modelItem: {
+        stratigraphicUnit: {required},
+        number: {
+          required,
+          integer,
+          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName)
+        },
+        type: {required},
+        quantity: {integer},
+        length: {decimal},
+        height: {decimal},
+        width: {decimal},
+        thickness: {decimal},
+        minDiameter: {decimal},
+        maxDiameter: {decimal},
+        weight: {decimal},
+        compiler: {required},
+      }
+    }
   },
   computed: {
     stratigraphicUnitErrors() {
@@ -43,6 +50,7 @@ export default {
       if (!this.$v.modelItem.number.$dirty) return errors
       !this.$v.modelItem.number.required && errors.push('Ecofact number is required.')
       !this.$v.modelItem.number.integer && errors.push('Ecofact number must be an integer number.')
+      !this.$v.modelItem.number.isUniqueNumberInSU && errors.push('Duplicate ecofact number for this SU.')
       return errors
     },
     quantityErrors() {

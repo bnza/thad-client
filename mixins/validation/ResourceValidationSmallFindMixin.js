@@ -3,32 +3,39 @@ import { required, integer, decimal, between } from 'vuelidate/lib/validators'
 import greaterThan from "~/src/validators/greaterThan";
 import coordinateIsATriple from "~/src/validators/coordinateIsATriple";
 import isValidSubPeriod from "~/src/validators/isValidSubPeriod";
+import isUniqueNumberInSU from "~/src/validators/isUniqueNumberInSU";
 
 export default {
   mixins: [validationMixin],
-  validations: {
-    modelItem: {
-      stratigraphicUnit: { required },
-      number: { required, integer },
-      type: {required },
-      material: {required },
-      preservation: {required },
-      length: { decimal },
-      height: { decimal },
-      width: { decimal },
-      minWidth: { decimal },
-      maxWidth: { decimal, greaterThan: greaterThan('minWidth') },
-      thickness: { decimal },
-      baseDiameter: { decimal },
-      minDiameter: { decimal },
-      coordN: { decimal, coordinateIsATriple: coordinateIsATriple(), between: between(0.00,9329005.18) },
-      coordE: { decimal, coordinateIsATriple: coordinateIsATriple(), between: between(166021.44,833978.56) },
-      coordZ: { decimal, coordinateIsATriple: coordinateIsATriple() },
-      maxDiameter: { decimal, greaterThan: greaterThan('minDiameter')},
-      weight: {decimal},
-      compiler: {required},
-      subperiod: { isValidSubPeriod: isValidSubPeriod()}
-    },
+  validations() {
+    return {
+      modelItem: {
+        stratigraphicUnit: {required},
+        number: {
+          required,
+          integer,
+          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName)
+        },
+        type: {required},
+        material: {required},
+        preservation: {required},
+        length: {decimal},
+        height: {decimal},
+        width: {decimal},
+        minWidth: {decimal},
+        maxWidth: {decimal, greaterThan: greaterThan('minWidth')},
+        thickness: {decimal},
+        baseDiameter: {decimal},
+        minDiameter: {decimal},
+        coordN: {decimal, coordinateIsATriple: coordinateIsATriple(), between: between(0.00, 9329005.18)},
+        coordE: {decimal, coordinateIsATriple: coordinateIsATriple(), between: between(166021.44, 833978.56)},
+        coordZ: {decimal, coordinateIsATriple: coordinateIsATriple()},
+        maxDiameter: {decimal, greaterThan: greaterThan('minDiameter')},
+        weight: {decimal},
+        compiler: {required},
+        subperiod: {isValidSubPeriod: isValidSubPeriod()}
+      }
+    }
   },
   computed: {
     stratigraphicUnitErrors() {
@@ -60,6 +67,7 @@ export default {
       if (!this.$v.modelItem.number.$dirty) return errors
       !this.$v.modelItem.number.required && errors.push('Ecofact number is required.')
       !this.$v.modelItem.number.integer && errors.push('Ecofact number must be an integer number.')
+      !this.$v.modelItem.number.isUniqueNumberInSU && errors.push('Duplicate small find number for this SU.')
       return errors
     },
     lengthErrors() {

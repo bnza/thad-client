@@ -242,6 +242,7 @@
 
 <script>
 import {clone, has} from "ramda";
+import {mapActions} from "vuex";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceValidationEcofactMixin from "@/mixins/validation/ResourceValidationEcofactMixin";
@@ -310,7 +311,10 @@ export default {
       },
       immediate: true
     }
-  }
+  },
+  methods: {
+    ...mapActions('http', ['isUniqueNumberInSU']),
+  },
 }
 </script>
 

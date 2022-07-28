@@ -405,6 +405,7 @@
 
 <script>
 import {clone, has} from "ramda";
+import {mapActions} from "vuex";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceValidationPotteryMixin from "@/mixins/validation/ResourceValidationPotteryMixin";
@@ -495,7 +496,10 @@ export default {
         this.modelItem.subperiod = null
       }
     }
-  }
+  },
+  methods: {
+    ...mapActions('http', ['isUniqueNumberInSU']),
+  },
 }
 </script>
 

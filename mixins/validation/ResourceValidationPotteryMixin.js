@@ -1,19 +1,26 @@
 import { validationMixin } from 'vuelidate'
 import { required, integer, decimal } from 'vuelidate/lib/validators'
 import isValidSubPeriod from "~/src/validators/isValidSubPeriod";
+import isUniqueNumberInSU from "~/src/validators/isUniqueNumberInSU";
 
 export default {
   mixins: [validationMixin],
-  validations: {
-    modelItem: {
-      stratigraphicUnit: { required },
-      number: { required, integer },
-      thickness: { decimal },
-      rimDiameter: { decimal },
-      baseDiameter: { decimal },
-      compiler: {required},
-      subperiod: { isValidSubPeriod: isValidSubPeriod()}
-    },
+  validations() {
+    return  {
+      modelItem: {
+        stratigraphicUnit: {required},
+        number: {
+          required,
+          integer,
+          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName)
+        },
+        thickness: {decimal},
+        rimDiameter: {decimal},
+        baseDiameter: {decimal},
+        compiler: {required},
+        subperiod: {isValidSubPeriod: isValidSubPeriod()}
+      }
+    }
   },
   computed: {
     stratigraphicUnitErrors() {
@@ -27,6 +34,7 @@ export default {
       if (!this.$v.modelItem.number.$dirty) return errors
       !this.$v.modelItem.number.required && errors.push('Pottery number is required.')
       !this.$v.modelItem.number.integer && errors.push('Pottery number must be an integer number.')
+      !this.$v.modelItem.number.isUniqueNumberInSU && errors.push('Duplicate pottery number for this SU.')
       return errors
     },
     thicknessErrors() {
