@@ -344,6 +344,7 @@
 
 <script>
 import {clone, has, hasPath} from "ramda";
+import {mapActions} from "vuex";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceValidationGraveMixin from "@/mixins/validation/ResourceValidationGraveMixin";
@@ -373,15 +374,6 @@ export default {
   },
   computed: {
     years: () => yearsRange(),
-/*     isSecondaryDeposition: {
-      get() {
-        const isSecondaryDeposition = this.modelItem.isSecondaryDeposition
-        return isSecondaryDeposition === undefined ? undefined : isSecondaryDeposition === true ? 1 : 0
-      },
-      set(flag) {
-        this.modelItem.isSecondaryDeposition = !!flag
-      }
-    }, */
     requestData() {
       const data = normalizeRequestBodyData(this.updateItem)
       for (const key of [
@@ -398,18 +390,6 @@ export default {
           data[key] = this.normalizeResource(key)
         }
       }
-/*
-      for (const key of [
-        'earlierThan',
-        'laterThan',
-      ]) {
-        if (has(key, data)) {
-          console.log(data[key])
-          data[key] = this.toResourceIRI('stratigraphicUnit', data[key])
-          console.log(data[key])
-        }
-      } */
-
       for (const key of [
         'number',
         'building',
@@ -438,6 +418,9 @@ export default {
       },
       immediate: true
     }
-  }
+  },
+  methods: {
+    ...mapActions('http', ['isUniqueNumberInSite']),
+  },
 }
 </script>

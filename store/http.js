@@ -177,5 +177,24 @@ export const actions = {
         },
         params
       })
+  },
+  async isUniqueNumberInSite({dispatch, rootGetters}, {resourceName, siteId, number}) {
+    const resource = rootGetters['api/getResource'](resourceName)
+    if (!siteId || !number) {
+      return true
+    }
+    const response = await dispatch('request',
+      {
+        method: 'get',
+        url: resource.collectionUrl,
+        headers: {
+          Accept: 'application/ld+json'
+        },
+        params: {
+          'site.id': siteId,
+          number
+        }
+      })
+    return !response.data['hydra:totalItems']
   }
 }

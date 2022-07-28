@@ -2,24 +2,31 @@ import { validationMixin } from 'vuelidate'
 import { required, integer, helpers, between, maxLength } from 'vuelidate/lib/validators'
 import {optionalDecimal} from "~/src/validator";
 import greaterThan from "~/src/validators/greaterThan";
+import isUniqueNumberInSite from "~/src/validators/isUniqueNumberInSite";
 
 export default {
   mixins: [validationMixin],
-  validations: {
-    modelItem: {
-      area: { required },
-      number: { required, integer },
-      type: { required },
-      year: { required, integer, between: between(2000, 2099)},
-      building: { integer },
-      buildingSubPhase: { lowercase: helpers.regex('isLowercase',/^[a-z]*$/), maxLength: maxLength(1) },
-      room: {maxLength: maxLength(3), uppercase: helpers.regex('isUppercase',/^[A-Z]*$/)},
-      phase: { integer },
-      subPhase: { lowercase: helpers.regex('isLowercase',/^[a-z]*$/), maxLength: maxLength(1)},
-      topElevation: { optionalDecimal, optionalGreaterThan: greaterThan('bottomElevation')},
-      bottomElevation: { optionalDecimal },
-      compiler: { required },
-    },
+  validations() {
+    return {
+      modelItem: {
+        area: {required},
+        number: {
+          required,
+          integer,
+          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName)
+        },
+        type: {required},
+        year: {required, integer, between: between(2000, 2099)},
+        building: {integer},
+        buildingSubPhase: {lowercase: helpers.regex('isLowercase', /^[a-z]*$/), maxLength: maxLength(1)},
+        room: {maxLength: maxLength(3), uppercase: helpers.regex('isUppercase', /^[A-Z]*$/)},
+        phase: {integer},
+        subPhase: {lowercase: helpers.regex('isLowercase', /^[a-z]*$/), maxLength: maxLength(1)},
+        topElevation: {optionalDecimal, optionalGreaterThan: greaterThan('bottomElevation')},
+        bottomElevation: {optionalDecimal},
+        compiler: {required},
+      }
+   }
   },
   computed: {
     areaErrors() {
@@ -39,6 +46,7 @@ export default {
       if (!this.$v.modelItem.number.$dirty) return errors
       !this.$v.modelItem.number.required && errors.push('SU number is required.')
       !this.$v.modelItem.number.integer && errors.push('SU number must be an integer number.')
+      !this.$v.modelItem.number.isUniqueNumberInSite && errors.push('Duplicate SU number for this site.')
       return errors
     },
     yearErrors() {

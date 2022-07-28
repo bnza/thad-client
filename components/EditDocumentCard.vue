@@ -189,6 +189,7 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
 import {clone, has} from "ramda";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
@@ -255,6 +256,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('http', ['isUniqueNumberInSite']),
     async beforeSubmit() {
       const mediaObjectIsInvalid =  await this.$refs.media.isInvalid()
       if (this.isUpdate) {

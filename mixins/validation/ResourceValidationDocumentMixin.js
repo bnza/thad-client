@@ -1,17 +1,24 @@
 import { validationMixin } from 'vuelidate'
 import {required, integer, between} from 'vuelidate/lib/validators'
+import isUniqueNumberInSite from "~/src/validators/isUniqueNumberInSite";
 
 export default {
   mixins: [validationMixin],
-  validations: {
-    modelItem: {
-      area: { required },
-      number: { required, integer },
-      year: { required, integer, between: between(2000, 2099)},
-      type: { required },
-      mediaObject: { required },
-      creator: { required }
-    },
+  validations() {
+    return {
+      modelItem: {
+        area: {required},
+        number: {
+          required,
+          integer,
+          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName)
+        },
+        year: {required, integer, between: between(2000, 2099)},
+        type: {required},
+        mediaObject: {required},
+        creator: {required}
+      },
+    }
   },
   computed: {
     areaErrors() {
@@ -43,6 +50,7 @@ export default {
       if (!this.$v.modelItem.number.$dirty) return errors
       !this.$v.modelItem.number.required && errors.push('Document number is required.')
       !this.$v.modelItem.number.integer && errors.push('Document number must be an integer number.')
+      !this.$v.modelItem.number.isUniqueNumberInSite && errors.push('Duplicate document number for this site.')
       return errors
     },
     yearErrors() {
