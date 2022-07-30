@@ -74,7 +74,13 @@
               v-on="$listeners"
             />
           </v-col>
-          <v-col />
+          <v-col>
+            <select-typologies-autocomplete
+              label="typology"
+              :select.sync="modelItem.typology"
+              class="mx-4"
+            />
+          </v-col>
         </v-row>
       </v-expansion-panel-content>
     </v-expansion-panel>

@@ -57,7 +57,13 @@
                   readonly
                 />
               </v-col>
-            <v-col />
+            <v-col>
+              <v-text-field
+                :value="getResponseValue('typology', item)"
+                label="preservation"
+                readonly
+              />
+            </v-col>
             </v-row>
           </v-expansion-panel-content>
         </v-expansion-panel>

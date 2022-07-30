@@ -607,4 +607,18 @@ export default [
     multiple: false,
     label: 'decoration (has any value)'
   },
+  {
+    property: 'typology',
+    variable: 'typology',
+    operator: SearchLabels.contains,
+    multiple: false,
+    label: 'typology'
+  },
+  {
+    property: 'typology',
+    variable: 'typology',
+    operator: ExistsLabels.exists,
+    multiple: false,
+    label: 'typology'
+  },
 ]

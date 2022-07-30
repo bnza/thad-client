@@ -59,6 +59,11 @@
         width: '100px'
       },
       {
+        text: 'typology',
+        value: 'typology',
+        width: '150px'
+      },
+      {
         text: 'period',
         value: 'period.code',
         width: '130px'

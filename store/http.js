@@ -178,6 +178,21 @@ export const actions = {
         params
       })
   },
+  getTypologies({dispatch}, {apiPrefix, search}) {
+    const params = {}
+    if (search) {
+      params.code = search
+    }
+    return dispatch('request',
+      {
+        method: 'get',
+        url: `${apiPrefix}/typologies`,
+        headers: {
+          Accept: 'application/json'
+        },
+        params
+      })
+  },
   async isUniqueNumberInSite({dispatch, rootGetters}, {resourceName, siteId, number}) {
     const resource = rootGetters['api/getResource'](resourceName)
     if (!siteId || !number) {
