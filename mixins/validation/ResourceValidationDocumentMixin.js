@@ -11,7 +11,7 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName)
+          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName,  this.requestData)
         },
         year: {required, integer, between: between(2000, 2099)},
         type: {required},

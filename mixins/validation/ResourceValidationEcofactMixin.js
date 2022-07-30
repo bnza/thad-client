@@ -11,7 +11,7 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName)
+          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName,  this.requestData)
         },
         type: {required},
         quantity: {integer},

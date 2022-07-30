@@ -13,7 +13,7 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName)
+          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName,  this.requestData)
         },
         type: {required},
         year: {required, integer, between: between(2000, 2099)},

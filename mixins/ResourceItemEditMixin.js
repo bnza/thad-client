@@ -81,11 +81,32 @@ export default {
       }
       return iri
     },
+    async validate(v) {
+      v = v  || this.$v
+      v.$touch()
+      await this.$nextTick()
+      return new Promise((resolve) => {
+        const unwatch = this.$watch(
+          () => v.$pending,
+          (isPending) => {
+            if (!isPending) {
+              resolve(!v.$invalid)
+              if (unwatch) {
+                unwatch()
+              }
+            }
+          },
+          {
+            immediate: true
+          }
+        )
+      })
+    },
     async isInvalid() {
       if (!this.$v) {
         return false
       }
-      await this.$v.$touch()
+      await this.validate()
       return this.$v.$invalid
     },
     async beforeSubmit() {},
