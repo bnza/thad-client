@@ -191,6 +191,7 @@
 <script>
 import {mapActions} from "vuex";
 import {clone, has} from "ramda";
+import Vue from "vue";
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
 import ResourceValidationDocumentMixin from "@/mixins/validation/ResourceValidationDocumentMixin";
@@ -198,7 +199,6 @@ import ResourceItemEditMixin from "@/mixins/ResourceItemEditMixin";
 import ResourceCollectionParentMixin from "@/mixins/ResourceCollectionParentMixin";
 import {normalizeRequestBodyData} from "@/src/request";
 import {yearsRange} from "@/src/utils";
-
 
 export default {
   name: "EditDocumentCard",
@@ -258,7 +258,7 @@ export default {
   methods: {
     ...mapActions('http', ['isUniqueNumberInSite']),
     async beforeSubmit() {
-      const mediaObjectIsInvalid =  await this.$refs.media.isInvalid()
+      const mediaObjectIsInvalid =  await this.$refs.media?.isInvalid()
       if (this.isUpdate) {
         return
       }
@@ -269,7 +269,8 @@ export default {
       if (documentIsInvalid) {
         return
       }
-      this.modelItem.mediaObject = await this.$refs.media.submit()
+      const mediaObject = await this.$refs.media.submit()
+      Vue.set(this.modelItem, 'mediaObject', mediaObject)
     },
   }
 }
