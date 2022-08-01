@@ -55,33 +55,7 @@
         </resource-fetch-item>
       </v-tab-item>
     </v-tabs-items>
-    <div v-if="ready && tab!=='su'" class="px-6" >
-      <v-row dense>
-      <v-col>
-        <v-textarea
-          :value="getResponseValue('notes', item)"
-          label="note"
-          readonly
-        />
-      </v-col>
-    </v-row>
-    <v-row dense>
-      <v-col>
-        <v-text-field
-          :value="getResponseValue('compiler', item)"
-          label="compiler"
-          readonly
-        />
-      </v-col>
-      <v-col>
-        <v-text-field
-          :value="getResponseValue('date', item).substring(0,10)"
-          label="date"
-          readonly
-        />
-      </v-col>
-    </v-row>
-    </div>
+    <read-cumulative-pottery-sheet-common-card v-if="ready && tab!=='su'" class="px-6" :item="item"/>
     <delete-resource-dialog
       v-if="deletingItem"
       :resource-name="resourceName"

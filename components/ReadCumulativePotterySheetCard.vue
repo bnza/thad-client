@@ -29,6 +29,7 @@
           <lazy-read-cumulative-pottery-sheet-period-card :item="item" />
         </v-tab-item>
       </v-tabs-items>
+      <read-cumulative-pottery-sheet-common-card v-if="ready" class="px-6" :item="item"/>
     </v-card-text>
     <v-card-text v-else>
       <v-container>
