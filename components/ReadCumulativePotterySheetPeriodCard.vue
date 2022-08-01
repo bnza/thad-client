@@ -59,7 +59,7 @@
           <v-col>
             <v-text-field
               :value="getResponseValue('periodNUBCount', item)"
-              label="Norther Ubaid"
+              label="Northern Ubaid"
               readonly
             />
           </v-col>
@@ -176,7 +176,7 @@
           <v-col>
             <v-text-field
               :value="getResponseValue('subperiodNUBCount', item)"
-              label="Norther Ubaid"
+              label="Northern Ubaid"
               readonly
             />
           </v-col>
