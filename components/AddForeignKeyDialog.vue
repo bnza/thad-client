@@ -58,11 +58,6 @@ export default {
     ResourceNavigationMixin,
     SetForeignKeyMixin
   ],
-  data() {
-    return {
-      target: null,
-    }
-  },
   props: {
     idKey: {
       type: String,
@@ -83,6 +78,11 @@ export default {
     resourceField: {
       type: String,
       required: true
+    }
+  },
+  data() {
+    return {
+      target: null,
     }
   },
   computed: {
@@ -123,7 +123,7 @@ export default {
           }
         })
         await this.$store.dispatch('snackbar/show', {
-          text: 'Successfully unlinked item',
+          text: 'Successfully linked item',
           color: 'success'
         })
         this.$emit('linked')
