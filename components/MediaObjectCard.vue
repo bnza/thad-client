@@ -6,13 +6,14 @@
     data-cy="media-object-card"
   >
     <v-img
-      :src="thumbnailUrl"
+      :src="`${thumbnailUrl}?counter=${counter}`"
       :class="`white--text align-end`"
       width="256px"
       height="256px"
       max-width="256px"
       max-height="256px"
       style="background-color: white"
+      @error="retry"
     >
       <template #placeholder>
         <v-row
@@ -56,7 +57,19 @@ export default {
   name: "MediaObjectCard",
   mixins: [
     ResourceMediaObjectMixin
-  ]
+  ],
+  data() {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    retry() {
+      setTimeout(() => {
+        this.counter = this.counter + 1
+      }, 1000 * (2^this.counter))
+    }
+  }
 }
 </script>
 
