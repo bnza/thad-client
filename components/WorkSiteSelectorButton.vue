@@ -6,14 +6,13 @@
         icon
         v-bind="attrs"
         data-cy="work-site-btn"
-        :disabled="hasWorkSite"
         v-on="on"
         @click="openDialog"
       >
-        <v-icon color="primary" class="mx-3">mdi-bullseye</v-icon>
+        <v-icon color="primary" class="mx-3">{{icon}}</v-icon>
       </v-btn>
     </template>
-    <span>Set as work site</span>
+    <span>{{span}}</span>
   </v-tooltip>
 </template>
 
@@ -29,12 +28,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['hasWorkSite'])
+    ...mapGetters(['hasWorkSite']),
+    icon() {
+      return this.hasWorkSite ? 'mdi-checkbox-blank-circle-outline' : 'mdi-bullseye'
+    },
+    span() {
+      return this.hasWorkSite ? 'Work with the whole dataset' : 'Set as work site'
+    }
   },
   methods: {
     ...mapMutations(['setProposedWorkSite', 'setWorkSiteDialog']),
     openDialog() {
-      this.setProposedWorkSite(this.site)
+      const site = this.hasWorkSite ? {} : this.site
+      this.setProposedWorkSite(site)
       this.setWorkSiteDialog(true)
     }
   }

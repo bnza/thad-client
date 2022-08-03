@@ -1,12 +1,10 @@
 <template>
-  <fragment v-if="$auth.loggedIn && hasWorkSite">
-    <v-spacer/>
-    <v-tooltip bottom >
+    <v-tooltip v-if="hasWorkSite" bottom>
       <template #activator="{ on, attrs }">
         <v-toolbar-title
           v-bind="attrs"
           data-cy="work-site-title"
-          class="title font-weight-bold"
+          class="title font-weight-black text-h4"
           v-on="on"
         >
           {{ workSite.name }}
@@ -14,45 +12,16 @@
       </template>
       <span>Current workspace</span>
     </v-tooltip>
-    <v-tooltip bottom >
-      <template #activator="{ on, attrs }">
-        <v-btn
-          nuxt
-          icon
-          x-small
-          v-bind="attrs"
-          data-cy="work-site-btn"
-          color="grey"
-          v-on="on"
-          @click="openDialog"
-        >
-          <v-icon class="mx-3">mdi-close-circle-outline</v-icon>
-        </v-btn>
-      </template>
-      <span>Work on the whole dataset</span>
-    </v-tooltip>
-  </fragment>
 </template>
 
 <script>
-import {mapGetters, mapMutations, mapState} from "vuex";
-import {Fragment} from 'vue-frag'
+import {mapGetters, mapState} from "vuex";
 
 export default {
   name: "WorkSiteContainer",
-  components: {
-    Fragment
-  },
   computed: {
-    ...mapState(['workSite', 'workSiteDialog']),
+    ...mapState(['workSite']),
     ...mapGetters(['hasWorkSite'])
-  },
-  methods: {
-    ...mapMutations(['setWorkSiteDialog', 'setProposedWorkSite']),
-    openDialog() {
-      this.setProposedWorkSite({})
-      this.setWorkSiteDialog(true)
-    }
   },
 }
 </script>
