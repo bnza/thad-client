@@ -292,7 +292,7 @@
                 v-model="modelItem.description"
                 class="mx-4"
                 label="description"
-                data-cy="su-description-input"
+                data-cy="description-input"
               />
             </v-col>
             <v-col>
@@ -300,7 +300,7 @@
                 v-model="modelItem.interpretation"
                 class="mx-4"
                 label="interpretation"
-                data-cy="su-interpretation-input"
+                data-cy="interpretation-input"
               />
             </v-col>
             <v-col>
@@ -308,7 +308,7 @@
                 v-model="modelItem.summary"
                 label="summary"
                 class="mx-4"
-                data-cy="su-summary-input"
+                data-cy="summary-input"
               />
             </v-col>
           </v-row>
@@ -370,6 +370,15 @@ export default {
         area: {},
         date: new Date().toISOString().substring(0, 10),
       },
+      numericProps: [
+        'number',
+        'building',
+        'buildingSubPhase',
+        'phase',
+        'subPhase',
+        'topElevation',
+        'bottomElevation',
+      ]
     }
   },
   computed: {
@@ -388,19 +397,6 @@ export default {
       ]) {
         if (has(key, data)) {
           data[key] = this.normalizeResource(key)
-        }
-      }
-      for (const key of [
-        'number',
-        'building',
-        'buildingSubPhase',
-        'phase',
-        'subPhase',
-        'topElevation',
-        'bottomElevation',
-      ]) {
-        if (has(key, data)) {
-          data[key] = 1 * data[key]
         }
       }
       if (hasPath(['area','site'], data)) {

@@ -45,11 +45,17 @@ export const actions = {
         },
       })
   },
-  getAreas({dispatch, rootGetters}, site) {
+  getAreaCodes({dispatch, rootGetters}, {site, code}) {
     const resource = rootGetters['api/getResource']('area')
-    const params = {}
+    const params = {
+      pagination: true,
+      itemsPerPage: 50
+    }
     if (site) {
-      params['site.id'] = site
+      params.site = site
+    }
+    if (code) {
+      params.code = code
     }
     return dispatch('request',
       {
@@ -60,26 +66,13 @@ export const actions = {
         },
         params
       })
-  },
-  getSus({dispatch, rootGetters}, {area}) {
-    const resource = rootGetters['api/getResource']('stratigraphicUnit')
-    const params = {}
-    if (area?.id) {
-      params['area.id'] = area.id
-    }
-    return dispatch('request',
-      {
-        method: 'get',
-        url: resource.collectionUrl,
-        headers: {
-          Accept: 'application/ld+json'
-        },
-        params
-      })
+
   },
   getSuCodes({dispatch, rootGetters}, {area, code}) {
     const resource = rootGetters['api/getResource']('stratigraphicUnit')
     const params = {
+      pagination: true,
+      itemsPerPage: 50,
       properties: {
         '': 'id',
         'appId': 'code'
@@ -104,6 +97,8 @@ export const actions = {
   getGraveCodes({dispatch, rootGetters}, {area, code}) {
     const resource = rootGetters['api/getResource']('grave')
     const params = {
+      pagination: true,
+      itemsPerPage: 50,
       properties: {
         '': 'id',
         'appId': 'code'
@@ -125,35 +120,8 @@ export const actions = {
         params
       })
   },
-  getGraves({dispatch, rootGetters}, {area}) {
-    const resource = rootGetters['api/getResource']('grave')
-    const params = {}
-    if (area?.id) {
-      params['area.id'] = area.id
-    }
-    return dispatch('request',
-      {
-        method: 'get',
-        url: resource.collectionUrl,
-        headers: {
-          Accept: 'application/ld+json'
-        },
-        params
-      })
-  },
   getResourceItem({dispatch, rootGetters}, {resourceName, id}) {
     const resource = rootGetters['api/getResource'](resourceName)
-    return dispatch('request',
-      {
-        method: 'get',
-        url: resource.itemUrl(id),
-        headers: {
-          Accept: 'application/ld+json'
-        },
-      })
-  },
-  getSu({dispatch, rootGetters}, id) {
-    const resource = rootGetters['api/getResource']('stratigraphicUnit')
     return dispatch('request',
       {
         method: 'get',

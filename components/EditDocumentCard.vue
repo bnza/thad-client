@@ -219,6 +219,10 @@ export default {
       panels: [
         0,1,2,3,4,5
       ],
+      numericProps: [
+        'number',
+        'year',
+      ]
     }
   },
   computed: {
@@ -232,14 +236,6 @@ export default {
       ]) {
         if (has(key, data)) {
           data[key] = this.normalizeResource(key)
-        }
-      }
-      for (const key of [
-        'number',
-        'year',
-      ]) {
-        if (has(key, data)) {
-          data[key] = 1 * data[key]
         }
       }
       return data

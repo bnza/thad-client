@@ -170,17 +170,17 @@ describe('The Pottery resource lifecycle', () => {
 
     cy.get('[data-cy=number-input-col]').type('{backspace}{backspace}1')
 
-    cy.intercept({method: 'patch', path: '**/api/potteries/*'}).as('failedUpdateRequest')
-
-    cy.get('[data-cy=submit-btn]').click()
-
-    cy.wait('@failedUpdateRequest').its('response.statusCode').should('eq', 422)
-
-    cy.get('[data-cy=snackbar-close-btn]').click()
+    cy.get('[data-cy=number-input-col] .v-messages__message').should('be.visible')
 
     cy.get('[data-cy=number-input-col] input').type('{backspace}9')
 
+    cy.get('[data-cy=notes-input]').type('Some notes')
+
+    cy.intercept({method: 'patch', path: '**/api/potteries/*'}).as('updateRequest')
+
     cy.get('[data-cy=submit-btn]').click()
+
+    cy.wait('@updateRequest').its('response.statusCode').should('eq', 200)
 
     cy.get('[data-cy=resource-delete-btn]').click()
 

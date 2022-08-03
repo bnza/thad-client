@@ -4,8 +4,6 @@ import {normalizeRequestBodyData, normalizeResource} from "~/src/request";
 import ResourceItemGetMixin from "~/mixins/ResourceItemGetMixin";
 import ResourceNavigationMixin from "~/mixins/ResourceNavigationMixin";
 
-const iriFormatters = {}
-
 export default {
   mixins: [
     ResourceItemGetMixin,
@@ -19,7 +17,8 @@ export default {
   },
   data() {
     return {
-      modelItem: {}
+      modelItem: {},
+      numericProps: [],
     }
   },
   computed: {
@@ -30,7 +29,7 @@ export default {
       return normalizeResource(this.modelItem)
     },
     updateItem() {
-      return diff(this.item, this.modelItem)
+      return diff(this.item, this.normalizeNumbers(this.modelItem))
     },
     isUpdate() {
       return !isEmpty(this.item)
@@ -71,15 +70,14 @@ export default {
     createdResourcePath(data) {
       return this.$route.fullPath.replace(/create$/, data.id)
     },
-    formatIri(resourceName, id) {
-      let iri = this.$config.apiPrefix
-      iri = `${iri}/` + (has(resourceName, iriFormatters) ?
-        iriFormatters[resourceName]() :
-        resourceName)
-      if (id) {
-        iri = `${iri}/${id}`
+    normalizeNumbers(modelItem) {
+      const data = clone(modelItem)
+      for (const key of this.numericProps) {
+        if (has(key, data)) {
+          data[key] = 1 * data[key]
+        }
       }
-      return iri
+      return data
     },
     async validate(v) {
       v = v  || this.$v

@@ -156,19 +156,15 @@ describe('The Grave resource lifecycle', () => {
 
     cy.get('[data-cy=number-input-col]').type('{backspace}{backspace}1')
 
-    cy.get('[data-cy=submit-btn]').click()
-
-    cy.wait('@updateRequest').its('response.statusCode').should('eq', 422)
-
-    cy.get('[data-cy=snackbar-close-btn]').click()
+    cy.get('[data-cy=number-input-col] .v-messages__message').should('be.visible')
 
     cy.get('[data-cy=number-input-col] input').type('{backspace}9')
 
-    cy.get('[data-cy=su-description-input]').type('Some description')
+    cy.get('[data-cy=description-input]').type('Some description')
 
-    cy.get('[data-cy=su-summary-input]').type('Some summary')
+    cy.get('[data-cy=summary-input]').type('Some summary')
 
-    cy.get('[data-cy=su-interpretation-input]').type('Some interpretation')
+    cy.get('[data-cy=interpretation-input]').type('Some interpretation')
 
     cy.get('[data-cy=submit-btn]').click()
 

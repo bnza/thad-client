@@ -329,6 +329,16 @@ export default {
         area: {},
         date: new Date().toISOString().substring(0, 10),
       },
+      numericProps: [
+        'number',
+        'topElevation',
+        'bottomElevation',
+        'building',
+        'buildingSubPhase',
+        'phase',
+        'subPhase',
+        'year',
+      ]
     }
   },
   computed: {
@@ -344,19 +354,6 @@ export default {
       ]) {
         if (has(key, data)) {
           data[key] = this.normalizeResource(key)
-        }
-      }
-      for (const key of [
-        'number',
-        'topElevation',
-        'bottomElevation',
-        'building',
-        'buildingSubPhase',
-        'phase',
-        'subPhase',
-      ]) {
-        if (has(key, data)) {
-          data[key] = 1 * data[key]
         }
       }
       if (hasPath(['area','site'], data)) {

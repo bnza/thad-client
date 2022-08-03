@@ -383,7 +383,7 @@
               v-model="modelItem.notes"
               label="notes"
               class="mx-4"
-              data-cy="pottery-description-input"
+              data-cy="notes-input"
             />
           </v-col>
         </v-row>
@@ -439,6 +439,12 @@ export default {
       panels: [
         0,1,2,3,4,5,6
       ],
+      numericProps: [
+        'number',
+        'thickness',
+        'baseDiameter',
+        'rimDiameter'
+      ]
     }
   },
   computed: {
@@ -473,16 +479,6 @@ export default {
       ]) {
         if (has(key, data)) {
           data[key] = this.normalizeResource(key)
-        }
-      }
-      for (const key of [
-        'number',
-        'thickness',
-        'baseDiameter',
-        'rimDiameter'
-      ]) {
-        if (has(key, data)) {
-          data[key] = 1 * data[key]
         }
       }
       return data

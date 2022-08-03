@@ -45,8 +45,6 @@ describe('The Document resource lifecycle', () => {
     cy.get('[data-cy=year-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=number-input-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=type-select-col] .v-messages__message').should('be.visible')
-    cy.get('[data-cy=interpretation-select-col] .v-messages__message').should('be.visible')
-    cy.get('[data-cy=description-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=file-input-card] .v-messages__message').should('be.visible')
     cy.get('[data-cy=creator-select-col] .v-messages__message').should('be.visible')
 
@@ -89,15 +87,19 @@ describe('The Document resource lifecycle', () => {
 
     cy.get('[data-cy=resource-update-btn]').click()
 
-    cy.intercept({method: 'patch', path: '**/api/documents/*'}).as('failedUpdateRequest')
+    cy.intercept({method: 'patch', path: '**/api/documents/*'}).as('updateRequest')
 
     cy.get('[data-cy=number-input-col]').type('{backspace}{backspace}1')
 
+    cy.get('[data-cy=number-input-col] .v-messages__message').should('be.visible')
+
+    cy.get('[data-cy=number-input-col]').type('{backspace}{backspace}5')
+
+    cy.get('[data-cy=summary-input]').click().type('add some text')
+
     cy.get('[data-cy=submit-btn]').click()
 
-    cy.wait('@failedUpdateRequest').its('response.statusCode').should('eq', 422)
-
-    cy.get('[data-cy=snackbar-close-btn]').click()
+    cy.wait('@updateRequest').its('response.statusCode').should('eq', 200)
 
     cy.get('[data-cy=cancel-btn]').click()
 

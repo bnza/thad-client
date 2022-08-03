@@ -6,8 +6,9 @@ export default (fn, resourceName, requestData) =>
       return true
     }
     const area = ref('area', this, parentVm)
+    const site = ref('site', this, parentVm)
     const number = ref('number', this, parentVm)
-    const siteId = area?.site?.id
+    const siteId = area?.site?.id || site?.id
     if (!siteId) {
       return true
     }

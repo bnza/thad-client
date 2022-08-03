@@ -145,15 +145,19 @@ describe('The SU resource lifecycle', () => {
 
     cy.intercept({method: 'patch', path: '**/api/stratigraphic_units/*'}).as('failedUpdateRequest')
 
-    cy.get('[data-cy=submit-btn]').click()
+    cy.get('[data-cy=number-input-col] .v-messages__message').should('be.visible')
 
-    cy.wait('@failedUpdateRequest').its('response.statusCode').should('eq', 422)
+    cy.get('[data-cy=number-input-col] input').type('{backspace}9')
 
-    cy.get('[data-cy=snackbar-close-btn]').click()
+    cy.get('[data-cy=su-description-input]').type(' and some more description')
+
+    cy.intercept({method: 'patch', path: '**/api/stratigraphic_units/*'}).as('updateRequest')
 
     cy.get('[data-cy=number-input-col] input').type('{backspace}9')
 
     cy.get('[data-cy=submit-btn]').click()
+
+    cy.wait('@updateRequest').its('response.statusCode').should('eq', 200)
 
     cy.get('[data-cy=resource-delete-btn]').click()
 
@@ -186,7 +190,7 @@ describe('The SU resource lifecycle', () => {
 
     cy.get('@deleteResourceDialogCard').find('[data-cy=delete-btn]').click()
 
-    cy.wait('@successfulDeleteRequest').its('response.statusCode').should('eq', 500)
+    cy.wait('@successfulDeleteRequest').its('response.statusCode').should('eq', 422)
 
     cy.get('[data-cy=snackbar-close-btn]').click()
 

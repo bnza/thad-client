@@ -455,6 +455,22 @@ export default {
       panels: [
         0,1,2,3,4,5
       ],
+      numericProps:[
+        'number',
+        'length',
+        'height',
+        'thickness',
+        'weight',
+        'width',
+        'minWidth',
+        'maxWidth',
+        'baseDiameter',
+        'minDiameter',
+        'maxDiameter',
+        'coordN',
+        'coordE',
+        'coordZ',
+      ]
     }
   },
   computed: {
@@ -475,26 +491,6 @@ export default {
       ]) {
         if (has(key, data)) {
           data[key] = this.normalizeResource(key)
-        }
-      }
-      for (const key of [
-        'number',
-        'length',
-        'height',
-        'thickness',
-        'weight',
-        'width',
-        'minWidth',
-        'maxWidth',
-        'baseDiameter',
-        'minDiameter',
-        'maxDiameter',
-        'coordN',
-        'coordE',
-        'coordZ',
-      ]) {
-        if (has(key, data)) {
-          data[key] = 1 * data[key]
         }
       }
       return data
