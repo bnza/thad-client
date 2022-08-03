@@ -55,7 +55,7 @@ export const actions = {
       params.site = site
     }
     if (code) {
-      params.code = code
+      params['appId.code'] = code
     }
     return dispatch('request',
       {
@@ -73,16 +73,12 @@ export const actions = {
     const params = {
       pagination: true,
       itemsPerPage: 50,
-      properties: {
-        '': 'id',
-        'appId': 'code'
-      }
     }
     if (area?.id) {
       params['area.id'] = area.id
     }
     if (code) {
-      params.code = code
+      params['appId.code'] = code
     }
     return dispatch('request',
       {
@@ -99,16 +95,12 @@ export const actions = {
     const params = {
       pagination: true,
       itemsPerPage: 50,
-      properties: {
-        '': 'id',
-        'appId': 'code'
-      }
     }
     if (area?.id) {
       params['area.id'] = area.id
     }
     if (code) {
-      params.code = code
+      params['appId.code'] = code
     }
     return dispatch('request',
       {
