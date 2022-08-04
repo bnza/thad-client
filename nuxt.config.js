@@ -85,6 +85,11 @@ export default {
   },
 
   auth: {
+    cookie: {
+      options: {
+        sameSite: 'lax'
+      }
+    },
     scopeKey: 'roles',
     strategies: {
       local: {
