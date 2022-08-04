@@ -132,7 +132,7 @@
               <v-text-field
                 v-model="modelItem.number"
                 class="mx-4"
-                label="number"
+                label="identification number"
                 :disabled="updateCodeDisabled"
                 required
                 :error-messages="numberErrors"

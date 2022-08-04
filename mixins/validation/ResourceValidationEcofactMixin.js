@@ -1,5 +1,5 @@
 import { validationMixin } from 'vuelidate'
-import { required, integer, decimal } from 'vuelidate/lib/validators'
+import { required, integer, decimal, minValue } from 'vuelidate/lib/validators'
 import isUniqueNumberInSU from "~/src/validators/isUniqueNumberInSU";
 
 export default {
@@ -11,7 +11,8 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName,  this.requestData)
+          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName,  this.requestData),
+          positive: minValue(1)
         },
         type: {required},
         quantity: {integer},
@@ -50,6 +51,7 @@ export default {
       if (!this.$v.modelItem.number.$dirty) return errors
       !this.$v.modelItem.number.required && errors.push('Ecofact number is required.')
       !this.$v.modelItem.number.integer && errors.push('Ecofact number must be an integer number.')
+      !this.$v.modelItem.number.positive && errors.push('SU number must be positive value.')
       !this.$v.modelItem.number.isUniqueNumberInSU && errors.push('Duplicate ecofact number for this SU.')
       return errors
     },

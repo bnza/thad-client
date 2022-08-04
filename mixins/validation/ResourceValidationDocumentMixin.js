@@ -1,5 +1,5 @@
 import { validationMixin } from 'vuelidate'
-import {required, integer, between} from 'vuelidate/lib/validators'
+import {required, integer, between, minValue} from 'vuelidate/lib/validators'
 import isUniqueNumberInSite from "~/src/validators/isUniqueNumberInSite";
 
 export default {
@@ -11,7 +11,8 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName,  this.requestData)
+          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName,  this.requestData),
+          positive: minValue(1)
         },
         year: {required, integer, between: between(2000, 2099)},
         type: {required},
@@ -50,6 +51,7 @@ export default {
       if (!this.$v.modelItem.number.$dirty) return errors
       !this.$v.modelItem.number.required && errors.push('Document number is required.')
       !this.$v.modelItem.number.integer && errors.push('Document number must be an integer number.')
+      !this.$v.modelItem.number.positive && errors.push('SU number must be positive value.')
       !this.$v.modelItem.number.isUniqueNumberInSite && errors.push('Duplicate document number for this site.')
       return errors
     },

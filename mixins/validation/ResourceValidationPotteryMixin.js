@@ -1,5 +1,5 @@
 import { validationMixin } from 'vuelidate'
-import { required, integer, decimal } from 'vuelidate/lib/validators'
+import { required, integer, decimal, minValue } from 'vuelidate/lib/validators'
 import isValidSubPeriod from "~/src/validators/isValidSubPeriod";
 import isUniqueNumberInSU from "~/src/validators/isUniqueNumberInSU";
 
@@ -12,7 +12,8 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName, this.requestData)
+          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName, this.requestData),
+          positive: minValue(1)
         },
         thickness: {decimal},
         rimDiameter: {decimal},
@@ -34,6 +35,7 @@ export default {
       if (!this.$v.modelItem.number.$dirty) return errors
       !this.$v.modelItem.number.required && errors.push('Pottery number is required.')
       !this.$v.modelItem.number.integer && errors.push('Pottery number must be an integer number.')
+      !this.$v.modelItem.number.positive && errors.push('SU number must be positive value.')
       !this.$v.modelItem.number.isUniqueNumberInSU && errors.push('Duplicate pottery number for this SU.')
       return errors
     },

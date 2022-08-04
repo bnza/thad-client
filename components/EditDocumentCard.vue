@@ -102,7 +102,7 @@
           >
             <v-text-field
               v-model="modelItem.number"
-              label="number"
+              label="identification number"
               required
               :disabled="updateCodeDisabled"
               :error-messages="numberErrors"

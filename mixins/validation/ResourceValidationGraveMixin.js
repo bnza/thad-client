@@ -1,5 +1,5 @@
 import { validationMixin } from 'vuelidate'
-import {required, integer, between, maxLength, helpers} from 'vuelidate/lib/validators'
+import {required, integer, between, maxLength, helpers, minValue} from 'vuelidate/lib/validators'
 import {optionalDecimal} from "~/src/validator";
 import greaterThan from "~/src/validators/greaterThan";
 import isUniqueNumberInSite from "~/src/validators/isUniqueNumberInSite";
@@ -13,7 +13,8 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName,  this.requestData)
+          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName,  this.requestData),
+          positive: minValue(1)
         },
         type: {required},
         year: {required, integer, between: between(2000, 2099)},
@@ -40,6 +41,7 @@ export default {
       if (!this.$v.modelItem.number.$dirty) return errors
       !this.$v.modelItem.number.required && errors.push('Grave number is required.')
       !this.$v.modelItem.number.integer && errors.push('Grave number must be an integer number.')
+      !this.$v.modelItem.number.positive && errors.push('SU number must be positive value.')
       !this.$v.modelItem.number.isUniqueNumberInSite && errors.push('Duplicate grave number for this site.')
       return errors
     },

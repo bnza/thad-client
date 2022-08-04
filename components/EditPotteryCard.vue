@@ -46,7 +46,7 @@
             <v-text-field
               v-model="modelItem.number"
               :disabled="updateCodeDisabled"
-              label="number"
+              label="identification number"
               required
               :error-messages="numberErrors"
               class="mx-4"
