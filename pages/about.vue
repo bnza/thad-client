@@ -13,7 +13,7 @@
           </v-row>
         </v-card-title>
         <v-card-text class="text-body-1 ma-8 pa-8">
-          <p>This database and the related web application was conceived to archive and manage the data collected by the excavation projects carried out
+          <p>This database and the related web application were conceived to archive and manage the data collected by the excavation projects carried out
             in the framework of the
             <a href="http://www.terradininive.com/" target="_blank">Land of Nineveh Archaeological Project</a> (<strong class="secondary--text">LoNAP</strong>) starting from 2022.</p><br />
           <p class="my-16">
