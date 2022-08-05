@@ -103,7 +103,7 @@ export default {
       return {
         sxSU: this.sxSu['@id'],
         relationship: this.relationship['@id'],
-        dxSU: this.modelItem.dxSu['@id']
+        dxSU: this.modelItem.dxSu ? this.modelItem.dxSu['@id'] : null
       }
     }
   },
