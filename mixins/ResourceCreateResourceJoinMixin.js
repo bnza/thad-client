@@ -33,6 +33,12 @@ export default {
       'request',
     ]),
     async submit() {
+      if (this.$v){
+        this.$v.$touch()
+        if (this.$v.$invalid) {
+          return
+        }
+      }
       try {
         await this.request({
           method: 'post',

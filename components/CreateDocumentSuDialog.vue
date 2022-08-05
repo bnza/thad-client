@@ -13,13 +13,25 @@
         <v-row dense justify="center">
           <v-col class="d-flex justify-center align-center">
             <media-object-card :media="parent" />
+            <p v-if="mediaObjectErrors">
+              <span
+                v-for="(error, index) in mediaObjectErrors"
+                :key="index"
+                class="error--text"
+              >
+                {{error}}
+              </span>
+            </p>
           </v-col>
         </v-row>
         <select-sus-autocomplete
           data-cy="dx-su-input"
           :select.sync="modelItem.su"
           :area="parent.area"
+          :error-messages="stratigraphicUnitErrors"
           v-on="$listeners"
+          @input="$v.requestData.stratigraphicUnit.$touch()"
+          @blur="$v.requestData.stratigraphicUnit.$touch()"
         />
       </v-card-text>
       <v-card-actions>
@@ -45,11 +57,13 @@
 
 <script>
 import ResourceCreateResourceJoinMixin from "@/mixins/ResourceCreateResourceJoinMixin";
+import ResourceValidationDocumentSUMixin from "@/mixins/validation/ResourceValidationDocumentSUMixin";
 
 export default {
   name: "CreateDocumentSuDialog",
   mixins: [
-    ResourceCreateResourceJoinMixin
+    ResourceCreateResourceJoinMixin,
+    ResourceValidationDocumentSUMixin
   ],
   computed: {
     defaultModelItem() {

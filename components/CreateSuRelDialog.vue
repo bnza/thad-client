@@ -15,16 +15,37 @@
           label="stratigraphic unit"
           readonly
         />
+        <p v-if="sxSUErrors">
+              <span
+                v-for="(error, index) in sxSUErrors"
+                :key="index"
+                class="error--text"
+              >
+                {{error}}
+              </span>
+        </p>
         <v-text-field
           :value="getResponseValue('value', relationship)"
           label="relationship"
           readonly
         />
+        <p v-if="relationshipErrors">
+              <span
+                v-for="(error, index) in relationshipErrors"
+                :key="index"
+                class="error--text"
+              >
+                {{error}}
+              </span>
+        </p>
         <select-sus-autocomplete
           data-cy="dx-su-input"
           :select.sync="modelItem.dxSu"
           :area="sxSu.area"
+          :error-messages="dxSUErrors"
           v-on="$listeners"
+          @input="$v.requestData.dxSU.$touch()"
+          @blur="$v.requestData.dxSU.$touch()"
         />
       </v-card-text>
       <v-card-actions>
@@ -50,11 +71,13 @@
 
 <script>
 import ResourceCreateResourceJoinMixin from "@/mixins/ResourceCreateResourceJoinMixin";
+import ResourceValidationSURelMixin from "@/mixins/validation/ResourceValidationSURelMixin";
 
 export default {
   name: "CreateSuRelDialog",
   mixins: [
-    ResourceCreateResourceJoinMixin
+    ResourceCreateResourceJoinMixin,
+    ResourceValidationSURelMixin
   ],
   props: {
     visible: {

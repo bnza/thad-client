@@ -13,13 +13,25 @@
         <v-row dense justify="center">
           <v-col class="d-flex justify-center align-center">
             <media-object-card :media="parent" />
+            <p v-if="mediaObjectErrors">
+              <span
+                v-for="(error, index) in mediaObjectErrors"
+                :key="index"
+                class="error--text"
+              >
+                {{error}}
+              </span>
+            </p>
           </v-col>
         </v-row>
         <select-graves-autocomplete
           data-cy="grave-input"
           :select.sync="modelItem.grave"
           :area="parent.area"
+          :error-messages="graveErrors"
           v-on="$listeners"
+          @input="$v.requestData.grave.$touch()"
+          @blur="$v.requestData.grave.$touch()"
         />
       </v-card-text>
       <v-card-actions>
@@ -45,11 +57,13 @@
 
 <script>
 import ResourceCreateResourceJoinMixin from "@/mixins/ResourceCreateResourceJoinMixin";
+import ResourceValidationDocumentGraveMixin from "@/mixins/validation/ResourceValidationDocumentGraveMixin";
 
 export default {
   name: "CreateDocumentGraveDialog",
   mixins: [
-    ResourceCreateResourceJoinMixin
+    ResourceCreateResourceJoinMixin,
+    ResourceValidationDocumentGraveMixin
   ],
   computed: {
     defaultModelItem() {
