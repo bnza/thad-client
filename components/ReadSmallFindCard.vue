@@ -63,19 +63,19 @@
             <v-row dense>
               <v-col sm="2">
                 <v-text-field
-                  :value="getResponseValue('coordN', item)"
-                  label="north (meters)"
-                  hint="North projected coordinate value in meters (WGS 84 / UTM zone 38N)"
+                  :value="getResponseValue('coordE', item)"
+                  hint="East projected coordinate value in meters (WGS 84 / UTM zone 38N)"
                   :persistent-hint="true"
+                  label="X / east (meter)"
                   readonly
                 />
               </v-col>
               <v-col sm="2">
                 <v-text-field
-                  :value="getResponseValue('coordE', item)"
-                  hint="East projected coordinate value in meters (WGS 84 / UTM zone 38N)"
+                  :value="getResponseValue('coordN', item)"
+                  label="Y / north (meter)"
+                  hint="North projected coordinate value in meters (WGS 84 / UTM zone 38N)"
                   :persistent-hint="true"
-                  label="east (meters)"
                   readonly
                 />
               </v-col>

@@ -72,23 +72,10 @@
           </v-col>
         </v-row>
         <v-row dense>
-          <v-col data-cy="coord-n-input-col" sm="2">
-            <v-text-field
-              v-model="modelItem.coordN"
-              label="north (meter)"
-              required
-              :error-messages="coordNErrors"
-              class="mx-4"
-              hint="North projected coordinate value in meters (WGS 84 / UTM zone 38N)"
-              :persistent-hint="true"
-              @input="$v.modelItem.coordN.$touch()"
-              @blur="$v.modelItem.coordN.$touch()"
-            />
-          </v-col>
           <v-col data-cy="coord-e-input-col" sm="2">
             <v-text-field
               v-model="modelItem.coordE"
-              label="longitude (meter)"
+              label="X / east (meter)"
               required
               :error-messages="coordEErrors"
               class="mx-4"
@@ -96,6 +83,19 @@
               :persistent-hint="true"
               @input="$v.modelItem.coordE.$touch()"
               @blur="$v.modelItem.coordE.$touch()"
+            />
+          </v-col>
+          <v-col data-cy="coord-n-input-col" sm="2">
+            <v-text-field
+              v-model="modelItem.coordN"
+              label="Y / north (meter)"
+              required
+              :error-messages="coordNErrors"
+              class="mx-4"
+              hint="North projected coordinate value in meters (WGS 84 / UTM zone 38N)"
+              :persistent-hint="true"
+              @input="$v.modelItem.coordN.$touch()"
+              @blur="$v.modelItem.coordN.$touch()"
             />
           </v-col>
           <v-col data-cy="coord-z-input-col" sm="2">

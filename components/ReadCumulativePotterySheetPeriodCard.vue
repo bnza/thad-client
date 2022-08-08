@@ -73,7 +73,7 @@
           <v-col>
             <v-text-field
               :value="getResponseValue('periodEBACount', item)"
-              label="Early Bronze Age"
+              label="Early Middle Tigris"
               readonly
             />
           </v-col>
