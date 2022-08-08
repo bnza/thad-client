@@ -18,6 +18,7 @@
           label="stratigraphic unit"
           :select.sync="target"
           :clearable="true"
+          :area="item.area"
           :error-messages="targetErrors"
           @input="$v.target.$touch()"
           @blur="$v.target.$touch()"
@@ -49,14 +50,14 @@
 
 <script>
 import ResourceNavigationMixin from "@/mixins/ResourceNavigationMixin";
-import SetForeignKeyMixin from "@/mixins/validation/SetForeignKeyMixin";
+import AddForeignKeyValidationMixin from "@/mixins/validation/AddForeignKeyValidationMixin";
 import {normalizeResourceId} from "@/src/request";
 
 export default {
   name: "AddForeignKeyDialog",
   mixins: [
     ResourceNavigationMixin,
-    SetForeignKeyMixin
+    AddForeignKeyValidationMixin
   ],
   props: {
     idKey: {
@@ -108,10 +109,10 @@ export default {
       this.$emit('close', false)
     },
     async linkItem() {
-      // this.$v.touch()
-      // if (this.$v.$invalid()) {
-      //   return
-      // }
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        return
+      }
       try {
         await this.$store.dispatch('http/request', {
           method: 'patch',
