@@ -133,7 +133,7 @@ export default [
     variable: 'type.id[]',
     operator: SearchLabels.equals,
     multiple: false,
-    vocabulary: 'sampleType',
+    vocabulary: 'ecofactType',
     label: 'type'
   },
   {

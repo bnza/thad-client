@@ -60,7 +60,7 @@
             <v-col>
               <v-text-field
                 :value="getResponseValue('typology', item)"
-                label="preservation"
+                label="typology"
                 readonly
               />
             </v-col>
@@ -355,16 +355,16 @@ export default {
       default: () => {}
     }
   },
-  computed: {
-    decorations() {
-      return (this.getResponseValue('decorations', this.item) || []).map(i => i.decoration.value)
-    }
-  },
   data() {
     return {
       panels: [
         0,1,2,3,4,5,6
       ],
+    }
+  },
+  computed: {
+    decorations() {
+      return (this.getResponseValue('decorations', this.item) || []).map(i => i.decoration.value)
     }
   }
 }
