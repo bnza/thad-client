@@ -11,9 +11,16 @@
           <v-col sm="3">
             <v-text-field
               :value="getResponseValue('diagnosticWareCount', item)"
-              label="diagnostic sherd count"
+              label="diagnostic sherd count by period"
               readonly
-            />
+            >
+              <template v-if="countWarning" #append-outer>
+                <diagnostic-sherd-count-alert
+                  :period-diagnostic-count="item.diagnosticWareCount"
+                  :ware-diagnostic-count="wareTypeDiagnosticCount"
+                />
+              </template>
+            </v-text-field>
           </v-col>
           <v-col sm="3">
             <v-text-field
@@ -417,10 +424,12 @@
 
 <script>
 import ResourceItemDataAccessorMixin from "@/mixins/ResourceItemDataAccessorMixin";
+import DiagnosticSherdCountWarningMixin from "@/mixins/DiagnosticSherdCountWarningMixin";
 
 export default {
   name: "ReadCumulativePotterySheetPeriodCard",
   mixins: [
+    DiagnosticSherdCountWarningMixin,
     ResourceItemDataAccessorMixin
   ],
   props: {
