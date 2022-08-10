@@ -309,8 +309,8 @@
       <template #[`item.decorations`]="{ item }">
         <long-text-table-data-tooltip v-if="Array.isArray(item.decorations)" :text="item.decorations.map(item => item.decoration.value).join(', ')" />
       </template>
-      <template #[`item.note`]="{ item }">
-        <long-text-table-data-tooltip :text="item.note" />
+      <template #[`item.notes`]="{ item }">
+        <long-text-table-data-tooltip :text="item.notes" />
       </template>
     </v-data-table>
     <filter-collection-dialog
