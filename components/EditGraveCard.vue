@@ -245,6 +245,7 @@
               <select-sus-autocomplete
                 class="mx-4"
                 label="earlier than"
+                :area="modelItem.area || {}"
                 :select.sync="modelItem.earlierThan"
                 :clearable="true"
               />
@@ -254,6 +255,7 @@
               <select-sus-autocomplete
                 class="mx-4"
                 label="later than"
+                :area="modelItem.area || {}"
                 :select.sync="modelItem.laterThan"
                 :clearable="true"
               />

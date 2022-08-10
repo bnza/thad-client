@@ -11,7 +11,6 @@
     :disabled="disabled"
     :clearable="clearable"
     :return-object="returnObject"
-    cache-items
     flat
     hide-no-data
     :label="label"
@@ -92,6 +91,9 @@ export default {
     search () {
       this.$fetch()
     },
+    area () {
+      this.$fetch()
+    }
   }
 }
 </script>
