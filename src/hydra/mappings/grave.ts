@@ -129,7 +129,7 @@ export default [
     variable: 'type.id[]',
     operator: SearchLabels.equals,
     multiple: false,
-    vocabulary: 'suType',
+    vocabulary: 'graveType',
     label: 'type'
   },
   {

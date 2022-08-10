@@ -121,7 +121,7 @@ export default [
     variable: 'subperiod.id[]',
     operator: SearchLabels.equals,
     multiple: false,
-    vocabulary: 'period',
+    vocabulary: 'subperiod',
     label: 'sub period'
   },
   {
