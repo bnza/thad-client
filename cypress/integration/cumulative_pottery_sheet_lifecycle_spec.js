@@ -71,9 +71,15 @@ describe('The Cumulative Pottery Sheet resource lifecycle', () => {
 
     cy.get('[data-cy=resource-update-btn]').click()
 
+    cy.intercept({method: 'get', path: '**/api/stratigraphic_units*'}).as('getSusRequest')
+
     cy.intercept({method: 'patch', path: '**/api/cumulative_pottery_sheets/*'}).as('failedUpdateRequest')
 
-    cy.get('[data-cy=su-select-col]').click().type('1{downArrow}{enter}')
+    cy.get('[data-cy=su-select-col]').click().type('1')
+
+    cy.wait('@getSusRequest').its('response.statusCode').should('eq', 200)
+
+    cy.get('[data-cy=su-select-col]').click().type('{downArrow}{enter}')
 
     cy.get('[data-cy=submit-btn]').click()
 

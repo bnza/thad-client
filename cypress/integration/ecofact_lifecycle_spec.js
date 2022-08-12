@@ -43,7 +43,13 @@ describe('The Ecofact resource lifecycle', () => {
     cy.get('[data-cy=type-select-col] .v-messages__message').should('be.visible')
     cy.get('[data-cy=compiler-select-col] .v-messages__message').should('be.visible')
 
-    cy.get('[data-cy=su-select-col]').click().type('1{downArrow}{enter}')
+    cy.intercept({method: 'get', path: '**/api/stratigraphic_units*'}).as('getSusRequest')
+
+    cy.get('[data-cy=su-select-col]').click().type('1')
+
+    cy.wait('@getSusRequest').its('response.statusCode').should('eq', 200)
+
+    cy.get('[data-cy=su-select-col]').click().type('{downArrow}{enter}')
 
     cy.get('[data-cy=number-input-col]').click().type('{backspace}x')
 
