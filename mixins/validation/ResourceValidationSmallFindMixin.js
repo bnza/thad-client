@@ -3,10 +3,14 @@ import { required, integer, decimal, between, minValue } from 'vuelidate/lib/val
 import greaterThan from "~/src/validators/greaterThan";
 import coordinateIsATriple from "~/src/validators/coordinateIsATriple";
 import isValidSubPeriod from "~/src/validators/isValidSubPeriod";
+import IsUniqueNumberInSUValidationMixin from "~/mixins/validation/IsUniqueNumberInSUValidationMixin";
 import isUniqueNumberInSU from "~/src/validators/isUniqueNumberInSU";
 
 export default {
-  mixins: [validationMixin],
+  mixins: [
+    validationMixin,
+    IsUniqueNumberInSUValidationMixin
+  ],
   validations() {
     return {
       modelItem: {
@@ -14,7 +18,12 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName,  this.requestData),
+          isUniqueNumberInSU: isUniqueNumberInSU(
+            this.isUniqueNumberInSU,
+            this.resourceName,
+            this.requestData,
+            this.validatingValuesChanged
+          ),
           positive: minValue(1)
         },
         type: {required},

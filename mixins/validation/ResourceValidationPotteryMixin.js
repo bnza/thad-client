@@ -1,10 +1,14 @@
 import { validationMixin } from 'vuelidate'
 import { required, integer, decimal, minValue } from 'vuelidate/lib/validators'
 import isValidSubPeriod from "~/src/validators/isValidSubPeriod";
+import IsUniqueNumberInSUValidationMixin from "~/mixins/validation/IsUniqueNumberInSUValidationMixin";
 import isUniqueNumberInSU from "~/src/validators/isUniqueNumberInSU";
 
 export default {
-  mixins: [validationMixin],
+  mixins: [
+    validationMixin,
+    IsUniqueNumberInSUValidationMixin
+  ],
   validations() {
     return  {
       modelItem: {
@@ -12,7 +16,12 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName, this.requestData),
+          isUniqueNumberInSU: isUniqueNumberInSU(
+            this.isUniqueNumberInSU,
+            this.resourceName,
+            this.requestData,
+            this.validatingValuesChanged
+          ),
           positive: minValue(1)
         },
         thickness: {decimal},

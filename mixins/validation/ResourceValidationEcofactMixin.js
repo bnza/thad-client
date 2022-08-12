@@ -1,9 +1,13 @@
 import { validationMixin } from 'vuelidate'
 import { required, integer, decimal, minValue } from 'vuelidate/lib/validators'
+import IsUniqueNumberInSUValidationMixin from "~/mixins/validation/IsUniqueNumberInSUValidationMixin";
 import isUniqueNumberInSU from "~/src/validators/isUniqueNumberInSU";
 
 export default {
-  mixins: [validationMixin],
+  mixins: [
+    validationMixin,
+    IsUniqueNumberInSUValidationMixin
+  ],
   validations() {
     return {
       modelItem: {
@@ -11,7 +15,12 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSU: isUniqueNumberInSU(this.isUniqueNumberInSU, this.resourceName,  this.requestData),
+          isUniqueNumberInSU: isUniqueNumberInSU(
+            this.isUniqueNumberInSU,
+            this.resourceName,
+            this.requestData,
+            this.validatingValuesChanged
+          ),
           positive: minValue(1)
         },
         type: {required},
@@ -103,19 +112,5 @@ export default {
       !this.$v.modelItem.weight.decimal && errors.push('Weight must be a decimal number.')
       return errors
     },
-
-  },
-  watch: {
-    modelItem: {
-      handler(item) {
-        if (item.code) {
-          this.modelItem.code = item.code.trim().toUpperCase()
-        }
-        if (item.name) {
-          this.modelItem.name = item.name.trim()
-        }
-      },
-      deep: true
-    }
   },
 }
