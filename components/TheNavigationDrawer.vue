@@ -20,7 +20,7 @@
     </v-list>
     <main-resources-list-group v-if="$auth.loggedIn" />
     <settings-resources-list-group v-if="$auth.loggedIn" />
-    <v-list>
+<!--    <v-list>
       <v-list-item
         :href="`${$config.apiBaseUrl}/${$config.apiPrefix}`"
         target="_blank"
@@ -30,7 +30,7 @@
         </v-list-item-icon>
         <v-list-item-title>API</v-list-item-title>
       </v-list-item>
-    </v-list>
+    </v-list>-->
     <v-list>
       <v-list-item
         nuxt
