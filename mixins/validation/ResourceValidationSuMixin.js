@@ -3,9 +3,13 @@ import { required, integer, helpers, between, maxLength, minValue } from 'vuelid
 import {optionalDecimal} from "~/src/validator";
 import greaterThan from "~/src/validators/greaterThan";
 import isUniqueNumberInSite from "~/src/validators/isUniqueNumberInSite";
+import IsUniqueNumberInSiteValidationMixin from "~/mixins/validation/IsUniqueNumberInSiteValidationMixin";
 
 export default {
-  mixins: [validationMixin],
+  mixins: [
+    validationMixin,
+    IsUniqueNumberInSiteValidationMixin
+  ],
   validations() {
     return {
       modelItem: {
@@ -13,7 +17,13 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName, this.requestData),
+          isUniqueNumberInSite:
+            isUniqueNumberInSite(
+              this.isUniqueNumberInSite,
+              this.resourceName,
+              this.requestData,
+              this.validatingValuesChanged
+            ),
           positive: minValue(1)
         },
         type: {required},

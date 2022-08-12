@@ -1,9 +1,13 @@
 import { validationMixin } from 'vuelidate'
 import {required, integer, between, minValue} from 'vuelidate/lib/validators'
 import isUniqueNumberInSite from "~/src/validators/isUniqueNumberInSite";
+import IsUniqueNumberInSiteValidationMixin from "~/mixins/validation/IsUniqueNumberInSiteValidationMixin";
 
 export default {
-  mixins: [validationMixin],
+  mixins: [
+    validationMixin,
+    IsUniqueNumberInSiteValidationMixin
+  ],
   validations() {
     return {
       modelItem: {
@@ -11,7 +15,13 @@ export default {
         number: {
           required,
           integer,
-          isUniqueNumberInSite: isUniqueNumberInSite(this.isUniqueNumberInSite, this.resourceName,  this.requestData),
+          isUniqueNumberInSite:
+            isUniqueNumberInSite(
+              this.isUniqueNumberInSite,
+              this.resourceName,
+              this.requestData,
+              this.validatingValuesChanged
+            ),
           positive: minValue(1)
         },
         year: {required, integer, between: between(2000, 2099)},
