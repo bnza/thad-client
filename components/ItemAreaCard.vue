@@ -7,7 +7,11 @@
       <v-toolbar-title v-if="ready"><strong class="secondary--text">{{formatCode(resourceName, item)}}</strong></v-toolbar-title>
       <v-spacer />
       <navigation-collection-resource-button :resource-name="resourceName" />
-      <navigation-update-resource-button :item-id="id" :resource-name="resourceName" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
+      <navigation-update-resource-button
+        :item-id="id"
+        :resource-name="resourceName"
+        :disabled="!ready || !$auth.hasScope('ROLE_ADMIN')"
+      />
       <navigation-delete-resource-button
         :item-id="id"
         :resource-name="resourceName"

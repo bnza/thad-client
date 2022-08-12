@@ -7,11 +7,15 @@
       <v-toolbar-title v-if="item"><strong class="secondary--text">{{item.code}}</strong></v-toolbar-title>
       <v-spacer />
       <navigation-collection-resource-button :resource-name="resourceName" />
-      <navigation-update-resource-button :item-id="id" :resource-name="resourceName" :disabled="!$auth.hasScope('ROLE_ADMIN')" />
+      <navigation-update-resource-button
+        :item-id="id"
+        :resource-name="resourceName"
+        :disabled="!ready || !$auth.hasScope('ROLE_ADMIN')"
+      />
       <navigation-delete-resource-button
         :item-id="id"
         :resource-name="resourceName"
-        :disabled="!$auth.hasScope('ROLE_ADMIN')"
+        :disabled="!ready || !$auth.hasScope('ROLE_ADMIN')"
         @delete="openDeleteDialog(item)"
       />
       <template #extension>
