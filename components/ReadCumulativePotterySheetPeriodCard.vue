@@ -79,7 +79,7 @@
           </v-col>
           <v-col>
             <v-text-field
-              :value="getResponseValue('periodEBACount', item)"
+              :value="getResponseValue('periodEMTCount', item)"
               label="Early Middle Tigris"
               readonly
             />

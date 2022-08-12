@@ -497,9 +497,9 @@ export default {
         width: '100px'
       },
       {
-        text: 'P-EBA',
-        value: 'periodEBACount',
-        label: 'period Early Bronze Age sherd count',
+        text: 'P-EMT',
+        value: 'periodEMTCount',
+        label: 'period Early Middle Tigris sherd count',
         align: 'right',
         width: '100px'
       },

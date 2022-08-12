@@ -221,16 +221,8 @@ const wareMappings = [
     label: 'period Late Chalcolithic sherd count',
   },
   {
-    property: 'periodEBACount',
-    label: 'period Early Bronze Age sherd count',
-  },
-  {
-    property: 'periodEBACount',
-    label: 'period Early Bronze Age sherd count',
-  },
-  {
-    property: 'periodEBACount',
-    label: 'period Early Bronze Age sherd count',
+    property: 'periodEMTCount',
+    label: 'period Early Middle Tigris sherd count',
   },
   {
     property: 'periodMBACount',
