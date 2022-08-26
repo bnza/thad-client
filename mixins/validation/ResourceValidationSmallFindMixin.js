@@ -69,7 +69,7 @@ export default {
     preservationErrors() {
       const errors = []
       if (!this.$v.modelItem.preservation.$dirty) return errors
-      !this.$v.modelItem.preservation.required && errors.push('material is required.')
+      !this.$v.modelItem.preservation.required && errors.push('preservation is required.')
       return errors
     },
     numberErrors() {
