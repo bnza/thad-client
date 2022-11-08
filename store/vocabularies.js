@@ -4,7 +4,7 @@ export const state = () => ({
 
 export const mutations = {
   set(state, {resourceName, data}) {
-    state[resourceName] = data['hydra:member']
+    state[resourceName] = data['hydra:member'].sort((a,b) => a.value > b.value)
   },
   setReady(state, flag) {
     state.ready = flag
