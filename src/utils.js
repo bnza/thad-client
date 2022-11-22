@@ -105,3 +105,35 @@ export const yearsRange = (start, end) => {
   end = end || (new Date()).getFullYear();
   return [...Array(end - start + 1).keys()].map(x => x + start).reverse();
 }
+
+const compareStringProp = (a, b, key) => {
+  if (a[key] > b[key]) {
+    return 1
+  }
+  if (a[key] < b[key]) {
+    return -1
+  }
+  return 0
+}
+
+const compareVocById = (a,b) => {
+  return a.id - b.id
+}
+
+const compareVocByValue = (a,b) => {
+  return compareStringProp(a, b, 'value')
+}
+
+const compareVocBySubPeriodCode = (a,b) => {
+  return a.period.id === b.period.id ?  compareStringProp(a, b, 'code') : a.period.id - b.period.id
+}
+
+export const compareVoc = (resourceName) => {
+  if (resourceName === 'period') {
+    return compareVocById
+  }
+  if (resourceName === 'subperiod') {
+    return compareVocBySubPeriodCode
+  }
+  return compareVocByValue
+}

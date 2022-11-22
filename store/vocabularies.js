@@ -1,10 +1,11 @@
+import {compareVoc} from "~/src/utils";
 export const state = () => ({
   ready: false
 })
 
 export const mutations = {
   set(state, {resourceName, data}) {
-    state[resourceName] = data['hydra:member']
+    state[resourceName] = data['hydra:member'].sort(compareVoc(resourceName))
   },
   setReady(state, flag) {
     state.ready = flag
