@@ -336,7 +336,6 @@ export default {
         'building',
         'buildingSubPhase',
         'phase',
-        'subPhase',
         'year',
       ]
     }
